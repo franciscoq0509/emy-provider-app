@@ -1,11 +1,15 @@
 import React from 'react';
-import { View, Button } from 'react-native';
+import { View, Button, Text } from 'react-native';
 import { StackNavigator, TabNavigator } from 'react-navigation';
-//import App from '../App';
+import { connect, Provider } from 'react-redux';
 import CustomersList from '../components/CustomersList';
 import Header from '../components/Header'; 
 import ActivitiesList from '../components/ActivitiesList';
 import QuickBook from '../components/QuickBook';
+import addCustomerChunck from '../actions/customers';
+import configureStore from '../store/configureStore';
+
+const store = configureStore();
 
 
 const HomeScreen = ({ navigation }) => {
@@ -26,12 +30,22 @@ const HomeScreen = ({ navigation }) => {
     );
 };
 
-const CustomersScreen = () => (
-    <View>
-        <Header />
-        <CustomersList />
-    </View>
-);
+class CustomersScreen extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = props;
+    };
+    render() {
+        return (
+            <View>
+                <Header />
+                <Provider store={store}>
+                    <CustomersList />
+                </Provider>
+            </View>
+        );
+    };
+};
 
 const ActivitiesScreen = () => (
     <View>
