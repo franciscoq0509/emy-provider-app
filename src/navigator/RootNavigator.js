@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Button, Text } from 'react-native';
 import { StackNavigator, TabNavigator } from 'react-navigation';
 import { connect, Provider } from 'react-redux';
-import CustomersList from '../components/CustomersList';
+import CustomersContainer from '../containers/CustomersContainer';
 import Header from '../components/Header'; 
 import ActivitiesList from '../components/ActivitiesList';
 import QuickBook from '../components/QuickBook';
@@ -40,7 +40,7 @@ class CustomersScreen extends React.Component {
             <View>
                 <Header />
                 <Provider store={store}>
-                    <CustomersList />
+                    <CustomersContainer />
                 </Provider>
             </View>
         );

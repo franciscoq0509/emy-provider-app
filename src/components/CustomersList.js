@@ -1,44 +1,16 @@
 import React from 'react';
 import { View, Text } from 'react-native'
 import { connect } from 'react-redux';
-import addCustomerChunck from '../actions/customers';
+import { addCustomerChunck } from '../actions/customers';
 
-
-const fetchCustomers = () => (
-    fetch('https://randomuser.me/api/?results=500')
-);
-
-const asyncAction = () => {
-    return (dispatch) => {
-        return fetchCustomers().then(
-            (successData) => dispatch(addCustomerChunck(successData)),
-            (error) => 'Error'
-        );
-    };
+const CustomersList = (props) => {
+    console.log(typeof props.customers === 'object');
+    return (
+        <View>
+            { typeof props.customers === 'object' && props.customers.map((c) => <Text key={c.registered}>{c.name.first}</Text>)}
+        </View>
+    );
 };
 
 
-class CustomersList extends React.Component {
-    constructor({ newChunk, ...props }) {
-        super(newChunk, props);
-        props.dispatch(asyncAction());
-        this.renderStuff = this.renderStuff.bind(this);
-        this.state = {
-            chunk: newChunk
-        }
-    };
-
-    renderStuff(props){
-        return props.map((el) => {el});
-    }
-
-    render(){
-        return (
-            <View>
-                <Text>{this.state.chunk}</Text>
-            </View>
-        );
-    };
-};
-
-export default connect()(CustomersList);
+export default CustomersList;
