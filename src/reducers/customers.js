@@ -1,7 +1,9 @@
-export default (state = [], action) => {
+const stateInit = {allCustomers: []};
+
+export default (state = stateInit, action) => {
     switch (action.type) {
         case 'SAVE_CHUNK':
-            return [...state, action.newChunk]
+        return {allCustomers: [...state.allCustomers, ...action.allCustomers]} //return [action.newChunk]
         default:
             break;
     }   
