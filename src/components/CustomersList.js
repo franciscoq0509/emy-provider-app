@@ -10,11 +10,11 @@ const CustomersList = (props) => {
     const _keyExtractor = (item, index) => item.registered;
     return (
         <View> 
-                <FlatList
-                    data={props.customers}
-                    renderItem={CustomerItem}
-                    keyExtractor={_keyExtractor}
-                />
+            <FlatList
+                data={props.customers}
+                renderItem={CustomerItem}
+                keyExtractor={_keyExtractor}
+            />
         </View>
     );
 };

@@ -30,22 +30,14 @@ const HomeScreen = ({ navigation }) => {
     );
 };
 
-class CustomersScreen extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = props;
-    };
-    render() {
-        return (
-            <View>
-                <Header />
-                <Provider store={store}>
-                    <CustomersContainer />
-                </Provider>
-            </View>
-        );
-    };
-};
+const CustomersScreen = (props) => (
+    <View>
+        <Header />
+        <Provider store={store}>
+            <CustomersContainer />
+        </Provider>
+    </View>
+);
 
 const ActivitiesScreen = () => (
     <View>
