@@ -1,13 +1,13 @@
 import React from 'react';
 import { View, Text } from 'react-native';
+import { ListItem } from 'react-native-elements';
 
 export const CustomerItem = (customer) => {
        return (
-            <View>
-                <Text>{customer.item.name.first}</Text>
-                <Text>{customer.item.name.last}</Text>
-                <Text></Text>
-            </View>
+            <ListItem
+                roundAvatar
+                title={`${customer.item.name.first} ${customer.item.name.last}`}
+            />
         );
     
 };
