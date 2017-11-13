@@ -4,12 +4,16 @@ import { List } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { addCustomerChunck } from '../actions/customers';
 import { CustomerItem } from './CustomerItem';
+import { StackNavigator } from 'react-navigation';
+import { CustomerFullDetails } from './CustomerFullDetails';
+
 
 class CustomersList extends React.Component {
     
     navToCustomerDetails = (id) => {
-        console.log('user clicked', id);
+        //console.log('user clicked', id);
         console.log(this.props);
+        this.props.nav.navigate('fullDetail', { id });
     };
     customersAndCallback() {
         console.log('in create object');
@@ -31,6 +35,12 @@ class CustomersList extends React.Component {
     }
     
 };
+
+const navigator = StackNavigator({
+    fullDetail: {
+        screen: CustomerFullDetails,
+    }
+});
 
 
 export default CustomersList;

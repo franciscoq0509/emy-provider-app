@@ -32,7 +32,6 @@ const HomeScreen = ({ navigation }) => {
 
 class CustomersScreen extends React.Component {
     render() {
-        console.log(this.props);
         return (
             <View>
                 <Header />
