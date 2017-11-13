@@ -39,14 +39,14 @@ class CustomersListContainer extends React.Component {
                     console.log(this.props);
                 });
 
-        setTimeout(() => {
-            this.props.dispatch(asyncAction())
-            .then(
-                ({ customers }) => {
-                    this.setState(() => ({customerChunk : this.props.customers.allCustomers}));
-                    console.log(this.props);
-                });
-        }, 6000)
+        // setTimeout(() => {
+        //     this.props.dispatch(asyncAction())
+        //     .then(
+        //         ({ customers }) => {
+        //             this.setState(() => ({customerChunk : this.props.customers.allCustomers}));
+        //             console.log(this.props);
+        //         });
+        // }, 6000);
    }
 
     render() {
