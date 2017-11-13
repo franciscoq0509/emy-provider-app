@@ -5,19 +5,31 @@ import { connect } from 'react-redux';
 import { addCustomerChunck } from '../actions/customers';
 import { CustomerItem } from './CustomerItem';
 
-const CustomersList = (props) => {
-    console.log(props);
-    console.log(typeof props.customers === 'object');
-    const _keyExtractor = (item, index) => item.registered;
-    return (
-        <List> 
-            <FlatList
-                data={props.customers}
-                renderItem={CustomerItem}
-                keyExtractor={_keyExtractor}
-            />
-        </List>
-    );
+class CustomersList extends React.Component {
+    
+    navToCustomerDetails = (id) => {
+        console.log('user clicked', id);
+        console.log(this.props);
+    };
+    customersAndCallback() {
+        console.log('in create object');
+        console.log(this.props);
+        return this.props.customers !== "" ? this.props.customers.map((customer) => ({...customer, navToCustomerDetails : this.navToCustomerDetails})) : "";
+    };
+    //console.log(propsAndNav);
+    _keyExtractor = (item, index) => item.registered;
+    render() {
+        return (
+            <List> 
+                <FlatList
+                    data={this.customersAndCallback()}
+                    renderItem={CustomerItem}
+                    keyExtractor={this._keyExtractor}
+                />
+            </List>
+        );
+    }
+    
 };
 
 

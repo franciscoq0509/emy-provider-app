@@ -51,11 +51,7 @@ class CustomersListContainer extends React.Component {
 
     render() {
         return (
-            <View>
-            {
-                <CustomersList customers={this.state.customerChunk}/>
-            }
-            </View>
+            <CustomersList customers={this.state.customerChunk} nav={this.props.nav}/>
         );
     };
 };
