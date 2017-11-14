@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { addCustomerChunck } from '../actions/customers';
 import CustomersListNavigator from '../components/CustomersListNavigator';
+import selectCustomers from '../selectors/customers';
 
 
 const fetchCustomers = () => (
@@ -30,8 +31,8 @@ class CustomersListContainer extends React.Component {
         this.props.dispatch(asyncAction())
             .then(
                 ({ customers }) => {
-                    this.setState(() => ({customerChunk : this.props.customers.allCustomers}));
-                    console.log(this.props.customers.allCustomers);
+                    this.setState(() => ({customerChunk : this.props.allCustomers}));
+                    
                 });
 
         // setTimeout(() => {
@@ -44,6 +45,12 @@ class CustomersListContainer extends React.Component {
         // }, 6000);
    }
 
+   componentWillReceiveProps(nextProps) {
+       if(this.props !== nextProps) {
+        this.setState(() => ({customerChunk : nextProps.allCustomers}));
+       }
+   }
+
     render() {
         return (
             <CustomersListNavigator screenProps={ {customers: this.state.customerChunk} } nav={this.props.nav}/>
@@ -52,9 +59,8 @@ class CustomersListContainer extends React.Component {
 };
 
 const mapStateToProps = (state) => {
-    console.log(state);
     return {
-        customers: state //selectCustomers from /selectors/selectCustomers
+        allCustomers: selectCustomers(state.allCustomers, state.customersFilter)
     };
 };
 

@@ -1,4 +1,4 @@
-const stateInit = {allCustomers: []};
+const stateInit = [];
 
 export default (state = stateInit, action) => {
     switch (action.type) {

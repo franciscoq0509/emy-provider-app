@@ -4,14 +4,12 @@ import { List } from 'react-native-elements';
 import { CustomerItem } from './CustomerItem';
 import { StackNavigator } from 'react-navigation';
 import { CustomerFullDetails } from './CustomerFullDetails';
-import { StandardSearchbar } from './StandardSearchbar'
+import StandardSearchbar from './StandardSearchbar'
 
 
 class CustomersList extends React.Component {
 
     customersAndCallback() {
-        console.log('in create object');
-        console.log(this.props);
         return this.props.screenProps.customers !== "" ? this.props.screenProps.customers.map((customer) => ({...customer, customNavigator: this.props.navigation})) : "";
     };
 
