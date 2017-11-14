@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Button, Text } from 'react-native';
-import { StackNavigator, TabNavigator } from 'react-navigation';
+import { StackNavigator, TabNavigator, addNavigationHelpers } from 'react-navigation';
 import { connect, Provider } from 'react-redux';
 import CustomersContainer from '../containers/CustomersContainer';
 import Header from '../components/Header'; 
@@ -33,12 +33,9 @@ const HomeScreen = ({ navigation }) => {
 class CustomersScreen extends React.Component {
     render() {
         return (
-            <View>
-                <Header />
-                <Provider store={store}>
-                    <CustomersContainer nav={this.props.navigation}/>
-                </Provider>
-            </View>
+            <Provider store={store}>
+                <CustomersContainer nav={this.props}/>
+            </Provider>
         );
     }
     
@@ -81,5 +78,7 @@ const RootNavigator = TabNavigator({
         }
     }
 });
+
+addNavigationHelpers(RootNavigator);
 
 export default RootNavigator;

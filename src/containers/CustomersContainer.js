@@ -2,11 +2,11 @@ import React from 'react';
 import { View, Text } from 'react-native'
 import { connect } from 'react-redux';
 import { addCustomerChunck } from '../actions/customers';
-import CustomersList from '../components/CustomersList';
+import CustomersListNavigator from '../components/CustomersListNavigator';
 
 
 const fetchCustomers = () => (
-    fetch('https://randomuser.me/api/?results=8')
+    fetch('https://randomuser.me/api/?results=50')
 );
 
 const asyncAction = (dispatch) => {
@@ -51,7 +51,7 @@ class CustomersListContainer extends React.Component {
 
     render() {
         return (
-            <CustomersList customers={this.state.customerChunk} nav={this.props.nav}/>
+            <CustomersListNavigator screenProps={ {customers: this.state.customerChunk} } nav={this.props.nav}/>
         );
     };
 };
