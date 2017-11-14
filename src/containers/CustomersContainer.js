@@ -31,7 +31,7 @@ class CustomersListContainer extends React.Component {
             .then(
                 ({ customers }) => {
                     this.setState(() => ({customerChunk : this.props.customers.allCustomers}));
-                    console.log(this.props);
+                    console.log(this.props.customers.allCustomers);
                 });
 
         // setTimeout(() => {
@@ -52,6 +52,7 @@ class CustomersListContainer extends React.Component {
 };
 
 const mapStateToProps = (state) => {
+    console.log(state);
     return {
         customers: state //selectCustomers from /selectors/selectCustomers
     };
