@@ -1,10 +1,8 @@
 import React from 'react';
-import { View, Text, FlatList } from 'react-native'
+import { FlatList } from 'react-native'
 import { List } from 'react-native-elements';
-import { connect } from 'react-redux';
-import { addCustomerChunck } from '../actions/customers';
 import { CustomerItem } from './CustomerItem';
-import { StackNavigator, createNavigator, createNavigationContainer, NavigationActions, addNavigationHelpers } from 'react-navigation';
+import { StackNavigator } from 'react-navigation';
 import { CustomerFullDetails } from './CustomerFullDetails';
 
 

@@ -1,12 +1,11 @@
 import React from 'react';
-import { View, Button, Text } from 'react-native';
-import { StackNavigator, TabNavigator, addNavigationHelpers } from 'react-navigation';
-import { connect, Provider } from 'react-redux';
+import { View, Button } from 'react-native';
+import { TabNavigator, addNavigationHelpers } from 'react-navigation';
+import { Provider } from 'react-redux';
 import CustomersContainer from '../containers/CustomersContainer';
 import Header from '../components/Header'; 
 import ActivitiesList from '../components/ActivitiesList';
 import QuickBook from '../components/QuickBook';
-import addCustomerChunck from '../actions/customers';
 import configureStore from '../store/configureStore';
 
 const store = configureStore();
