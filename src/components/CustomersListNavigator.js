@@ -23,7 +23,7 @@ class CustomersList extends React.Component {
                     data={this.customersAndCallback()}
                     renderItem={CustomerItem}
                     keyExtractor={this._keyExtractor}
-                    ListHeaderComponent={StandardSearchbar}
+                    ListHeaderComponent={<StandardSearchbar search="allCustomers" />}
                 />
             </List>
         );

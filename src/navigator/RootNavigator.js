@@ -11,23 +11,23 @@ import configureStore from '../store/configureStore';
 const store = configureStore();
 
 
-const HomeScreen = ({ navigation }) => {
-    const homeButtons = [
-        {title: 'Customers', navigateTo: 'Customers'},
-    ];
-    return (
-        <View>
-            <Header />
-            {homeButtons.map(({ title, navigateTo }, index) => 
-                <Button
-                    key={index} 
-                    title={title} 
-                    onPress={() => navigation.navigate('Customers')}
-                />
-            )}
-        </View>
-    );
-};
+// const HomeScreen = ({ navigation }) => {
+//     const homeButtons = [
+//         {title: 'Customers', navigateTo: 'Customers'},
+//     ];
+//     return (
+//         <View>
+//             <Header />
+//             {homeButtons.map(({ title, navigateTo }, index) => 
+//                 <Button
+//                     key={index} 
+//                     title={title} 
+//                     onPress={() => navigation.navigate('Customers')}
+//                 />
+//             )}
+//         </View>
+//     );
+// };
 
 class CustomersScreen extends React.Component {
     render() {
@@ -55,9 +55,9 @@ const QuickBookScreen = () => (
 );
 
 const RootNavigator = TabNavigator({
-    Home: {
-        screen: HomeScreen,
-    },
+    // Home: {
+    //     screen: HomeScreen,
+    // },
     Customers: {
         screen: CustomersScreen,
         navigationOptions: {

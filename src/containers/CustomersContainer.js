@@ -53,7 +53,7 @@ class CustomersListContainer extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        customers: state
+        customers: state //selectCustomers from /selectors/selectCustomers
     };
 };
 
