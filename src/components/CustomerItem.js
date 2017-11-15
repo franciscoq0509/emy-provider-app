@@ -10,8 +10,6 @@ export const CustomerItem = (props) => {
             title={`${props.item.name.first} ${props.item.name.last}`}
             onPress={() => {props.item.customNavigator.navigate('fullDetail', { customerId : props.item.registered })}}
         />
-
-        
     );
 
 };

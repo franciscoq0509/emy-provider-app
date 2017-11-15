@@ -61,7 +61,7 @@ class CustomersListContainer extends React.Component {
 const mapStateToProps = (state) => {
     console.log(state);
     return {
-        allCustomers: selectCustomers(state.allCustomers, state.customersFilter)
+        allCustomers: selectCustomers(state.customersData.allCustomers, state.customersFilter)
     };
 };
 

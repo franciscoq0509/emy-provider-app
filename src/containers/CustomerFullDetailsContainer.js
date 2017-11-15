@@ -19,7 +19,10 @@ const returnCustomerDetails = (id) => {
                 (err) => dispatch(saveCustomerDetails(err.json()))
             )
             .then(
-                (customerDetails) => dispatch(saveCustomerDetails(customerDetails))
+                (customerDetailsObject) => {
+                    const customerDetails = customerDetailsObject.results[0]
+                    dispatch(saveCustomerDetails(customerDetails))
+                }
             )
             .catch((err) => dispatch(saveCustomerDetails(err)));
     } ;
@@ -29,7 +32,7 @@ const returnCustomerDetails = (id) => {
 class CustomerDetails extends React.Component {
 
     componentDidMount() {
-        console.log(this.props.navigation.state.params.customerId);
+        console.log(this.props);
         this.props.dispatch(returnCustomerDetails(this.props.navigation.state.params.customerId))
             .then((customer) => console.log(customer))
             .catch((err) => {console.log(err)})

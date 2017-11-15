@@ -6,7 +6,7 @@ import thunk from 'redux-thunk';
 export default () => {
     const store = createStore(
         combineReducers({
-            allCustomers: CustomersReducer, 
+            customersData: CustomersReducer, 
             customersFilter: CustomersFilter
         }), 
         applyMiddleware(thunk)
