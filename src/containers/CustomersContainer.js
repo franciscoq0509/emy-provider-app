@@ -51,7 +51,7 @@ class CustomersListContainer extends React.Component {
        }
    }
 
-    render() {
+    render() {      
         return (
             <CustomersListNavigator screenProps={ {customers: this.state.customerChunk} } nav={this.props.nav}/>
         );
@@ -59,6 +59,7 @@ class CustomersListContainer extends React.Component {
 };
 
 const mapStateToProps = (state) => {
+    console.log(state);
     return {
         allCustomers: selectCustomers(state.allCustomers, state.customersFilter)
     };

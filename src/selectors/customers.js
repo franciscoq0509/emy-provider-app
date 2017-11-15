@@ -1,9 +1,10 @@
-export default (allCustomers, { text }) => {
-    if(allCustomers.length !== 0){
-        return allCustomers.filter((customer) => {
+export default (state, { text }) => {
+    console.log(state.allCustomers);
+    if(state.allCustomers.length !== 0){
+        return state.allCustomers.filter((customer) => {
             const textMatch = customer.name.first.toLowerCase().includes(text.toLowerCase()) || 
                     customer.name.last.toLowerCase().includes(text.toLowerCase());
             return textMatch;
         });
-    } else return allCustomers;
+    } else return state.allCustomers;
 };

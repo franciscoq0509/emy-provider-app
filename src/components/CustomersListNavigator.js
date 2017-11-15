@@ -3,8 +3,8 @@ import { FlatList } from 'react-native'
 import { List } from 'react-native-elements';
 import { CustomerItem } from './CustomerItem';
 import { StackNavigator } from 'react-navigation';
-import { CustomerFullDetails } from './CustomerFullDetails';
-import StandardSearchbar from './StandardSearchbar'
+import StandardSearchbar from './StandardSearchbar';
+import CustomerFullDetailsContainer from '../containers/CustomerFullDetailsContainer';
 
 
 class CustomersList extends React.Component {
@@ -37,7 +37,7 @@ const CustomersListNavigator = StackNavigator({
         }
     },
     fullDetail: {
-        screen: CustomerFullDetails,
+        screen: CustomerFullDetailsContainer,
     }
 });
 
