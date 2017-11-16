@@ -1,43 +1,44 @@
 import React from 'react';
-import { View, Button, Text } from 'react-native';
-import { StackNavigator, TabNavigator } from 'react-navigation';
-import { connect, Provider } from 'react-redux';
+import { View, Button } from 'react-native';
+import { TabNavigator, addNavigationHelpers } from 'react-navigation';
+import { Provider } from 'react-redux';
 import CustomersContainer from '../containers/CustomersContainer';
 import Header from '../components/Header'; 
 import ActivitiesList from '../components/ActivitiesList';
 import QuickBook from '../components/QuickBook';
-import addCustomerChunck from '../actions/customers';
 import configureStore from '../store/configureStore';
 
 const store = configureStore();
 
 
-const HomeScreen = ({ navigation }) => {
-    const homeButtons = [
-        {title: 'Customers', navigateTo: 'Customers'},
-    ];
-    return (
-        <View>
-            <Header />
-            {homeButtons.map(({ title, navigateTo }, index) => 
-                <Button
-                    key={index} 
-                    title={title} 
-                    onPress={() => navigation.navigate('Customers')}
-                />
-            )}
-        </View>
-    );
-};
+// const HomeScreen = ({ navigation }) => {
+//     const homeButtons = [
+//         {title: 'Customers', navigateTo: 'Customers'},
+//     ];
+//     return (
+//         <View>
+//             <Header />
+//             {homeButtons.map(({ title, navigateTo }, index) => 
+//                 <Button
+//                     key={index} 
+//                     title={title} 
+//                     onPress={() => navigation.navigate('Customers')}
+//                 />
+//             )}
+//         </View>
+//     );
+// };
 
-const CustomersScreen = (props) => (
-    <View>
-        <Header />
-        <Provider store={store}>
-            <CustomersContainer />
-        </Provider>
-    </View>
-);
+class CustomersScreen extends React.Component {
+    render() {
+        return (
+            <Provider store={store}>
+                <CustomersContainer nav={this.props}/>
+            </Provider>
+        );
+    }
+    
+};
 
 const ActivitiesScreen = () => (
     <View>
@@ -54,9 +55,9 @@ const QuickBookScreen = () => (
 );
 
 const RootNavigator = TabNavigator({
-    Home: {
-        screen: HomeScreen,
-    },
+    // Home: {
+    //     screen: HomeScreen,
+    // },
     Customers: {
         screen: CustomersScreen,
         navigationOptions: {
@@ -76,5 +77,7 @@ const RootNavigator = TabNavigator({
         }
     }
 });
+
+addNavigationHelpers(RootNavigator);
 
 export default RootNavigator;
