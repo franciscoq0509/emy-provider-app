@@ -1,17 +1,16 @@
 import React from 'react';
-import { Text } from 'react-native';
+import { Text, View } from 'react-native';
 import { connect } from 'react-redux';
 import { CustomerFullDetails } from '../components/CustomerFullDetails';
 import { saveCustomerDetails } from '../actions/customers';
 
 const fetchCustomerDetails = (id) => {
     //use id to req user data fro API
-    console.log(id);
+    //console.log(id);
     return fetch('https://randomuser.me/api/')
 };
 
 const returnCustomerDetails = (id) => {
-    console.log(id);
     return (dispatch) => {
         return fetchCustomerDetails(id)
             .then(
@@ -30,26 +29,30 @@ const returnCustomerDetails = (id) => {
 
 
 class CustomerDetails extends React.Component {
-
     componentDidMount() {
-        console.log(this.props);
         this.props.dispatch(returnCustomerDetails(this.props.navigation.state.params.customerId))
-            .then((customer) => console.log(customer))
+            .then(() => 
+                {
+                    this.setState(() => ({customerData: this.props.customerData})) 
+                })
             .catch((err) => {console.log(err)})
     }
 
     render(){
-        console.log(this.props);
         return (
-            <Text>here in container</Text>
+            <View>
+                { this.state && <CustomerFullDetails {...this.state.customerData} />}
+            </View>
         );
     };
 };
 
+//getting customerData below will be empty at the point of passing it in as props to CustomerDetails
+//but the point of it is once the customer data has been fetched and saved to store, we have direct access to it via this.props.customerData
+//Because we cannot access the store directly in our component, we have to pass access to it through props.
 const mapStateToProps = (state) => {
-    console.log(state);
     return {
-        customers: state.allCustomers
+        customerData: state.customersData.customerDetails
     }
 };
 
