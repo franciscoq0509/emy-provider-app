@@ -4,7 +4,7 @@ export const addCustomerChunck = (newChunk) => ({
     allCustomers : newChunk.results
 });
 
-export const saveCustomerDetails = (customerDetails) => ({
+export const saveCustomerDetails = (customerDetailsObject) => ({
     type: 'SAVE_CUSTOMER_DETAILS',
-    customerDetails
+    customerDetails: customerDetailsObject.results[0]
 });

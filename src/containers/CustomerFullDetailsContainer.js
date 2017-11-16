@@ -19,8 +19,7 @@ const returnCustomerDetails = (id) => {
             )
             .then(
                 (customerDetailsObject) => {
-                    const customerDetails = customerDetailsObject.results[0]
-                    dispatch(saveCustomerDetails(customerDetails))
+                    dispatch(saveCustomerDetails(customerDetailsObject))
                 }
             )
             .catch((err) => dispatch(saveCustomerDetails(err)));
@@ -34,6 +33,7 @@ class CustomerDetails extends React.Component {
             .then(() => 
                 {
                     this.setState(() => ({customerData: this.props.customerData})) 
+                    console.log(this.props);
                 })
             .catch((err) => {console.log(err)})
     }
@@ -52,7 +52,8 @@ class CustomerDetails extends React.Component {
 //Because we cannot access the store directly in our component, we have to pass access to it through props.
 const mapStateToProps = (state) => {
     return {
-        customerData: state.customersData.customerDetails
+        customerData: state.customersData.customerDetails,
+        allToCheck: state
     }
 };
 
