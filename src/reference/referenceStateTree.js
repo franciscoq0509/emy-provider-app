@@ -22,9 +22,10 @@ const refStateTree = {
             id: {
                 name: 'string',
                 location: 'string',
-                attendanceIds: []
+                attendanceIds: [],
+                activityIds: []
                 //...
-            }//each object on details should be saved not overwritten so we can cache for later
+            }//each object on customerDetails should be saved not overwritten so we can cache for later
         },
         Activities: {
             activityId: {
@@ -58,6 +59,44 @@ const refStateTree = {
             id: {
                 //..
             }
+        },
+
+        //lookups
+        attendeesInActivity: {
+            byId: {
+                2: {
+                    id: 2,
+                    attendeeIds: []
+                }
+            },
+            allIds: [2,44,54,/*....*/] //Activity Ids
+        },
+        attendeesUnderCustomer: {
+            byId: {
+                1: {
+                    id: 1,
+                    attendeeIds: []
+                }
+            },
+            allIds: [1] //customer Ids
+        },
+        activitiesUnderCustomer: {
+            byId: {
+                3: {
+                    id: 3,
+                    activityIds: []
+                }
+            },
+            allIds: [3] //Customer Ids
+        },
+        customersInActivity: {
+            byId: {
+                6: {
+                    id: 6,
+                    customerIds: []
+                }
+            },
+            allIds: [6] //Activity Ids
         }
     },
     customersRequested: {
