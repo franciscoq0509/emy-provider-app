@@ -1,67 +1,67 @@
 const refStateTree = {
-    entities : {
-        LoggedInUser: {
+    LoggedInUser: {
+        id: 'number',
+        name: 'string'
+        //other relevant info on user
+    },
+    Customers : {
+        id: {
+            name: 'string',
             id: 'number',
-            name: 'string'
-            //other relevant info on user
+            activityIds: [/*list of ids to reference all the activities this parent is connected to*/]
         },
-        Customers : {
-            id: {
-                name: 'string',
-                id: 'number',
-                activityIds: [/*list of ids to reference all the activities this parent is connected to*/]
-            },
-            id: {
-                name: 'string',
-                id: 'number',
-                activityIds: []
-            }
-            //...    
+        id: {
+            name: 'string',
+            id: 'number',
+            activityIds: []
+        }
+        //...    
+    },
+    customerDetails: {
+        id: {
+            name: 'string',
+            location: 'string',
+            attendanceIds: [],
+            activityIds: []
+            //...
+        }//each object on customerDetails should be saved not overwritten so we can cache for later
+    },
+    Activities: {
+        activityId: {
+            activityId: 'number',
+            name: 'string',
+            attendanceIds: [],
+            notesIds: [],
+            alertsIds:[]
+            //..
         },
-        customerDetails: {
-            id: {
-                name: 'string',
-                location: 'string',
-                attendanceIds: [],
-                activityIds: []
-                //...
-            }//each object on customerDetails should be saved not overwritten so we can cache for later
+        //....  
+    },
+    attendanceList: {
+        id: {
+            id: 'number',
+            name: 'string',
+            //other relevant data on attendee
         },
-        Activities: {
-            activityId: {
-                activityId: 'number',
-                name: 'string',
-                attendanceIds: [],
-                notesIds: [],
-                alertsIds:[]
-                //..
-            },
-            //....  
-        },
-        attendanceList: {
-            id: {
-                id: 'number',
-                name: 'string',
-                //other relevant data on attendee
-            },
-            id: {
-                id: 'number',
-                name: 'string',                
-                //other relevant data on attendee
-            }
-        },
-        notes: {
-            id: {
-                //..
-            }
-        },
-        alerts: {
-            id: {
-                //..
-            }
-        },
+        id: {
+            id: 'number',
+            name: 'string',                
+            //other relevant data on attendee
+        }
+    },
+    notes: {
+        id: {
+            //..
+        }
+    },
+    alerts: {
+        id: {
+            //..
+        }
+    },
 
-        //lookups
+    //lookups
+    entities: {
         attendeesInActivity: {
             byId: {
                 2: {
@@ -126,3 +126,6 @@ const refStateTree = {
         }
     }
 }
+
+//need to add in filters as well..
+//need to add in entities for notes and alerts by activities. also by customers??
