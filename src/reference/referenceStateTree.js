@@ -71,6 +71,7 @@ const refStateTree = {
             },
             allIds: [2,44,54,/*....*/] //Activity Ids
         },
+        //attendees in activity filtered by specific day..
         attendeesUnderCustomer: {
             byId: {
                 1: {
