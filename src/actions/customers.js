@@ -1,5 +1,5 @@
 
-export const addCustomerChunck = (newChunk) => ({
+export const addCustomerChunk = (newChunk) => ({
     type: 'SAVE_CHUNK',
     allCustomers : newChunk.results
 });

@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { addCustomerChunck } from '../actions/customers';
+import { addCustomerChunk } from '../actions/customers';
 import CustomersListNavigator from '../components/CustomersListNavigator';
 import selectCustomers from '../selectors/customers';
 
@@ -14,11 +14,11 @@ const asyncAction = (dispatch) => {
         return fetchCustomers()
             .then(
                 (customersObject) => customersObject.json(),
-                (error) => dispatch(addCustomerChunck(error))
+                (error) => dispatch(addCustomerChunk(error))
             ).then((customers) => {
-                return dispatch(addCustomerChunck(customers));
+                return dispatch(addCustomerChunk(customers));
             })
-            .catch((err) => dispatch(addCustomerChunck(err)))
+            .catch((err) => dispatch(addCustomerChunk(err)))
     };
 };
 
