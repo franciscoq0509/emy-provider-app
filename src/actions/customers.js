@@ -49,9 +49,9 @@ export const recieveCustomerDetailsFailure = (error) => ({ //recieve new custome
 });
 
 
-export const saveCustomerDetails = (customerDetails) => ({ //save customer details
+export const saveCustomerDetails = (customersDetails) => ({ //save customer details
     type: 'SAVE_CUSTOMER_DETAILS',
-    customerDetails
+    customersDetails
 });
 
 //create a new action creator that handles request failures
