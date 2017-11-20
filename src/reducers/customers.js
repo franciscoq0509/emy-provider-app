@@ -1,6 +1,6 @@
 const stateInit = {
-    allCustomers: [],
-    customerDetails: {}
+    allCustomers: []
+    //customerDetails: {}
 };
 
 //const stateInit = [];
@@ -13,14 +13,14 @@ export default (state = stateInit, action) => {
         console.log(state);
         console.log(action);
             return {
-                allCustomers: [...state.allCustomers, ...action.allCustomers] ,
-                customerDetails: {...state.customerDetails}
+                allCustomers: [...state.allCustomers, ...action.allCustomers] 
+                //customerDetails: {...state.customerDetails}
             };
-        case 'SAVE_CUSTOMER_DETAILS':
-            return {
-                allCustomers: [...state.allCustomers],
-                customerDetails: {...action.customerDetails}
-            };
+        // case 'SAVE_CUSTOMER_DETAILS':
+        //     return {
+        //         allCustomers: [...state.allCustomers],
+        //         customerDetails: {...action.customerDetails}
+        //     };
         default:
             return state;
     }   

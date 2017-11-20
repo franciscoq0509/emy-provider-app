@@ -52,7 +52,7 @@ class CustomerDetails extends React.Component {
 //Because we cannot access the store directly in our component, we have to pass access to it through props.
 const mapStateToProps = (state) => {
     return {
-        customerData: state.customersData.customerDetails
+        customerData: state.customersDetails
     }
 };
 
