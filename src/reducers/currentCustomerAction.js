@@ -12,22 +12,30 @@ export default (
         switch (action.type) {
             case 'INVALIDATE_CUSTOMERS':
                 return {
-                    ...state,
-                    didInvalidate: true
+                   // ...state,
+                    didInvalidate: true,
+                    isFetching: false,
+                    didFail: false
                 };
             case 'REQUEST_CUSTOMERS':
                 return {
-                    ...state,
+                    //...state,
                     isFetching: true,
-                    didInvalidate: false
+                    didInvalidate: false,
+                    didFail: false
                 };
             case 'RECEIVE_CUSTOMERS_SUCCESS':
                 return {
-                    ...state,
+                    //...state,
                     isFetching: false,
                     didInvalidate: false,
+                    didFail: false
                 }
             default:
-                return state;
+                return {
+                    isFetching: false,
+                    didInvalidate: false,
+                    didFail: false
+                };
         }
     };

@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { addCustomerChunk } from '../actions/customers';
-import { requestCustomers } from '../actions/customers';
+import { addCustomerChunk, requestCustomers, receiveNewCustomers } from '../actions/customers';
+import {  } from '../actions/customers';
 import CustomersListNavigator from '../components/CustomersListNavigator';
 import selectCustomers from '../selectors/customers';
 
@@ -19,6 +19,7 @@ const asyncAction = (dispatch) => {
                 (customersObject) => customersObject.json(),
                 (error) => dispatch(addCustomerChunk(error))
             ).then((customers) => {
+                dispatch(receiveNewCustomers());
                 return dispatch(addCustomerChunk(customers));
             })
             .catch((err) => dispatch(addCustomerChunk(err)))
@@ -32,22 +33,24 @@ class CustomersListContainer extends React.Component {
     }
 
     showLoadingSpinner() {
-        console.log('showSPinner function');
+        //console.log(this.props.actions.isFetching);
         return this.props.actions.isFetching ? true : false;
     }
 
     constructor(props) {
         super(props);
+        //console.log(this.props.actions.isFetching);
         this.showLoadingSpinner = this.showLoadingSpinner.bind(this);
     }
 
     componentWillMount() {
         this.setState(() => ({showSpinner: this.showLoadingSpinner}));
+        this.setState(() => ({actions: this.props.actions}));
     }
     
    componentDidMount() {
        
-        console.log(this.props);
+        //console.log(this.props);
         
         setTimeout(() => {
             this.props.dispatch(asyncAction())
@@ -78,7 +81,7 @@ class CustomersListContainer extends React.Component {
 
     render() {      
         return (
-            <CustomersListNavigator screenProps={ {customers: this.state.customerChunk, showSpinner: this.state.showSpinner} } nav={this.props.nav}/>
+            <CustomersListNavigator screenProps={ {customers: this.state.customerChunk, showSpinner: this.state.showSpinner, actions: this.state.actions} } nav={this.props.nav}/>
         );
     };
 };

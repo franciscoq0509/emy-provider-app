@@ -15,11 +15,11 @@ class CustomersList extends React.Component {
 
     _keyExtractor = (item, index) => item.registered;
     render() {
-        console.log(this.props);
+        console.log(this.props.screenProps.actions.isFetching);
+        console.log(this.props.screenProps.showSpinner());
         return (
             <List> 
-                <Text>still trying</Text>
-                {!this.props.screenProps.showSpinner() ? //returning true when should be false..
+                {this.props.screenProps.showSpinner() ? //returning true when should be false..
                     <Text>spinningspinningspinningspinningspinningspinningspinningspinningspinningspinningspinningspinningspinningspinningspinningspinningspinningspinning</Text>
                     : 
                     
