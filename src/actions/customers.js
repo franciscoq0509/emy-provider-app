@@ -1,55 +1,64 @@
-export const invalidateCustomers = () => ({ //user refreshes
+//user refreshes
+export const invalidateCustomers = () => ({ 
     type: 'INVALIDATE_CUSTOMERS'
 });
 
-export const requestCustomers = () => ({ //fetch new customers
+//fetch new customers
+export const requestCustomers = () => ({ 
     type: 'REQUEST_CUSTOMERS'
 });
 
-export const receiveNewCustomers = (newCustomers) => ({ //recieving new customers success
+//recieving new customers success
+export const receiveNewCustomers = (newCustomers) => ({ 
     type: 'RECEIVE_CUSTOMERS_SUCCESS',
     allCustomers : newCustomers.results,
     receivedAt: Date.now()
 });
 
-export const receiveCustomersError = (error) => ({ //recieving new customers failure
+//recieving new customers failure
+export const receiveCustomersError = (error) => ({ 
     type: 'RECEIVE_CUSTOMERS_FAILURE',
     error,
     receivedAt: Date.now()
 });
 
-export const addCustomerChunk = (newChunk) => ({ //save Customers
+//save Customers
+export const addCustomerChunk = (newChunk) => ({ 
     type: 'SAVE_CHUNK',
-    allCustomers : newChunk.results
+    allCustomers : newChunk.results,
+    receivedAt: Date.now()
 });
 
 
 
 
 
-
-export const selectCustomerForDetails = (id) => ({ //user clicks on customers name
+//user clicks on customers name
+export const selectCustomerForDetails = (id) => ({ 
     type: 'SELECT_CUSTOMER_FOR_DETAILS',
     id
 });
 
-export const requestCustomerDetails = (id) => ({ //fetches customer details
+//fetches customer details
+export const requestCustomerDetails = (id) => ({ 
     type: 'REQUEST_CUSTOMER_DETAILS',
     id
 });
 
-export const recieveCustomerDetailsSuccess = (id) => ({ //recieve new customer details success
+//recieve new customer details success
+export const recieveCustomerDetailsSuccess = (id) => ({ 
     type: 'RECIEVE_CUSTOMER_DETAILS_SUCCESS',
     id
 });
 
-export const recieveCustomerDetailsFailure = (error) => ({ //recieve new customer details failure
+//recieve new customer details failure
+export const recieveCustomerDetailsFailure = (error) => ({ 
     type: 'RECIEVE_CUSTOMER_DETAILS_FAILURE',
     error
 });
 
-
-export const saveCustomerDetails = (customersDetails) => ({ //save customer details
+//save customer details
+export const saveCustomerDetails = (customersDetails) => ({ 
     type: 'SAVE_CUSTOMER_DETAILS',
     customersDetails
 });

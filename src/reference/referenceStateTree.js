@@ -117,26 +117,28 @@ const refStateTree = {
         fromUser: {
             isFetching: false,
             didInvalidate: false,
-            customersDetailIds: [/*array of customer ids*/]
+            didFail: false
+           // customersDetailIds: [/*array of customer ids*/] commented out as no need for it currently
         },
         fromApp: {
             isFetching: false,
             didInvalidate: false,
             lastUpdated: 273836787383836, //timestamp
-            customersDetailIds: [/*array of customer ids*/]
+           // customersDetailIds: [/*array of customer ids*/] commented out as no need for it currently
         }
     },
     activitiesRequested: {
         fromUser: {
             isFetching: false,
             didInvalidate: false,
-            activityIds: [/*array of customer ids*/]
+            didFail: false
+           // activityIds: [/*array of customer ids*/] commented out as no need for it currently
         },
         fromApp: {
             isFetching: false,
             didInvalidate: false,
             lastUpdated: 273836787383836, //timestamp
-            activityIds: [/*array of customer ids*/]
+           // activityIds: [/*array of customer ids*/] commented out as no need for it currently
         }
     }
 }
