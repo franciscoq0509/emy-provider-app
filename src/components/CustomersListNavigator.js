@@ -1,5 +1,5 @@
 import React from 'react';
-import { FlatList } from 'react-native'
+import { FlatList, Text } from 'react-native'
 import { List } from 'react-native-elements';
 import { CustomerItem } from './CustomerItem';
 import { StackNavigator } from 'react-navigation';
@@ -18,7 +18,8 @@ class CustomersList extends React.Component {
         console.log(this.props.screenProps);
         return (
             <List> 
-                {this.props.screenProps.actions !== undefined &&  this.props.screenProps.actions.isFetching ? 
+                <Text>still trying</Text>
+                {this.props.screenProps.actions !== undefined &&  this.props.screenProps.actions.isFetching ?
                     <Text>spinningspinningspinningspinningspinningspinningspinningspinningspinningspinningspinningspinningspinningspinningspinningspinningspinningspinning</Text>
                     : 
                     

@@ -12,6 +12,7 @@ const fetchCustomers = () => (
 
 const asyncAction = (dispatch) => {
     return (dispatch) => {
+        dispatch(requestCustomers());
         return fetchCustomers()
             .then(
                 (customersObject) => customersObject.json(),
@@ -29,15 +30,18 @@ class CustomersListContainer extends React.Component {
         customerChunk : ''
     }
    componentDidMount() {
-        this.props.dispatch(requestCustomers);
+       
         console.log(this.props);
         this.setState(() => ({actions: this.props.actions}));
-        this.props.dispatch(asyncAction())
+        setTimeout(() => {
+            this.props.dispatch(asyncAction())
             .then(
                 ({ customers }) => {
                     this.setState(() => ({customerChunk : this.props.allCustomers}));
                     
                 });
+        },5000);
+        
 
         // setTimeout(() => {
         //     this.props.dispatch(asyncAction())
