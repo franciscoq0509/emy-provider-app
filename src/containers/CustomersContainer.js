@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { addCustomerChunck } from '../actions/customers';
+import { addCustomerChunk } from '../actions/customers';
+import { requestCustomers } from '../actions/customers';
 import CustomersListNavigator from '../components/CustomersListNavigator';
 import selectCustomers from '../selectors/customers';
 
@@ -14,11 +15,11 @@ const asyncAction = (dispatch) => {
         return fetchCustomers()
             .then(
                 (customersObject) => customersObject.json(),
-                (error) => dispatch(addCustomerChunck(error))
+                (error) => dispatch(addCustomerChunk(error))
             ).then((customers) => {
-                return dispatch(addCustomerChunck(customers));
+                return dispatch(addCustomerChunk(customers));
             })
-            .catch((err) => dispatch(addCustomerChunck(err)))
+            .catch((err) => dispatch(addCustomerChunk(err)))
     };
 };
 
@@ -28,6 +29,9 @@ class CustomersListContainer extends React.Component {
         customerChunk : ''
     }
    componentDidMount() {
+        this.props.dispatch(requestCustomers);
+        console.log(this.props);
+        this.setState(() => ({actions: this.props.actions}));
         this.props.dispatch(asyncAction())
             .then(
                 ({ customers }) => {
@@ -53,7 +57,7 @@ class CustomersListContainer extends React.Component {
 
     render() {      
         return (
-            <CustomersListNavigator screenProps={ {customers: this.state.customerChunk} } nav={this.props.nav}/>
+            <CustomersListNavigator screenProps={ {customers: this.state.customerChunk, actions: this.state.actions} } nav={this.props.nav}/>
         );
     };
 };
@@ -61,7 +65,8 @@ class CustomersListContainer extends React.Component {
 const mapStateToProps = (state) => {
     console.log(state);
     return {
-        allCustomers: selectCustomers(state.customersData.allCustomers, state.customersFilter)
+        allCustomers: selectCustomers(state.customersData.allCustomers, state.customersFilter),
+        actions: state.currentCustomerAction 
     };
 };
 
