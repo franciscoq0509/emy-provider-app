@@ -11,6 +11,7 @@ const fetchCustomers = () => (
 );
 
 const asyncAction = (dispatch) => {
+    
     return (dispatch) => {
         dispatch(requestCustomers());
         return fetchCustomers()
@@ -54,6 +55,7 @@ class CustomersListContainer extends React.Component {
    }
 
    componentWillReceiveProps(nextProps) {
+      
        if(this.props !== nextProps) {
         this.setState(() => ({customerChunk : nextProps.allCustomers}));
        }
