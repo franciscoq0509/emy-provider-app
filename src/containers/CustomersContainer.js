@@ -30,10 +30,25 @@ class CustomersListContainer extends React.Component {
     state = {
         customerChunk : ''
     }
+
+    showLoadingSpinner() {
+        console.log('showSPinner function');
+        return this.props.actions.isFetching ? true : false;
+    }
+
+    constructor(props) {
+        super(props);
+        this.showLoadingSpinner = this.showLoadingSpinner.bind(this);
+    }
+
+    componentWillMount() {
+        this.setState(() => ({showSpinner: this.showLoadingSpinner}));
+    }
+    
    componentDidMount() {
        
         console.log(this.props);
-        this.setState(() => ({actions: this.props.actions}));
+        
         setTimeout(() => {
             this.props.dispatch(asyncAction())
             .then(
@@ -63,7 +78,7 @@ class CustomersListContainer extends React.Component {
 
     render() {      
         return (
-            <CustomersListNavigator screenProps={ {customers: this.state.customerChunk, actions: this.state.actions} } nav={this.props.nav}/>
+            <CustomersListNavigator screenProps={ {customers: this.state.customerChunk, showSpinner: this.state.showSpinner} } nav={this.props.nav}/>
         );
     };
 };
