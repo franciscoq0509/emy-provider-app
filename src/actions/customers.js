@@ -4,9 +4,12 @@ export const invalidateCustomers = () => ({
 });
 
 //fetch new customers
-export const requestCustomers = () => ({ 
-    type: 'REQUEST_CUSTOMERS'
-});
+export const requestCustomers = () => {
+    console.log('request action fired');
+    return {
+        type: 'REQUEST_CUSTOMERS'
+    }
+};
 
 //recieving new customers success
 export const receiveNewCustomers = (newCustomers) => ({ 

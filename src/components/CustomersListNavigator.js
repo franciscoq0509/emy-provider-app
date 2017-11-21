@@ -15,14 +15,21 @@ class CustomersList extends React.Component {
 
     _keyExtractor = (item, index) => item.registered;
     render() {
+        console.log(this.props.screenProps);
         return (
             <List> 
-                <FlatList
-                    data={this.customersAndCallback()}
-                    renderItem={CustomerItem}
-                    keyExtractor={this._keyExtractor}
-                    ListHeaderComponent={<StandardSearchbar search="allCustomers" />}
-                />
+                {this.props.screenProps.actions !== undefined &&  this.props.screenProps.actions.isFetching ? 
+                    <Text>spinningspinningspinningspinningspinningspinningspinningspinningspinningspinningspinningspinningspinningspinningspinningspinningspinningspinning</Text>
+                    : 
+                    
+                    <FlatList
+                        data={this.customersAndCallback()}
+                        renderItem={CustomerItem}
+                        keyExtractor={this._keyExtractor}
+                        ListHeaderComponent={<StandardSearchbar search="allCustomers" />}
+                    />
+                
+                }
             </List>
         );
     }
