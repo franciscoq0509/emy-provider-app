@@ -7,7 +7,10 @@ import selectCustomers from '../selectors/customers';
 
 
 const fetchCustomers = () => (
-    fetch('http://emy-front-api.27s-dev.net/providers-api/v1/55790419-dbb4-43b4-9c1d-7bae0a37004f/users?full_name=%')
+    fetch(
+        'http://emy-front-api.27s-dev.net/providers-api/v1/55790419-dbb4-43b4-9c1d-7bae0a37004f/users?full_name=%'
+        //'https://front-api.enrolmy.com/activities-api/v1/activities'
+    )
 );
 
 const asyncAction = (dispatch) => {
@@ -19,7 +22,7 @@ const asyncAction = (dispatch) => {
                 (customersObject) => customersObject.json(),
                 (error) => dispatch(receiveCustomersError(error))
             ).then((customers) => {
-                console.log(customers.users);
+                console.log(customers);
                 return dispatch(receiveNewCustomers(customers.users));
             })
             .catch((err) => dispatch(receiveCustomersError(err)))
