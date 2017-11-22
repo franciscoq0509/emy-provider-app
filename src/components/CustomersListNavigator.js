@@ -5,6 +5,7 @@ import { CustomerItem } from './CustomerItem';
 import { StackNavigator } from 'react-navigation';
 import StandardSearchbar from './StandardSearchbar';
 import CustomerFullDetailsContainer from '../containers/CustomerFullDetailsContainer';
+import spinnerStyle from './styles/spinnerStyle';
 
 
 class CustomersList extends React.Component {
@@ -14,15 +15,18 @@ class CustomersList extends React.Component {
     };
 
     _keyExtractor = (item, index) => item.registered;
-    
+
     render() {
         return (
-            <View>
-                {this.props.screenProps.showSpinner() ? //returning true when should be false..
-                    <ActivityIndicator
-                        animating = {true}
-                        size = "large"
-                    />
+            <View  style={ center = {flex:1} }>
+                
+                {this.props.screenProps.showSpinner() ? 
+                    <View style={spinnerStyle.container}>
+                        <ActivityIndicator
+                            animating = {true}
+                            size = "large"
+                        />
+                    </View>
                     : 
                     <List> 
                         <FlatList
