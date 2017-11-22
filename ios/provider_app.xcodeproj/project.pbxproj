@@ -213,44 +213,28 @@
 			remoteGlobalIDString = 3D3CD9181DE5FBD800167DC4;
 			remoteInfo = "jschelpers-tvOS";
 		};
-<<<<<<< HEAD
-		44D0C8F81FC5120A00D31770 /* PBXContainerItemProxy */ = {
-=======
 		44D0C9321FC627E700D31770 /* PBXContainerItemProxy */ = {
->>>>>>> master
 			isa = PBXContainerItemProxy;
 			containerPortal = ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = ADD01A681E09402E00F6D226;
 			remoteInfo = "RCTBlob-tvOS";
 		};
-<<<<<<< HEAD
-		44D0C90A1FC5120A00D31770 /* PBXContainerItemProxy */ = {
-=======
 		44D0C9441FC627E700D31770 /* PBXContainerItemProxy */ = {
->>>>>>> master
 			isa = PBXContainerItemProxy;
 			containerPortal = 139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 3DBE0D001F3B181A0099AA32;
 			remoteInfo = fishhook;
 		};
-<<<<<<< HEAD
-		44D0C90C1FC5120A00D31770 /* PBXContainerItemProxy */ = {
-=======
 		44D0C9461FC627E700D31770 /* PBXContainerItemProxy */ = {
->>>>>>> master
 			isa = PBXContainerItemProxy;
 			containerPortal = 139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 3DBE0D0D1F3B181C0099AA32;
 			remoteInfo = "fishhook-tvOS";
 		};
-<<<<<<< HEAD
-		44D0C9111FC5120B00D31770 /* PBXContainerItemProxy */ = {
-=======
 		44D0C94B1FC627E700D31770 /* PBXContainerItemProxy */ = {
->>>>>>> master
 			isa = PBXContainerItemProxy;
 			containerPortal = 7FB6D6E884A640D3B4374453 /* RNVectorIcons.xcodeproj */;
 			proxyType = 2;
@@ -463,13 +447,8 @@
 			children = (
 				139FDEF41B06529B00C62182 /* libRCTWebSocket.a */,
 				3DAD3E991DF850E9000B6D8A /* libRCTWebSocket-tvOS.a */,
-<<<<<<< HEAD
-				44D0C90B1FC5120A00D31770 /* libfishhook.a */,
-				44D0C90D1FC5120A00D31770 /* libfishhook-tvOS.a */,
-=======
 				44D0C9451FC627E700D31770 /* libfishhook.a */,
 				44D0C9471FC627E700D31770 /* libfishhook-tvOS.a */,
->>>>>>> master
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -503,11 +482,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-<<<<<<< HEAD
-		44D0C8F21FC5120600D31770 /* Recovered References */ = {
-=======
 		44D0C92C1FC627E600D31770 /* Recovered References */ = {
->>>>>>> master
 			isa = PBXGroup;
 			children = (
 				75AB6FC9206D45DABA18DA1F /* libRNVectorIcons.a */,
@@ -515,17 +490,10 @@
 			name = "Recovered References";
 			sourceTree = "<group>";
 		};
-<<<<<<< HEAD
-		44D0C90E1FC5120A00D31770 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				44D0C9121FC5120B00D31770 /* libRNVectorIcons.a */,
-=======
 		44D0C9481FC627E700D31770 /* Products */ = {
 			isa = PBXGroup;
 			children = (
 				44D0C94C1FC627E700D31770 /* libRNVectorIcons.a */,
->>>>>>> master
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -585,11 +553,7 @@
 				00E356EF1AD99517003FC87E /* provider_appTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				8ECCC7E22BAA4EEBA1B53367 /* Resources */,
-<<<<<<< HEAD
-				44D0C8F21FC5120600D31770 /* Recovered References */,
-=======
 				44D0C92C1FC627E600D31770 /* Recovered References */,
->>>>>>> master
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -629,11 +593,7 @@
 			isa = PBXGroup;
 			children = (
 				ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */,
-<<<<<<< HEAD
-				44D0C8F91FC5120A00D31770 /* libRCTBlob-tvOS.a */,
-=======
 				44D0C9331FC627E700D31770 /* libRCTBlob-tvOS.a */,
->>>>>>> master
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -798,11 +758,7 @@
 					ProjectRef = 146833FF1AC3E56700842450 /* React.xcodeproj */;
 				},
 				{
-<<<<<<< HEAD
-					ProductGroup = 44D0C90E1FC5120A00D31770 /* Products */;
-=======
 					ProductGroup = 44D0C9481FC627E700D31770 /* Products */;
->>>>>>> master
 					ProjectRef = 7FB6D6E884A640D3B4374453 /* RNVectorIcons.xcodeproj */;
 				},
 			);
@@ -964,34 +920,6 @@
 			remoteRef = 3DAD3EAE1DF850E9000B6D8A /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-<<<<<<< HEAD
-		44D0C8F91FC5120A00D31770 /* libRCTBlob-tvOS.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = "libRCTBlob-tvOS.a";
-			remoteRef = 44D0C8F81FC5120A00D31770 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		44D0C90B1FC5120A00D31770 /* libfishhook.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libfishhook.a;
-			remoteRef = 44D0C90A1FC5120A00D31770 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		44D0C90D1FC5120A00D31770 /* libfishhook-tvOS.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = "libfishhook-tvOS.a";
-			remoteRef = 44D0C90C1FC5120A00D31770 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		44D0C9121FC5120B00D31770 /* libRNVectorIcons.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libRNVectorIcons.a;
-			remoteRef = 44D0C9111FC5120B00D31770 /* PBXContainerItemProxy */;
-=======
 		44D0C9331FC627E700D31770 /* libRCTBlob-tvOS.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -1018,7 +946,6 @@
 			fileType = archive.ar;
 			path = libRNVectorIcons.a;
 			remoteRef = 44D0C94B1FC627E700D31770 /* PBXContainerItemProxy */;
->>>>>>> master
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */ = {
