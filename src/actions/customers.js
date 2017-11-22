@@ -25,13 +25,6 @@ export const receiveCustomersError = (error) => ({
     receivedAt: Date.now()
 });
 
-//save Customers
-export const addCustomerChunk = (newChunk) => ({ 
-    type: 'SAVE_CHUNK',
-    allCustomers : newChunk.results,
-    receivedAt: Date.now()
-});
-
 
 
 

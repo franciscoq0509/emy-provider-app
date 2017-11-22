@@ -17,12 +17,11 @@ const asyncAction = (dispatch) => {
         return fetchCustomers()
             .then(
                 (customersObject) => customersObject.json(),
-                (error) => dispatch(addCustomerChunk(error))
+                (error) => dispatch(receiveNewCustomers(error))
             ).then((customers) => {
-                dispatch(receiveNewCustomers());
-                return dispatch(addCustomerChunk(customers));
+                return dispatch(receiveNewCustomers(customers));
             })
-            .catch((err) => dispatch(addCustomerChunk(err)))
+            .catch((err) => dispatch(receiveNewCustomers(err)))
     };
 };
 
@@ -33,55 +32,35 @@ class CustomersListContainer extends React.Component {
     }
 
     showLoadingSpinner() {
-        //console.log(this.props.actions.isFetching);
         return this.props.actions.isFetching ? true : false;
     }
 
     constructor(props) {
         super(props);
-        //console.log(this.props.actions.isFetching);
         this.showLoadingSpinner = this.showLoadingSpinner.bind(this);
     }
 
     componentWillMount() {
         this.setState(() => ({showSpinner: this.showLoadingSpinner}));
-        this.setState(() => ({actions: this.props.actions}));
     }
     
-   componentDidMount() {
-       
-        //console.log(this.props);
-        
-        setTimeout(() => {
-            this.props.dispatch(asyncAction())
-            .then(
-                ({ customers }) => {
-                    this.setState(() => ({customerChunk : this.props.allCustomers}));
-                    
-                });
-        },5000);
-        
+    componentDidMount() {   
+    this.props.dispatch(asyncAction())
+		.then(
+            ({ customers }) => {
+                this.setState(() => ({customerChunk : this.props.allCustomers}));
+            });
+    }
 
-        // setTimeout(() => {
-        //     this.props.dispatch(asyncAction())
-        //     .then(
-        //         ({ customers }) => {
-        //             this.setState(() => ({customerChunk : this.props.customers.allCustomers}));
-        //             console.log(this.props);
-        //         });
-        // }, 6000);
-   }
-
-   componentWillReceiveProps(nextProps) {
-      
-       if(this.props !== nextProps) {
-        this.setState(() => ({customerChunk : nextProps.allCustomers}));
-       }
-   }
+	componentWillReceiveProps(nextProps) { 
+		if(this.props !== nextProps) {
+			this.setState(() => ({customerChunk : nextProps.allCustomers}));
+		}
+	}
 
     render() {      
         return (
-            <CustomersListNavigator screenProps={ {customers: this.state.customerChunk, showSpinner: this.state.showSpinner, actions: this.state.actions} } nav={this.props.nav}/>
+            <CustomersListNavigator screenProps={ {customers: this.state.customerChunk, showSpinner: this.state.showSpinner} } nav={this.props.nav}/>
         );
     };
 };

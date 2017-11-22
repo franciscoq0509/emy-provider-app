@@ -1,5 +1,5 @@
 import React from 'react';
-import { FlatList, Text } from 'react-native'
+import { FlatList, Text, ActivityIndicator, View } from 'react-native'
 import { List } from 'react-native-elements';
 import { CustomerItem } from './CustomerItem';
 import { StackNavigator } from 'react-navigation';
@@ -14,24 +14,26 @@ class CustomersList extends React.Component {
     };
 
     _keyExtractor = (item, index) => item.registered;
+    
     render() {
-        console.log(this.props.screenProps.actions.isFetching);
-        console.log(this.props.screenProps.showSpinner());
         return (
-            <List> 
+            <View>
                 {this.props.screenProps.showSpinner() ? //returning true when should be false..
-                    <Text>spinningspinningspinningspinningspinningspinningspinningspinningspinningspinningspinningspinningspinningspinningspinningspinningspinningspinning</Text>
-                    : 
-                    
-                    <FlatList
-                        data={this.customersAndCallback()}
-                        renderItem={CustomerItem}
-                        keyExtractor={this._keyExtractor}
-                        ListHeaderComponent={<StandardSearchbar search="allCustomers" />}
+                    <ActivityIndicator
+                        animating = {true}
+                        size = "large"
                     />
-                
+                    : 
+                    <List> 
+                        <FlatList
+                            data={this.customersAndCallback()}
+                            renderItem={CustomerItem}
+                            keyExtractor={this._keyExtractor}
+                            ListHeaderComponent={<StandardSearchbar search="allCustomers" />}
+                        />
+                    </List>
                 }
-            </List>
+            </View>
         );
     }
     
