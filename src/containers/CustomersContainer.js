@@ -6,10 +6,12 @@ import CustomersListNavigator from '../components/CustomersListNavigator';
 import selectCustomers from '../selectors/customers';
 
 
+
 const fetchCustomers = () => (
     fetch(
         //'http://emy-front-api.27s-dev.net/providers-api/v1/55790419-dbb4-43b4-9c1d-7bae0a37004f/users?full_name=%'
-        'https://front-api.enrolmy.com/activities-api/v1/activities'
+        //'https://front-api.enrolmy.com/activities-api/v1/activities'
+        'https://front-api.enrolmy.com/providers-api/v1/55790419-dbb4-43b4-9c1d-7bae0a37004f/users'
     )
 );
 
