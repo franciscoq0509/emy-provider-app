@@ -9,12 +9,13 @@ import spinnerStyle from './styles/spinnerStyle';
 
 
 class CustomersList extends React.Component {
-
+    
     customersAndCallback() {
+        console.log(this.props.screenProps.customers[0]);
         return this.props.screenProps.customers !== "" ? this.props.screenProps.customers.map((customer) => ({...customer, customNavigator: this.props.navigation})) : "";
     };
 
-    _keyExtractor = (item, index) => item.registered;
+    _keyExtractor = (item, index) => item.id;
 
     render() {
         return (

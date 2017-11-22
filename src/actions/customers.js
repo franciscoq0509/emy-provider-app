@@ -14,7 +14,7 @@ export const requestCustomers = () => {
 //recieving new customers success
 export const receiveNewCustomers = (newCustomers) => ({ 
     type: 'RECEIVE_CUSTOMERS_SUCCESS',
-    allCustomers : newCustomers.results,
+    allCustomers : newCustomers,
     receivedAt: Date.now()
 });
 

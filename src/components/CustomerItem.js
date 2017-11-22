@@ -7,7 +7,7 @@ export const CustomerItem = (props) => {
     return (
         <ListItem
             roundAvatar
-            title={`${props.item.name.first} ${props.item.name.last}`}
+            title={`${props.item.first_name} ${props.item.last_name}`}
             onPress={() => {props.item.customNavigator.navigate('fullDetail', { customerId : props.item.registered })}}
         />
     );

@@ -1,13 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { addCustomerChunk, requestCustomers, receiveNewCustomers } from '../actions/customers';
+import { requestCustomers, receiveNewCustomers, receiveCustomersError } from '../actions/customers';
 import {  } from '../actions/customers';
 import CustomersListNavigator from '../components/CustomersListNavigator';
 import selectCustomers from '../selectors/customers';
 
 
 const fetchCustomers = () => (
-    fetch('https://randomuser.me/api/?results=50')
+    fetch('http://emy-front-api.27s-dev.net/providers-api/v1/55790419-dbb4-43b4-9c1d-7bae0a37004f/users?full_name=%')
 );
 
 const asyncAction = (dispatch) => {
@@ -17,11 +17,12 @@ const asyncAction = (dispatch) => {
         return fetchCustomers()
             .then(
                 (customersObject) => customersObject.json(),
-                (error) => dispatch(receiveNewCustomers(error))
+                (error) => dispatch(receiveCustomersError(error))
             ).then((customers) => {
-                return dispatch(receiveNewCustomers(customers));
+                console.log(customers.users);
+                return dispatch(receiveNewCustomers(customers.users));
             })
-            .catch((err) => dispatch(receiveNewCustomers(err)))
+            .catch((err) => dispatch(receiveCustomersError(err)))
     };
 };
 
