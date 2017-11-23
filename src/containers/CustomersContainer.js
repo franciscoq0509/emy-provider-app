@@ -3,13 +3,14 @@ import { connect } from 'react-redux';
 import { requestCustomers, receiveNewCustomers, receiveCustomersError } from '../actions/customers';
 import {  } from '../actions/customers';
 import CustomersListNavigator from '../components/CustomersListNavigator';
-import selectCustomers from '../selectors/customers';
+//import selectCustomers from '../selectors/customers';
+import { getFilteredCustomers } from '../selectors/index';
 
 
 
 const fetchCustomers = () => (
     fetch(
-        //'http://emy-front-api.27s-dev.net/providers-api/v1/55790419-dbb4-43b4-9c1d-7bae0a37004f/users?full_name=%'
+        //'https://emy-front-api.craig.27s-dev.net/providers-api/v1/55790419-dbb4-43b4-9c1d-7bae0a37004f/users?full_name=%'
         //'https://front-api.enrolmy.com/activities-api/v1/activities'
         'https://front-api.enrolmy.com/providers-api/v1/55790419-dbb4-43b4-9c1d-7bae0a37004f/users'
     )
@@ -54,19 +55,20 @@ class CustomersListContainer extends React.Component {
     this.props.dispatch(asyncAction())
 		.then(
             ({ customers }) => {
-                this.setState(() => ({customerChunk : this.props.allCustomers}));
+                this.setState(() => ({customers : this.props.allCustomers}));
+                this.setState(() => ({filteredCustomers : this.props.filteredCustomers}));
             });
     }
 
 	componentWillReceiveProps(nextProps) { 
 		if(this.props !== nextProps) {
-			this.setState(() => ({customerChunk : nextProps.allCustomers}));
+			this.setState(() => ({customers : nextProps.allCustomers}));
 		}
 	}
 
     render() {      
         return (
-            <CustomersListNavigator screenProps={ {customers: this.state.customerChunk, showSpinner: this.state.showSpinner} } nav={this.props.nav}/>
+            <CustomersListNavigator screenProps={ {customers: this.state.customers, filteredCustomers: this.state.filteredCustomers, showSpinner: this.state.showSpinner} } nav={this.props.nav}/>
         );
     };
 };
@@ -74,7 +76,8 @@ class CustomersListContainer extends React.Component {
 const mapStateToProps = (state) => {
     console.log(state);
     return {
-        allCustomers: selectCustomers(state.customersData.allCustomers, state.customersFilter),
+        filteredCustomers: getFilteredCustomers(state, state),//selectCustomers(state.customersData.allCustomers, state.customersFilter),
+        allCustomers: state.customersData.allCustomers,
         actions: state.currentCustomerAction 
     };
 };

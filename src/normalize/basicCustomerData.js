@@ -2,11 +2,15 @@ import { Schema, arrayOf, normalize } from 'normalizr';
 
 
 export default (customersArray) => {
-    const normalized = {};
+    const normalizedData = {};
+    normalizedData.allCustomers = {};
+    normalizedData.allCustomerIds = [];
     customersArray.map((customer) => {
-        normalized[customer.id] = customer;
+        normalizedData.allCustomers[customer.id] = customer;
+        normalizedData.allCustomerIds.push(customer.id);
         //return; 
     });
-    return normalized;
+    console.log(normalizedData);
+    return normalizedData;
     
 }
