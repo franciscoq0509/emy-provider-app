@@ -1,9 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { requestCustomers, receiveNewCustomers, receiveCustomersError } from '../actions/customers';
-import {  } from '../actions/customers';
 import CustomersListNavigator from '../components/CustomersListNavigator';
-//import selectCustomers from '../selectors/customers';
 import { getFilteredCustomers } from '../selectors/index';
 
 
@@ -34,10 +32,6 @@ const asyncAction = (dispatch) => {
 
 
 class CustomersListContainer extends React.Component {
-    state = {
-        customerChunk : ''
-    }
-
     showLoadingSpinner = () => {
         return this.props.actions.isFetching ? true : false;
     }
@@ -72,7 +66,7 @@ class CustomersListContainer extends React.Component {
 const mapStateToProps = (state) => {
     //console.log(state);
     return {
-        filteredCustomers: getFilteredCustomers(state, state, state),//selectCustomers(state.customersData.allCustomers, state.customersFilter),
+        filteredCustomers: getFilteredCustomers(state, state, state),
         allCustomers: state.customersData.allCustomers,
         actions: state.currentCustomerAction 
     };
