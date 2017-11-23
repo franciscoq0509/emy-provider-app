@@ -1,5 +1,5 @@
 const stateInit = {
-    allCustomers: [],
+    allCustomers: {},
     receivedAt: {}
 };
 
@@ -9,7 +9,7 @@ export default (state = stateInit, action) => {
     switch (action.type) {
         case 'RECEIVE_CUSTOMERS_SUCCESS':
             return {
-                allCustomers: action.allCustomers !== undefined ? [...state.allCustomers, ...action.allCustomers] : [...state.allCustomers],
+                allCustomers: action.allCustomers !== undefined ? {...state.allCustomers, ...action.allCustomers} : {...state.allCustomers},
                 receivedAt:  action.receivedAt
             };
         default:

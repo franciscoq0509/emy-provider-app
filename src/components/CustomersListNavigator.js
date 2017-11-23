@@ -11,7 +11,7 @@ import spinnerStyle from './styles/spinnerStyle';
 class CustomersList extends React.Component {
     
     customersAndCallback() {
-        console.log(this.props.screenProps.customers[0]);
+        console.log(this.props.screenProps.customers);
         return this.props.screenProps.customers !== "" ? this.props.screenProps.customers.map((customer) => ({...customer, customNavigator: this.props.navigation})) : "";
     };
 

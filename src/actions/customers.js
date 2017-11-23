@@ -21,7 +21,7 @@ export const receiveNewCustomers = (newCustomers) => {
     console.log(normalizedCustomers);
     return {
         type: 'RECEIVE_CUSTOMERS_SUCCESS',
-        allCustomers : newCustomers,
+        allCustomers : normalizedCustomers,
         receivedAt: Date.now()
     }
 };
