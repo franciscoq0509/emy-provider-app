@@ -8,13 +8,15 @@ export const getFilteredCustomers = createSelector(
     [getTextMatch, customers, customersIds],
     (text, customers, allIds) => {
         if(allIds !== undefined) {
+            //console.log('not undefined');
             let filteredCustomerObjects = [];
-            filteredCustomerObjects = allIds.filter((id) => {
+            allIds.filter((id) => {
                 const textMatch = customers[id].first_name === null || customers[id].first_name.toLowerCase().includes(text.toLowerCase()) || 
                 customers[id].last_name === null || customers[id].last_name.toLowerCase().includes(text.toLowerCase());
-                return textMatch ? customers[id] : false;
+                 if(textMatch) { filteredCustomerObjects[id] = customers[id] };
             });
-            return filteredCustomerObjects;
+            //console.log(filteredCustomerObjects);
+            return  filteredCustomerObjects;
         } else return customers;
     }
 )

@@ -10,9 +10,9 @@ import { getFilteredCustomers } from '../selectors/index';
 
 const fetchCustomers = () => (
     fetch(
-        //'https://emy-front-api.craig.27s-dev.net/providers-api/v1/55790419-dbb4-43b4-9c1d-7bae0a37004f/users?full_name=%'
+        'https://emy-front-api.craig.27s-dev.net/providers-api/v1/55790419-dbb4-43b4-9c1d-7bae0a37004f/users?full_name=%'
         //'https://front-api.enrolmy.com/activities-api/v1/activities'
-        'https://front-api.enrolmy.com/providers-api/v1/55790419-dbb4-43b4-9c1d-7bae0a37004f/users'
+        //'https://front-api.enrolmy.com/providers-api/v1/55790419-dbb4-43b4-9c1d-7bae0a37004f/users'
     )
 );
 
@@ -25,7 +25,7 @@ const asyncAction = (dispatch) => {
                 (customersObject) => customersObject.json(),
                 (error) => dispatch(receiveCustomersError(error))
             ).then((customers) => {
-                console.log(customers);
+                //console.log(customers);
                 return dispatch(receiveNewCustomers(customers.users));
             })
             .catch((err) => dispatch(receiveCustomersError(err)))
@@ -38,13 +38,8 @@ class CustomersListContainer extends React.Component {
         customerChunk : ''
     }
 
-    showLoadingSpinner() {
+    showLoadingSpinner = () => {
         return this.props.actions.isFetching ? true : false;
-    }
-
-    constructor(props) {
-        super(props);
-        this.showLoadingSpinner = this.showLoadingSpinner.bind(this);
     }
 
     componentWillMount() {
@@ -62,7 +57,8 @@ class CustomersListContainer extends React.Component {
 
 	componentWillReceiveProps(nextProps) { 
 		if(this.props !== nextProps) {
-			this.setState(() => ({customers : nextProps.allCustomers}));
+            this.setState(() => ({customers : nextProps.allCustomers}));
+            this.setState(() => ({filteredCustomers : this.props.filteredCustomers}));
 		}
 	}
 
@@ -74,9 +70,9 @@ class CustomersListContainer extends React.Component {
 };
 
 const mapStateToProps = (state) => {
-    console.log(state);
+    //console.log(state);
     return {
-        filteredCustomers: getFilteredCustomers(state, state),//selectCustomers(state.customersData.allCustomers, state.customersFilter),
+        filteredCustomers: getFilteredCustomers(state, state, state),//selectCustomers(state.customersData.allCustomers, state.customersFilter),
         allCustomers: state.customersData.allCustomers,
         actions: state.currentCustomerAction 
     };
