@@ -1,3 +1,6 @@
+import normalizeBasicCustomers from '../normalize/basicCustomerData';
+
+
 //user refreshes
 export const invalidateCustomers = () => ({ 
     type: 'INVALIDATE_CUSTOMERS'
@@ -12,11 +15,17 @@ export const requestCustomers = () => {
 };
 
 //recieving new customers success
-export const receiveNewCustomers = (newCustomers) => ({ 
-    type: 'RECEIVE_CUSTOMERS_SUCCESS',
-    allCustomers : newCustomers.results,
-    receivedAt: Date.now()
-});
+export const receiveNewCustomers = (newCustomers) => { 
+    console.log('just befoe norm function');
+    const normalizedCustomers = normalizeBasicCustomers(newCustomers);
+    console.log(normalizedCustomers);
+    return {
+        type: 'RECEIVE_CUSTOMERS_SUCCESS',
+        allCustomers : normalizedCustomers.allCustomers,
+        allCustomerIds: normalizedCustomers.allCustomerIds,
+        receivedAt: Date.now()
+    }
+};
 
 //recieving new customers failure
 export const receiveCustomersError = (error) => ({ 

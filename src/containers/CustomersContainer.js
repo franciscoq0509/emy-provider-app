@@ -1,13 +1,19 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { addCustomerChunk, requestCustomers, receiveNewCustomers } from '../actions/customers';
+import { requestCustomers, receiveNewCustomers, receiveCustomersError } from '../actions/customers';
 import {  } from '../actions/customers';
 import CustomersListNavigator from '../components/CustomersListNavigator';
-import selectCustomers from '../selectors/customers';
+//import selectCustomers from '../selectors/customers';
+import { getFilteredCustomers } from '../selectors/index';
+
 
 
 const fetchCustomers = () => (
-    fetch('https://randomuser.me/api/?results=50')
+    fetch(
+        'https://emy-front-api.craig.27s-dev.net/providers-api/v1/55790419-dbb4-43b4-9c1d-7bae0a37004f/users?full_name=%'
+        //'https://front-api.enrolmy.com/activities-api/v1/activities'
+        //'https://front-api.enrolmy.com/providers-api/v1/55790419-dbb4-43b4-9c1d-7bae0a37004f/users'
+    )
 );
 
 const asyncAction = (dispatch) => {
@@ -17,11 +23,12 @@ const asyncAction = (dispatch) => {
         return fetchCustomers()
             .then(
                 (customersObject) => customersObject.json(),
-                (error) => dispatch(receiveNewCustomers(error))
+                (error) => dispatch(receiveCustomersError(error))
             ).then((customers) => {
-                return dispatch(receiveNewCustomers(customers));
+                //console.log(customers);
+                return dispatch(receiveNewCustomers(customers.users));
             })
-            .catch((err) => dispatch(receiveNewCustomers(err)))
+            .catch((err) => dispatch(receiveCustomersError(err)))
     };
 };
 
@@ -31,13 +38,8 @@ class CustomersListContainer extends React.Component {
         customerChunk : ''
     }
 
-    showLoadingSpinner() {
+    showLoadingSpinner = () => {
         return this.props.actions.isFetching ? true : false;
-    }
-
-    constructor(props) {
-        super(props);
-        this.showLoadingSpinner = this.showLoadingSpinner.bind(this);
     }
 
     componentWillMount() {
@@ -48,27 +50,30 @@ class CustomersListContainer extends React.Component {
     this.props.dispatch(asyncAction())
 		.then(
             ({ customers }) => {
-                this.setState(() => ({customerChunk : this.props.allCustomers}));
+                this.setState(() => ({customers : this.props.allCustomers}));
+                this.setState(() => ({filteredCustomers : this.props.filteredCustomers}));
             });
     }
 
 	componentWillReceiveProps(nextProps) { 
 		if(this.props !== nextProps) {
-			this.setState(() => ({customerChunk : nextProps.allCustomers}));
+            this.setState(() => ({customers : nextProps.allCustomers}));
+            this.setState(() => ({filteredCustomers : this.props.filteredCustomers}));
 		}
 	}
 
     render() {      
         return (
-            <CustomersListNavigator screenProps={ {customers: this.state.customerChunk, showSpinner: this.state.showSpinner} } nav={this.props.nav}/>
+            <CustomersListNavigator screenProps={ {customers: this.state.customers, filteredCustomers: this.state.filteredCustomers, showSpinner: this.state.showSpinner} } nav={this.props.nav}/>
         );
     };
 };
 
 const mapStateToProps = (state) => {
-    console.log(state);
+    //console.log(state);
     return {
-        allCustomers: selectCustomers(state.customersData.allCustomers, state.customersFilter),
+        filteredCustomers: getFilteredCustomers(state, state, state),//selectCustomers(state.customersData.allCustomers, state.customersFilter),
+        allCustomers: state.customersData.allCustomers,
         actions: state.currentCustomerAction 
     };
 };

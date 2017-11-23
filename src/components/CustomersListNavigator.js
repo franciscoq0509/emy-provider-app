@@ -8,13 +8,15 @@ import CustomerFullDetailsContainer from '../containers/CustomerFullDetailsConta
 import spinnerStyle from './styles/spinnerStyle';
 
 
-class CustomersList extends React.Component {
-
+class CustomersList extends React.PureComponent {
+    
     customersAndCallback() {
-        return this.props.screenProps.customers !== "" ? this.props.screenProps.customers.map((customer) => ({...customer, customNavigator: this.props.navigation})) : "";
+        console.log(this.props.screenProps.filteredCustomers);
+        return (this.props.screenProps.filteredCustomers !== undefined && 
+            this.props.screenProps.filteredCustomers.length !== 0) ? this.props.screenProps.filteredCustomers : []; //.map((customer) => ({...customer, customNavigator: this.props.navigation}))
     };
 
-    _keyExtractor = (item, index) => item.registered;
+    _keyExtractor = (item, index) => index;
 
     render() {
         return (
