@@ -8,7 +8,7 @@ import CustomerFullDetailsContainer from '../containers/CustomerFullDetailsConta
 import spinnerStyle from './styles/spinnerStyle';
 
 
-class CustomersList extends React.Component {
+class CustomersList extends React.PureComponent {
     
     customersAndCallback() {
         console.log(this.props.screenProps.filteredCustomers);

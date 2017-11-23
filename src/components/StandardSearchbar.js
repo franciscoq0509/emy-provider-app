@@ -2,18 +2,22 @@ import React from 'react';
 import { SearchBar } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { setTextFilter } from '../actions/customerFilters';
+import { Throttle } from 'react-throttle';
 
 
 
 const StandardSearchbar = (props) => {
+    console.log(props);
     return (
-        <SearchBar 
-            placeholder="Search Customers..." 
-            lightTheme 
-            round
-            value={props.filters.text}
-            onChangeText={(value) => {props.dispatch(setTextFilter(value))}} 
-        />
+        <Throttle time="100" handler="onChangeText">
+            <SearchBar 
+                placeholder="Search Customers..." 
+                lightTheme 
+                round
+
+                onChangeText={(value) => {props.dispatch(setTextFilter(value))}} 
+            />
+        </Throttle>
     ); 
 };
 
@@ -21,4 +25,4 @@ const mapStateToProps = (state) => ({
     filters: state.customersFilter
 });
 
-export default connect(mapStateToProps)(StandardSearchbar);
+export default connect()(StandardSearchbar);
