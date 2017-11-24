@@ -16,6 +16,7 @@ export const getFilteredCustomers = createSelector(
                  if(textMatch) { filteredCustomerObjects[id] = customers[id] };
             });
             //console.log(filteredCustomerObjects);
+            console.log(text);
             return  filteredCustomerObjects;
         } else return customers;
     }

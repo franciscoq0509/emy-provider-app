@@ -1,6 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
-import { connect } from 'redux';
+import { connect } from 'react-redux';
+import { receiveCustomersError,  receiveNewActivities} from '../actions/activities';
 //receiveActivitiesError,  receiveNewActivities
 const fetchActivities = () => (
     fetch('https://front-api.enrolmy.com/activities-api/v1/activities')
@@ -25,12 +26,18 @@ class ActivitiesContainer extends React.Component {
     componentDidMount() {
         this.props.dispatch(asyncFetch())
             .then(
-                (thing) => {
-                    console.log(thing);
+                ({ activities }) => {
+                   // console.log(activities.activities);
             })
+    }
+
+    render() {
+        return null;
     }
 };
 
 const mapStateToProps = (state) => ({
-    activities
+    activities: state.activities
 });
+
+export default connect(mapStateToProps)(ActivitiesContainer);

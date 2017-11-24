@@ -8,7 +8,7 @@ export const invalidateCustomers = () => ({
 
 //fetch new customers
 export const requestCustomers = () => {
-    console.log('request action fired');
+    //console.log('request action fired');
     return {
         type: 'REQUEST_CUSTOMERS'
     }
@@ -16,9 +16,9 @@ export const requestCustomers = () => {
 
 //recieving new customers success
 export const receiveNewCustomers = (newCustomers) => { 
-    console.log('just befoe norm function');
+    //console.log('just befoe norm function');
     const normalizedCustomers = normalizeBasicCustomers(newCustomers);
-    console.log(normalizedCustomers);
+    //console.log(normalizedCustomers);
     return {
         type: 'RECEIVE_CUSTOMERS_SUCCESS',
         allCustomers : normalizedCustomers.allCustomers,

@@ -10,7 +10,7 @@ export default (customersArray) => {
         normalizedData.allCustomerIds.push(customer.id);
         //return; 
     });
-    console.log(normalizedData);
+    //console.log(normalizedData);
     return normalizedData;
     
 }

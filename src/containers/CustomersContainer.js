@@ -44,14 +44,15 @@ class CustomersListContainer extends React.Component {
     this.props.dispatch(asyncAction())
 		.then(
             ({ customers }) => {
-                this.setState(() => ({customers : this.props.allCustomers}));
+                //this.setState(() => ({customers : this.props.allCustomers}));
                 this.setState(() => ({filteredCustomers : this.props.filteredCustomers}));
             });
     }
 
 	componentWillReceiveProps(nextProps) { 
+        console.log(nextProps.filteredCustomers);
 		if(this.props !== nextProps) {
-            this.setState(() => ({customers : nextProps.allCustomers}));
+            //this.setState(() => ({customers : nextProps.allCustomers}));
             this.setState(() => ({filteredCustomers : this.props.filteredCustomers}));
 		}
 	}
@@ -67,7 +68,7 @@ const mapStateToProps = (state) => {
     //console.log(state);
     return {
         filteredCustomers: getFilteredCustomers(state, state, state),
-        allCustomers: state.customersData.allCustomers,
+        //allCustomers: state.customersData.allCustomers,
         actions: state.currentCustomerAction 
     };
 };
