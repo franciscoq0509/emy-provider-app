@@ -8,7 +8,7 @@ import { getFilteredCustomers } from '../selectors/index';
 
 const fetchCustomers = () => (
     fetch(
-        'https://emy-front-api.craig.27s-dev.net/providers-api/v1/55790419-dbb4-43b4-9c1d-7bae0a37004f/users?full_name=%'
+        'https://emy-front-api.craig.27s-dev.net/providers-api/v1/55790419-dbb4-43b4-9c1d-7bae0a37004f/users?full_name=%&limit=12'
         //'https://front-api.enrolmy.com/activities-api/v1/activities'
         //'https://front-api.enrolmy.com/providers-api/v1/55790419-dbb4-43b4-9c1d-7bae0a37004f/users'
     )
