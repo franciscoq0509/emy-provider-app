@@ -7,18 +7,18 @@ const customersIds = (state) => state.customersData.allCustomerIds;
 export const getFilteredCustomers = createSelector(
     [getTextMatch, customers, customersIds],
     (text, customers, allIds) => {
-        if(allIds !== undefined) {
+        console.log(text.length)
+        if(allIds !== undefined && text.length !== 0) {
             //console.log('not undefined');
             let filteredCustomerObjects = [];
             allIds.filter((id) => {
-                const textMatch = customers[id].first_name === null || customers[id].first_name.toLowerCase().includes(text.toLowerCase()) || 
-                customers[id].last_name === null || customers[id].last_name.toLowerCase().includes(text.toLowerCase());
-                 if(textMatch) { filteredCustomerObjects[id] = customers[id] };
+                const textMatch = customers[id].full_name === null || customers[id].full_name.toLowerCase().search(text.toLowerCase());
+                 if(textMatch >= 1) { filteredCustomerObjects[id] = customers[id] };
             });
-            //console.log(filteredCustomerObjects);
+            console.log(filteredCustomerObjects);
             console.log(text);
             return  filteredCustomerObjects;
-        } else return customers;
+        } else {console.log('else');console.log(customers);return customers;}
     }
 )
 

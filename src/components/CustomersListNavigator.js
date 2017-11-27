@@ -12,13 +12,15 @@ class CustomersList extends React.PureComponent {
     
     customersAndCallback() {
         //console.log(this.props.screenProps.filteredCustomers);
-        return (this.props.screenProps.filteredCustomers !== undefined && 
-            this.props.screenProps.filteredCustomers.length !== 0) ? this.props.screenProps.filteredCustomers : []; //.map((customer) => ({...customer, customNavigator: this.props.navigation}))
+        console.log(this.props.screenProps.filteredCustomers);
+        return (this.props.screenProps.filteredCustomers !== undefined) ? [...Object.values(this.props.screenProps.filteredCustomers)] : []; //.map((customer) => ({...customer, customNavigator: this.props.navigation}))
     };
 
     _keyExtractor = (item, index) => index;
 
     render() {
+        console.log('rendering list');
+        console.log(this.customersAndCallback());
         return (
             <View  style={ center = {flex:1} }>
                 
@@ -33,7 +35,8 @@ class CustomersList extends React.PureComponent {
                     <List> 
                         <FlatList
                             data={this.customersAndCallback()}
-                            initialNumToRender={5}
+                            initialNumToRender={10}
+                            onEndReachedThreshold={1200}
                             renderItem={CustomerItem}
                             keyExtractor={this._keyExtractor}
                             ListHeaderComponent={<StandardSearchbar search="allCustomers" />}

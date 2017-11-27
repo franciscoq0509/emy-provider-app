@@ -13,10 +13,12 @@
 		"react-dom": "^15.6.1",
 		"react-native": "0.50.2",
 		"react-native-elements": "^0.18.2",
+		"react-native-optimized-flatlist": "^1.0.3",
 		"react-native-vector-icons": "^4.4.2",
 		"react-navigation": "^1.0.0-beta.19",
 		"react-redux": "^5.0.6",
 		"react-throttle": "^0.3.0",
+		"recyclerlistview": "^1.2.1",
 		"redux": "^3.7.2",
 		"redux-thunk": "^2.2.0",
 		"reselect": "^3.0.1"
