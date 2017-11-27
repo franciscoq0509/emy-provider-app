@@ -11,16 +11,12 @@ import spinnerStyle from './styles/spinnerStyle';
 class CustomersList extends React.PureComponent {
     
     customersAndCallback() {
-        //console.log(this.props.screenProps.filteredCustomers);
-        console.log(this.props.screenProps.filteredCustomers);
         return (this.props.screenProps.filteredCustomers !== undefined) ? [...Object.values(this.props.screenProps.filteredCustomers)] : []; //.map((customer) => ({...customer, customNavigator: this.props.navigation}))
     };
 
     _keyExtractor = (item, index) => index;
 
     render() {
-        console.log('rendering list');
-        console.log(this.customersAndCallback());
         return (
             <View  style={ center = {flex:1} }>
                 
