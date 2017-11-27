@@ -11,9 +11,7 @@ import spinnerStyle from './styles/spinnerStyle';
 class CustomersList extends React.PureComponent {
     
     customersAndCallback() {
-        console.log(this.props.screenProps.filteredCustomers);
-        return (this.props.screenProps.filteredCustomers !== undefined && 
-            this.props.screenProps.filteredCustomers.length !== 0) ? this.props.screenProps.filteredCustomers : []; //.map((customer) => ({...customer, customNavigator: this.props.navigation}))
+        return (this.props.screenProps.filteredCustomers !== undefined) ? [...Object.values(this.props.screenProps.filteredCustomers)] : []; 
     };
 
     _keyExtractor = (item, index) => index;
@@ -33,6 +31,8 @@ class CustomersList extends React.PureComponent {
                     <List> 
                         <FlatList
                             data={this.customersAndCallback()}
+                            initialNumToRender={10}
+                            onEndReachedThreshold={1200}
                             renderItem={CustomerItem}
                             keyExtractor={this._keyExtractor}
                             ListHeaderComponent={<StandardSearchbar search="allCustomers" />}
