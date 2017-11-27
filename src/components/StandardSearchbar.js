@@ -11,12 +11,11 @@ const StandardSearchbar = (props) => {
 
     }
     return (
-        <Debounce time="400" handler="onChangeText">
+        <Debounce time="100" handler="onChangeText">
             <SearchBar 
                 placeholder="Search Customers..." 
                 lightTheme 
                 round
-                
                 onChangeText={(value) => {
                     props.dispatch(setTextFilter(value))
                 }} 
