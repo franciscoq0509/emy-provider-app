@@ -7,7 +7,6 @@ const customersIds = (state) => state.customersData.allCustomerIds;
 export const getFilteredCustomers = createSelector(
     [getTextMatch, customers, customersIds],
     (text, customers, allIds) => {
-        //console.log(text);
         if(allIds !== undefined && text.length !== 0) {
             let filteredCustomerObjects = [];
             allIds.filter((id) => {

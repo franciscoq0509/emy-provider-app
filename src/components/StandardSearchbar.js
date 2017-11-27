@@ -11,7 +11,7 @@ const StandardSearchbar = (props) => {
 
     }
     return (
-        <Debounce time="600" handler="onChangeText">
+        <Debounce time="400" handler="onChangeText">
             <SearchBar 
                 placeholder="Search Customers..." 
                 lightTheme 

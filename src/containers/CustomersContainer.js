@@ -23,7 +23,6 @@ const asyncAction = (dispatch) => {
                 (customersObject) => customersObject.json(),
                 (error) => dispatch(receiveCustomersError(error))
             ).then((customers) => {
-                //console.log(customers);
                 return dispatch(receiveNewCustomers(customers.users));
             })
             .catch((err) => dispatch(receiveCustomersError(err)))
@@ -37,7 +36,6 @@ class CustomersListContainer extends React.Component {
     }
 
     componentWillMount() {
-        //console.log(this.props.filteredCustomers);
         this.setState(() => ({showSpinner: this.showLoadingSpinner}));
     }
     
@@ -45,17 +43,12 @@ class CustomersListContainer extends React.Component {
     this.props.dispatch(asyncAction())
 		.then(
             ({ customers }) => { 
-                //console.log(this.props.filteredCustomers);
                 this.setState(() => ({filteredCustomers : this.props.filteredCustomers}));
             });
     }
 
 	componentWillReceiveProps(nextProps) { 
-        //console.log(nextProps.filteredCustomers);
 		if(this.props !== nextProps) {
-            //console.log('rerendering customersContainer');
-            //console.log(nextProps);
-            //this.setState(() => ({customers : nextProps.allCustomers}));
             this.setState(() => ({filteredCustomers : nextProps.filteredCustomers}));
 		}
 	}
@@ -68,10 +61,8 @@ class CustomersListContainer extends React.Component {
 };
 
 const mapStateToProps = (state) => {
-    //console.log(getFilteredCustomers(state, state, state));
     return {
         filteredCustomers: getFilteredCustomers(state, state, state),
-        //allCustomers: state.customersData.allCustomers,
         actions: state.currentCustomerAction 
     };
 };
