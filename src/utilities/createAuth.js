@@ -1,5 +1,7 @@
 const Buffer = require('buffer/').Buffer;
 
+import saveJwt from './saveJwt';
+
 const _options = (guid, uname, pwd) => ({
     method: 'GET',
     uri: 'https://login-dev.enrolmy.com/login?scope=users,client-users,addresses,phones,ethnic-groups,emergency-contacts,family-doctors,educations',
@@ -10,14 +12,16 @@ const _options = (guid, uname, pwd) => ({
 });
 
 export const createAuth = (uname, pwd, guid = '55790419-dbb4-43b4-9c1d-7bae0a37004f') => {
-    console.log(_options(guid, uname, pwd));
+    //console.log(_options(guid, uname, pwd));
     fetch('https://login-dev.enrolmy.com/login?scope=users,client-users,addresses,phones,ethnic-groups,emergency-contacts,family-doctors,educations',_options(guid, uname, pwd))
         .then(
             (data) => {
-                console.log(data);
-                console.log(data);
+                (data.status === 200 && data._bodyText) ?
+                    saveJwt(data._bodyText)
+                :
+                    console.log('error here..');
             },
             (error) => {console.log(eror)}
         )
-        .catch((err) => console.log(err));
+        .catch((err) => {console.log(err)});
 }   
