@@ -15,6 +15,7 @@ export const createAuth = (uname, pwd, guid = '55790419-dbb4-43b4-9c1d-7bae0a370
         .then(
             (data) => {
                 console.log(data);
+                console.log(data);
             },
             (error) => {console.log(eror)}
         )
