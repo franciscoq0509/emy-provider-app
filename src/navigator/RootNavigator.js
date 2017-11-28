@@ -37,8 +37,7 @@ class CustomersScreen extends React.Component {
                 <CustomersContainer nav={this.props}/>
             </Provider>
         );
-    }
-    
+    }  
 };
 
 const ActivitiesScreen = () => (

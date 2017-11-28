@@ -1,6 +1,5 @@
 const Buffer = require('buffer/').Buffer;
-
-import saveJwt from './saveJwt';
+const { connect } from 'react-redux';
 
 const _options = (guid, uname, pwd) => ({
     method: 'GET',
@@ -11,17 +10,36 @@ const _options = (guid, uname, pwd) => ({
     }
 });
 
-export const createAuth = (uname, pwd, guid = '55790419-dbb4-43b4-9c1d-7bae0a37004f') => {
-    //console.log(_options(guid, uname, pwd));
+const fetchJwt = (uname, pwd, guid = '55790419-dbb4-43b4-9c1d-7bae0a37004f') => (
     fetch('https://login-dev.enrolmy.com/login?scope=users,client-users,addresses,phones,ethnic-groups,emergency-contacts,family-doctors,educations',_options(guid, uname, pwd))
+);
+
+
+const LoginSubmitButtonContainer = () => {
+    //console.log(_options(guid, uname, pwd));
+    //fetch('https://login-dev.enrolmy.com/login?scope=users,client-users,addresses,phones,ethnic-groups,emergency-contacts,family-doctors,educations',_options(guid, uname, pwd))
+    fetchJwt(uname, pwd, guid)
         .then(
             (data) => {
                 (data.status === 200 && data._bodyText) ?
-                    saveJwt(data._bodyText)
+                    console.log('arrived', data);
                 :
                     console.log('error here..');
             },
             (error) => {console.log(eror)}
         )
         .catch((err) => {console.log(err)});
-}       
+};
+
+const mapStateToProps = (state) => ({
+    jwt : jwt.all,
+    jwtHeaders: jwt.headers,
+    jwtPayload: jwt.payload,
+    jwtSignature: jwt.sig
+});
+
+
+
+
+
+

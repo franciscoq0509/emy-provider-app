@@ -3,7 +3,7 @@ import { View, Text } from 'react-native';
 import Header from './Header';
 import {FormLabel, FormInput} from 'react-native-elements';
 import { createAuth } from '../utilities/createAuth';
-import configureStore from './src/store/configureStore';
+import configureStore from '../store/configureStore';
 import { Provider } from 'react-redux';
 const store = configureStore();
 
