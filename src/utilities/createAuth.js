@@ -19,7 +19,7 @@ export const createAuth = (uname, pwd, guid = '55790419-dbb4-43b4-9c1d-7bae0a370
                 (data.status === 200 && data._bodyText) ?
                     saveJwt(data._bodyText)
                 :
-                    console.log('error here..');
+                    console.log(data);
             },
             (error) => {console.log(eror)}
         )
