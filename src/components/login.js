@@ -3,7 +3,6 @@ import { View, Text } from 'react-native';
 import Header from './Header';
 import LoginSubmitButtonContainer from '../containers/LoginSubmitButtonContainer';
 import {FormLabel, FormInput} from 'react-native-elements';
-import { createAuth } from '../utilities/createAuth';
 import configureStore from '../store/configureStore';
 import { Provider } from 'react-redux';
 const store = configureStore();
@@ -13,7 +12,7 @@ const store = configureStore();
 export default class Login extends React.Component {
     
     componentWillMount = () => {
-        this.setState(() => ({uname: "not und", pwd: "not undef"}));
+        this.setState(() => ({uname: "", pwd: ""}));
     }
 
     //when the below functions are used as callbacks for this.setState in render JSX, it breaks the props sent to LoginSubmitButtonContainer
