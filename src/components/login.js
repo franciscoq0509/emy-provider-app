@@ -33,38 +33,61 @@ export default class Login extends React.Component {
 
 
     render() {
-        //console.log(this.state);
+        console.log(store.getState());
         return (
             <Provider store={store}>
-                <View>
+                <View style={ {flex: 1} }>
                     <Header />
-                    <FormLabel>User Name</FormLabel>
-                    <FormInput 
-                        onChangeText={
+                    <View  style={styles.wrapper}>
+                        <FormLabel>User Name</FormLabel>
+                        <FormInput
+                            inputStyle={styles.formField} 
+                            onChangeText={
                                 (text) => {
                                     this.setState({uname: text});
+                                }
                             }
-                        }
-                        textInputRef='username'
-                    />
-                    <FormLabel>Password</FormLabel>
-                    <FormInput 
-                    onChangeText={
-                        (text) => {
-                            this.setState({pwd: text});
-                    }
-                } 
-                        textInputRef='password'
-                        secureTextEntry={true}
-                    />
+                            textInputRef='username'
+                        />
+                        <FormLabel>Password</FormLabel>
+                        <FormInput 
+                        inputStyle={styles.formField} 
+                        onChangeText={
+                            (text) => {
+                                this.setState({pwd: text});
+                            }
+                        } 
+                            textInputRef='password'
+                            secureTextEntry={true}
+                        />
 
-                        <LoginSubmitButtonContainer submitCallBack = {this.submitPressed} uname={this.state.uname} pwd={this.state.pwd}/>
-                    
-                    
+                        <LoginSubmitButtonContainer style={styles.submitButtonWrapper} submitCallBack = {this.submitPressed} uname={this.state.uname} pwd={this.state.pwd}/>
+                    </View>
                 </View>
             </Provider>
         );
     }
     
+};
+
+const styles = {
+    wrapper: {
+        marginTop: 50,
+        flex: 1,
+        flexDirection: 'column',
+        //alignItems: 'center',
+        justifyContent: 'flex-start',
+        //alignSelf: 'center'
+    },
+    formField: {
+        //marginTop: 50,
+        paddingTop: 20,
+        paddingLeft: 20,
+        paddingRight: 20,
+        paddingBottom: 20
+    },
+    submitButtonWrapper: {
+        paddingTop: 40,
+    }
 };
 
