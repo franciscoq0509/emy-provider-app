@@ -12,33 +12,29 @@ const store = configureStore();
 
 export default class Login extends React.Component {
     
-    constructor(props) {
-        super(props);
-        this.usernameInputChange = this.usernameInputChange.bind(this);
-        this.passwordInputChange = this.passwordInputChange.bind(this);
-        this.submitPressed = this.submitPressed.bind(this);
-    }
-    
-    componentDidMount() {
-        this.setState(() => ({uname: "", pwd: ""}));
+    componentWillMount = () => {
+        this.setState(() => ({uname: "not und", pwd: "not undef"}));
     }
 
-    usernameInputChange(text) {
-        this.setState(() => ({uname: text}));
-        console.log(this.state.uname);
-    }
+    //when the below functions are used as callbacks for this.setState in render JSX, it breaks the props sent to LoginSubmitButtonContainer
+    //after the below functions are executed.
+    // usernameInputChange = (text) => {
+    //     this.setState(() => ({uname: text}));
+    //     //console.log(this.state.uname);
+    // }
 
-    passwordInputChange(text) {
-        this.setState(() => ({pwd: text}));
-        console.log(this.state.pwd);
-    }
+    // passwordInputChange = (text) => {
+    //     this.setState(() => ({pwd: text}));
+    //     //console.log(this.state.pwd);
+    // }
 
-    submitPressed() {
+    submitPressed = () => {
         console.log(this.state);
     }
 
 
     render() {
+        //console.log(this.state);
         return (
             <Provider store={store}>
                 <View>
@@ -47,7 +43,7 @@ export default class Login extends React.Component {
                     <FormInput 
                         onChangeText={
                                 (text) => {
-                                    this.setState({uname: text}, this.usernameInputChange);
+                                    this.setState({uname: text});
                             }
                         }
                         textInputRef='username'
@@ -56,13 +52,16 @@ export default class Login extends React.Component {
                     <FormInput 
                     onChangeText={
                         (text) => {
-                            this.setState({pwd: text}, this.passwordInputChange);
+                            this.setState({pwd: text});
                     }
                 } 
                         textInputRef='password'
                         secureTextEntry={true}
                     />
-                    <LoginSubmitButtonContainer submitCallBack = {this.submitPressed}/>
+
+                        <LoginSubmitButtonContainer submitCallBack = {this.submitPressed} uname={this.state.uname} pwd={this.state.pwd}/>
+                    
+                    
                 </View>
             </Provider>
         );

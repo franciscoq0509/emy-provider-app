@@ -17,10 +17,13 @@ const fetchJwt = (uname, pwd, guid = '55790419-dbb4-43b4-9c1d-7bae0a37004f') => 
 );
 
 
-const LoginSubmitButtonContainer = (props) => {
-    this.startSubmitProcess = () => {
-        props.submitCallback();
-        //console.log(props.submitCallback());
+class LoginSubmitButtonContainer extends React.Component {
+    
+    startSubmitProcess = () => {
+        //this.props.submitCallback();
+        //console.log(typeof props.submitCallback);
+        
+        console.log(this.props);
         // fetchJwt(uname, pwd, guid)
         // .then(
         //     (data) => {
@@ -34,10 +37,11 @@ const LoginSubmitButtonContainer = (props) => {
         // .catch((err) => {console.log(err)});
     }
     
-
+    render() {
         return (
             <SubmitButton pressed={this.startSubmitProcess}/>
         );
+    }
 };
 
 const mapStateToProps = (state) => ({

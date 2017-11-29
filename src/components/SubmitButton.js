@@ -2,7 +2,6 @@ import React from 'react';
 import { Button } from 'react-native-elements';
 
 export const SubmitButton = (props) => {
-    console.log(props);
     return (
     <Button
         raised
