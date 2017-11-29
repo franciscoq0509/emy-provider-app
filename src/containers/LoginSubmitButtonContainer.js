@@ -3,6 +3,7 @@ const Buffer = require('buffer/').Buffer;
 import { SubmitButton } from '../components/SubmitButton';
 import { connect } from 'react-redux';
 import { jwtSplit } from '../utilities/jwtSplit';
+import { saveNewJwt } from '../actions/jwt';
 
 const _options = (guid, uname, pwd) => ({
     method: 'GET',
@@ -32,7 +33,7 @@ class LoginSubmitButtonContainer extends React.Component {
                     //console.log(jwtSplit(data._bodyText));
                     const jwtSplit = jwtSplit(data._bodyText); 
                     jwtSplit ? 
-                    console.log('save it', jwtSplit(data._bodyText)) 
+                    this.props.dispatch(saveNewJwt(data._bodyText,jwtSplit)) 
                     : 
                     console.log('something went wrong');
                 }
@@ -50,7 +51,7 @@ class LoginSubmitButtonContainer extends React.Component {
 };
 
 const mapStateToProps = (state) => ({
-    // jwt : jwt.all,
+    // jwt : fullJwt,
     // jwtHeaders: jwt.headers,
     // jwtPayload: jwt.payload,
     // jwtSignature: jwt.sig
