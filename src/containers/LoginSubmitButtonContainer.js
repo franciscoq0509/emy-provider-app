@@ -25,12 +25,16 @@ class LoginSubmitButtonContainer extends React.Component {
         //console.log(typeof props.submitCallback);
         
         console.log(this.props);
-        fetchJwt(this.props.uname, this.props.pwd, guid = '55790419-dbb4-43b4-9c1d-7bae0a37004f')
+        fetchJwt('jerrys@gymowner.cxm','L#N#marlin28', guid = '55790419-dbb4-43b4-9c1d-7bae0a37004f')//this.props.uname, this.props.pwd
         .then(
             (data) => {
                 if (data.status === 200 && data._bodyText) {
-                    console.log('arrived', data);
-                    jwtSplit(data._bodyText);
+                    //console.log(jwtSplit(data._bodyText));
+                    const jwtSplit = jwtSplit(data._bodyText); 
+                    jwtSplit ? 
+                    console.log('save it', jwtSplit(data._bodyText)) 
+                    : 
+                    console.log('something went wrong');
                 }
             },
             (error) => {console.log(eror)}
