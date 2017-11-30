@@ -1,7 +1,8 @@
 import React from 'react';
 import { SignedOutNavigator } from '../navigator/SignedOutNavigator';
-import RootNavigator from '../navigator/RootNavigator'
+import SignedInNavigator from '../navigator/SignedInNavigator'
 import { _checkUserLoggedIn } from '../utilities/userAuth';
+import { createRootNavigator } from '../navigator/RootNavigator';
 
 
 export default class App extends React.Component {
@@ -30,10 +31,9 @@ export default class App extends React.Component {
             return null;
         }
 
-        if(signedIn) {
-            return <RootNavigator />
-        } else {
-            return <SignedOutNavigator />
-        }
+        const Layout = createRootNavigator(signedIn);
+
+        return <Layout />;
+        
     }
 }
