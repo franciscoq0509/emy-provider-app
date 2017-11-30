@@ -2,18 +2,15 @@ import React from 'react';
 import { View, Text } from 'react-native';
 
 
-export const CustomerFullDetails = ({ name, phone, email, location }) => { //
-    //console.log(data);
+export const CustomerFullDetails = ({ full_name, dob, email, status, gender }) => { //{ name, phone, email, location }
+
     return (
         <View>
-            <Text>This is the full details for : {name.first} {name.last}</Text>
-            <Text>Phone : {phone}</Text>
-            <Text>Email : {email}</Text>
-            <Text>lOCATION</Text>
-            <Text>City : {location.city}</Text>
-            <Text>Street : {location.street}</Text>
-            <Text>State : {location.state}</Text>
-            <Text>Post Code : {location.postcode}</Text>
+            <Text>This is the full details for : {full_name}</Text>
+            <Text>gender: {gender === 'M' ? 'Male' : 'Female'}</Text>
+            <Text>email: {email}</Text>
+            <Text>dob: {dob}</Text>
+            <Text>status: {status}</Text>
         </View>
     );
 };

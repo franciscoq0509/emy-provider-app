@@ -11,7 +11,10 @@ import spinnerStyle from './styles/spinnerStyle';
 class CustomersList extends React.PureComponent {
     
     customersAndCallback() {
-        return (this.props.screenProps.filteredCustomers !== undefined) ? [...Object.values(this.props.screenProps.filteredCustomers)] : []; 
+        //console.log(this.props);
+        const filteredCustomers = (this.props.screenProps.filteredCustomers !== undefined) ? [...Object.values(this.props.screenProps.filteredCustomers)] : []; 
+        console.log(filteredCustomers);
+        return filteredCustomers.length !== 0 ? filteredCustomers.map(c => ({...c, nav: {...this.props.navigation}})) : filteredCustomers;
     };
 
     _keyExtractor = (item, index) => index;

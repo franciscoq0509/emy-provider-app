@@ -28,14 +28,19 @@ const returnCustomerDetails = (id) => {
 
 
 class CustomerDetails extends React.Component {
-    componentDidMount() {
-        this.props.dispatch(returnCustomerDetails(this.props.navigation.state.params.customerId))
-            .then(() => 
-                {
-                    this.setState(() => ({customerData: this.props.customerData})) 
-                    console.log(this.props);
-                })
-            .catch((err) => {console.log(err)})
+    componentWillMount() {
+        console.log(this.props);
+        this.setState(() => ({
+                customerData: this.props.screenProps.filteredCustomers[this.props.navigation.state.params.customerId]
+            })
+        );
+        // this.props.dispatch(returnCustomerDetails(this.props.navigation.state.params.customerId))
+        //     .then(() => 
+        //         {
+        //             this.setState(() => ({customerData: this.props.customerData})) 
+        //             console.log(this.props);
+        //         })
+        //     .catch((err) => {console.log(err)})
     }
 
     render(){
@@ -51,8 +56,9 @@ class CustomerDetails extends React.Component {
 //but the point of it is once the customer data has been fetched and saved to store, we have direct access to it via this.props.customerData
 //Because we cannot access the store directly in our component, we have to pass access to it through props.
 const mapStateToProps = (state) => {
+    console.log(state);
     return {
-        customerData: state.customersDetails
+        customerData: state.allCustomers
     }
 };
 
