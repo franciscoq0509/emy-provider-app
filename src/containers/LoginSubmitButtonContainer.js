@@ -36,8 +36,9 @@ class LoginSubmitButtonContainer extends React.Component {
                     //console.log(extractedJwt);
                     if(extractedJwt) {
                         this.props.dispatch(saveNewJwt(data._bodyText,extractedJwt)); 
-                        _setUserToken(loginTokenName, data._bodyText);
-                        console.log(this.props);
+                        _setUserToken(loginTokenName, data._bodyText)
+                            .then(() => this.props.nav.navigate("SignedIn"));
+                        
                     } else console.log('something went wrong');
                     
                 }
