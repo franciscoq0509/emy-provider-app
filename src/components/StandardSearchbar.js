@@ -7,9 +7,9 @@ import { Debounce } from 'react-throttle';
 
 
 const StandardSearchbar = (props) => {
-    const cancelPreviousDispatch = (value) => {
+    // const cancelPreviousDispatch = (value) => {
 
-    }
+    // }
     return (
         <Debounce time="100" handler="onChangeText">
             <SearchBar 

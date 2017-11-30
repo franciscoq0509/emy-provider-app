@@ -1,4 +1,4 @@
-import { SignedOutNavigator } from './signedOutNavigator';
+import { SignedOutNavigator } from './SignedOutNavigator';
 import SignedInNavigator from './SignedInNavigator';
 import { StackNavigator } from 'react-navigation';
 import Login from '../components/login';
