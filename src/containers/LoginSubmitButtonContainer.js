@@ -4,6 +4,8 @@ import { SubmitButton } from '../components/SubmitButton';
 import { connect } from 'react-redux';
 import { jwtSplit } from '../utilities/jwtSplit';
 import { saveNewJwt } from '../actions/jwt';
+import { _setUserToken, loginTokenName } from '../utilities/userAuth';
+
 
 const _options = (guid, uname, pwd) => ({
     method: 'GET',
@@ -34,7 +36,9 @@ class LoginSubmitButtonContainer extends React.Component {
                     //console.log(extractedJwt);
                     if(extractedJwt) {
                         this.props.dispatch(saveNewJwt(data._bodyText,extractedJwt)); 
-                        console.log(this.props);
+                        _setUserToken(loginTokenName, data._bodyText)
+                            .then(() => this.props.nav.navigate("SignedIn"));
+                        
                     } else console.log('something went wrong');
                     
                 }

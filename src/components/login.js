@@ -5,6 +5,7 @@ import LoginSubmitButtonContainer from '../containers/LoginSubmitButtonContainer
 import {FormLabel, FormInput} from 'react-native-elements';
 import configureStore from '../store/configureStore';
 import { Provider } from 'react-redux';
+
 const store = configureStore();
 
 
@@ -34,6 +35,7 @@ export default class Login extends React.Component {
 
     render() {
         console.log(store.getState());
+        console.log(this.props);
         return (
             <Provider store={store}>
                 <View style={ {flex: 1} }>
@@ -61,7 +63,7 @@ export default class Login extends React.Component {
                             secureTextEntry={true}
                         />
 
-                        <LoginSubmitButtonContainer style={styles.submitButtonWrapper} submitCallBack = {this.submitPressed} uname={this.state.uname} pwd={this.state.pwd}/>
+                        <LoginSubmitButtonContainer style={styles.submitButtonWrapper} nav={this.props.navigation} uname={this.state.uname} pwd={this.state.pwd}/>
                     </View>
                 </View>
             </Provider>

@@ -14,7 +14,7 @@ const styles = {
     wrapper : {
         paddingTop: 10,
         paddingBottom: 10,
-        marginTop: 20,
+        //marginTop: 20,
         alignItems: 'center',
         backgroundColor: '#3197EA',
         width: '100%',
