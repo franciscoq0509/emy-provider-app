@@ -7,9 +7,9 @@ import Header from '../components/Header';
 //import ActivitiesList from '../components/ActivitiesList';
 import ActivitiesContainer from '../containers/ActivitiesContainer';
 import QuickBook from '../components/QuickBook';
-//import configureStore from '../store/configureStore';
+import configureStore from '../store/configureStore';
 
-
+const store = configureStore();
 
 
 // const HomeScreen = ({ navigation }) => {

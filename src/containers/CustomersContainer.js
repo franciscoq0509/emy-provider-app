@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { requestCustomers, receiveNewCustomers, receiveCustomersError } from '../actions/customers';
 import CustomersListNavigator from '../components/CustomersListNavigator';
 import { getFilteredCustomers } from '../selectors/index';
-import { createAuth } from '../utilities/createAuth';
+
 
 
 
@@ -46,9 +46,6 @@ class CustomersListContainer extends React.Component {
                 ({ customers }) => { 
                     this.setState(() => ({filteredCustomers : this.props.filteredCustomers}));
                 });
-
-
-                createAuth('jerrys@gymowner.cxm', 'L#N#marlin28');
     }
 
 	componentWillReceiveProps(nextProps) { 

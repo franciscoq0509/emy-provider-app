@@ -5,6 +5,7 @@ import LoginSubmitButtonContainer from '../containers/LoginSubmitButtonContainer
 import {FormLabel, FormInput} from 'react-native-elements';
 import configureStore from '../store/configureStore';
 import { Provider } from 'react-redux';
+
 const store = configureStore();
 
 
