@@ -62,6 +62,7 @@ class CustomersListContainer extends React.Component {
 };
 
 const mapStateToProps = (state) => {
+    console.log(state);
     return {
         filteredCustomers: getFilteredCustomers(state, state, state),
         actions: state.currentCustomerAction 

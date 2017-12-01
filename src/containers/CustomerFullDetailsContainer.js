@@ -4,15 +4,15 @@ import { connect } from 'react-redux';
 import { CustomerFullDetails } from '../components/CustomerFullDetails';
 import { saveCustomerDetails } from '../actions/customers';
 
-const fetchCustomerDetails = (id) => {
+const fetchCustomerDetails = (id, jwt) => {
     //use id to req user data fro API
     //console.log(id);
-    return fetch('https://randomuser.me/api/')
+    return fetch(`https://front-api.enrolmy.com/providers-api/v1/55790419-dbb4-43b4-9c1d-7bae0a37004f/users/${id}`, {headers: {Authorization: `Bearer ${jwt}`}})
 };
 
-const returnCustomerDetails = (id) => {
+const returnCustomerDetails = (id, jwt) => {
     return (dispatch) => {
-        return fetchCustomerDetails(id)
+        return fetchCustomerDetails(id, jwt)
             .then(
                 (details) => details.json(),
                 (err) => dispatch(saveCustomerDetails(err.json()))
@@ -34,31 +34,31 @@ class CustomerDetails extends React.Component {
                 customerData: this.props.screenProps.filteredCustomers[this.props.navigation.state.params.customerId]
             })
         );
-        // this.props.dispatch(returnCustomerDetails(this.props.navigation.state.params.customerId))
-        //     .then(() => 
-        //         {
-        //             this.setState(() => ({customerData: this.props.customerData})) 
-        //             console.log(this.props);
-        //         })
-        //     .catch((err) => {console.log(err)})
+        this.props.dispatch(returnCustomerDetails(this.props.navigation.state.params.customerId, this.props.fullJwt))
+            .then(() => 
+                {
+                    this.setState(() => ({allCustomerDetails: this.props.allCustomerDetails, id: this.props.navigation.state.params.customerId})) 
+                    console.log(this.props);
+                })
+            .catch((err) => {console.log(err)})
     }
 
     render(){
+        console.log(this.state);
         return (
             <View>
-                { this.state && <CustomerFullDetails {...this.state.customerData} />}
+                { this.state.id && <CustomerFullDetails {...this.state.allCustomerDetails[this.state.id]} />}
             </View>
         );
     };
 };
 
-//getting customerData below will be empty at the point of passing it in as props to CustomerDetails
-//but the point of it is once the customer data has been fetched and saved to store, we have direct access to it via this.props.customerData
-//Because we cannot access the store directly in our component, we have to pass access to it through props.
 const mapStateToProps = (state) => {
     console.log(state);
     return {
-        customerData: state.allCustomers
+        customerData: state.allCustomers,
+        allCustomerDetails: state.customersDetails,
+        fullJwt: state.jwt.fullJwt
     }
 };
 
