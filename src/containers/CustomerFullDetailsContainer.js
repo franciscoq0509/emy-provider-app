@@ -1,6 +1,7 @@
 import React from 'react';
 import { Text, View } from 'react-native';
 import { connect } from 'react-redux';
+import findId from '../utilities/findId';
 import { CustomerFullDetails } from '../components/CustomerFullDetails';
 import { saveCustomerDetails } from '../actions/customers';
 
@@ -30,24 +31,35 @@ const returnCustomerDetails = (id, jwt) => {
 class CustomerDetails extends React.Component {
     componentWillMount() {
         console.log(this.props);
-        this.setState(() => ({
-                customerData: this.props.screenProps.filteredCustomers[this.props.navigation.state.params.customerId]
-            })
-        );
-        this.props.dispatch(returnCustomerDetails(this.props.navigation.state.params.customerId, this.props.fullJwt))
-            .then(() => 
-                {
-                    this.setState(() => ({allCustomerDetails: this.props.allCustomerDetails, id: this.props.navigation.state.params.customerId})) 
-                    console.log(this.props);
+        if(this.props.navigation.state.params.customerId) {
+            const fullDetailsFromStore = findId(this.props.navigation.state.params.customerId, this.props.allCustomerDetails);
+            console.log(fullDetailsFromStore);
+            this.setState(() => ({
+                    basicCustomerData: this.props.screenProps.filteredCustomers[this.props.navigation.state.params.customerId]
                 })
-            .catch((err) => {console.log(err)})
+            );
+            if(fullDetailsFromStore) {
+                console.log('found it in store');
+                this.setState(() => ({allCustomerDetails: fullDetailsFromStore})); 
+            } else {
+                console.log('need to fetch....');
+                this.props.dispatch(returnCustomerDetails(this.props.navigation.state.params.customerId, this.props.fullJwt))
+                .then(() => 
+                    {
+                        this.setState(() => ({allCustomerDetails: this.props.allCustomerDetails[this.props.navigation.state.params.customerId]})) 
+                        console.log(this.props);
+                    })
+                .catch((err) => {console.log(err)})
+            }
+
+        }
     }
 
     render(){
         console.log(this.state);
         return (
             <View>
-                { this.state.id && <CustomerFullDetails {...this.state.allCustomerDetails[this.state.id]} />}
+                { this.state.allCustomerDetails && <CustomerFullDetails {...this.state.allCustomerDetails} />}
             </View>
         );
     };
