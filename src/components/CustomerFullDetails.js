@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text } from 'react-native';
+import { Button, Card } from 'react-native-elements';
 
 
 export const CustomerFullDetails = ({ full_name, dob, email, status, gender, phones } = allCustomerDetails) => { //{ full_name, dob, email, status, gender } = 
@@ -12,13 +13,22 @@ export const CustomerFullDetails = ({ full_name, dob, email, status, gender, pho
     console.log(phoneInfo);
     return (
         <View>
-            <Text>This is the full details for : {full_name}</Text>
-            <Text>gender: {gender === 'M' ? 'Male' : 'Female'}</Text>
-            <Text>email: {email}</Text>
-            <Text>dob: {dob}</Text>
-            <Text>status: {status}</Text> 
-            <Text>Mobile: {phoneInfo.length !== 0 && phoneInfo.mobile ? phoneInfo.mobile.phone : 'N/A'}</Text>
-            <Text>Home: {phoneInfo.length !== 0 && phoneInfo.home ? phoneInfo.home.phone : 'N/A'}</Text>
+            <Card title="Basic Details">
+                <View style={card = {alignSelf: 'center'}}>
+                    <Text>{full_name}</Text>
+                    <Text>{gender === 'M' ? 'Male' : 'Female'}</Text>
+                    <Text>{email ? email : 'No email found'}</Text>
+                    <Text>DOB: {dob}</Text>
+                    <Text>Mobile: {phoneInfo.length !== 0 && phoneInfo.mobile ? phoneInfo.mobile.phone : 'No mobile found'}</Text>
+                    <Text>Home: {phoneInfo.length !== 0 && phoneInfo.home ? phoneInfo.home.phone : 'No home number found'}</Text>
+                </View>
+            </Card>
+            <Button
+                small
+                iconLeft
+                title='Show More'
+                buttonStyle={ wrapper = {marginTop: 40} }
+            />
         </View>
     );
 };
