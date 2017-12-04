@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 import { Button, Card } from 'react-native-elements';
+const Moment = require('moment');
 
 
 export const CustomerFullDetails = (props) => {
@@ -25,6 +26,7 @@ export const CustomerFullDetails = (props) => {
         home: phones.find((obj) => obj.name === 'Home'? obj : false),
     }
 
+    console.log(dob);
     return (
         <View>
             <Card title="Details">
@@ -32,7 +34,7 @@ export const CustomerFullDetails = (props) => {
                     <Text>{full_name}</Text>
                     <Text>{gender === 'M' ? 'Male' : 'Female'}</Text>
                     <Text>{email ? email : 'No email found'}</Text>
-                    <Text>DOB: {dob}</Text>
+                    <Text>DOB: {Moment(dob).format("MMMM D, YYYY")}</Text>
                     <Text>Mobile: {phoneInfo.length !== 0 && phoneInfo.mobile ? phoneInfo.mobile.phone : 'N/A'}</Text>
                     <Text>Home: {phoneInfo.length !== 0 && phoneInfo.home ? phoneInfo.home.phone : 'N/AA'}</Text>
                 </View>
@@ -41,7 +43,7 @@ export const CustomerFullDetails = (props) => {
                 props.showMoreClicked ? 
                 <Card>
                     <View style={card = {alignSelf: 'flex-start'}}>
-                        <Text>created: {created}</Text>
+                        <Text>created: {Moment(created).format("MMMM D, YYYY, h:mm:ss a")}</Text>
                         {parseInt(is_child,10) ? 
                             <View>
                                 <Text>School Name: {school_name ? school_name : 'N/A'}</Text>
