@@ -10,13 +10,12 @@ export default (state = stateInit, action) => {
     switch (action.type) {
         case 'SAVE_NEW_JWT':
         console.log(action.fullJwt);
-            return jwt = {
+            return  {
                 fullJwt: action.fullJwt,
                 headers: action.headers,
                 payload: action.payload,
                 sig: action.sig,
             };
-            
         default:
         console.log(state);
            return state;

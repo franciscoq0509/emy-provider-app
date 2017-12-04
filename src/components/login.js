@@ -3,11 +3,6 @@ import { View, Text } from 'react-native';
 import Header from './Header';
 import LoginSubmitButtonContainer from '../containers/LoginSubmitButtonContainer';
 import {FormLabel, FormInput} from 'react-native-elements';
-import configureStore from '../store/configureStore';
-import { Provider } from 'react-redux';
-
-const store = configureStore();
-
 
 
 export default class Login extends React.Component {
@@ -34,39 +29,36 @@ export default class Login extends React.Component {
 
 
     render() {
-        console.log(store.getState());
         console.log(this.props);
         return (
-            <Provider store={store}>
-                <View style={ {flex: 1} }>
-                    <Header />
-                    <View  style={styles.wrapper}>
-                        <FormLabel>User Name</FormLabel>
-                        <FormInput
-                            inputStyle={styles.formField} 
-                            onChangeText={
-                                (text) => {
-                                    this.setState({uname: text});
-                                }
-                            }
-                            textInputRef='username'
-                        />
-                        <FormLabel>Password</FormLabel>
-                        <FormInput 
+            <View style={ {flex: 1} }>
+                <Header />
+                <View  style={styles.wrapper}>
+                    <FormLabel>User Name</FormLabel>
+                    <FormInput
                         inputStyle={styles.formField} 
                         onChangeText={
                             (text) => {
-                                this.setState({pwd: text});
+                                this.setState({uname: text});
                             }
-                        } 
-                            textInputRef='password'
-                            secureTextEntry={true}
-                        />
+                        }
+                        textInputRef='username'
+                    />
+                    <FormLabel>Password</FormLabel>
+                    <FormInput 
+                    inputStyle={styles.formField} 
+                    onChangeText={
+                        (text) => {
+                            this.setState({pwd: text});
+                        }
+                    } 
+                        textInputRef='password'
+                        secureTextEntry={true}
+                    />
 
-                        <LoginSubmitButtonContainer style={styles.submitButtonWrapper} nav={this.props.navigation} uname={this.state.uname} pwd={this.state.pwd}/>
-                    </View>
+                    <LoginSubmitButtonContainer style={styles.submitButtonWrapper} nav={this.props.navigation} uname={this.state.uname} pwd={this.state.pwd}/>
                 </View>
-            </Provider>
+            </View>
         );
     }
     

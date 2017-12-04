@@ -4,12 +4,8 @@ import { TabNavigator, addNavigationHelpers } from 'react-navigation';
 import { Provider } from 'react-redux';
 import CustomersContainer from '../containers/CustomersContainer';
 import Header from '../components/Header'; 
-//import ActivitiesList from '../components/ActivitiesList';
 import ActivitiesContainer from '../containers/ActivitiesContainer';
 import QuickBook from '../components/QuickBook';
-import configureStore from '../store/configureStore';
-
-const store = configureStore();
 
 
 // const HomeScreen = ({ navigation }) => {
@@ -33,18 +29,14 @@ const store = configureStore();
 class CustomersScreen extends React.Component {
     render() {
         return (
-            <Provider store={store}>
-                <CustomersContainer nav={this.props}/>
-            </Provider>
+            <CustomersContainer nav={this.props}/>
         );
     }  
 };
 
 const ActivitiesScreen = () => (
     <View>
-        <Provider store={store}>
-            <ActivitiesContainer />
-        </Provider>
+        <ActivitiesContainer />
     </View>
 );
 
