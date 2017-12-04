@@ -5,6 +5,7 @@ const stateInit = {
 };
 
 export default (state = stateInit, action) => {
+    console.log(state);
     switch (action.type) {
         case 'RECEIVE_CUSTOMERS_SUCCESS':
             return {

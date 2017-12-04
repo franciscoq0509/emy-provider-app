@@ -33,11 +33,15 @@ class LoginSubmitButtonContainer extends React.Component {
             (data) => {
                 if (data.status === 200 && data._bodyText) {
                     const extractedJwt = jwtSplit(data._bodyText); 
-                    //console.log(extractedJwt);
+                    console.log(extractedJwt);
                     if(extractedJwt) {
+                        console.log('about to save');
                         this.props.dispatch(saveNewJwt(data._bodyText,extractedJwt)); 
                         _setUserToken(loginTokenName, data._bodyText)
-                            .then(() => this.props.nav.navigate("SignedIn"));
+                            .then(() => {
+                                console.log(this.props);
+                                this.props.nav.navigate("SignedIn")
+                            });
                         
                     } else console.log('something went wrong');
                     
@@ -56,6 +60,7 @@ class LoginSubmitButtonContainer extends React.Component {
 };
 
 const mapStateToProps = (state) => ({
+    //all: state,
     jwt : state.jwt.fullJwt,
     jwtHeaders: state.jwt.headers,
     jwtPayload: state.jwt.payload,

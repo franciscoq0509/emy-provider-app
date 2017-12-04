@@ -5,6 +5,7 @@ const Moment = require('moment');
 
 
 export const CustomerFullDetails = (props) => {
+    console.log(props);
     const { 
         full_name, 
         dob, 
@@ -18,8 +19,8 @@ export const CustomerFullDetails = (props) => {
         school_name,
         school_year,
         special_needs 
-    } = props.allCustomerDetails;
-    //console.log(allCustomerDetails);
+    } = props.basicCustomerDetails;
+    
     const phoneInfo = {
         length: phones.length,
         mobile: phones.find((obj) => obj.name === 'Mobile'? obj : false),
@@ -33,10 +34,10 @@ export const CustomerFullDetails = (props) => {
                 <View style={card = {alignSelf: 'flex-start'}}>
                     <Text>{full_name}</Text>
                     <Text>{gender === 'M' ? 'Male' : 'Female'}</Text>
-                    <Text>{email ? email : 'No email found'}</Text>
+                    <Text>email: {email ? email : 'None found'}</Text>
                     <Text>DOB: {Moment(dob).format("MMMM D, YYYY")}</Text>
                     <Text>Mobile: {phoneInfo.length !== 0 && phoneInfo.mobile ? phoneInfo.mobile.phone : 'N/A'}</Text>
-                    <Text>Home: {phoneInfo.length !== 0 && phoneInfo.home ? phoneInfo.home.phone : 'N/AA'}</Text>
+                    <Text>Home: {phoneInfo.length !== 0 && phoneInfo.home ? phoneInfo.home.phone : 'N/A'}</Text>
                 </View>
             </Card>
             {

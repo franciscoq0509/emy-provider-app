@@ -7,7 +7,7 @@ import { saveCustomerDetails } from '../actions/customers';
 
 const fetchCustomerDetails = (id, jwt) => {
     //use id to req user data fro API
-    //console.log(id);
+    console.log(jwt);
     return fetch(`https://front-api.enrolmy.com/providers-api/v1/55790419-dbb4-43b4-9c1d-7bae0a37004f/users/${id}`, {headers: {Authorization: `Bearer ${jwt}`}})
 };
 
@@ -46,7 +46,7 @@ class CustomerDetails extends React.Component {
             const fullDetailsFromStore = findId(this.props.navigation.state.params.customerId, this.props.allCustomerDetails);
             console.log(fullDetailsFromStore);
             this.setState(() => ({
-                    basicCustomerData: this.props.screenProps.filteredCustomers[this.props.navigation.state.params.customerId]
+                    basicCustomerDetails: this.props.screenProps.filteredCustomers[this.props.navigation.state.params.customerId]
                 })
             );
             if(fullDetailsFromStore) {
@@ -70,7 +70,8 @@ class CustomerDetails extends React.Component {
         console.log(this.state);
         return (
             <View>
-                { this.state.allCustomerDetails && <CustomerFullDetails 
+                { this.state.allCustomerDetails && <CustomerFullDetails
+                    basicCustomerDetails={this.state.basicCustomerDetails} 
                     allCustomerDetails = {this.state.allCustomerDetails} 
                     showMoreClicked={this.state.showMoreClicked}
                     clickHandler={this.state.clickHandler} 
