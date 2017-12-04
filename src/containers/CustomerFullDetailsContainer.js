@@ -29,8 +29,19 @@ const returnCustomerDetails = (id, jwt) => {
 
 
 class CustomerDetails extends React.Component {
+    constructor(props) {
+        super(props);
+        this.clicked = this.clicked.bind(this);
+        
+    }
+    
+    clicked() {
+        this.setState(()=> ({showMoreClicked: true}));
+    };
+
     componentWillMount() {
         console.log(this.props);
+        this.setState(() => ({showMoreClicked: false, clickHandler: this.clicked})); 
         if(this.props.navigation.state.params.customerId) {
             const fullDetailsFromStore = findId(this.props.navigation.state.params.customerId, this.props.allCustomerDetails);
             console.log(fullDetailsFromStore);
@@ -59,7 +70,11 @@ class CustomerDetails extends React.Component {
         console.log(this.state);
         return (
             <View>
-                { this.state.allCustomerDetails && <CustomerFullDetails {...this.state.allCustomerDetails} />}
+                { this.state.allCustomerDetails && <CustomerFullDetails 
+                    allCustomerDetails = {this.state.allCustomerDetails} 
+                    showMoreClicked={this.state.showMoreClicked}
+                    clickHandler={this.state.clickHandler} 
+                />}
             </View>
         );
     };
