@@ -1,4 +1,5 @@
-import normalizeBasicCustomers from '../normalize/basicCustomerData';
+import { normalizeBasicCustomerDetails } from '../normalize/basicCustomerData';
+import { normalizedFullCustomerDetails } from '../normalize/basicCustomerData';
 
 
 //user refreshes
@@ -17,7 +18,7 @@ export const requestCustomers = () => {
 //recieving new customers success
 export const receiveNewCustomers = (newCustomers) => { 
     //console.log('just befoe norm function');
-    const normalizedCustomers = normalizeBasicCustomers(newCustomers);
+    const normalizedCustomers = normalizeBasicCustomerDetails(newCustomers);
     //console.log(normalizedCustomers);
     return {
         type: 'RECEIVE_CUSTOMERS_SUCCESS',

@@ -4,7 +4,7 @@ const refStateTree = {
         name: 'string'
         //other relevant info on user
     },
-    Customers : {
+    CustomersData : {
         id: {
             name: 'string',
             id: 'number',
@@ -26,7 +26,10 @@ const refStateTree = {
             //...
         }//each object on customerDetails should be saved not overwritten so we can cache for later
     },
-    Activities: {
+    customersFilter: {
+        text: ""
+    },
+    activities: {
         activityId: {
             activityId: 'number',
             name: 'string',
@@ -143,5 +146,4 @@ const refStateTree = {
     }
 }
 
-//need to add in filters as well..
 //need to add in entities for notes and alerts by activities. also by customers??

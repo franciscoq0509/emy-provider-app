@@ -1,7 +1,7 @@
 import { Schema, arrayOf, normalize } from 'normalizr';
 
 
-export default (customersArray) => {
+export const normalizeBasicCustomerDetails =  (customersArray) => {
     const normalizedData = {};
     normalizedData.allCustomers = {};
     normalizedData.allCustomerIds = [];
@@ -14,3 +14,25 @@ export default (customersArray) => {
     return normalizedData;
     
 }
+
+export const normalizedFullCustomerDetails = (customerDetails) => {
+
+}
+
+//might need an entitiy with user uuid and user_id
+
+//full details all keyed by id
+
+//generalCustomersDetails
+//addresses
+//custom questions
+//educations
+//emergency contacts
+//ethnic groups
+//family doctors
+//health information
+//phones
+//residency status
+//unauthorized persons
+//user client permissions
+//
