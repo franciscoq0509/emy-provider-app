@@ -6,9 +6,14 @@ import { CustomerFullDetails } from '../components/CustomerFullDetails';
 import { saveCustomerDetails } from '../actions/customers';
 
 const fetchCustomerDetails = (id, jwt) => {
-    //use id to req user data fro API
-    console.log(jwt);
-    return fetch(`https://front-api.enrolmy.com/providers-api/v1/55790419-dbb4-43b4-9c1d-7bae0a37004f/users/${id}`, {headers: {Authorization: `Bearer ${jwt}`}})
+    return fetch(`https://emy-front-api.craig.27s-dev.net/providers-api/v1/55790419-dbb4-43b4-9c1d-7bae0a37004f/users/${id}`, 
+        {
+            headers: {
+                'Authorization': `Bearer ${jwt}`,
+                'X-enrolmy-slug': '55790419-dbb4-43b4-9c1d-7bae0a37004f'
+            }
+        }
+    )
 };
 
 const returnCustomerDetails = (id, jwt) => {
@@ -16,15 +21,13 @@ const returnCustomerDetails = (id, jwt) => {
         return fetchCustomerDetails(id, jwt)
             .then(
                 (details) => details.json(),
-                (err) => dispatch(saveCustomerDetails(err.json()))
+                (err) => dispatch(saveCustomerDetails(err))   
             )
             .then(
-                (customerDetailsObject) => {
-                    dispatch(saveCustomerDetails(customerDetailsObject))
-                }
+                (customerDetailsObject) => dispatch(saveCustomerDetails(customerDetailsObject))
             )
             .catch((err) => dispatch(saveCustomerDetails(err)));
-    } ;
+    };
 };
 
 
@@ -55,8 +58,9 @@ class CustomerDetails extends React.Component {
             } else {
                 console.log('need to fetch....');
                 this.props.dispatch(returnCustomerDetails(this.props.navigation.state.params.customerId, this.props.fullJwt))
-                .then(() => 
-                    {
+                .then((result) => 
+                    {   
+                        console.log(result);
                         this.setState(() => ({allCustomerDetails: this.props.allCustomerDetails[this.props.navigation.state.params.customerId]})) 
                         console.log(this.props);
                     })
