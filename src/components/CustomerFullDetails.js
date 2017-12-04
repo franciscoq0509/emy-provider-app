@@ -42,14 +42,14 @@ export const CustomerFullDetails = (props) => {
                 <Card>
                     <View style={card = {alignSelf: 'flex-start'}}>
                         <Text>created: {created}</Text>
-                        {is_child ? 
+                        {parseInt(is_child,10) ? 
                             <View>
                                 <Text>School Name: {school_name ? school_name : 'N/A'}</Text>
                                 <Text>School Year: {school_year ? school_year : 'N/A'}</Text>
                                 <Text>Special Needs: {special_needs ? special_needs : 'None'}</Text>
                             </View>
                                 : 
-                            <Text>Is a parent</Text>
+                            <Text>{full_name} is the parent of...</Text>
                         }
                         
                     </View>
