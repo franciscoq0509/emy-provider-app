@@ -65,9 +65,21 @@ export const recieveCustomerDetailsFailure = (error) => ({
 
 //save customer details
 export const saveCustomerDetails = (customersDetails) => { 
-    normalizedFullCustomerDetails(customersDetails);
+    console.log('+++++++++++++++++++++++++++++');
+    const normalizedCustomerDetails = normalizedFullCustomerDetails(customersDetails);
+    console.log('=========================');
+    console.log(normalizedCustomerDetails);
  return {
     type: 'SAVE_CUSTOMER_DETAILS',
+    customersDetails
+ }
+};
+
+export const saveCustomerDetailsFailure = (customersDetails) => { 
+    //const normalizedCustomerDetails = normalizedFullCustomerDetails(customersDetails);
+    //console.log(normalizedCustomerDetails);
+ return {
+    type: 'SAVE_CUSTOMER_DETAILS_FAILED',
     customersDetails
  }
 };

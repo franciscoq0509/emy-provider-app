@@ -3,7 +3,7 @@ import { Text, View } from 'react-native';
 import { connect } from 'react-redux';
 import findId from '../utilities/findId';
 import { CustomerFullDetails } from '../components/CustomerFullDetails';
-import { saveCustomerDetails } from '../actions/customers';
+import { saveCustomerDetails, saveCustomerDetailsFailure } from '../actions/customers';
 
 const fetchCustomerDetails = (id, jwt) => {
     return fetch(`https://emy-front-api.craig.27s-dev.net/providers-api/v1/55790419-dbb4-43b4-9c1d-7bae0a37004f/users/${id}`, 
@@ -21,12 +21,12 @@ const returnCustomerDetails = (id, jwt) => {
         return fetchCustomerDetails(id, jwt)
             .then(
                 (details) => details.json(),
-                (err) => dispatch(saveCustomerDetails(err))   
+                (err) => dispatch(saveCustomerDetailsFailure(err))   
             )
             .then(
                 (customerDetailsObject) => dispatch(saveCustomerDetails(customerDetailsObject))
             )
-            .catch((err) => dispatch(saveCustomerDetails(err)));
+            .catch((err) => dispatch(saveCustomerDetailsFailure(err)));
     };
 };
 
