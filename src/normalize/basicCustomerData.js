@@ -80,12 +80,12 @@ console.log(count);
     //create an object with all normalized data as attributes
     console.log('about to return++====+++====++==');
     return {
-        allDetails : normalizedAllDetails.entities.allCustomersDetails[customerDetails.id],
-        addresses : normalizedAddresses.entities[customerDetails.id],
-        emergencyContacts : normalizedAddresses.entities[customerDetails.id],
-        familyDoctors : normalizedFamilyDoctors.entities[customerDetails.id],
-        healthInfo : normalizedHealthInfo.entities[customerDetails.id],
-        phoneNumbers : normalizedPhoneNumbers.entities[customerDetails.id]
+        allDetails : { [customerDetails.id] : normalizedAllDetails.entities.allCustomersDetails[customerDetails.id] },
+        addresses : { [customerDetails.id] : normalizedAddresses.entities[customerDetails.id] },
+        emergencyContacts : { [customerDetails.id] : normalizedAddresses.entities[customerDetails.id] },
+        familyDoctors : { [customerDetails.id] : normalizedFamilyDoctors.entities[customerDetails.id] },
+        healthInfo : { [customerDetails.id] : normalizedHealthInfo.entities[customerDetails.id] },
+        phoneNumbers : { [customerDetails.id] : normalizedPhoneNumbers.entities[customerDetails.id] }
     };
 }
 
