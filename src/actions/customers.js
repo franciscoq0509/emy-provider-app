@@ -64,9 +64,12 @@ export const recieveCustomerDetailsFailure = (error) => ({
 });
 
 //save customer details
-export const saveCustomerDetails = (customersDetails) => ({ 
+export const saveCustomerDetails = (customersDetails) => { 
+    normalizedFullCustomerDetails(customersDetails);
+ return {
     type: 'SAVE_CUSTOMER_DETAILS',
     customersDetails
-});
+ }
+};
 
 //create a new action creator that handles request failures
