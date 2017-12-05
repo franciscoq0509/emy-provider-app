@@ -16,30 +16,28 @@ export const normalizeBasicCustomerDetails =  (customersArray) => {
 }
 
 export const normalizedFullCustomerDetails = (customerDetails) => {
-    const generalCustomersDetails = new schema.Entity('generalCustomersDetails');
+    const allCustomersDetails = new schema.Entity('allCustomersDetails');
     console.log(customerDetails);  
-    const n = new schema.Entity('generalCustomersDetails', {
-        generalCustomersDetails
+    const n = new schema.Entity('allCustomersDetails', {
+        allCustomersDetails
     });
     const normData = normalize(customerDetails, n);
     console.log(normData);
-
-    let normalizedAddresses = {};
+/////////
     let extractAddresses = {addresses: []};
+    const addressesSchema = new schema.Entity('addresses');
+    const AddressesListSchema = [addressesSchema];
     if('data' in customerDetails.addresses) {
         console.log('data exists');
         extractAddresses.addresses = [...customerDetails.addresses.data];
-
     }
-    console.log(extractAddresses);
-    let addressesSchema = new schema.Entity('addresses');
-    if(extractAddresses.addresses.length > 0) {
-        let addressesSchema = {
-            [extractAddresses.addresses]: [addressesSchema]
-        }
-        normalizedAddresses = normalize(extractAddresses, addressesSchema);
-        console.log(normalizedAddresses);
-    }
+    const normalizedAddresses = normalize(extractAddresses.addresses, AddressesListSchema);
+    console.log(normalizedAddresses);
+////////
+    const emergencySchema = new schema.Entity('emergencyContacts', {}, {idAttribute: 'emergency_contact_id'});
+    const emergencyContactsList = [ emergencySchema ];
+    const normalizedEmergency = normalize(customerDetails.emergency_contacts, emergencyContactsList);
+    console.log(normalizedEmergency);
     
 }
 
@@ -47,7 +45,7 @@ export const normalizedFullCustomerDetails = (customerDetails) => {
 
 //full details all keyed by id
 
-//generalCustomersDetails
+//allCustomersDetails
 //addresses --
 //custom questions
 //educations
