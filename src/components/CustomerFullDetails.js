@@ -1,6 +1,8 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 import { Button, Card } from 'react-native-elements';
+import { ParentDetailsCard } from './ParentDetailsCard';
+import { ChildDetailsCard } from './ChildDetailsCard';
 const Moment = require('moment');
 
 
@@ -55,37 +57,22 @@ export const CustomerFullDetails = (props) => {
             </Card>
             {
                 props.showMoreClicked ? 
-                <Card>
-                    <View style={card = {alignSelf: 'flex-start'}}>
-                        <Text>created: {Moment(created).format("MMMM D, YYYY, h:mm:ss a")}</Text>
-                        {is_child ? 
-                            <View>
-                                <Text>School Name: {school_name ? school_name : 'N/A'}</Text>
-                                <Text>School Year: {school_year ? school_year : 'N/A'}</Text>
-                                {healthInformation ?
-                                    <View>
-                                        <Text>Allergies: {healthInformation.allergies ? 
-                                            `yes ${healthInformation.allergies}` 
-                                            : 
-                                            'no'}</Text>
-                                        <Text>Bee Allergy Response: {
-                                            healthInformation.bee_allergy_response ?
-                                            <Text>{healthInformation.bee_allergy_response}</Text>
-                                            :
-                                            <Text>None</Text>
-                                            }
-                                        </Text>
-                                    </View>
-                                    :
-                                    <Text>No Health information was found on {full_name}!</Text>
-                                }
-                            </View>
-                                : 
-                            <Text>{full_name} is the parent of...</Text>
-                        }
-                        
-                    </View>
-                </Card>
+                <View>
+                    {is_child ? 
+                        <ChildDetailsCard 
+                            school_name={school_name} 
+                            school_year={school_year}
+                            healthInformation={healthInformation}
+                            customerCreated={created}
+                            fullName={full_name}
+                        />
+                        :
+                        <ParentDetailsCard 
+                            customerCreated={created} 
+                            fullName={full_name}
+                        />
+                    }
+                </View>
                 :
                 <Button
                     small
