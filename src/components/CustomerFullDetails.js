@@ -18,16 +18,18 @@ export const CustomerFullDetails = (props) => {
         relationship,
         school_name,
         school_year,
-        special_needs 
+        //special_needs 
     } = props.basicCustomerDetails;
     const {
-        phones 
+        phones,
+        healthInfo 
     } = props.allCustomerDetails
     const phoneNumbers = {
         Mobile : phones[Object.keys(phones).find((key) => phones[key].name === 'Mobile')],
         Home : phones[Object.keys(phones).find((key) => phones[key].name === 'Home')],
         Work : phones[Object.keys(phones).find((key) => phones[key].name === 'Work')],
     }
+    const healthInformation = healthInfo[Object.keys(healthInfo)[0]] ? healthInfo[Object.keys(healthInfo)[0]] : 0; 
     console.log(phoneNumbers);
     
     // const phoneInfo = {
@@ -37,6 +39,7 @@ export const CustomerFullDetails = (props) => {
     // }
 
     console.log(dob);
+    console.log(healthInfo[Object.keys(healthInfo)[0]]);
     return (
         <View>
             <Card title="Details">
@@ -44,10 +47,10 @@ export const CustomerFullDetails = (props) => {
                     <Text>{full_name}</Text>
                     <Text>{gender === 'M' ? 'Male' : 'Female'}</Text>
                     <Text>email: {email ? email : 'None found'}</Text>
-                    <Text>DOB: {Moment(dob).format("MMMM D, YYYY")}</Text>
-                    <Text>Mobile: {phoneNumbers.Mobile ? phoneNumbers.Mobile.phone : 'N/A'}</Text>
-                    <Text>Work: {phoneNumbers.Work ? phoneNumbers.Work.phone : 'N/A'}</Text>
-                    <Text>Home: {phoneNumbers.Home ? phoneNumbers.Home.phone : 'N/A'}</Text>
+                    <Text>DOB: {dob !== null ? Moment(dob).format("MMMM D, YYYY") : 'Not found'}</Text>
+                    <Text>Mobile: {phoneNumbers.Mobile ? phoneNumbers.Mobile.phone : 'None found'}</Text>
+                    <Text>Work: {phoneNumbers.Work ? phoneNumbers.Work.phone : 'None found'}</Text>
+                    <Text>Home: {phoneNumbers.Home ? phoneNumbers.Home.phone : 'None found'}</Text>
                 </View>
             </Card>
             {
@@ -55,11 +58,27 @@ export const CustomerFullDetails = (props) => {
                 <Card>
                     <View style={card = {alignSelf: 'flex-start'}}>
                         <Text>created: {Moment(created).format("MMMM D, YYYY, h:mm:ss a")}</Text>
-                        {parseInt(is_child,10) ? 
+                        {is_child ? 
                             <View>
                                 <Text>School Name: {school_name ? school_name : 'N/A'}</Text>
                                 <Text>School Year: {school_year ? school_year : 'N/A'}</Text>
-                                <Text>Special Needs: {special_needs ? special_needs : 'None'}</Text>
+                                {healthInformation ?
+                                    <View>
+                                        <Text>Allergies: {healthInformation.allergies ? 
+                                            `yes ${healthInformation.allergies}` 
+                                            : 
+                                            'no'}</Text>
+                                        <Text>Bee Allergy Response: {
+                                            healthInformation.bee_allergy_response ?
+                                            <Text>{healthInformation.bee_allergy_response}</Text>
+                                            :
+                                            <Text>None</Text>
+                                            }
+                                        </Text>
+                                    </View>
+                                    :
+                                    <Text>No Health information was found on {full_name}!</Text>
+                                }
                             </View>
                                 : 
                             <Text>{full_name} is the parent of...</Text>
