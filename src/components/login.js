@@ -62,14 +62,15 @@ export default class Login extends React.Component {
                         textInputRef='password'
                         secureTextEntry={true}
                     />
-
-                    <LoginSubmitButtonContainer 
-                        style={styles.submitButtonWrapper} 
-                        nav={this.props.navigation} 
-                        uname={this.state.uname} 
-                        pwd={this.state.pwd}
-                        showErrorMessage={this.showErrorMessage}
-                    />
+                    <View style={styles.submitButtonWrapper} >
+                        <LoginSubmitButtonContainer 
+                            
+                            nav={this.props.navigation} 
+                            uname={this.state.uname} 
+                            pwd={this.state.pwd}
+                            showErrorMessage={this.showErrorMessage}
+                        />
+                    </View>
                     {this.state.showNetworkError && <ErrorMessage type={'network'}/>}
                     {this.state.showValidationError && <ErrorMessage type={'validation'}/>}
                     
@@ -94,10 +95,9 @@ const styles = {
         paddingTop: 20,
         paddingLeft: 20,
         paddingRight: 20,
-        paddingBottom: 20
     },
     submitButtonWrapper: {
-        paddingTop: 40,
+        marginTop: 40,
     }
 };
 
