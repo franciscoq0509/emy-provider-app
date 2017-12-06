@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 import Header from './Header';
+import { ErrorMessage } from './ErrorMessage';
 import LoginSubmitButtonContainer from '../containers/LoginSubmitButtonContainer';
 import {FormLabel, FormInput} from 'react-native-elements';
 
@@ -8,25 +9,31 @@ import {FormLabel, FormInput} from 'react-native-elements';
 export default class Login extends React.Component {
     
     componentWillMount = () => {
-        this.setState(() => ({uname: "", pwd: ""}));
+        this.setState(() => ({uname: "", pwd: "", showValidationError: false, showNetworkError: false, showUnknownError: false}));
     }
-
-    //when the below functions are used as callbacks for this.setState in render JSX, it breaks the props sent to LoginSubmitButtonContainer
-    //after the below functions are executed.
-    // usernameInputChange = (text) => {
-    //     this.setState(() => ({uname: text}));
-    //     //console.log(this.state.uname);
-    // }
-
-    // passwordInputChange = (text) => {
-    //     this.setState(() => ({pwd: text}));
-    //     //console.log(this.state.pwd);
-    // }
 
     submitPressed = () => {
         console.log(this.state);
     }
 
+    showErrorMessage = (err_message) => {
+        console.log(err_message);
+        console.log(typeof err_message);
+        if(typeof err_message === 'object' && Object.keys(err_message).length === 0) {
+            this.setState({showNetworkError: true, showValidationError: false, showUnknownError: false});
+        } else {
+            console.log('error happened');
+            const errMessage = JSON.parse(err_message);
+            if('error_description' in errMessage && errMessage.error_description.toLowerCase().includes('invalid username and password')) {
+                //showValidationError
+                this.setState({showValidationError: true, showNetworkError: false, showUnknownError: false});
+            } else {
+                //someothererror
+            }
+            console.log(errMessage);
+        }
+
+    }
 
     render() {
         console.log(this.props);
@@ -56,7 +63,16 @@ export default class Login extends React.Component {
                         secureTextEntry={true}
                     />
 
-                    <LoginSubmitButtonContainer style={styles.submitButtonWrapper} nav={this.props.navigation} uname={this.state.uname} pwd={this.state.pwd}/>
+                    <LoginSubmitButtonContainer 
+                        style={styles.submitButtonWrapper} 
+                        nav={this.props.navigation} 
+                        uname={this.state.uname} 
+                        pwd={this.state.pwd}
+                        showErrorMessage={this.showErrorMessage}
+                    />
+                    {this.state.showNetworkError && <ErrorMessage type={'network'}/>}
+                    {this.state.showValidationError && <ErrorMessage type={'validation'}/>}
+                    
                 </View>
             </View>
         );

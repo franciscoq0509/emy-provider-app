@@ -28,9 +28,10 @@ class LoginSubmitButtonContainer extends React.Component {
         //console.log(typeof props.submitCallback);
         
         console.log(this.props);
-        fetchJwt('jerrys@gymowner.cxm','L#N#marlin28', guid = '55790419-dbb4-43b4-9c1d-7bae0a37004f')//this.props.uname, this.props.pwd
+        fetchJwt('jerrys@gymowner.cxm','L#N#maAArlin28', guid = '55790419-dbb4-43b4-9c1d-7bae0a37004f')//this.props.uname, this.props.pwd
         .then(
             (data) => {
+                console.log('inside .then..', data);
                 if (data.status === 200 && data._bodyText) {
                     const extractedJwt = jwtSplit(data._bodyText); 
                     console.log(extractedJwt);
@@ -43,13 +44,13 @@ class LoginSubmitButtonContainer extends React.Component {
                                 this.props.nav.navigate("SignedIn")
                             });
                         
-                    } else console.log('something went wrong');
+                    } else {console.log('else error'); this.props.showErrorMessage('splitJWT failed..');}
                     
-                }
+                } else {console.log('failed to login'); this.props.showErrorMessage(data._bodyText);}
             },
-            (error) => {console.log(eror)}
+            (error) => {console.log('error'); this.props.showErrorMessage(error)}
         )
-        .catch((err) => {console.log(err)});
+        .catch((err) => {console.log('catch error'); this.props.showErrorMessage(err)});
     }
     
     render() {
