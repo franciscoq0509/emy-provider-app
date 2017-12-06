@@ -1,5 +1,5 @@
-import { normalizeBasicCustomerDetails } from '../normalize/basicCustomerData';
-import { normalizedFullCustomerDetails } from '../normalize/basicCustomerData';
+import { normalizeBasicCustomerDetails } from '../normalize/customerData';
+import { normalizedFullCustomerDetails } from '../normalize/customerData';
 
 
 //user refreshes
@@ -65,13 +65,14 @@ export const recieveCustomerDetailsFailure = (error) => ({
 
 //save customer details
 export const saveCustomerDetails = (customersDetails) => { 
-    console.log('+++++++++++++++++++++++++++++');
+    console.log(customersDetails);
     const normalizedCustomerDetails = normalizedFullCustomerDetails(customersDetails);
     console.log('=========================');
     console.log(normalizedCustomerDetails);
  return {
-    type: 'SAVE_CUSTOMER_DETAILS',
-    customersDetails
+    type: 'SAVE_FULL_CUSTOMER_DETAILS',
+    normalizedCustomerDetails,
+    id : customersDetails.id
  }
 };
 

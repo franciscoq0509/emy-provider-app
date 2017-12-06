@@ -12,7 +12,7 @@ export const CustomerFullDetails = (props) => {
         email, 
         status, 
         gender, 
-        phones,
+        //phones,
         created,
         is_child,
         relationship,
@@ -20,12 +20,21 @@ export const CustomerFullDetails = (props) => {
         school_year,
         special_needs 
     } = props.basicCustomerDetails;
-    
-    const phoneInfo = {
-        length: phones.length,
-        mobile: phones.find((obj) => obj.name === 'Mobile'? obj : false),
-        home: phones.find((obj) => obj.name === 'Home'? obj : false),
+    const {
+        phones 
+    } = props.allCustomerDetails
+    const phoneNumbers = {
+        Mobile : phones[Object.keys(phones).find((key) => phones[key].name === 'Mobile')],
+        Home : phones[Object.keys(phones).find((key) => phones[key].name === 'Home')],
+        Work : phones[Object.keys(phones).find((key) => phones[key].name === 'Work')],
     }
+    console.log(phoneNumbers);
+    
+    // const phoneInfo = {
+    //     length: phones.length,
+    //     mobile: phones.find((obj) => obj.name === 'Mobile'? obj : false),
+    //     home: phones.find((obj) => obj.name === 'Home'? obj : false),
+    // }
 
     console.log(dob);
     return (
@@ -36,8 +45,9 @@ export const CustomerFullDetails = (props) => {
                     <Text>{gender === 'M' ? 'Male' : 'Female'}</Text>
                     <Text>email: {email ? email : 'None found'}</Text>
                     <Text>DOB: {Moment(dob).format("MMMM D, YYYY")}</Text>
-                    <Text>Mobile: {phoneInfo.length !== 0 && phoneInfo.mobile ? phoneInfo.mobile.phone : 'N/A'}</Text>
-                    <Text>Home: {phoneInfo.length !== 0 && phoneInfo.home ? phoneInfo.home.phone : 'N/A'}</Text>
+                    <Text>Mobile: {phoneNumbers.Mobile ? phoneNumbers.Mobile.phone : 'N/A'}</Text>
+                    <Text>Work: {phoneNumbers.Work ? phoneNumbers.Work.phone : 'N/A'}</Text>
+                    <Text>Home: {phoneNumbers.Home ? phoneNumbers.Home.phone : 'N/A'}</Text>
                 </View>
             </Card>
             {
