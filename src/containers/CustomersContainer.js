@@ -58,7 +58,17 @@ class CustomersListContainer extends React.Component {
 
     render() {      
         return (
-            <CustomersListNavigator screenProps={ {customers: this.state.customers, filteredCustomers: this.state.filteredCustomers, showSpinner: this.state.showSpinner} } nav={this.props.nav}/>
+            <CustomersListNavigator 
+                screenProps = { 
+                    {   
+                        customers: this.state.customers, 
+                        filteredCustomers: this.state.filteredCustomers, 
+                        showSpinner: this.state.showSpinner,
+                        showLoadError: true
+                    } 
+                } 
+                nav={this.props.nav}
+            />
         );
     };
 };

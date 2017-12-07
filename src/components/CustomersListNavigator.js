@@ -6,6 +6,7 @@ import { StackNavigator } from 'react-navigation';
 import StandardSearchbar from './StandardSearchbar';
 import CustomerFullDetailsContainer from '../containers/CustomerFullDetailsContainer';
 import spinnerStyle from './styles/spinnerStyle';
+import { ErrorMessage } from './ErrorMessage';
 
 
 class CustomersList extends React.PureComponent {
@@ -20,30 +21,38 @@ class CustomersList extends React.PureComponent {
     _keyExtractor = (item, index) => index;
 
     render() {
-        return (
-            <View  style={ center = {flex:1} }>
-                
-                {this.props.screenProps.showSpinner() ? 
-                    <View style={spinnerStyle.container}>
-                        <ActivityIndicator
-                            animating = {true}
-                            size = "large"
-                        />
+        switch (this.props.screenProps.showLoadError) {
+            case true:
+                return (
+                    <ErrorMessage message={'Sorry we cannot find the resource you are looking for'} errorStyle={'block'} />
+                )
+            default:
+                return (
+                    <View  style={ center = {flex:1} }>
+                        
+                        {this.props.screenProps.showSpinner() ? 
+                            <View style={spinnerStyle.container}>
+                                <ActivityIndicator
+                                    animating = {true}
+                                    size = "large"
+                                />
+                            </View>
+                            : 
+                            <List> 
+                                <FlatList
+                                    data={this.customersAndCallback()}
+                                    initialNumToRender={10}
+                                    onEndReachedThreshold={1200}
+                                    renderItem={CustomerItem}
+                                    keyExtractor={this._keyExtractor}
+                                    ListHeaderComponent={<StandardSearchbar search="allCustomers" />}
+                                />
+                            </List>
+                        }
                     </View>
-                    : 
-                    <List> 
-                        <FlatList
-                            data={this.customersAndCallback()}
-                            initialNumToRender={10}
-                            onEndReachedThreshold={1200}
-                            renderItem={CustomerItem}
-                            keyExtractor={this._keyExtractor}
-                            ListHeaderComponent={<StandardSearchbar search="allCustomers" />}
-                        />
-                    </List>
-                }
-            </View>
-        );
+                );
+        }
+        
     }
     
 };

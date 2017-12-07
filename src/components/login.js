@@ -20,15 +20,15 @@ export default class Login extends React.Component {
         console.log(err_message);
         console.log(typeof err_message);
         if(typeof err_message === 'object' && Object.keys(err_message).length === 0) {
-            this.setState({showNetworkError: true, showValidationError: false, showUnknownError: false});
+            this.setState({showError: true, message: `Network error!\nMake sure your device has an internet connection.`});
         } else {
             console.log('error happened');
             const errMessage = JSON.parse(err_message);
             if('error_description' in errMessage && errMessage.error_description.toLowerCase().includes('invalid username and password')) {
                 //showValidationError
-                this.setState({showValidationError: true, showNetworkError: false, showUnknownError: false});
+                this.setState({showError: true, message: `Sorry your username or password are incorrect.`});
             } else {
-                //someothererror
+                this.setState({showError: true, message: `Woops! looks like something went wrong.`});
             }
             console.log(errMessage);
         }
@@ -40,6 +40,7 @@ export default class Login extends React.Component {
         return (
             <View style={ {flex: 1} }>
                 <Header />
+                {this.state.showError && <ErrorMessage message={this.state.message}  errorStyle={'bubble'}/>}
                 <View  style={styles.wrapper}>
                     <FormLabel>User Name</FormLabel>
                     <FormInput
@@ -71,8 +72,6 @@ export default class Login extends React.Component {
                             showErrorMessage={this.showErrorMessage}
                         />
                     </View>
-                    {this.state.showNetworkError && <ErrorMessage type={'network'}/>}
-                    {this.state.showValidationError && <ErrorMessage type={'validation'}/>}
                     
                 </View>
             </View>
@@ -83,7 +82,7 @@ export default class Login extends React.Component {
 
 const styles = {
     wrapper: {
-        marginTop: 50,
+        marginTop: 10,
         flex: 1,
         flexDirection: 'column',
         //alignItems: 'center',

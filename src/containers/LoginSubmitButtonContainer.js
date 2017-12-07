@@ -24,11 +24,8 @@ const fetchJwt = (uname, pwd, guid) => (
 class LoginSubmitButtonContainer extends React.Component {
     
     startSubmitProcess = () => {
-        //this.props.submitCallback();
-        //console.log(typeof props.submitCallback);
-        
         console.log(this.props);
-        fetchJwt('jerrys@gymowner.cxm','L#N#maAArlin28', guid = '55790419-dbb4-43b4-9c1d-7bae0a37004f')//this.props.uname, this.props.pwd
+        fetchJwt('jerrys@gymowner.cxm','L#N#marlin28', guid = '55790419-dbb4-43b4-9c1d-7bae0a37004f')//this.props.uname, this.props.pwd
         .then(
             (data) => {
                 console.log('inside .then..', data);
@@ -61,7 +58,6 @@ class LoginSubmitButtonContainer extends React.Component {
 };
 
 const mapStateToProps = (state) => ({
-    //all: state,
     jwt : state.jwt.fullJwt,
     jwtHeaders: state.jwt.headers,
     jwtPayload: state.jwt.payload,

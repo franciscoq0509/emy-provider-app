@@ -1,11 +1,12 @@
 import React from 'react';
-import { View, Button } from 'react-native';
+import { View, Button, Image } from 'react-native';
 import { TabNavigator, addNavigationHelpers } from 'react-navigation';
 import { Provider } from 'react-redux';
 import CustomersContainer from '../containers/CustomersContainer';
 import Header from '../components/Header'; 
 import ActivitiesContainer from '../containers/ActivitiesContainer';
 import QuickBook from '../components/QuickBook';
+import { Icon } from 'react-native-elements';
 
 
 // const HomeScreen = ({ navigation }) => {
@@ -34,11 +35,17 @@ class CustomersScreen extends React.Component {
     }  
 };
 
-const ActivitiesScreen = () => (
-    <View>
-        <ActivitiesContainer />
-    </View>
-);
+class ActivitiesScreen extends React.Component {
+    render() {
+        return(
+        <View>
+            <ActivitiesContainer />
+        </View>
+        );
+    };
+
+   
+};
 
 const QuickBookScreen = () => (
     <View>
@@ -54,19 +61,28 @@ const SignedInNavigator = TabNavigator({
         Customers: {
             screen: CustomersScreen,
             navigationOptions: {
-                headerTitle: 'All Customers'
+                headerTitle: 'All Customers',
+                tabBarIcon: () => (
+                    <Icon name='users' type='entypo'/>
+                  ),
             }
         },
         Activities: {
             screen: ActivitiesScreen,
             navigationOptions: {
-                headerTitle: 'All Activities'
+                headerTitle: 'All Activities',
+                tabBarIcon: () => (
+                    <Icon name='clipboard' type='entypo'/>
+                  ),
             }
         },
         QuickBook: {
             screen: QuickBookScreen,
             navigationOptions: {
-                headerTitle: 'Quick Book'
+                headerTitle: 'Quick Book',
+                tabBarIcon: () => (
+                    <Icon name='book' type='entypo'/>
+                  ),
             }
         }
     },
