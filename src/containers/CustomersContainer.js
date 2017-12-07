@@ -78,7 +78,7 @@ class CustomersListContainer extends React.Component {
                         customers: this.state.customers, 
                         filteredCustomers: this.state.filteredCustomers, 
                         showSpinner: this.state.showSpinner,
-                        showLoadError: true//this.state.showLoadError
+                        showLoadError: this.state.showLoadError
                     } 
                 } 
                 nav={this.props.nav}
