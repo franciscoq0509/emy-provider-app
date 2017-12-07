@@ -7,7 +7,7 @@ const Moment = require('moment');
 export const ChildDetailsCard = ({ school_name, school_year, healthInformation, customerCreated, fullName }) => {
     return (
         <Card>
-            <Text>created: {Moment(customerCreated).format("MMMM D, YYYY, h:mm:ss a")}</Text>
+            <Text>Acount Created: {Moment(customerCreated).format("MMMM D, YYYY, h:mm:ss a")}</Text>
             <Text>School Name: {school_name ? school_name : 'N/A'}</Text>
             <Text>School Year: {school_year ? school_year : 'N/A'}</Text>
             {healthInformation ?

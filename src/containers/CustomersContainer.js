@@ -40,29 +40,28 @@ class CustomersListContainer extends React.Component {
 
     componentWillMount() {
         this.setState(() => ({showSpinner: this.showLoadingSpinner, showLoadError: false}));
-    }
-    
-    componentDidMount() {   
-        this.props.dispatch(this.customersThunk())
-            .then(
-                (resp) => { 
-                    console.log(resp);
-                    if('type' in resp) {
-                        if(resp.type === 'RECEIVE_CUSTOMERS_SUCCESS') {
-                            this.setState({showLoadError: false});
-                            this.setState(() => ({filteredCustomers : this.props.filteredCustomers}));        
-                        } else {
-                            //error here
-                            this.setState({showLoadError: true});
-                        }
 
+        this.props.dispatch(this.customersThunk())
+        .then(
+            (resp) => { 
+                console.log(resp);
+                if('type' in resp) {
+                    if(resp.type === 'RECEIVE_CUSTOMERS_SUCCESS') {
+                        this.setState({showLoadError: false});
+                        this.setState(() => ({filteredCustomers : this.props.filteredCustomers}));        
                     } else {
                         //error here
                         this.setState({showLoadError: true});
                     }
-                    this.setState(() => ({filteredCustomers : this.props.filteredCustomers}));
-                })
-                .catch((err) => {console.log(`this is the customers errer ${err}`); this.setState({showLoadError: true});})
+
+                } else {
+                    //error here
+                    this.setState({showLoadError: true});
+                }
+                this.setState(() => ({filteredCustomers : this.props.filteredCustomers}));
+            })
+            .catch((err) => {console.log(`this is the customers errer ${err}`); this.setState({showLoadError: true});})
+
     }
 
 	componentWillReceiveProps(nextProps) { 
@@ -79,7 +78,7 @@ class CustomersListContainer extends React.Component {
                         customers: this.state.customers, 
                         filteredCustomers: this.state.filteredCustomers, 
                         showSpinner: this.state.showSpinner,
-                        showLoadError: this.state.showLoadError
+                        showLoadError: true//this.state.showLoadError
                     } 
                 } 
                 nav={this.props.nav}

@@ -6,7 +6,7 @@ const Moment = require('moment');
 export const ParentDetailsCard = ({ customerCreated, fullName }) => {
     return (
         <Card>
-            <Text>created: {Moment(customerCreated).format("MMMM D, YYYY, h:mm:ss a")}</Text>
+            <Text>Account Created: {Moment(customerCreated).format("MMMM D, YYYY, h:mm:ss a")}</Text>
             <Text>{fullName} is the parent of...</Text>
         </Card>
     )
