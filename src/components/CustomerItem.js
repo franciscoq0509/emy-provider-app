@@ -5,6 +5,7 @@ import { addNavigationHelpers } from 'react-navigation';
 import spinnerStyle from './styles/spinnerStyle';
 
 export const CustomerItem = (props) => {
+    //console.log(props);
     return (
         <View style={ center = {flex:1} }>
         {
@@ -13,7 +14,7 @@ export const CustomerItem = (props) => {
                     containerStyle={props.item.is_child ? {} : {backgroundColor: '#e6f4f4'}}
                     roundAvatar
                     title={`${props.item.first_name} ${props.item.last_name}`}
-                    onPress={() => {props.item.customNavigator.navigate('fullDetail', { customerId : props.item.registered })}}
+                    onPress={() => {props.item.nav.navigate('fullDetail', { customerId : props.item.id })}}
                 />
             :
             <View></View>

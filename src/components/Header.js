@@ -1,19 +1,21 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, Image } from 'react-native';
 
 const Header = ()=> {
     const { wrapper, text } = styles;
    return ( 
         <View style={wrapper}>
-            <Text style={text}>Enrolmy</Text>
+            <Image
+            style={{width: 300, resizeMode: 'contain'}}
+                source={require('../assets/logo-white-LG.png')}
+            />
         </View>
    );
 };
 
 const styles = {
     wrapper : {
-        paddingTop: 10,
-        paddingBottom: 10,
+        //paddingBottom: 10,
         //marginTop: 20,
         alignItems: 'center',
         backgroundColor: '#3197EA',

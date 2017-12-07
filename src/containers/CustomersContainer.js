@@ -7,45 +7,61 @@ import { getFilteredCustomers } from '../selectors/index';
 
 
 
-const fetchCustomers = () => (
+const fetchCustomers = (jwt) => (
     fetch(
-        'https://emy-front-api.craig.27s-dev.net/providers-api/v1/55790419-dbb4-43b4-9c1d-7bae0a37004f/users?full_name=%&limit=200'
-        //'https://front-api.enrolmy.com/activities-api/v1/activities'
-        //'https://front-api.enrolmy.com/providers-api/v1/55790419-dbb4-43b4-9c1d-7bae0a37004f/users'
+        'https://emy-front-api.craig.27s-dev.net/providers-api/v1/55790419-dbb4-43b4-9c1d-7bae0a37004f/users?full_name=%&limit=200',
+        {headers: {Authorization: `Bearer ${jwt}`}}
     )
 );
 
-const asyncAction = (dispatch) => {
-    
-    return (dispatch) => {
-        dispatch(requestCustomers());
-        return fetchCustomers()
-            .then(
-                (customersObject) => customersObject.json(),
-                (error) => dispatch(receiveCustomersError(error))
-            ).then((customers) => {
-                return dispatch(receiveNewCustomers(customers.users));
-            })
-            .catch((err) => dispatch(receiveCustomersError(err)))
-    };
-};
 
 
 class CustomersListContainer extends React.Component {
+
+
+    customersThunk = (dispatch) => {
+        
+        return (dispatch) => {
+            dispatch(requestCustomers());
+            return fetchCustomers(this.props.jwt)
+                .then(
+                    (customersObject) => customersObject.json(),
+                    (error) => dispatch(receiveCustomersError(error))
+                ).then((customers) => {
+                    return dispatch(receiveNewCustomers(customers.users));
+                })
+                .catch((err) => dispatch(receiveCustomersError(err)))
+        };
+    };
+
     showLoadingSpinner = () => {
         return this.props.actions.isFetching ? true : false;
     }
 
     componentWillMount() {
-        this.setState(() => ({showSpinner: this.showLoadingSpinner}));
-    }
-    
-    componentDidMount() {   
-        this.props.dispatch(asyncAction())
-            .then(
-                ({ customers }) => { 
-                    this.setState(() => ({filteredCustomers : this.props.filteredCustomers}));
-                });
+        this.setState(() => ({showSpinner: this.showLoadingSpinner, showLoadError: false}));
+
+        this.props.dispatch(this.customersThunk())
+        .then(
+            (resp) => { 
+                console.log(resp);
+                if('type' in resp) {
+                    if(resp.type === 'RECEIVE_CUSTOMERS_SUCCESS') {
+                        this.setState({showLoadError: false});
+                        this.setState(() => ({filteredCustomers : this.props.filteredCustomers}));        
+                    } else {
+                        //error here
+                        this.setState({showLoadError: true});
+                    }
+
+                } else {
+                    //error here
+                    this.setState({showLoadError: true});
+                }
+                this.setState(() => ({filteredCustomers : this.props.filteredCustomers}));
+            })
+            .catch((err) => {console.log(`this is the customers errer ${err}`); this.setState({showLoadError: true});})
+
     }
 
 	componentWillReceiveProps(nextProps) { 
@@ -56,15 +72,27 @@ class CustomersListContainer extends React.Component {
 
     render() {      
         return (
-            <CustomersListNavigator screenProps={ {customers: this.state.customers, filteredCustomers: this.state.filteredCustomers, showSpinner: this.state.showSpinner} } nav={this.props.nav}/>
+            <CustomersListNavigator 
+                screenProps = { 
+                    {   
+                        customers: this.state.customers, 
+                        filteredCustomers: this.state.filteredCustomers, 
+                        showSpinner: this.state.showSpinner,
+                        showLoadError: this.state.showLoadError
+                    } 
+                } 
+                nav={this.props.nav}
+            />
         );
     };
 };
 
 const mapStateToProps = (state) => {
+    console.log(state);
     return {
         filteredCustomers: getFilteredCustomers(state, state, state),
-        actions: state.currentCustomerAction 
+        actions: state.currentCustomerAction,
+        jwt: state.jwt.fullJwt 
     };
 };
 

@@ -1,4 +1,5 @@
-import normalizeBasicCustomers from '../normalize/basicCustomerData';
+import { normalizeBasicCustomerDetails } from '../normalize/customerData';
+import { normalizedFullCustomerDetails } from '../normalize/customerData';
 
 
 //user refreshes
@@ -17,7 +18,7 @@ export const requestCustomers = () => {
 //recieving new customers success
 export const receiveNewCustomers = (newCustomers) => { 
     //console.log('just befoe norm function');
-    const normalizedCustomers = normalizeBasicCustomers(newCustomers);
+    const normalizedCustomers = normalizeBasicCustomerDetails(newCustomers);
     //console.log(normalizedCustomers);
     return {
         type: 'RECEIVE_CUSTOMERS_SUCCESS',
@@ -63,9 +64,25 @@ export const recieveCustomerDetailsFailure = (error) => ({
 });
 
 //save customer details
-export const saveCustomerDetails = (customersDetails) => ({ 
-    type: 'SAVE_CUSTOMER_DETAILS',
+export const saveCustomerDetails = (customersDetails) => { 
+    console.log(customersDetails);
+    const normalizedCustomerDetails = normalizedFullCustomerDetails(customersDetails);
+    console.log('=========================');
+    console.log(normalizedCustomerDetails);
+ return {
+    type: 'SAVE_FULL_CUSTOMER_DETAILS',
+    normalizedCustomerDetails,
+    id : customersDetails.id
+ }
+};
+
+export const saveCustomerDetailsFailure = (customersDetails) => { 
+    //const normalizedCustomerDetails = normalizedFullCustomerDetails(customersDetails);
+    //console.log(normalizedCustomerDetails);
+ return {
+    type: 'SAVE_CUSTOMER_DETAILS_FAILED',
     customersDetails
-});
+ }
+};
 
 //create a new action creator that handles request failures

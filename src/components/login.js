@@ -1,72 +1,80 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 import Header from './Header';
+import { ErrorMessage } from './ErrorMessage';
 import LoginSubmitButtonContainer from '../containers/LoginSubmitButtonContainer';
 import {FormLabel, FormInput} from 'react-native-elements';
-import configureStore from '../store/configureStore';
-import { Provider } from 'react-redux';
-
-const store = configureStore();
-
 
 
 export default class Login extends React.Component {
     
     componentWillMount = () => {
-        this.setState(() => ({uname: "", pwd: ""}));
+        this.setState(() => ({uname: "", pwd: "", showValidationError: false, showNetworkError: false, showUnknownError: false}));
     }
-
-    //when the below functions are used as callbacks for this.setState in render JSX, it breaks the props sent to LoginSubmitButtonContainer
-    //after the below functions are executed.
-    // usernameInputChange = (text) => {
-    //     this.setState(() => ({uname: text}));
-    //     //console.log(this.state.uname);
-    // }
-
-    // passwordInputChange = (text) => {
-    //     this.setState(() => ({pwd: text}));
-    //     //console.log(this.state.pwd);
-    // }
 
     submitPressed = () => {
         console.log(this.state);
     }
 
+    showErrorMessage = (err_message) => {
+        console.log(err_message);
+        console.log(typeof err_message);
+        if(typeof err_message === 'object' && Object.keys(err_message).length === 0) {
+            this.setState({showError: true, message: `Network error!\nMake sure your device has an internet connection.`});
+        } else {
+            console.log('error happened');
+            const errMessage = JSON.parse(err_message);
+            if('error_description' in errMessage && errMessage.error_description.toLowerCase().includes('invalid username and password')) {
+                //showValidationError
+                this.setState({showError: true, message: `Sorry your username or password are incorrect.`});
+            } else {
+                this.setState({showError: true, message: `Woops! looks like something went wrong.`});
+            }
+            console.log(errMessage);
+        }
+
+    }
 
     render() {
-        console.log(store.getState());
         console.log(this.props);
         return (
-            <Provider store={store}>
-                <View style={ {flex: 1} }>
-                    <Header />
-                    <View  style={styles.wrapper}>
-                        <FormLabel>User Name</FormLabel>
-                        <FormInput
-                            inputStyle={styles.formField} 
-                            onChangeText={
-                                (text) => {
-                                    this.setState({uname: text});
-                                }
-                            }
-                            textInputRef='username'
-                        />
-                        <FormLabel>Password</FormLabel>
-                        <FormInput 
+            <View style={ {flex: 1} }>
+                <Header />
+                {this.state.showError && <ErrorMessage message={this.state.message}  errorStyle={'bubble'}/>}
+                <View  style={styles.wrapper}>
+                    <FormLabel>User Name</FormLabel>
+                    <FormInput
                         inputStyle={styles.formField} 
                         onChangeText={
                             (text) => {
-                                this.setState({pwd: text});
+                                this.setState({uname: text});
                             }
-                        } 
-                            textInputRef='password'
-                            secureTextEntry={true}
+                        }
+                        textInputRef='username'
+                    />
+                    <FormLabel>Password</FormLabel>
+                    <FormInput 
+                    inputStyle={styles.formField} 
+                    onChangeText={
+                        (text) => {
+                            this.setState({pwd: text});
+                        }
+                    } 
+                        textInputRef='password'
+                        secureTextEntry={true}
+                    />
+                    <View style={styles.submitButtonWrapper} >
+                        <LoginSubmitButtonContainer 
+                            
+                            nav={this.props.navigation} 
+                            uname={this.state.uname} 
+                            pwd={this.state.pwd}
+                            showErrorMessage={this.showErrorMessage}
                         />
-
-                        <LoginSubmitButtonContainer style={styles.submitButtonWrapper} nav={this.props.navigation} uname={this.state.uname} pwd={this.state.pwd}/>
                     </View>
+                    
                 </View>
-            </Provider>
+            </View>
         );
     }
     
@@ -74,7 +82,7 @@ export default class Login extends React.Component {
 
 const styles = {
     wrapper: {
-        marginTop: 50,
+        marginTop: 10,
         flex: 1,
         flexDirection: 'column',
         //alignItems: 'center',
@@ -86,10 +94,9 @@ const styles = {
         paddingTop: 20,
         paddingLeft: 20,
         paddingRight: 20,
-        paddingBottom: 20
     },
     submitButtonWrapper: {
-        paddingTop: 40,
+        marginTop: 40,
     }
 };
 

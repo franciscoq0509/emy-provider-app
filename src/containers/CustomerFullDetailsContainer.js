@@ -1,58 +1,125 @@
 import React from 'react';
 import { Text, View } from 'react-native';
 import { connect } from 'react-redux';
+import findId from '../utilities/findId';
 import { CustomerFullDetails } from '../components/CustomerFullDetails';
-import { saveCustomerDetails } from '../actions/customers';
+import { saveCustomerDetails, saveCustomerDetailsFailure } from '../actions/customers';
 
-const fetchCustomerDetails = (id) => {
-    //use id to req user data fro API
-    //console.log(id);
-    return fetch('https://randomuser.me/api/')
-};
 
-const returnCustomerDetails = (id) => {
-    return (dispatch) => {
-        return fetchCustomerDetails(id)
-            .then(
-                (details) => details.json(),
-                (err) => dispatch(saveCustomerDetails(err.json()))
-            )
-            .then(
-                (customerDetailsObject) => {
-                    dispatch(saveCustomerDetails(customerDetailsObject))
-                }
-            )
-            .catch((err) => dispatch(saveCustomerDetails(err)));
-    } ;
+const fetchCustomerDetails = (id, jwt) => {
+    return fetch(`https://emy-front-api.craig.27s-dev.net/providers-api/v1/55790419-dbb4-43b4-9c1d-7bae0a37004f/users/${id}`, 
+        {
+            headers: {
+                'Authorization': `Bearer ${jwt}`,
+                'X-enrolmy-slug': '55790419-dbb4-43b4-9c1d-7bae0a37004f'
+            }
+        }
+    )
 };
 
 
 class CustomerDetails extends React.Component {
-    componentDidMount() {
-        this.props.dispatch(returnCustomerDetails(this.props.navigation.state.params.customerId))
-            .then(() => 
-                {
-                    this.setState(() => ({customerData: this.props.customerData})) 
-                    console.log(this.props);
+    constructor(props) {
+        super(props);
+        this.clicked = this.clicked.bind(this);
+        this.setDetailsState = this.setDetailsState.bind(this);    
+    }
+    
+    clicked() {
+        this.setState(()=> ({showMoreClicked: true}));
+    };
+
+    setDetailsState() {
+        const { phoneNumbers, addresses, emergencyContacts, healthInfo } = this.props.allCustomerDetails;
+        console.log(phoneNumbers);
+        const id = this.props.navigation.state.params.customerId;
+        this.setState(() => ({
+            allCustomerDetails: {
+                phones : phoneNumbers[id],
+                addresses : addresses[id],
+                healthInfo : healthInfo[id],
+                emergencyContacts : emergencyContacts[id]
+            }
+        })); 
+    }
+
+    returnCustomerDetails = (id, jwt) => {
+        return (dispatch) => {
+            return fetchCustomerDetails(id, jwt)
+                .then(
+                    (details) => details.json(),
+                    (err) => err   
+                )
+                .then(
+                    
+                    (customerDetailsObject) => {
+                        console.log(customerDetailsObject);
+                        return dispatch(saveCustomerDetails(customerDetailsObject));
+                    }
+                )
+                .catch((err) => err);
+        };
+    };
+
+
+    componentWillMount() {
+        console.log(this.props);
+        this.setState(() => ({showMoreClicked: false, clickHandler: this.clicked, advancedDataLoadFailed: false})); 
+        if(this.props.navigation.state.params.customerId) {
+            this.setState(() => ({
+                    basicCustomerDetails: this.props.screenProps.filteredCustomers[this.props.navigation.state.params.customerId]
                 })
-            .catch((err) => {console.log(err)})
+            );
+            const fullDetailsFromStore = findId(this.props.navigation.state.params.customerId, this.props.allCustomerDetails.allDetails);
+            console.log(fullDetailsFromStore);
+            if(fullDetailsFromStore) {
+                console.log('======================found it in store=======================');
+                this.setDetailsState();
+                
+            } else {
+                console.log('need to fetch....');
+                this.props.dispatch(this.returnCustomerDetails(this.props.navigation.state.params.customerId, this.props.fullJwt))
+                .then((result) => 
+                    {   
+                        console.log(result);
+                        if('type' in result && result.type === 'SAVE_FULL_CUSTOMER_DETAILS') {
+                            console.log(typeof result);
+                            this.setDetailsState();
+                            console.log(this.props);
+                        } else {
+                            this.setState({advancedDataLoadFailed: true, allCustomerDetails: 'error loading'});
+                        }
+                    })
+                .catch((err) => {console.log('about to set state for failed');this.setState({advancedDataLoadFailed: true, allCustomerDetails: 'error loading'})})
+            }
+
+        }
     }
 
     render(){
+        console.log('==============about to try render=============');
+        console.log(this.props);
+        console.log(this.state);
         return (
             <View>
-                { this.state && <CustomerFullDetails {...this.state.customerData} />}
+                { this.state.allCustomerDetails && <CustomerFullDetails
+                    basicCustomerDetails={this.state.basicCustomerDetails} 
+                    allCustomerDetails = {this.state.allCustomerDetails} 
+                    showMoreClicked={this.state.showMoreClicked}
+                    clickHandler={this.state.clickHandler}
+                    advancedDataLoadFailed  = {this.state.advancedDataLoadFailed}
+                />}
             </View>
         );
     };
 };
 
-//getting customerData below will be empty at the point of passing it in as props to CustomerDetails
-//but the point of it is once the customer data has been fetched and saved to store, we have direct access to it via this.props.customerData
-//Because we cannot access the store directly in our component, we have to pass access to it through props.
 const mapStateToProps = (state) => {
+    console.log(state);
     return {
-        customerData: state.customersDetails
+        customerData: state.allCustomers,
+        allCustomerDetails: state.customersDetails,
+        fullJwt: state.jwt.fullJwt
     }
 };
 

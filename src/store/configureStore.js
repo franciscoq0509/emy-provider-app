@@ -15,7 +15,7 @@ export default () => {
             currentCustomerAction: currentCustomerAction,
             customersFilter: CustomersFilter,
             activities: activitiesReducer,
-            jwt
+            jwt: jwt
         }), 
         applyMiddleware(thunk)
     );
