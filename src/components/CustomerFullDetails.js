@@ -3,6 +3,7 @@ import { View, Text } from 'react-native';
 import { Button, Card } from 'react-native-elements';
 import { ParentDetailsCard } from './ParentDetailsCard';
 import { ChildDetailsCard } from './ChildDetailsCard';
+import { ErrorMessage } from '../components/ErrorMessage';
 const Moment = require('moment');
 
 
@@ -22,17 +23,24 @@ export const CustomerFullDetails = (props) => {
         school_year,
         //special_needs 
     } = props.basicCustomerDetails;
+    
     const {
         phones,
         healthInfo 
     } = props.allCustomerDetails
-    const phoneNumbers = {
-        Mobile : phones[Object.keys(phones).find((key) => phones[key].name === 'Mobile')],
-        Home : phones[Object.keys(phones).find((key) => phones[key].name === 'Home')],
-        Work : phones[Object.keys(phones).find((key) => phones[key].name === 'Work')],
+    let phoneNumbers = 0;
+    if(phones !==undefined) {
+        phoneNumbers = {
+            Mobile : phones[Object.keys(phones).find((key) => phones[key].name === 'Mobile')],
+            Home : phones[Object.keys(phones).find((key) => phones[key].name === 'Home')],
+            Work : phones[Object.keys(phones).find((key) => phones[key].name === 'Work')],
+        }
     }
-    const healthInformation = healthInfo[Object.keys(healthInfo)[0]] ? healthInfo[Object.keys(healthInfo)[0]] : 0; 
-    console.log(phoneNumbers);
+    let healthInformation = 0;
+    if(healthInfo !== undefined) {
+        healthInformation = healthInfo[Object.keys(healthInfo)[0]] ? healthInfo[Object.keys(healthInfo)[0]] : 0; 
+        console.log(phoneNumbers);
+    }
     
     // const phoneInfo = {
     //     length: phones.length,
@@ -41,7 +49,7 @@ export const CustomerFullDetails = (props) => {
     // }
 
     console.log(dob);
-    console.log(healthInfo[Object.keys(healthInfo)[0]]);
+    //console.log(healthInfo[Object.keys(healthInfo)[0]]);
     return (
         <View>
             <Card title="Details">
@@ -50,9 +58,9 @@ export const CustomerFullDetails = (props) => {
                     <Text>{gender === 'M' ? 'Male' : 'Female'}</Text>
                     <Text>email: {email ? email : 'None found'}</Text>
                     <Text>DOB: {dob !== null ? Moment(dob).format("MMMM D, YYYY") : 'Not found'}</Text>
-                    <Text>Mobile: {phoneNumbers.Mobile ? phoneNumbers.Mobile.phone : 'None found'}</Text>
-                    <Text>Work: {phoneNumbers.Work ? phoneNumbers.Work.phone : 'None found'}</Text>
-                    <Text>Home: {phoneNumbers.Home ? phoneNumbers.Home.phone : 'None found'}</Text>
+                    <Text>Mobile: {phoneNumbers && phoneNumbers.Mobile ? phoneNumbers.Mobile.phone : 'None found'}</Text>
+                    <Text>Work: {phoneNumbers && phoneNumbers.Work ? phoneNumbers.Work.phone : 'None found'}</Text>
+                    <Text>Home: {phoneNumbers && phoneNumbers.Home ? phoneNumbers.Home.phone : 'None found'}</Text>
                 </View>
             </Card>
             {
@@ -74,13 +82,19 @@ export const CustomerFullDetails = (props) => {
                     }
                 </View>
                 :
-                <Button
-                    small
-                    iconLeft
-                    title='Show More'
-                    buttonStyle={ wrapper = {marginTop: 40} }
-                    onPress={props.clickHandler}
-                />
+                <View>
+                  {props.advancedDataLoadFailed ? 
+                    <ErrorMessage message={`Sorry all information on ${full_name} could not be found at this time`} type={'bubble'}/>
+                    :  
+                    <Button
+                        small
+                        iconLeft
+                        title='Show More'
+                        buttonStyle={ wrapper = {marginTop: 40} }
+                        onPress={props.clickHandler}
+                    />
+                  }
+                </View>
             }
         </View>
     );
