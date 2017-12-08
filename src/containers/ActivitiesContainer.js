@@ -3,6 +3,7 @@ import { View } from 'react-native';
 import { connect } from 'react-redux';
 import { receiveCustomersError,  receiveNewActivities} from '../actions/activities';
 import isActivityPastPresentOrFuture from '../utilities/isActivityPastPresentOrFuture';
+import ActivitiesList from '../components/ActivitiesList';
 //receiveActivitiesError,  receiveNewActivities
  
 class ActivitiesContainer extends React.Component {
@@ -57,7 +58,7 @@ class ActivitiesContainer extends React.Component {
 
     render() {
         console.log(this.state);
-        return null;
+        return <ActivitiesList />
     }
 };
 

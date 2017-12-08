@@ -87,7 +87,10 @@ const SignedInNavigator = TabNavigator({
         }
     },
     {   
-        initialRouteName: "Customers"   
+        initialRouteName: "Customers",
+        animationEnabled: false,
+        lazy: true,
+        swipeEnabled: false   
         
     }
 
