@@ -45,10 +45,11 @@ class ActivitiesContainer extends React.Component {
         this.props.dispatch(this.requestAndReturnActivities())
             .then(
                 (resp) => {
+                    console.log(resp);
                    if('type' in resp && resp.type === 'RECEIVE_ACTIVITIES_SUCCESS') {
                        console.log(this.props);
                        const timeAwareActivities = this.props.activities.activities.activities.map((act) => isActivityPastPresentOrFuture(act));
-                       this.setState({allActivities: timeAwareActivities});
+                       this.setState({timeAwareActivities});
                    } else {
                     this.setState({showLoadError: true, allActivities: 0});
                    }

@@ -5,19 +5,30 @@ import { Icon, ButtonGroup } from 'react-native-elements';
 import Header from './Header';
 
 
-const ActivitiesPast = () => {
+// <List> 
+// <FlatList
+//     data={this.customersAndCallback()}
+//     initialNumToRender={10}
+//     onEndReachedThreshold={1200}
+//     renderItem={CustomerItem}
+//     keyExtractor={this._keyExtractor}
+// />
+// </List>
+
+const ActivitiesPast = ({activities, showSpinner}) => {
+    _keyExtractor = (item, index) => index;
     return (
         <Text>This is past activities</Text>
     );
 }
 
-const ActivitiesCurrent = () => {
+const ActivitiesCurrent = ({activities, showSpinner}) => {
     return (
         <Text>This is current activities</Text>
     );
 }
 
-const ActivitiesFuture = () => {
+const ActivitiesFuture = ({activities, showSpinner}) => {
     return (
         <Text>This is future activities</Text>
     );
@@ -33,26 +44,51 @@ export default class ActivitiesList extends React.Component {
         }
     }
 
+    selectActivitiesToShow = (time) => {
+        console.log(this.props);
+        if(Object.keys(this.props.activities).length === 0) {
+            return 0;
+        } else {
+            switch (time) {
+                case 'past':
+                    return this.props.activities.filter((act) => act.timeCategory === 'past');
+                case 'current':
+                    return this.props.activities.filter((act) => act.timeCategory === 'current');
+                case 'future':
+                    return this.props.activities.filter((act) => act.timeCategory === 'future');
+                default:
+                    return this.props.activities.filter((act) => act.timeCategory === 'current');
+            }
+        }
+    }
+
     
 
     showSelected = () => {
         switch (this.state.selectedIndex) {
             case 0:
                 return (
-                    <ActivitiesPast />
+                    <ActivitiesPast 
+                    activities = {this.selectActivitiesToShow('past')} 
+                    showSpinner={Object.keys(this.props.activities).length === 0 ? true : false}/>
                 );
             case 1:
                 return (
-                    <ActivitiesCurrent />
+                    <ActivitiesCurrent 
+                    activities = {this.selectActivitiesToShow('current')}
+                    showSpinner={Object.keys(this.props.activities).length === 0 ? true : false}/>
                 );
             case 2:
                 return (
-                    <ActivitiesFuture />
+                    <ActivitiesFuture 
+                    activities = {this.selectActivitiesToShow('future')}
+                    showSpinner={Object.keys(this.props.activities).length === 0 ? true : false}/>
                 );
         
             default:
                 return (
-                    <ActivitiesCurrent />
+                    <ActivitiesCurrent activities = {this.selectActivitiesToShow('current')}
+                    showSpinner={Object.keys(this.props.activities).length === 0 ? true : false}/>
                 );
         }
     }
