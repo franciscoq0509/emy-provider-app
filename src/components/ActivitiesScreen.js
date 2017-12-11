@@ -25,7 +25,7 @@ export default class ActivitiesScreen extends React.Component {
                 case 'past':
                     return this.props.activities.filter((act) => act.timeCategory === 'past');
                 case 'current':
-                    return this.props.activities.filter((act) => {console.log(act);return act.timeCategory === 'current';})
+                    return this.props.activities.filter((act) => act.timeCategory === 'current');
                 case 'future':
                     return this.props.activities.filter((act) => act.timeCategory === 'future');
                 default:

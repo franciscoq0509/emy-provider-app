@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { receiveActivitiesError,  receiveNewActivities} from '../actions/activities';
 import isActivityPastPresentOrFuture from '../utilities/isActivityPastPresentOrFuture';
 import ActivitiesScreen from '../components/ActivitiesScreen';
+import { getFilteredActivities } from '../selectors/index';
 //receiveActivitiesError,  receiveNewActivities
  
 class ActivitiesContainer extends React.Component {
@@ -68,7 +69,7 @@ class ActivitiesContainer extends React.Component {
 const mapStateToProps = (state) => {
     console.log(state);
     return {
-        activities: state.activities.allActivities,
+        activities: getFilteredActivities(state, state, state),
         jwt: state.jwt.fullJwt
     }
 };
