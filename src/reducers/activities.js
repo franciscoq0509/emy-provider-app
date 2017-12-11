@@ -1,5 +1,6 @@
 const stateInit = {
-    activities: {},
+    allActivities: {},
+    allActivityIds: [],
     errorMessage: "",
     revievedAt: null
 };
@@ -9,10 +10,11 @@ export default (state = stateInit, action) => {
     switch (action.type) {
         case 'RECEIVE_ACTIVITIES_SUCCESS':
             return {
-               activities: action.activities.activities,
+               allActivities: action.allActivities,
+               allActivityIds: action.allActivityIds,
                receivedAt: action.receivedAt 
             }
-        case 'RECEIVE_CUSTOMERS_FAILURE':
+        case 'RECEIVE_ACTIVITIES_FAILURE':
             return {
                 ...state,
                 errorMessage: action.error

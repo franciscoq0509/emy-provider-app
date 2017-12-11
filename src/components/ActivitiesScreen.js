@@ -4,6 +4,7 @@ import { TabNavigator, addNavigationHelpers } from 'react-navigation';
 import { Icon, ButtonGroup } from 'react-native-elements';
 import Header from './Header';
 import { ActivitiesList } from './ActivitiesList';
+import StandardSearchbar from './StandardSearchbar';
 
 
 export default class ActivitiesScreen extends React.Component {
@@ -83,12 +84,13 @@ export default class ActivitiesScreen extends React.Component {
         return (
             <View>
                 <Header />
+                <StandardSearchbar search="allActivities" />
                 <ButtonGroup 
                 onPress={this.updateIndex}
                 selectedIndex={this.state.selectedIndex}
                 buttons={buttons}
                 containerStyle={{height: 50}}
-                />
+                />    
             {this.showSelected()}
             </View>
         );

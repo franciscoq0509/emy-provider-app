@@ -42,9 +42,7 @@ class ActivitiesScreen extends React.Component {
             <ActivitiesContainer />
         </View>
         );
-    };
-
-   
+    };  
 };
 
 const QuickBookScreen = () => (
@@ -65,7 +63,8 @@ const SignedInNavigator = TabNavigator({
                 tabBarIcon: () => (
                     <Icon name='users' type='entypo'/>
                   ),
-            }
+                header: {visible: false}
+            },
         },
         Activities: {
             screen: ActivitiesScreen,
@@ -87,11 +86,10 @@ const SignedInNavigator = TabNavigator({
         }
     },
     {   
-        initialRouteName: "Customers",
+        initialRouteName: "Activities",
         animationEnabled: false,
         lazy: true,
         swipeEnabled: false   
-        
     }
 
 );

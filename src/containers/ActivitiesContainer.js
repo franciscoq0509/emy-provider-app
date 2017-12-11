@@ -1,7 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
 import { connect } from 'react-redux';
-import { receiveCustomersError,  receiveNewActivities} from '../actions/activities';
+import { receiveActivitiesError,  receiveNewActivities} from '../actions/activities';
 import isActivityPastPresentOrFuture from '../utilities/isActivityPastPresentOrFuture';
 import ActivitiesScreen from '../components/ActivitiesScreen';
 //receiveActivitiesError,  receiveNewActivities
@@ -48,8 +48,8 @@ class ActivitiesContainer extends React.Component {
                 (resp) => {
                     console.log(resp);
                    if('type' in resp && resp.type === 'RECEIVE_ACTIVITIES_SUCCESS') {
-                       console.log(this.props.activities.activities);
-                       const timeAwareActivities = this.props.activities.activities.map((act) => isActivityPastPresentOrFuture(act));
+                       console.log(this.props.activities);
+                       const timeAwareActivities = Object.keys(this.props.activities).map((key) => isActivityPastPresentOrFuture(this.props.activities[key]));
                        timeAwareActivities = timeAwareActivities.filter((act) => act !== undefined);
                        this.setState({timeAwareActivities});
                    } else {
@@ -68,7 +68,7 @@ class ActivitiesContainer extends React.Component {
 const mapStateToProps = (state) => {
     console.log(state);
     return {
-        activities: state.activities,
+        activities: state.activities.allActivities,
         jwt: state.jwt.fullJwt
     }
 };

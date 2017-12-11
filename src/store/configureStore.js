@@ -4,6 +4,7 @@ import CustomersDetails from '../reducers/customersDetails';
 import CustomersFilter from '../reducers/customersFilter';
 import currentCustomerAction from '../reducers/currentCustomerAction';
 import activitiesReducer from '../reducers/activities';
+import activitiesFilter from '../reducers/activitiesFilter';
 import jwt from '../reducers/jwt';
 import thunk from 'redux-thunk';
 
@@ -15,6 +16,7 @@ export default () => {
             currentCustomerAction: currentCustomerAction,
             customersFilter: CustomersFilter,
             activities: activitiesReducer,
+            activitiesFilter: activitiesFilter,
             jwt: jwt
         }), 
         applyMiddleware(thunk)

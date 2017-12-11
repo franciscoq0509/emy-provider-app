@@ -3,6 +3,7 @@ import { FlatList, Text, View, ScrollView, Dimensions} from 'react-native';
 import { List } from 'react-native-elements';
 import { ActivityItem } from './ActivityItem';
 
+
 export const ActivitiesList = ({activities, showSpinner}) => {
     const {height, width} = Dimensions.get('window');
     if(activities !== 0 && activities.length > 0) {
