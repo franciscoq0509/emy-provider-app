@@ -3,7 +3,7 @@ import { View } from 'react-native';
 import { connect } from 'react-redux';
 import { receiveCustomersError,  receiveNewActivities} from '../actions/activities';
 import isActivityPastPresentOrFuture from '../utilities/isActivityPastPresentOrFuture';
-import ActivitiesList from '../components/ActivitiesList';
+import ActivitiesScreen from '../components/ActivitiesScreen';
 //receiveActivitiesError,  receiveNewActivities
  
 class ActivitiesContainer extends React.Component {
@@ -24,6 +24,7 @@ class ActivitiesContainer extends React.Component {
                         return dispatch(receiveActivitiesError(error))
                     }
                 ).then((resp) => {
+                    console.log(resp);
                     if(resp.success == true) {
                         return dispatch(receiveNewActivities(resp));
                     } else {
@@ -47,8 +48,9 @@ class ActivitiesContainer extends React.Component {
                 (resp) => {
                     console.log(resp);
                    if('type' in resp && resp.type === 'RECEIVE_ACTIVITIES_SUCCESS') {
-                       console.log(this.props);
-                       const timeAwareActivities = this.props.activities.activities.activities.map((act) => isActivityPastPresentOrFuture(act));
+                       console.log(this.props.activities.activities);
+                       const timeAwareActivities = this.props.activities.activities.map((act) => isActivityPastPresentOrFuture(act));
+                       timeAwareActivities = timeAwareActivities.filter((act) => act !== undefined);
                        this.setState({timeAwareActivities});
                    } else {
                     this.setState({showLoadError: true, allActivities: 0});
@@ -59,7 +61,7 @@ class ActivitiesContainer extends React.Component {
 
     render() {
         console.log(this.state);
-        return <ActivitiesList />
+        return <ActivitiesScreen activities={this.state.timeAwareActivities}/>
     }
 };
 

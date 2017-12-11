@@ -7,7 +7,7 @@ import spinnerStyle from './styles/spinnerStyle';
 export const CustomerItem = (props) => {
     //console.log(props);
     return (
-        <View style={ center = {flex:1} }>
+        <View>
         {
             props.item !== undefined ?
                 <ListItem
