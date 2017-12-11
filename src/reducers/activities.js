@@ -4,7 +4,7 @@ const stateInit = {
     errorMessage: "",
     revievedAt: null
 };
-
+//comment
 export default (state = stateInit, action) => {
     console.log(action);
     switch (action.type) {

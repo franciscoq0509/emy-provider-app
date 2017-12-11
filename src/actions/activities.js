@@ -2,6 +2,7 @@ import { normalizeActivityData } from '../normalize/activityData';
 
 export const receiveNewActivities = (activitiesObj) => {
     //console.log(activities);
+    
     const normalizedActivities = normalizeActivityData(activitiesObj.activities);
     return {
         type: 'RECEIVE_ACTIVITIES_SUCCESS',
