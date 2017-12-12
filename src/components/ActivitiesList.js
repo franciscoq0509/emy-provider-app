@@ -5,6 +5,7 @@ import { ActivityItem } from './ActivityItem';
 
 
 export const ActivitiesList = ({activities, showSpinner}) => {
+    console.log(activities);
     const {height, width} = Dimensions.get('window');
     if(activities !== 0 && activities.length > 0) {
         _keyExtractor = (item, index) => index;

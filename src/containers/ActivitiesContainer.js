@@ -40,6 +40,15 @@ class ActivitiesContainer extends React.Component {
         };
     }
 
+    componentWillReceiveProps(nextProps) { 
+		if(this.props !== nextProps) {
+            console.log('next props different');
+            console.log(nextProps);
+
+            this.setState(() => ({timeAwareActivities : nextProps.activities}));
+		}
+	}
+
 
     componentWillMount() {
         console.log(this.props);
@@ -51,8 +60,9 @@ class ActivitiesContainer extends React.Component {
                    if('type' in resp && resp.type === 'RECEIVE_ACTIVITIES_SUCCESS') {
                        console.log(this.props.activities);
                        const timeAwareActivities = Object.keys(this.props.activities).map((key) => isActivityPastPresentOrFuture(this.props.activities[key]));
+                       console.log(timeAwareActivities);
                        timeAwareActivities = timeAwareActivities.filter((act) => act !== undefined);
-                       this.setState({timeAwareActivities});
+                       this.setState({timeAwareActivities, timeAwareActivityIds});
                    } else {
                     this.setState({showLoadError: true, allActivities: 0});
                    }
@@ -70,6 +80,7 @@ const mapStateToProps = (state) => {
     console.log(state);
     return {
         activities: getFilteredActivities(state, state, state),
+        allActivityIds: state.activities.allActivityIds,
         jwt: state.jwt.fullJwt
     }
 };

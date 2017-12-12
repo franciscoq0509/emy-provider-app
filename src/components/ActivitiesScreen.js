@@ -5,6 +5,7 @@ import { Icon, ButtonGroup } from 'react-native-elements';
 import Header from './Header';
 import { ActivitiesList } from './ActivitiesList';
 import StandardSearchbar from './StandardSearchbar';
+import { getObjectById } from '../utilities/getObjectById';
 
 
 export default class ActivitiesScreen extends React.Component {
@@ -21,15 +22,19 @@ export default class ActivitiesScreen extends React.Component {
         if('activities' in this.props && this.props.activities === undefined) {
             return 0;
         } else if ('activities' in this.props && this.props.activities !== undefined && Object.keys(this.props.activities).length > 0){
+            let keys = null;
             switch (time) {
                 case 'past':
-                    return this.props.activities.filter((act) => act.timeCategory === 'past');
+                    keys = Object.keys(this.props.activities).filter((key) => this.props.activities[key].timeCategory === 'past');
+                    return getObjectById(keys, this.props.activities);
                 case 'current':
-                    return this.props.activities.filter((act) => act.timeCategory === 'current');
+                    keys = Object.keys(this.props.activities).filter((key) => this.props.activities[key].timeCategory === 'current');
+                    return getObjectById(keys, this.props.activities);
                 case 'future':
-                    return this.props.activities.filter((act) => act.timeCategory === 'future');
+                    keys = Object.keys(this.props.activities).filter((key) => this.props.activities[key].timeCategory === 'future');
+                    return getObjectById(keys, this.props.activities);
                 default:
-                    return this.props.activities.filter((act) => act.timeCategory === 'current');
+                    return Object.keys(this.props.activities).filter((key) => this.props.activities[key].timeCategory === 'current');
             }
         } else {
             return 0;
@@ -79,11 +84,18 @@ export default class ActivitiesScreen extends React.Component {
         this.setState({selectedIndex});
     }
 
+    componentWillReceiveProps(nextProps) { 
+		if(this.props !== nextProps) {
+            console.log('next props DIFFERENT');
+            console.log(nextProps)
+            this.setState(() => ({activities : nextProps.activities}));
+		}
+	}
+
     render() {
         const buttons = ['Past', 'Current', 'Future'];
         return (
             <View>
-                <Header />
                 <StandardSearchbar search="allActivities" />
                 <ButtonGroup 
                 onPress={this.updateIndex}

@@ -6,7 +6,8 @@ const customersIds = (state) => state.customersData.allCustomerIds;
 
 const getActivitiesTextMatch = (state) => {
     console.log(state);
-    return state.activitiesFilter.text;}
+    return state.activitiesFilter.text;
+}
 const activities = (state) => state.activities.allActivities;
 const activityIds = (state) => state.activities.allActivityIds;
 
@@ -28,12 +29,15 @@ export const getFilteredCustomers = createSelector(
 export const getFilteredActivities = createSelector(
     [getActivitiesTextMatch, activities, activityIds],
     (text, activities, allIds) => {
+        console.log(text);
         if(allIds !== undefined && text.length !== 0) {
+            console.log('made it in..');
             let filteredActivityObjects = [];
             allIds.filter((id) => {
                 const textMatch = activities[id].name === null || activities[id].name.toLowerCase().search(text.toLowerCase());
                  if(textMatch >= 0) { filteredActivityObjects[id] = activities[id] };
             });
+            console.log(filteredActivityObjects);
             return  filteredActivityObjects;
         } else return activities;
     }
