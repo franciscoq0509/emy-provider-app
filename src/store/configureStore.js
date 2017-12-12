@@ -17,7 +17,7 @@ export default () => {
             customersFilter: CustomersFilter,
             activities: activitiesReducer,
             activitiesFilter: activitiesFilter,
-            jwt: jwt
+            jwt
         }), 
         applyMiddleware(thunk)
     );
