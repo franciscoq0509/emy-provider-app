@@ -63,27 +63,27 @@ const SignedInNavigator = TabNavigator({
                   )
             },
         },
-        Activities: {
-            screen: ActivitiesScreen,
-            navigationOptions: {
-                headerTitle: 'All Activities',
-                tabBarIcon: () => (
-                    <Icon name='clipboard' type='entypo'/>
-                  ),
-            }
-        },
-        QuickBook: {
-            screen: QuickBookScreen,
-            navigationOptions: {
-                headerTitle: 'Quick Book',
-                tabBarIcon: () => (
-                    <Icon name='book' type='entypo'/>
-                  ),
-            }
-        }
+        // Activities: {
+        //     screen: ActivitiesScreen,
+        //     navigationOptions: {
+        //         headerTitle: 'All Activities',
+        //         tabBarIcon: () => (
+        //             <Icon name='clipboard' type='entypo'/>
+        //           ),
+        //     }
+        // },
+        // QuickBook: {
+        //     screen: QuickBookScreen,
+        //     navigationOptions: {
+        //         headerTitle: 'Quick Book',
+        //         tabBarIcon: () => (
+        //             <Icon name='book' type='entypo'/>
+        //           ),
+        //     }
+        // }
     },
     {   
-        initialRouteName: "Activities",
+        initialRouteName: "Customers",
         animationEnabled: false,
         lazy: true,
         swipeEnabled: false   
