@@ -4,7 +4,7 @@ import { TabNavigator, addNavigationHelpers } from 'react-navigation';
 import { Provider } from 'react-redux';
 import CustomersContainer from '../containers/CustomersContainer';
 import Header from '../components/Header'; 
-import ActivitiesContainer from '../containers/ActivitiesContainer';
+import ActivitiesNavigator from '../components/ActivitiesNavigator';
 import QuickBook from '../components/QuickBook';
 import { Icon } from 'react-native-elements';
 
@@ -38,9 +38,7 @@ class CustomersScreen extends React.Component {
 class ActivitiesScreen extends React.Component {
     render() {
         return(
-        <View>
-            <ActivitiesContainer />
-        </View>
+            <ActivitiesNavigator />
         );
     };  
 };
@@ -62,8 +60,7 @@ const SignedInNavigator = TabNavigator({
                 headerTitle: 'All Customers',
                 tabBarIcon: () => (
                     <Icon name='users' type='entypo'/>
-                  ),
-                header: {visible: false}
+                  )
             },
         },
         Activities: {

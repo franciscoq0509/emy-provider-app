@@ -3,11 +3,15 @@ import { View } from 'react-native';
 import { connect } from 'react-redux';
 import { receiveActivitiesError,  receiveNewActivities} from '../actions/activities';
 import isActivityPastPresentOrFuture from '../utilities/isActivityPastPresentOrFuture';
-import ActivitiesScreen from '../components/ActivitiesScreen';
+import ActivitiesListScreen from '../components/ActivitiesListScreen';
 import { getFilteredActivities } from '../selectors/index';
 //receiveActivitiesError,  receiveNewActivities
  
 class ActivitiesContainer extends React.Component {
+
+    static navigationOptions = ({ navigation }) => ({
+        title: `All Activities`,
+      });
 
     fetchActivities = (jwt) => (
         fetch('https://emy-front-api.craig.27s-dev.net/activities-api/v1/activities',
@@ -72,9 +76,10 @@ class ActivitiesContainer extends React.Component {
 
     render() {
         console.log(this.state);
-        return <ActivitiesScreen activities={this.state.timeAwareActivities}/>
+        return <ActivitiesListScreen activities={this.state.timeAwareActivities}/>
     }
 };
+
 
 const mapStateToProps = (state) => {
     console.log(state);

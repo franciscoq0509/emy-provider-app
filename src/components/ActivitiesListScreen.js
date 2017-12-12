@@ -8,7 +8,7 @@ import StandardSearchbar from './StandardSearchbar';
 import { getObjectById } from '../utilities/getObjectById';
 
 
-export default class ActivitiesScreen extends React.Component {
+export default class ActivitiesListScreen extends React.Component {
     constructor(props) {
         super(props);
 
@@ -74,7 +74,7 @@ export default class ActivitiesScreen extends React.Component {
         
             default:
                 return (
-                    <ActivitiesCurrent activities = {this.selectActivitiesToShow('current')}
+                    <ActivitiesList activities = {this.selectActivitiesToShow('current')}
                     showSpinner={this.showSpinner}/>
                 );
         }
