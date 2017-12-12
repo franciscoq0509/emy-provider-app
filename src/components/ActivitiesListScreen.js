@@ -17,6 +17,7 @@ export default class ActivitiesListScreen extends React.Component {
         }
     }
 
+
     selectActivitiesToShow = (time) => {
         console.log(this.props);
         if('activities' in this.props && this.props.activities === undefined) {
@@ -50,32 +51,43 @@ export default class ActivitiesListScreen extends React.Component {
             case 0:
                 return (
                     <ScrollView>
-                    <ActivitiesList
-                    activities = {this.selectActivitiesToShow('past')}
-                    showSpinner={this.showSpinner}/>
+                        <ActivitiesList
+                            activities = {this.selectActivitiesToShow('past')}
+                            showSpinner={this.showSpinner}
+                            nav={this.props.nav}
+                        />
                     </ScrollView>
                 );
             case 1:
                 return (
                     <ScrollView>
-                    <ActivitiesList
-                    activities = {this.selectActivitiesToShow('current')}
-                    showSpinner={this.showSpinner}/>
+                        <ActivitiesList
+                            activities = {this.selectActivitiesToShow('current')}
+                            showSpinner={this.showSpinner}
+                            nav={this.props.nav}
+                        />
                     </ScrollView>
                 );
             case 2:
                 return (
                     <ScrollView>
-                    <ActivitiesList
-                    activities = {this.selectActivitiesToShow('future')}
-                    showSpinner={this.showSpinner}/>
+                        <ActivitiesList
+                            activities = {this.selectActivitiesToShow('future')}
+                            showSpinner={this.showSpinner}
+                            nav={this.props.nav}
+                        />
                     </ScrollView>
                 );
         
             default:
                 return (
-                    <ActivitiesList activities = {this.selectActivitiesToShow('current')}
-                    showSpinner={this.showSpinner}/>
+                    <ScrollView>
+                        <ActivitiesList
+                            activities = {this.selectActivitiesToShow('current')}
+                            showSpinner={this.showSpinner}
+                            nav={this.props.nav}
+                        />
+                    </ScrollView>
                 );
         }
     }

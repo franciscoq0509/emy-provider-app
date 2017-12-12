@@ -66,7 +66,7 @@ class ActivitiesContainer extends React.Component {
                        const timeAwareActivities = Object.keys(this.props.activities).map((key) => isActivityPastPresentOrFuture(this.props.activities[key]));
                        console.log(timeAwareActivities);
                        timeAwareActivities = timeAwareActivities.filter((act) => act !== undefined);
-                       this.setState({timeAwareActivities, timeAwareActivityIds});
+                       this.setState({timeAwareActivities});
                    } else {
                     this.setState({showLoadError: true, allActivities: 0});
                    }
@@ -76,7 +76,7 @@ class ActivitiesContainer extends React.Component {
 
     render() {
         console.log(this.state);
-        return <ActivitiesListScreen activities={this.state.timeAwareActivities}/>
+        return <ActivitiesListScreen activities={this.state.timeAwareActivities} nav={this.props.navigation.navigate}/>
     }
 };
 

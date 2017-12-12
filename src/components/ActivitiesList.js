@@ -4,18 +4,22 @@ import { List } from 'react-native-elements';
 import { ActivityItem } from './ActivityItem';
 
 
-export const ActivitiesList = ({activities, showSpinner}) => {
-    console.log(activities);
+export const ActivitiesList = ({activities, showSpinner, nav}) => {
+    console.log(nav);
     const {height, width} = Dimensions.get('window');
     if(activities !== 0 && activities.length > 0) {
-        _keyExtractor = (item, index) => index;
+        const activitiesAndNav = () => {
+            console.log('inside callback');
+            return activities.length !== 0 ? activities.map(a => ({...a, nav})) : activities;
+        }
+        const _keyExtractor = (item, index) => index;
         return (
                 <View>
                 <List> 
                     <FlatList
-                        data={activities}
+                        data={activitiesAndNav()}
                         renderItem={ActivityItem}
-                        keyExtractor={this._keyExtractor}
+                        keyExtractor={_keyExtractor}
                     />
                 </List>
                 </View>
