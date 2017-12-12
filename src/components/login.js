@@ -5,7 +5,6 @@ import { ErrorMessage } from './ErrorMessage';
 import LoginSubmitButtonContainer from '../containers/LoginSubmitButtonContainer';
 import {FormLabel, FormInput} from 'react-native-elements';
 
-
 export default class Login extends React.Component {
     
     componentWillMount = () => {
@@ -25,7 +24,6 @@ export default class Login extends React.Component {
             console.log('error happened');
             const errMessage = JSON.parse(err_message);
             if('error_description' in errMessage && errMessage.error_description.toLowerCase().includes('invalid username and password')) {
-                //showValidationError
                 this.setState({showError: true, message: `Sorry your username or password are incorrect.`});
             } else {
                 this.setState({showError: true, message: `Woops! looks like something went wrong.`});
