@@ -26,6 +26,9 @@ export const loginTokenName = 'USER_TOKEN';
 //     }); 
 // };
 
+
+
+
 export async function _checkUserLoggedIn () {
     try {
         console.log(loginTokenName);
@@ -67,7 +70,7 @@ export async function _setUserToken(key, item) {
     try {
         await AsyncStorage.setItem(key, JSON.stringify(item));
         console.log(key);
-        return await AsyncStorage.getAllKeys();  
+        return await AsyncStorage.getItem(loginTokenName);  
     } catch (error) {
         console.log(error);
     }

@@ -44,6 +44,7 @@ class LoginSubmitButtonContainer extends React.Component {
                                         console.log(v);
                                     });
 
+                                    
                                 console.log(this.props);
                                 this.props.nav.navigate("SignedIn")
                             })

@@ -47,15 +47,18 @@ class CustomersListContainer extends React.Component {
                 console.log(resp);
                 if('type' in resp) {
                     if(resp.type === 'RECEIVE_CUSTOMERS_SUCCESS') {
+                        console.log('success');
                         this.setState({showLoadError: false});
                         this.setState(() => ({filteredCustomers : this.props.filteredCustomers}));        
                     } else {
+                        console.log('error recieving customers');
                         //error here
                         this.setState({showLoadError: true});
                     }
 
                 } else {
                     //error here
+                    console.log('error something went wroing');
                     this.setState({showLoadError: true});
                 }
                 this.setState(() => ({filteredCustomers : this.props.filteredCustomers}));
