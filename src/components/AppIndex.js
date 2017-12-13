@@ -26,7 +26,6 @@ export default class App extends React.Component {
     componentDidMount() {
         _checkUserLoggedIn()
             .then((isSignedIn) => {
-                console.log('in the callback', isSignedIn);
                 this.setState({signedIn: isSignedIn, checkedSignedIn: true})
             })
             .catch((err) => console.log('err occured getting JWT', err));
@@ -35,9 +34,7 @@ export default class App extends React.Component {
 
     render() {
         const { checkedSignedIn, signedIn } = this.state;
-        console.log('in render', checkedSignedIn);
         if(!checkedSignedIn) {
-            console.log('returning null appINdex');
             return null;
         }
 

@@ -2,7 +2,6 @@ import React from 'react';
 const Buffer = require('buffer/').Buffer;
 import { SubmitButton } from '../components/SubmitButton';
 import { connect } from 'react-redux';
-import { jwtSplit } from '../utilities/jwtSplit';
 import { saveNewJwt } from '../actions/jwt';
 import { _setUserToken, loginTokenName, _checkUserLoggedIn } from '../utilities/userAuth';
 
@@ -24,20 +23,14 @@ class LoginSubmitButtonContainer extends React.Component {
    
     
     startSubmitProcess = () => {
-        console.log(this.props);
         fetchJwt('jerrys@gymowner.cxm','L#N#marlin28', guid = '55790419-dbb4-43b4-9c1d-7bae0a37004f')//this.props.uname, this.props.pwd
         .then(
             (data) => {
-                console.log('inside .then..', data);
-                if (data.status === 200 && data._bodyText) {
-                    const extractedJwt = jwtSplit(data._bodyText); 
-                    console.log(extractedJwt);
+                if (data.status === 200 && data._bodyText) { 
                     if(extractedJwt) {
-                        console.log('about to save');
-                        this.props.dispatch(saveNewJwt(data._bodyText,extractedJwt)); 
+                        this.props.dispatch(saveNewJwt(data._bodyText)); 
                         _setUserToken(loginTokenName, data._bodyText)
                             .then((resp) => {
-                                console.log(this.props);
                                 this.props.nav.navigate("SignedIn")
                             })
                             .catch((err) => console.log(err));

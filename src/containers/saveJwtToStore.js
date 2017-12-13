@@ -12,7 +12,6 @@ import spinnerStyle from '../components/styles/spinnerStyle';
 class saveJwtToStore extends React.Component {
     componentWillMount() {
         this.setState({jwt: false});
-        console.log(this.props);
         _getUserToken()
             .then((token) => {
                 token ? 
@@ -29,8 +28,6 @@ class saveJwtToStore extends React.Component {
     }
 
     render() {
-        console.log(this.props);
-        console.log('|||-||| |||-|||');
         let renderJsx = (
             this.jwtSaved() ?
                 <SignedInNavigator />

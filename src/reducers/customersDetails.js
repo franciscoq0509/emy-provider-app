@@ -8,17 +8,9 @@ const stateInit = {
     customerDetailsError : ""
 };
 
-let count = 0;
-
 export default (state = stateInit, action) => {
-    count++
-    console.log(count);
-    console.log(action);
-    console.log(action.type);
-    console.log(state);
     switch (action.type) {
         case 'SAVE_FULL_CUSTOMER_DETAILS':
-        console.log('returning details data');
             return {
                 allDetails : {
                     ...state.allDetails,

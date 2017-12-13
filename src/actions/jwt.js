@@ -1,7 +1,6 @@
 import { jwtSplit } from '../utilities/jwtSplit';
 
 export const saveNewJwt = (jwt) => {
-    console.log(jwt);
     const jwtSplitObj = jwtSplit(jwt);
     return {
         type : 'SAVE_NEW_JWT',

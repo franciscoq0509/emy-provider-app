@@ -9,7 +9,6 @@ export const invalidateCustomers = () => ({
 
 //fetch new customers
 export const requestCustomers = () => {
-    //console.log('request action fired');
     return {
         type: 'REQUEST_CUSTOMERS'
     }
@@ -17,9 +16,7 @@ export const requestCustomers = () => {
 
 //recieving new customers success
 export const receiveNewCustomers = (newCustomers) => { 
-    //console.log('just befoe norm function');
     const normalizedCustomers = normalizeBasicCustomerDetails(newCustomers);
-    //console.log(normalizedCustomers);
     return {
         type: 'RECEIVE_CUSTOMERS_SUCCESS',
         allCustomers : normalizedCustomers.allCustomers,
@@ -65,10 +62,7 @@ export const recieveCustomerDetailsFailure = (error) => ({
 
 //save customer details
 export const saveCustomerDetails = (customersDetails) => { 
-    console.log(customersDetails);
     const normalizedCustomerDetails = normalizedFullCustomerDetails(customersDetails);
-    console.log('=========================');
-    console.log(normalizedCustomerDetails);
  return {
     type: 'SAVE_FULL_CUSTOMER_DETAILS',
     normalizedCustomerDetails,
@@ -77,8 +71,6 @@ export const saveCustomerDetails = (customersDetails) => {
 };
 
 export const saveCustomerDetailsFailure = (customersDetails) => { 
-    //const normalizedCustomerDetails = normalizedFullCustomerDetails(customersDetails);
-    //console.log(normalizedCustomerDetails);
  return {
     type: 'SAVE_CUSTOMER_DETAILS_FAILED',
     customersDetails

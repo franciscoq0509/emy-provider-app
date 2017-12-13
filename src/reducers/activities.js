@@ -6,7 +6,6 @@ const stateInit = {
 };
 //comment
 export default (state = stateInit, action) => {
-    console.log(action);
     switch (action.type) {
         case 'RECEIVE_ACTIVITIES_SUCCESS':
             return {

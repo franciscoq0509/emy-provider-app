@@ -10,7 +10,6 @@ const Moment = require('moment');
 
 
 export const CustomerFullDetails = (props) => {
-    console.log(props);
     const { 
         full_name, 
         dob, 
@@ -41,14 +40,7 @@ export const CustomerFullDetails = (props) => {
     let healthInformation = 0;
     if(healthInfo !== undefined) {
         healthInformation = healthInfo[Object.keys(healthInfo)[0]] ? healthInfo[Object.keys(healthInfo)[0]] : 0; 
-        console.log(phoneNumbers);
     }
-    
-    // const phoneInfo = {
-    //     length: phones.length,
-    //     mobile: phones.find((obj) => obj.name === 'Mobile'? obj : false),
-    //     home: phones.find((obj) => obj.name === 'Home'? obj : false),
-    // }
 
     const callNumber = (type) => {
         if('phone' in phoneNumbers[type]) {
@@ -72,8 +64,7 @@ export const CustomerFullDetails = (props) => {
             );
         } 
     }
-    console.log(dob);
-    //console.log(healthInfo[Object.keys(healthInfo)[0]]);
+    
     return (
         <ScrollView>
             <Card title="Details">

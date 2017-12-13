@@ -7,13 +7,12 @@ import { getFilteredCustomers } from '../selectors/index';
 
 
 
-const fetchCustomers = (jwt) => {
-    console.log(jwt);
-    return fetch(
+const fetchCustomers = (jwt) => (
+    fetch(
         'https://emy-front-api.craig.27s-dev.net/providers-api/v1/55790419-dbb4-43b4-9c1d-7bae0a37004f/users?full_name=%&limit=200',
         {headers: {Authorization: `Bearer ${jwt}`}}
     )
-};
+);
 
 
 
@@ -40,27 +39,21 @@ class CustomersListContainer extends React.Component {
     }
 
     componentWillMount() {
-        console.log('##########in customers container############');
         this.setState(() => ({showSpinner: this.showLoadingSpinner, showLoadError: false}));
-        console.log(this.props);
         this.props.dispatch(this.customersThunk())
         .then(
             (resp) => { 
-                console.log(resp);
                 if('type' in resp) {
                     if(resp.type === 'RECEIVE_CUSTOMERS_SUCCESS') {
-                        console.log('success');
                         this.setState({showLoadError: false});
                         this.setState(() => ({filteredCustomers : this.props.filteredCustomers}));        
                     } else {
-                        console.log('error recieving customers');
                         //error here
                         this.setState({showLoadError: true});
                     }
 
                 } else {
                     //error here
-                    console.log('error something went wroing');
                     this.setState({showLoadError: true});
                 }
                 this.setState(() => ({filteredCustomers : this.props.filteredCustomers}));
@@ -92,13 +85,11 @@ class CustomersListContainer extends React.Component {
     };
 };
 
-const mapStateToProps = (state) => {
-    console.log(state);
-    return {
-        filteredCustomers: getFilteredCustomers(state, state, state),
-        actions: state.currentCustomerAction,
-        jwt: state.jwt.fullJwt 
-    };
-};
+const mapStateToProps = (state) => ({
+    filteredCustomers: getFilteredCustomers(state, state, state),
+    actions: state.currentCustomerAction,
+    jwt: state.jwt.fullJwt 
+    
+});
 
 export default connect(mapStateToProps)(CustomersListContainer);

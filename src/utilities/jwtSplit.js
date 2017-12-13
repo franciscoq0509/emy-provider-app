@@ -1,6 +1,4 @@
 export const jwtSplit = (jwt) => {
-    console.log('return three parts of JWT');
-    console.log(jwt.split('.'));
     return (
             jwt.split('.').length === 3 ? 
             {

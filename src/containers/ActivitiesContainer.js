@@ -29,7 +29,6 @@ class ActivitiesContainer extends React.Component {
                         return dispatch(receiveActivitiesError(error))
                     }
                 ).then((resp) => {
-                    console.log(resp);
                     if(resp.success == true) {
                         return dispatch(receiveNewActivities(resp));
                     } else {
@@ -46,25 +45,18 @@ class ActivitiesContainer extends React.Component {
 
     componentWillReceiveProps(nextProps) { 
 		if(this.props !== nextProps) {
-            console.log('next props different');
-            console.log(nextProps);
-
             this.setState(() => ({timeAwareActivities : nextProps.activities}));
 		}
 	}
 
 
     componentWillMount() {
-        console.log(this.props);
         this.setState(() => ({showLoadError: false}));
         this.props.dispatch(this.requestAndReturnActivities())
             .then(
                 (resp) => {
-                    console.log(resp);
                    if('type' in resp && resp.type === 'RECEIVE_ACTIVITIES_SUCCESS') {
-                       console.log(this.props.activities);
                        const timeAwareActivities = Object.keys(this.props.activities).map((key) => isActivityPastPresentOrFuture(this.props.activities[key]));
-                       console.log(timeAwareActivities);
                        timeAwareActivities = timeAwareActivities.filter((act) => act !== undefined);
                        this.setState({timeAwareActivities});
                    } else {
@@ -75,14 +67,12 @@ class ActivitiesContainer extends React.Component {
     }
 
     render() {
-        console.log(this.state);
         return <ActivitiesListScreen activities={this.state.timeAwareActivities} nav={this.props.navigation.navigate}/>
     }
 };
 
 
 const mapStateToProps = (state) => {
-    console.log(state);
     return {
         activities: getFilteredActivities(state, state, state),
         allActivityIds: state.activities.allActivityIds,

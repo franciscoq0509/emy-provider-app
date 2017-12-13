@@ -7,12 +7,7 @@ import { setActivitiesSearchFilter } from '../actions/activitiesFilter';
 import { Debounce } from 'react-throttle';
 
 
-//comment
 const StandardSearchbar = (props) => {
-    // const cancelPreviousDispatch = (value) => {
-
-    // }
-    console.log(props);
     returnSearchBar = (value) => {
         switch (props.search) {
             case 'allCustomers':

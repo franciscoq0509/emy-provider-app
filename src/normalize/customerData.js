@@ -22,7 +22,6 @@ export const normalizedFullCustomerDetails = (customerDetails) => {
 
     let normalizedAddresses = {entities: {[customerDetails.id] : 0}};
     if('addresses' in customerDetails && 'data' in customerDetails.addresses) {
-        console.log(customerDetails.addresses);
         const addressesSchema = new schema.Entity(customerDetails.id);
         const AddressesListSchema = [addressesSchema];
         normalizedAddresses.addresses = [...customerDetails.addresses.data];

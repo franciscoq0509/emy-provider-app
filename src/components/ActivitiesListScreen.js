@@ -19,7 +19,6 @@ export default class ActivitiesListScreen extends React.Component {
 
 
     selectActivitiesToShow = (time) => {
-        console.log(this.props);
         if('activities' in this.props && this.props.activities === undefined) {
             return 0;
         } else if ('activities' in this.props && this.props.activities !== undefined && Object.keys(this.props.activities).length > 0){
@@ -98,8 +97,6 @@ export default class ActivitiesListScreen extends React.Component {
 
     componentWillReceiveProps(nextProps) { 
 		if(this.props !== nextProps) {
-            console.log('next props DIFFERENT');
-            console.log(nextProps)
             this.setState(() => ({activities : nextProps.activities}));
 		}
 	}

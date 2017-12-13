@@ -5,11 +5,9 @@ import { ActivityItem } from './ActivityItem';
 
 
 export const ActivitiesList = ({activities, showSpinner, nav}) => {
-    console.log(nav);
     const {height, width} = Dimensions.get('window');
     if(activities !== 0 && activities.length > 0) {
         const activitiesAndNav = () => {
-            console.log('inside callback');
             return activities.length !== 0 ? activities.map(a => ({...a, nav})) : activities;
         }
         const _keyExtractor = (item, index) => index;
@@ -25,7 +23,6 @@ export const ActivitiesList = ({activities, showSpinner, nav}) => {
                 </View>
         );
     } else {
-        console.log(typeof activities);
         return (<Text>Show Spinner here...</Text>);
     }
 }

@@ -31,7 +31,6 @@ class CustomerDetails extends React.Component {
 
     setDetailsState() {
         const { phoneNumbers, addresses, emergencyContacts, healthInfo } = this.props.allCustomerDetails;
-        console.log(phoneNumbers);
         const id = this.props.navigation.state.params.customerId;
         this.setState(() => ({
             allCustomerDetails: {
@@ -53,7 +52,6 @@ class CustomerDetails extends React.Component {
                 .then(
                     
                     (customerDetailsObject) => {
-                        console.log(customerDetailsObject);
                         return dispatch(saveCustomerDetails(customerDetailsObject));
                     }
                 )
@@ -63,7 +61,6 @@ class CustomerDetails extends React.Component {
 
 
     componentWillMount() {
-        console.log(this.props);
         this.setState(() => ({showMoreClicked: false, clickHandler: this.clicked, advancedDataLoadFailed: false})); 
         if(this.props.navigation.state.params.customerId) {
             this.setState(() => ({
@@ -71,21 +68,14 @@ class CustomerDetails extends React.Component {
                 })
             );
             const fullDetailsFromStore = findId(this.props.navigation.state.params.customerId, this.props.allCustomerDetails.allDetails);
-            console.log(fullDetailsFromStore);
             if(fullDetailsFromStore) {
-                console.log('======================found it in store=======================');
-                this.setDetailsState();
-                
+                this.setDetailsState();               
             } else {
-                console.log('need to fetch....');
                 this.props.dispatch(this.returnCustomerDetails(this.props.navigation.state.params.customerId, this.props.fullJwt))
                 .then((result) => 
                     {   
-                        console.log(result);
                         if('type' in result && result.type === 'SAVE_FULL_CUSTOMER_DETAILS') {
-                            console.log(typeof result);
                             this.setDetailsState();
-                            console.log(this.props);
                         } else {
                             this.setState({advancedDataLoadFailed: true, allCustomerDetails: 'error loading'});
                         }
@@ -97,9 +87,6 @@ class CustomerDetails extends React.Component {
     }
 
     render(){
-        console.log('==============about to try render=============');
-        console.log(this.props);
-        console.log(this.state);
         return (
             <View>
                 { this.state.allCustomerDetails && <CustomerFullDetails
@@ -115,7 +102,6 @@ class CustomerDetails extends React.Component {
 };
 
 const mapStateToProps = (state) => {
-    console.log(state);
     return {
         customerData: state.allCustomers,
         allCustomerDetails: state.customersDetails,

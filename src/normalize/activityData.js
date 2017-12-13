@@ -2,7 +2,6 @@ import { schema, arrayOf, normalize } from 'normalizr';
 
 
 export const normalizeActivityData = (activitiesArray) => {
-    console.log(activitiesArray);
     const normalizedData = {};
     normalizedData.allActivities = {};
     normalizedData.allActivityIds = [];
