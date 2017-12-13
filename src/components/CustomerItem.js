@@ -5,7 +5,8 @@ import { addNavigationHelpers } from 'react-navigation';
 import spinnerStyle from './styles/spinnerStyle';
 
 export const CustomerItem = (props) => {
-    //console.log(props);
+    console.log('in customer item');
+    console.log(props);
     return (
         <View>
         {

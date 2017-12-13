@@ -18,6 +18,7 @@ export const ErrorMessage = ({ message, errorStyle }) => {
     //             return `Woops! looks like something went wrong.`
     //     }
     // }
+
     switch (errorStyle) {
         case 'bubble':
             return (

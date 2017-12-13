@@ -28,6 +28,28 @@ export const loginTokenName = 'USER_TOKEN';
 
 
 
+export async function _getUserToken () {
+    try {
+        console.log(loginTokenName);
+        const token = await AsyncStorage.getItem(loginTokenName);
+        console.log(token);
+        if (token === null) {
+            console.log('token null');
+            console.log(token);
+            return false;
+        }
+        else {
+            console.log('retrieved token');
+            console.log(token);
+            return JSON.parse(token);
+        }
+    } catch (error) {
+        return error;
+    }
+};
+
+
+
 
 export async function _checkUserLoggedIn () {
     try {
@@ -44,22 +66,6 @@ export async function _checkUserLoggedIn () {
             console.log(token);
             return true;
         }
-        // console.log('inside async function', token);
-        // token = JSON.parse(token);
-        
-        // token.then((resp) => {
-        //     if (token === null) {
-        //         console.log('token null');
-        //         console.log(token);
-        //         return false;
-        //     }
-        //     else {
-        //         console.log('retrieved token');
-        //         console.log(token);
-        //         return true;
-        //     }
-        // });
-        
     } catch (error) {
         return error;
     }

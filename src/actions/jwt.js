@@ -1,8 +1,14 @@
-export const saveNewJwt = (jwt, jwtSplit) => ({
-    type : 'SAVE_NEW_JWT',
-    fullJwt: jwt,
-    headers: jwtSplit.headers,
-    payload: jwtSplit.payload,
-    sig: jwtSplit.sig,    
-});
+import { jwtSplit } from '../utilities/jwtSplit';
+
+export const saveNewJwt = (jwt) => {
+    console.log(jwt);
+    const jwtSplitObj = jwtSplit(jwt);
+    return {
+        type : 'SAVE_NEW_JWT',
+        fullJwt: jwt,
+        headers: jwtSplitObj.headers,
+        payload: jwtSplitObj.payload,
+        sig: jwtSplitObj.sig,    
+    };
+};
 

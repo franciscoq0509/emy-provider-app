@@ -7,12 +7,13 @@ import { getFilteredCustomers } from '../selectors/index';
 
 
 
-const fetchCustomers = (jwt) => (
-    fetch(
+const fetchCustomers = (jwt) => {
+    console.log(jwt);
+    return fetch(
         'https://emy-front-api.craig.27s-dev.net/providers-api/v1/55790419-dbb4-43b4-9c1d-7bae0a37004f/users?full_name=%&limit=200',
         {headers: {Authorization: `Bearer ${jwt}`}}
     )
-);
+};
 
 
 
@@ -39,8 +40,9 @@ class CustomersListContainer extends React.Component {
     }
 
     componentWillMount() {
+        console.log('##########in customers container############');
         this.setState(() => ({showSpinner: this.showLoadingSpinner, showLoadError: false}));
-
+        console.log(this.props);
         this.props.dispatch(this.customersThunk())
         .then(
             (resp) => { 

@@ -1,8 +1,8 @@
 const stateInit = {
-    fullJwt: "",
-    headers: "",
-    payload: "",
-    sig: "",
+    fullJwt: null,
+    headers: null,
+    payload: null,
+    sig: null,
 }
 
 export default (state = stateInit, action) => {
