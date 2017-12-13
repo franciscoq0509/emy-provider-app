@@ -4,7 +4,7 @@ import { SubmitButton } from '../components/SubmitButton';
 import { connect } from 'react-redux';
 import { jwtSplit } from '../utilities/jwtSplit';
 import { saveNewJwt } from '../actions/jwt';
-import { _setUserToken, loginTokenName } from '../utilities/userAuth';
+import { _setUserToken, loginTokenName, _checkUserLoggedIn } from '../utilities/userAuth';
 
 
 const _options = (guid, uname, pwd) => ({
@@ -20,8 +20,8 @@ const fetchJwt = (uname, pwd, guid) => (
     fetch('https://login-dev.enrolmy.com/login?scope=users,client-users,addresses,phones,ethnic-groups,emergency-contacts,family-doctors,educations',_options(guid, uname, pwd))
 );
 
-
 class LoginSubmitButtonContainer extends React.Component {
+   
     
     startSubmitProcess = () => {
         console.log(this.props);
@@ -36,10 +36,18 @@ class LoginSubmitButtonContainer extends React.Component {
                         console.log('about to save');
                         this.props.dispatch(saveNewJwt(data._bodyText,extractedJwt)); 
                         _setUserToken(loginTokenName, data._bodyText)
-                            .then(() => {
+                            .then((resp) => {
+                                console.log('user token set');
+                                console.log(resp);
+                                _checkUserLoggedIn()
+                                    .then(v => {
+                                        console.log(v);
+                                    });
+
                                 console.log(this.props);
                                 this.props.nav.navigate("SignedIn")
-                            });
+                            })
+                            .catch((err) => console.log(err));
                         
                     } else {console.log('else error'); this.props.showErrorMessage('splitJWT failed..');}
                     

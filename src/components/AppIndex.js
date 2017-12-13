@@ -19,18 +19,17 @@ export default class App extends React.Component {
             signedIn: false,
             checkedSignedIn: false
         };
-    }
 
-    componentWillMount() {
         _checkUserLoggedIn()
-            .then(isSignedIn => this.setState({signedIn: isSignedIn, checkedSignedIn: true}))
-            .catch(err => alert('error'));
+        .then(v => {
+            console.log(v);
+        });
     }
-
+    
     render() {
         const { checkedSignedIn, signedIn } = this.state;
-
-        if(!checkedSignedIn) {
+        console.log('in render', checkedSignedIn);
+        if(checkedSignedIn) {
             return null;
         }
 
