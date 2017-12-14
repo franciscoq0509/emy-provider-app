@@ -27,16 +27,12 @@ class LoginSubmitButtonContainer extends React.Component {
         .then(
             (data) => {
                 if (data.status === 200 && data._bodyText) { 
-                    if(extractedJwt) {
                         this.props.dispatch(saveNewJwt(data._bodyText)); 
                         _setUserToken(loginTokenName, data._bodyText)
                             .then((resp) => {
                                 this.props.nav.navigate("SignedIn")
                             })
-                            .catch((err) => console.log(err));
-                        
-                    } else {console.log('else error'); this.props.showErrorMessage('splitJWT failed..');}
-                    
+                            .catch((err) => console.log(err));        
                 } else {console.log('failed to login'); this.props.showErrorMessage(data._bodyText);}
             },
             (error) => {console.log('error'); this.props.showErrorMessage(error)}

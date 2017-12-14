@@ -11,9 +11,9 @@ import { ErrorMessage } from './ErrorMessage';
 
 class CustomersList extends React.PureComponent {
 
-    static navigationOptions = ({ navigation }) => ({
-        title: `All Customers`,
-      });
+    // static navigationOptions = ({ navigation }) => ({
+    //     title: `All Customers`,
+    //   });
     
     customersAndCallback() {
         const filteredCustomers = (this.props.screenProps.filteredCustomers !== undefined) ? [...Object.values(this.props.screenProps.filteredCustomers)] : []; 

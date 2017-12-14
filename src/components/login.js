@@ -13,6 +13,7 @@ export default class Login extends React.Component {
 
     showErrorMessage = (err_message) => {
         if(typeof err_message === 'object' && Object.keys(err_message).length === 0) {
+            console.log(err_message);
             this.setState({showError: true, message: `Network error!\nMake sure your device has an internet connection.`});
         } else {
             const errMessage = JSON.parse(err_message);
