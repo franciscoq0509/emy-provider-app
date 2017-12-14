@@ -16,13 +16,11 @@ export const CustomerFullDetails = (props) => {
         email, 
         status, 
         gender, 
-        //phones,
         created,
         is_child,
         relationship,
         school_name,
         school_year,
-        //special_needs 
     } = props.basicCustomerDetails;
     
     const {
@@ -59,7 +57,7 @@ export const CustomerFullDetails = (props) => {
                     backgroundColor='#74CC82'
                    title={`${type}: ${phoneNumbers[type].phone}` }
                    iconRight={{name: 'phone', type: 'Entypo'}}
-                   onPress={callNumber(type)}
+                   onPress={()=>callNumber(type)}
                 />
             );
         } 

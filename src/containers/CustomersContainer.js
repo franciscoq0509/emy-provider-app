@@ -11,10 +11,8 @@ const fetchCustomers = (jwt) => (
     fetch(
         'https://emy-front-api.craig.27s-dev.net/providers-api/v1/55790419-dbb4-43b4-9c1d-7bae0a37004f/users?full_name=%&limit=200',
         {
-            //mode: 'cors',
-            //credentials: 'same-origin',
             headers: {
-                'Authorization': 'Bearer ' + jwt
+                Authorization: `Bearer ${jwt}`
             }
         }
     )
@@ -29,13 +27,11 @@ class CustomersListContainer extends React.Component {
         
         return (dispatch) => {
             dispatch(requestCustomers());
-            console.log(this.props.jwt);
             return fetchCustomers(this.props.jwt)
                 .then(
                     (customersObject) => customersObject.json(),
                     (error) => dispatch(receiveCustomersError(error))
                 ).then((customers) => {
-                    console.log(customers);
                     return dispatch(receiveNewCustomers(customers.users));
                 })
                 .catch((err) => dispatch(receiveCustomersError(err)))
@@ -51,8 +47,8 @@ class CustomersListContainer extends React.Component {
         this.props.dispatch(this.customersThunk())
         .then(
             (resp) => { 
-                console.log(resp);
                 if('type' in resp) {
+                    console.log(resp);
                     if(resp.type === 'RECEIVE_CUSTOMERS_SUCCESS') {
                         this.setState({showLoadError: false});
                         this.setState(() => ({filteredCustomers : this.props.filteredCustomers}));        
