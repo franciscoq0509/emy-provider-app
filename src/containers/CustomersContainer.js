@@ -14,7 +14,7 @@ const fetchCustomers = (jwt) => (
             //mode: 'cors',
             //credentials: 'same-origin',
             headers: {
-                'Authorization': 'Basic ZW5yb2xteS1ocTpreXdkTTk3cUtwbm8zQXpKQVJ0Y1JFcFFyd2g2ejFObHhBSG5vbHhx'
+                'Authorization': 'Bearer ' + jwt
             }
         }
     )
