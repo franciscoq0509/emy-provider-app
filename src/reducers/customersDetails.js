@@ -5,6 +5,9 @@ const stateInit = {
     familyDoctors : {},
     healthInfo : {},
     phoneNumbers : {},
+    schoolInformation: {},
+    authorizedPickups: {},
+    unauthorizedPickups: {},
     customerDetailsError : ""
 };
 
@@ -35,6 +38,14 @@ export default (state = stateInit, action) => {
                 phoneNumbers : {
                     ...state.phoneNumbers,
                     [action.id] : action.normalizedCustomerDetails.phoneNumbers
+                },
+                schoolInformation : {
+                    ...state.schoolInformation,
+                    [action.id] : {
+                        ...state.schoolInformation[action.id],
+                        schoolName: action.normalizedCustomerDetails.school_name,
+                        schoolYear: action.normalizedCustomerDetails.school_year,
+                    }
                 }
             
             };

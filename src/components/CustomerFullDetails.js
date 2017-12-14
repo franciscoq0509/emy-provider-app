@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, ScrollView } from 'react-native';
+import { View, Text, ScrollView, StyleSheet } from 'react-native';
 import { Button, Card, Badge, Icon } from 'react-native-elements';
 import { ParentDetailsCard } from './ParentDetailsCard';
 import { ChildDetailsCard } from './ChildDetailsCard';
@@ -37,7 +37,9 @@ export const CustomerFullDetails = (props) => {
     }
     let healthInformation = 0;
     if(healthInfo !== undefined) {
-        healthInformation = healthInfo[Object.keys(healthInfo)[0]] ? healthInfo[Object.keys(healthInfo)[0]] : 0; 
+        if(typeof healthInfo === 'object') {
+            healthInformation = healthInfo[Object.keys(healthInfo)[0]] ? healthInfo[Object.keys(healthInfo)[0]] : 0; 
+        } 
     }
 
     const callNumber = (type) => {
@@ -67,10 +69,10 @@ export const CustomerFullDetails = (props) => {
         <ScrollView>
             <Card title="Details">
                 <View>
-                    <Text>{full_name}</Text>
-                    <Text>{gender === 'M' ? 'Male' : 'Female'}</Text>
-                    <Text>email: {email ? email : 'None found'}</Text>
-                    <Text>DOB: {dob !== null ? Moment(dob).format("MMMM D, YYYY") : 'Not found'}</Text>
+                    <Text style= {styles.text}>{full_name}</Text>
+                    <Text style= {styles.text}>{gender === 'M' ? 'Male' : 'Female'}</Text>
+                    <Text style= {styles.text}>email: {email ? email : 'None found'}</Text>
+                    <Text style= {styles.text}>DOB: {dob !== null ? Moment(dob).format("MMMM D, YYYY") : 'Not found'}</Text>
                     {findNumber('Mobile')}
                     {findNumber('Work')}
                     {findNumber('Home')}
@@ -112,5 +114,13 @@ export const CustomerFullDetails = (props) => {
         </ScrollView>
     );
 };
+
+const styles = StyleSheet.create({
+    text: {
+        paddingLeft: 20,
+        fontSize: 18,
+        marginBottom: 15
+    }
+});
 
 
