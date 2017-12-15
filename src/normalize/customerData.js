@@ -14,11 +14,13 @@ export const normalizeBasicCustomerDetails =  (customersArray) => {
 }
 
 export const normalizedFullCustomerDetails = (customerDetails) => {
+    console.log(customerDetails.school_name);
     const allCustomersDetails = new schema.Entity(customerDetails.id);
     const normalizedAll = new schema.Entity('allCustomersDetails', {
         allCustomersDetails
     });
     const normalizedAllDetails = normalize(customerDetails, normalizedAll);
+console.log(normalizedAllDetails);
 
     let normalizedAddresses = {entities: {[customerDetails.id] : 0}};
     if('addresses' in customerDetails && 'data' in customerDetails.addresses) {
@@ -27,21 +29,21 @@ export const normalizedFullCustomerDetails = (customerDetails) => {
         normalizedAddresses.addresses = [...customerDetails.addresses.data];
         normalizedAddresses = normalize(normalizedAddresses.addresses, AddressesListSchema);
     }
-
+console.log('addresses');
     let normalizedEmergency = {entities : {[customerDetails.id] : 0}};
     if('emergency_contacts' in customerDetails) {
         const emergencySchema = new schema.Entity(customerDetails.id, {}, {idAttribute: 'emergency_contact_id'});
         const emergencyContactsList = [ emergencySchema ];
         normalizedEmergency = normalize(customerDetails.emergency_contacts, emergencyContactsList);
     }
-
+console.log('emergency');
     let normalizedFamilyDoctors = {entities : {[customerDetails.id] : 0}};
     if('family_doctors' in customerDetails) {
         const familyDoctorSchema = new schema.Entity(customerDetails.id, {}, {idAttribute: 'family_doctor_id'});
         const familyDoctorsList = [ familyDoctorSchema ];
         normalizedFamilyDoctors = normalize(customerDetails.family_doctors, familyDoctorsList);
     }
-
+console.log('doctors');
     let normalizedHealthInfo = {entities: {[customerDetails.id] : 0}};
     if ('healths' in customerDetails) {
         const healthSchema = new schema.Entity(customerDetails.id, {}, {idAttribute: 'user_id'}); 
@@ -49,21 +51,28 @@ export const normalizedFullCustomerDetails = (customerDetails) => {
         var healthData = [{...customerDetails.healths}];
         normalizedHealthInfo = normalize(healthData, healthList);
     }
-
+console.log('health');
     let normalizedPhoneNumbers = {entities: {[customerDetails.id] : 0}};
     if( 'phones' in customerDetails && customerDetails.phones.length > 0 ) {
         const phoneSchema = new schema.Entity(customerDetails.id);
         const phoneList = [ phoneSchema ];
         normalizedPhoneNumbers = normalize(customerDetails.phones, phoneList);
     }
-
+console.log('phones');
+    let normalizedSchoolName = {[customerDetails.id] : 0};
+    if( 'school_name' in customerDetails && customerDetails.school_name !== null ) {
+        console.log('in');
+        normalizedSchoolName[customerDetails.id] = customerDetails.school_name;
+    }
+console.log(normalizedSchoolName);
     return {
         allDetails : normalizedAllDetails.entities.allCustomersDetails[customerDetails.id] ,
         addresses : normalizedAddresses.entities[customerDetails.id],
         emergencyContacts : normalizedAddresses.entities[customerDetails.id],
         familyDoctors : normalizedFamilyDoctors.entities[customerDetails.id],
         healthInfo : normalizedHealthInfo.entities[customerDetails.id],
-        phoneNumbers : normalizedPhoneNumbers.entities[customerDetails.id]
+        phoneNumbers : normalizedPhoneNumbers.entities[customerDetails.id],
+        schoolName : normalizedSchoolName[customerDetails.id]
     };
 }
 

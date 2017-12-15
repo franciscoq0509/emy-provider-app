@@ -12,6 +12,7 @@ const stateInit = {
 };
 
 export default (state = stateInit, action) => {
+    console.log('action.normalizedCustomerDetails', action.normalizedCustomerDetails);
     switch (action.type) {
         case 'SAVE_FULL_CUSTOMER_DETAILS':
             return {
@@ -41,10 +42,10 @@ export default (state = stateInit, action) => {
                 },
                 schoolInformation : {
                     ...state.schoolInformation,
-                    [action.id] : {
-                        ...state.schoolInformation[action.id],
-                        schoolName: action.normalizedCustomerDetails.school_name,
-                        schoolYear: action.normalizedCustomerDetails.school_year,
+                    schoolName : {
+                        ...state.schoolInformation.schoolName,
+                        [action.id]: action.normalizedCustomerDetails.schoolName,
+                        //schoolYear: action.normalizedCustomerDetails.school_year,
                     }
                 }
             

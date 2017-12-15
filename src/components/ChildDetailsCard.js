@@ -9,11 +9,11 @@ const Moment = require('moment');
 //adresses
 //...everything else in order
 
-export const ChildDetailsCard = ({ school_name, school_year, healthInformation, customerCreated, fullName }) => {
+export const ChildDetailsCard = ({ schoolName, school_year, healthInformation, customerCreated, fullName }) => {
     return (
         <Card>
             <Text style= {styles.text}>Acount Created: {Moment(customerCreated).format("MMMM D, YYYY, h:mm:ss a")}</Text>
-            <Text style= {styles.text}>School Name: {school_name ? school_name : 'N/A'}</Text>
+            <Text style= {styles.text}>School Name: {schoolName ? schoolName : 'N/A'}</Text>
             <Text style= {styles.text}>School Year: {school_year ? school_year : 'N/A'}</Text>
             {healthInformation ?
                 <View>
@@ -30,7 +30,7 @@ export const ChildDetailsCard = ({ school_name, school_year, healthInformation, 
                     </Text>
                 </View>
                 :
-                <Text>No Health information was found on {fullName}!</Text>
+                <Text style= {styles.text}>No Health information was found on {fullName}!</Text>
             }
         </Card>
     )

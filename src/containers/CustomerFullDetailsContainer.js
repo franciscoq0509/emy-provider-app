@@ -31,14 +31,15 @@ class CustomerDetails extends React.Component {
 
     setDetailsState() {
         console.log(this.props.allCustomerDetails);
-        const { phoneNumbers, addresses, emergencyContacts, healthInfo } = this.props.allCustomerDetails;
+        const { phoneNumbers, addresses, emergencyContacts, healthInfo, schoolInformation } = this.props.allCustomerDetails;
         const id = this.props.navigation.state.params.customerId;
         this.setState(() => ({
             allCustomerDetails: {
                 phones : phoneNumbers[id],
                 addresses : addresses[id],
                 healthInfo : healthInfo[id],
-                emergencyContacts : emergencyContacts[id]
+                emergencyContacts : emergencyContacts[id],
+                schoolName : schoolInformation.schoolName[id]
             }
         })); 
     }
@@ -51,8 +52,8 @@ class CustomerDetails extends React.Component {
                     (err) => err   
                 )
                 .then(
-                    
                     (customerDetailsObject) => {
+                        console.log(customerDetailsObject);
                         return dispatch(saveCustomerDetails(customerDetailsObject));
                     }
                 )

@@ -19,9 +19,11 @@ export const CustomerFullDetails = (props) => {
         created,
         is_child,
         relationship,
-        school_name,
-        school_year,
     } = props.basicCustomerDetails;
+
+    const {
+        schoolName
+    } = props.allCustomerDetails;
     
     const {
         phones,
@@ -83,8 +85,7 @@ export const CustomerFullDetails = (props) => {
                 <View>
                     {is_child ? 
                         <ChildDetailsCard 
-                            school_name={school_name} 
-                            school_year={school_year}
+                            schoolName={schoolName} 
                             healthInformation={healthInformation}
                             customerCreated={created}
                             fullName={full_name}
