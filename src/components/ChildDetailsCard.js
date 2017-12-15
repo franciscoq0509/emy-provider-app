@@ -2,19 +2,19 @@ import { Card } from 'react-native-elements';
 import { Text, View, StyleSheet } from 'react-native';
 import React from 'react';
 const Moment = require('moment');
-//emergency contact
-//school info
-//health info
-//auth pickups/ non-auth pickups
-//adresses
+//emergency contact -- needs to save
+//school info -- done
+//health info -- done
+//auth pickups/ non-auth pickups --not found
+//adresses -- needs to save
 //...everything else in order
 
-export const ChildDetailsCard = ({ schoolName, school_year, healthInformation, customerCreated, fullName }) => {
+export const ChildDetailsCard = ({ schoolName, schoolYear, healthInformation, customerCreated, fullName }) => {
     return (
         <Card>
             <Text style= {styles.text}>Acount Created: {Moment(customerCreated).format("MMMM D, YYYY, h:mm:ss a")}</Text>
             <Text style= {styles.text}>School Name: {schoolName ? schoolName : 'N/A'}</Text>
-            <Text style= {styles.text}>School Year: {school_year ? school_year : 'N/A'}</Text>
+            <Text style= {styles.text}>School Year: {schoolYear ? schoolYear : 'N/A'}</Text>
             {healthInformation ?
                 <View>
                     <Text style= {styles.text}>Allergies: {healthInformation.allergies ? 

@@ -5,7 +5,10 @@ const stateInit = {
     familyDoctors : {},
     healthInfo : {},
     phoneNumbers : {},
-    schoolInformation: {},
+    schoolInformation: {
+        schoolName : {},
+        schoolYear : {}
+    },
     authorizedPickups: {},
     unauthorizedPickups: {},
     customerDetailsError : ""
@@ -45,7 +48,10 @@ export default (state = stateInit, action) => {
                     schoolName : {
                         ...state.schoolInformation.schoolName,
                         [action.id]: action.normalizedCustomerDetails.schoolName,
-                        //schoolYear: action.normalizedCustomerDetails.school_year,
+                    },
+                    schoolYear : {
+                        ...state.schoolInformation.schoolYear,
+                        [action.id] : action.normalizedCustomerDetails.schoolYear
                     }
                 }
             

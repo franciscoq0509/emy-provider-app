@@ -14,7 +14,7 @@ export const normalizeBasicCustomerDetails =  (customersArray) => {
 }
 
 export const normalizedFullCustomerDetails = (customerDetails) => {
-    console.log(customerDetails.school_name);
+    console.log(customerDetails);
     const allCustomersDetails = new schema.Entity(customerDetails.id);
     const normalizedAll = new schema.Entity('allCustomersDetails', {
         allCustomersDetails
@@ -64,6 +64,11 @@ console.log('phones');
         console.log('in');
         normalizedSchoolName[customerDetails.id] = customerDetails.school_name;
     }
+    let normalizedSchoolYear = {[customerDetails.id] : null};
+    if( 'school_year' in customerDetails && customerDetails.school_year !== null ) {
+        console.log('in');
+        normalizedSchoolYear[customerDetails.id] = customerDetails.school_year;
+    }
 console.log(normalizedSchoolName);
     return {
         allDetails : normalizedAllDetails.entities.allCustomersDetails[customerDetails.id] ,
@@ -72,7 +77,8 @@ console.log(normalizedSchoolName);
         familyDoctors : normalizedFamilyDoctors.entities[customerDetails.id],
         healthInfo : normalizedHealthInfo.entities[customerDetails.id],
         phoneNumbers : normalizedPhoneNumbers.entities[customerDetails.id],
-        schoolName : normalizedSchoolName[customerDetails.id]
+        schoolName : normalizedSchoolName[customerDetails.id],
+        schoolYear : normalizedSchoolYear[customerDetails.id]
     };
 }
 

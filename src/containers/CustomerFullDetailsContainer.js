@@ -39,7 +39,8 @@ class CustomerDetails extends React.Component {
                 addresses : addresses[id],
                 healthInfo : healthInfo[id],
                 emergencyContacts : emergencyContacts[id],
-                schoolName : schoolInformation.schoolName[id]
+                schoolName : schoolInformation.schoolName[id],
+                schoolYear :  schoolInformation.schoolYear[id]
             }
         })); 
     }
