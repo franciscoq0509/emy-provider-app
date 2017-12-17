@@ -29,7 +29,7 @@ export default (state = stateInit, action) => {
                 },
                 emergencyContacts : {
                     ...state.emergencyContacts,
-                    [action.id] : action.normalizedCustomerDetails.emeregencyContacts
+                    [action.id] : action.normalizedCustomerDetails.emergencyContacts
                 },
                 familyDoctors : {
                     ...state.familyDoctors,

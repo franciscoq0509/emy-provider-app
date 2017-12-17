@@ -30,8 +30,9 @@ console.log(normalizedAllDetails);
         normalizedAddresses = normalize(normalizedAddresses.addresses, AddressesListSchema);
     }
 console.log('addresses');
-    let normalizedEmergency = {entities : {[customerDetails.id] : 0}};
+    let normalizedEmergency = {entities: {[customerDetails.id] : 0}};
     if('emergency_contacts' in customerDetails) {
+        console.log('=======in emergency');
         const emergencySchema = new schema.Entity(customerDetails.id, {}, {idAttribute: 'emergency_contact_id'});
         const emergencyContactsList = [ emergencySchema ];
         normalizedEmergency = normalize(customerDetails.emergency_contacts, emergencyContactsList);
@@ -73,7 +74,7 @@ console.log(normalizedSchoolName);
     return {
         allDetails : normalizedAllDetails.entities.allCustomersDetails[customerDetails.id] ,
         addresses : normalizedAddresses.entities[customerDetails.id],
-        emergencyContacts : normalizedAddresses.entities[customerDetails.id],
+        emergencyContacts : normalizedEmergency.entities[customerDetails.id],
         familyDoctors : normalizedFamilyDoctors.entities[customerDetails.id],
         healthInfo : normalizedHealthInfo.entities[customerDetails.id],
         phoneNumbers : normalizedPhoneNumbers.entities[customerDetails.id],

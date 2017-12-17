@@ -23,7 +23,8 @@ export const CustomerFullDetails = (props) => {
 
     const {
         schoolName,
-        schoolYear
+        schoolYear,
+        emergencyContacts,
     } = props.allCustomerDetails;
     
     const {
@@ -60,9 +61,9 @@ export const CustomerFullDetails = (props) => {
                 <Button
                     containerViewStyle={{marginTop: 30}}
                     backgroundColor='#74CC82'
-                   title={`${type}: ${phoneNumbers[type].phone}` }
-                   iconRight={{name: 'phone', type: 'Entypo'}}
-                   onPress={()=>callNumber(type)}
+                    title={`${type}: ${phoneNumbers[type].phone}` }
+                    iconRight={{name: 'phone', type: 'Entypo'}}
+                    onPress={()=>callNumber(type)}
                 />
             );
         } 
@@ -89,6 +90,7 @@ export const CustomerFullDetails = (props) => {
                             schoolName={schoolName} 
                             schoolYear={schoolYear}
                             healthInformation={healthInformation}
+                            emergencyContacts={emergencyContacts}
                             customerCreated={created}
                             fullName={full_name}
                         />

@@ -9,10 +9,23 @@ const Moment = require('moment');
 //adresses -- needs to save
 //...everything else in order
 
-export const ChildDetailsCard = ({ schoolName, schoolYear, healthInformation, customerCreated, fullName }) => {
+//add subtle color to either card or text?
+
+export const ChildDetailsCard = ({ schoolName, schoolYear, healthInformation, customerCreated, fullName, emergencyContacts }) => {
+
+    showEmergencyContacts = (obj) => {
+        if(obj === 0 ){
+            return null;
+        } else {
+            return Object.keys(obj).map((key) => <Text key={key}>{obj[key].first_name}</Text>);
+        }
+    }
+
+    console.log('here', emergencyContacts);
+    //                <Text>{emergencyContacts[Object.keys(emergencyContacts[0])].first_name}</Text>
     return (
         <Card>
-            <Text style= {styles.text}>Acount Created: {Moment(customerCreated).format("MMMM D, YYYY, h:mm:ss a")}</Text>
+            {this.showEmergencyContacts(emergencyContacts)}
             <Text style= {styles.text}>School Name: {schoolName ? schoolName : 'N/A'}</Text>
             <Text style= {styles.text}>School Year: {schoolYear ? schoolYear : 'N/A'}</Text>
             {healthInformation ?
@@ -32,6 +45,7 @@ export const ChildDetailsCard = ({ schoolName, schoolYear, healthInformation, cu
                 :
                 <Text style= {styles.text}>No Health information was found on {fullName}!</Text>
             }
+            <Text style= {styles.text}>Acount Created: {Moment(customerCreated).format("MMMM D, YYYY, h:mm:ss a")}</Text>
         </Card>
     )
 };
