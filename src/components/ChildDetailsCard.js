@@ -1,4 +1,4 @@
-import { Card } from 'react-native-elements';
+import { Card, Button } from 'react-native-elements';
 import { Text, View, StyleSheet } from 'react-native';
 import React from 'react';
 const Moment = require('moment');
@@ -15,9 +15,28 @@ export const ChildDetailsCard = ({ schoolName, schoolYear, healthInformation, cu
 
     showEmergencyContacts = (obj) => {
         if(obj === 0 ){
-            return null;
+            return <Text style={styles.text}>No emergency contacts found</Text>;
         } else {
-            return Object.keys(obj).map((key) => <Text key={key}>{obj[key].first_name}</Text>);
+            return (
+                <View>
+                    <Text style= {styles.text}>Emergency Contacts</Text>
+                    {Object.keys(obj).map((key, index) => (
+                            <View   style={styles.emergencyContactCard} key={key}>
+                                <Text style= {styles.emergencyContactName}>{obj[key].first_name}</Text>
+                                <View style={{flex:1, flexDirection: 'column'}}>
+                                    <Text style= {styles.subText}>Relationship: { obj[key].relationship }</Text>
+                                    <Button
+                                        small
+                                        backgroundColor='#74CC82'
+                                        title={ obj[key].phone }
+                                        iconRight={{name: 'phone', type: 'Entypo'}}
+                                    />
+                                </View>
+                            </View>
+                        )
+                    )}
+                </View>
+            );
         }
     }
 
@@ -51,9 +70,37 @@ export const ChildDetailsCard = ({ schoolName, schoolYear, healthInformation, cu
 };
 
 const styles = StyleSheet.create({
+    emergencyContactCard: {
+        paddingBottom: 15,
+        paddingTop: 15,
+        borderColor: '#898989',
+        backgroundColor: '#e6f4f4',
+        marginBottom: 15
+    },
+    emergencyContactBorderTop: {
+        borderWidth:  1,
+        borderLeftWidth: 0,
+        borderRightWidth: 0,
+        borderBottomWidth: 0,
+    },
+    title: {
+        paddingLeft: 20,
+        fontSize: 20,
+        marginBottom: 10
+    },
     text: {
         paddingLeft: 20,
         fontSize: 18,
+        marginBottom: 15
+    },
+    emergencyContactName: {
+        alignSelf:'center',
+        fontSize: 18,
+        marginBottom: 15
+    },
+    subText: {
+        alignSelf: 'center',
+        fontSize: 15,
         marginBottom: 15
     }
 });
