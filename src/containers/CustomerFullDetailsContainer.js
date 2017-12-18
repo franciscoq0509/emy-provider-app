@@ -22,27 +22,42 @@ class CustomerDetails extends React.Component {
     constructor(props) {
         super(props);
         this.clicked = this.clicked.bind(this);
-        this.setDetailsState = this.setDetailsState.bind(this);    
+        this.setDetailsState = this.setDetailsState.bind(this);  
+        this.findAndSetPrimaryContact = this.findAndSetPrimaryContact.bind(this); 
+        this.dispatchNewCustomerDetails = this.dispatchNewCustomerDetails.bind(this); 
     }
     
     clicked() {
         this.setState(()=> ({showMoreClicked: true}));
     };
 
+    findAndSetPrimaryContact(id) {
+        const primaryContact = findId(id, this.props.allCustomerDetails.allDetails);
+        return primaryContact;
+    } 
+
     setDetailsState() {
-        console.log(this.props.allCustomerDetails);
-        const { phoneNumbers, addresses, emergencyContacts, healthInfo, schoolInformation } = this.props.allCustomerDetails;
+        const { phoneNumbers, addresses, emergencyContacts, healthInfo, schoolInformation, allDetails } = this.props.allCustomerDetails;
         const id = this.props.navigation.state.params.customerId;
-        this.setState(() => ({
-            allCustomerDetails: {
-                phones : phoneNumbers[id],
-                addresses : addresses[id],
-                healthInfo : healthInfo[id],
-                emergencyContacts : emergencyContacts[id],
-                schoolName : schoolInformation.schoolName[id],
-                schoolYear :  schoolInformation.schoolYear[id]
-            }
-        })); 
+        const primaryContact = this.findAndSetPrimaryContact(allDetails[id].primary_contact.id);
+        console.log(primaryContact);
+        if(primaryContact !== false && 'success' in primaryContact && primaryContact.success === true) {
+            this.setState(() => ({
+                allCustomerDetails: {
+                    phones : phoneNumbers[id],
+                    addresses : addresses[id],
+                    healthInfo : healthInfo[id],
+                    emergencyContacts : emergencyContacts[id],
+                    schoolName : schoolInformation.schoolName[id],
+                    schoolYear :  schoolInformation.schoolYear[id],
+                    primaryContact
+                }
+            }));
+        } else {
+            //fetch for primary contact
+            console.log('disptching new fetch for primary contact details');
+            this.dispatchNewCustomerDetails(allDetails[id].primary_contact.id);
+        }
     }
 
     returnCustomerDetails = (id, jwt) => {
@@ -54,13 +69,25 @@ class CustomerDetails extends React.Component {
                 )
                 .then(
                     (customerDetailsObject) => {
-                        console.log(customerDetailsObject);
                         return dispatch(saveCustomerDetails(customerDetailsObject));
                     }
                 )
                 .catch((err) => err);
         };
     };
+
+    dispatchNewCustomerDetails(id = this.props.navigation.state.params.customerId) {
+        this.props.dispatch(this.returnCustomerDetails(id, this.props.fullJwt))
+        .then((result) => 
+            {   
+                if('type' in result && result.type === 'SAVE_FULL_CUSTOMER_DETAILS') {
+                    this.setDetailsState();
+                } else {
+                    this.setState({advancedDataLoadFailed: true, allCustomerDetails: 'error loading'});
+                }
+            })
+        .catch((err) => {console.log('about to set state for failed');this.setState({advancedDataLoadFailed: true, allCustomerDetails: 'error loading'})})
+    }
 
 
     componentWillMount() {
@@ -74,16 +101,7 @@ class CustomerDetails extends React.Component {
             if(fullDetailsFromStore) {
                 this.setDetailsState();               
             } else {
-                this.props.dispatch(this.returnCustomerDetails(this.props.navigation.state.params.customerId, this.props.fullJwt))
-                .then((result) => 
-                    {   
-                        if('type' in result && result.type === 'SAVE_FULL_CUSTOMER_DETAILS') {
-                            this.setDetailsState();
-                        } else {
-                            this.setState({advancedDataLoadFailed: true, allCustomerDetails: 'error loading'});
-                        }
-                    })
-                .catch((err) => {console.log('about to set state for failed');this.setState({advancedDataLoadFailed: true, allCustomerDetails: 'error loading'})})
+                this.dispatchNewCustomerDetails();
             }
 
         }
@@ -106,7 +124,7 @@ class CustomerDetails extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        customerData: state.allCustomers,
+        customerData: state.customersData.allCustomers,
         allCustomerDetails: state.customersDetails,
         fullJwt: state.jwt.fullJwt
     }

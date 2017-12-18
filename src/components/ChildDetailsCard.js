@@ -1,47 +1,21 @@
-import { Card, Button } from 'react-native-elements';
+import { Card, Button, Badge } from 'react-native-elements';
 import { Text, View, StyleSheet } from 'react-native';
 import React from 'react';
 import call from 'react-native-phone-call';
 const Moment = require('moment');
 
-//emergency contact -- needs to save
+//emergency contact -- done
 //school info -- done
 //health info -- done
 //auth pickups/ non-auth pickups --not found
-//adresses -- needs to save
+//adresses -- onlu parent
 //...everything else in order
+//family doctor w/ call button
+//complete health info -- done
 
-//add subtle color to either card or text?
 
-export const ChildDetailsCard = ({ schoolName, schoolYear, healthInformation, customerCreated, fullName, emergencyContacts }) => {
 
-    showEmergencyContacts = (obj) => {
-        if(obj === 0 ){
-            return <Text style={styles.text}>No emergency contacts found</Text>;
-        } else {
-            return (
-                <View>
-                    <Text style= {styles.text}>Emergency Contacts</Text>
-                    {Object.keys(obj).map((key, index) => (
-                            <View   style={styles.emergencyContactCard} key={key}>
-                                <Text style= {styles.emergencyContactName}>{obj[key].first_name}</Text>
-                                <View style={{flex:1, flexDirection: 'column'}}>
-                                    <Text style= {styles.subText}>Relationship: { obj[key].relationship }</Text>
-                                    <Button
-                                        small
-                                        backgroundColor='#74CC82'
-                                        title={ obj[key].phone }
-                                        iconRight={{name: 'phone', type: 'Entypo'}}
-                                        onPress={() => this.callNumber(obj[key].phone)}
-                                    />
-                                </View>
-                            </View>
-                        )
-                    )}
-                </View>
-            );
-        }
-    }
+export const ChildDetailsCard = ({ schoolName, schoolYear, healthInformation, customerCreated, fullName, emergencyContacts, addresses }) => {
 
     callNumber = (number) => {
         call({
@@ -49,16 +23,17 @@ export const ChildDetailsCard = ({ schoolName, schoolYear, healthInformation, cu
             prompt: false
         })
     }
-
-    console.log('here', emergencyContacts);
-    //                <Text>{emergencyContacts[Object.keys(emergencyContacts[0])].first_name}</Text>
+    
     return (
         <Card>
-            {this.showEmergencyContacts(emergencyContacts)}
-            <Text style= {styles.text}>School Name: {schoolName ? schoolName : 'N/A'}</Text>
-            <Text style= {styles.text}>School Year: {schoolYear ? schoolYear : 'N/A'}</Text>
+            <View style={styles.infoCard}>
+                <Text style={styles.title}>School Information</Text>
+                <Text style= {styles.text}>School: {schoolName ? schoolName : 'N/A'}</Text>
+                <Text style= {styles.text}>School Year: {schoolYear ? schoolYear : 'N/A'}</Text>
+            </View>
             {healthInformation ?
-                <View>
+                <View style={styles.infoCard}>
+                <Text style={styles.title}>Health Information</Text>
                     <Text style= {styles.text}>Allergies: {healthInformation.allergies ? 
                         `yes ${healthInformation.allergies}` 
                         : 
@@ -70,27 +45,32 @@ export const ChildDetailsCard = ({ schoolName, schoolYear, healthInformation, cu
                         <Text style= {styles.text}>None</Text>
                         }
                     </Text>
+                    <Text style= {styles.text}>Has a condition: {healthInformation.has_conditions ? 'yes' : 'no'}</Text>
+                    <Text style= {styles.text}>Has medication: {healthInformation.has_medication ? 'yes' : 'no'}</Text>
+                    {healthInformation.has_medication ? <Text style= {styles.text}>Medication: {healthInformation.medication}</Text> : 0}
                 </View>
                 :
                 <Text style= {styles.text}>No Health information was found on {fullName}!</Text>
             }
+            
+            <Text style= {styles.text}>Last Modified: {Moment(healthInformation.modified).format("DD of MMMM, YYYY")}</Text>
             <Text style= {styles.text}>Acount Created: {Moment(customerCreated).format("MMMM D, YYYY, h:mm:ss a")}</Text>
         </Card>
-    )
+    );
 };
 
 const styles = StyleSheet.create({
-    emergencyContactCard: {
+    infoCard: {
         paddingBottom: 15,
         paddingTop: 15,
-        borderColor: '#898989',
         backgroundColor: '#e6f4f4',
         marginBottom: 15
     },
     title: {
         paddingLeft: 20,
-        fontSize: 20,
-        marginBottom: 10
+        fontSize: 22,
+        marginBottom: 10,
+        color: '#2a2a2a'
     },
     text: {
         paddingLeft: 20,

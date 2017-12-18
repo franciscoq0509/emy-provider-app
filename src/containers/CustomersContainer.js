@@ -9,7 +9,7 @@ import { getFilteredCustomers } from '../selectors/index';
 
 const fetchCustomers = (jwt) => (
     fetch(
-        'https://emy-front-api.craig.27s-dev.net/providers-api/v1/55790419-dbb4-43b4-9c1d-7bae0a37004f/users?full_name=%&limit=200',
+        'https://emy-front-api.craig.27s-dev.net/providers-api/v1/55790419-dbb4-43b4-9c1d-7bae0a37004f/users?full_name=%',
         {
             headers: {
                 Authorization: `Bearer ${jwt}`

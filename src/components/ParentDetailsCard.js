@@ -3,7 +3,8 @@ import { Text, View, StyleSheet } from 'react-native';
 import React from 'react';
 const Moment = require('moment');
 
-export const ParentDetailsCard = ({ customerCreated, fullName }) => {
+export const ParentDetailsCard = ({ customerCreated, fullName, addresses }) => {
+    console.log(addresses);
     return (
         <Card>
             <Text style= {styles.text}>Account Created: {Moment(customerCreated).format("MMMM D, YYYY, h:mm:ss a")}</Text>
