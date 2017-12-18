@@ -1,7 +1,9 @@
 import { Card, Button } from 'react-native-elements';
 import { Text, View, StyleSheet } from 'react-native';
 import React from 'react';
+import call from 'react-native-phone-call';
 const Moment = require('moment');
+
 //emergency contact -- needs to save
 //school info -- done
 //health info -- done
@@ -30,6 +32,7 @@ export const ChildDetailsCard = ({ schoolName, schoolYear, healthInformation, cu
                                         backgroundColor='#74CC82'
                                         title={ obj[key].phone }
                                         iconRight={{name: 'phone', type: 'Entypo'}}
+                                        onPress={() => this.callNumber(obj[key].phone)}
                                     />
                                 </View>
                             </View>
@@ -38,6 +41,13 @@ export const ChildDetailsCard = ({ schoolName, schoolYear, healthInformation, cu
                 </View>
             );
         }
+    }
+
+    callNumber = (number) => {
+        call({
+            number: number.replace(/-|\s/g,""),
+            prompt: false
+        })
     }
 
     console.log('here', emergencyContacts);
@@ -76,12 +86,6 @@ const styles = StyleSheet.create({
         borderColor: '#898989',
         backgroundColor: '#e6f4f4',
         marginBottom: 15
-    },
-    emergencyContactBorderTop: {
-        borderWidth:  1,
-        borderLeftWidth: 0,
-        borderRightWidth: 0,
-        borderBottomWidth: 0,
     },
     title: {
         paddingLeft: 20,
