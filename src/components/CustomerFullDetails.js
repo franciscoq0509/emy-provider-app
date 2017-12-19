@@ -138,7 +138,7 @@ export const CustomerFullDetails = (props) => {
                 is_child ?
                 <View>
                     <Card title="Primary Contact" >
-                        <Text>{primaryContact.full_name}</Text> 
+                        <Text style={{alignSelf: 'center', fontSize: 18}}>{primaryContact.full_name}</Text> 
                         {createCallButton('Mobile', primaryContactPhones)}
                         {createCallButton('Work', primaryContactPhones)}
                         {createCallButton('Home', primaryContactPhones)}

@@ -34,7 +34,7 @@ class CustomerDetails extends React.Component {
     findAndSetPrimaryContact(id) {
         const primaryContact = findId(id, this.props.allCustomerDetails.allDetails);
         return primaryContact;
-    } 
+    }; 
 
     setDetailsState() {
         const { phoneNumbers, addresses, emergencyContacts, healthInfo, schoolInformation, allDetails } = this.props.allCustomerDetails;
@@ -58,7 +58,7 @@ class CustomerDetails extends React.Component {
             console.log('disptching new fetch for primary contact details');
             this.dispatchNewCustomerDetails(allDetails[id].primary_contact.id);
         }
-    }
+    };
 
     returnCustomerDetails = (id, jwt) => {
         return (dispatch) => {
@@ -87,7 +87,7 @@ class CustomerDetails extends React.Component {
                 }
             })
         .catch((err) => {console.log('about to set state for failed');this.setState({advancedDataLoadFailed: true, allCustomerDetails: 'error loading'})})
-    }
+    };
 
 
     componentWillMount() {
@@ -105,7 +105,7 @@ class CustomerDetails extends React.Component {
             }
 
         }
-    }
+    };
 
     render(){
         return (
