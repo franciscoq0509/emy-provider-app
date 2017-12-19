@@ -54,7 +54,6 @@ class CustomerDetails extends React.Component {
                 }
             }));
         } else {
-            //fetch for primary contact
             console.log('disptching new fetch for primary contact details');
             this.dispatchNewCustomerDetails(allDetails[id].primary_contact.id);
         }
