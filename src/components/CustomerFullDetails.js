@@ -42,6 +42,14 @@ export const CustomerFullDetails = (props) => {
             Work : phones[Object.keys(phones).find((key) => phones[key].name === 'Work')],
         }
     }
+    let primaryContactPhones = 0;
+    if(primaryContact && 'phones' in primaryContact) {
+        primaryContactPhones = {
+            Mobile : primaryContact.phones[Object.keys(primaryContact.phones).find((key) => primaryContact.phones[key].name === 'Mobile')],
+            Home : primaryContact.phones[Object.keys(primaryContact.phones).find((key) => primaryContact.phones[key].name === 'Home')],
+            Work : primaryContact.phones[Object.keys(primaryContact.phones).find((key) => primaryContact.phones[key].name === 'Work')],
+        }
+    }
     let healthInformation = 0;
     if(healthInfo !== undefined) {
         if(typeof healthInfo === 'object') {
@@ -49,31 +57,34 @@ export const CustomerFullDetails = (props) => {
         } 
     }
 
-    const callNumber = (type = null, number = null) => {
+    const callNumber = (type = null, phoneList, number = null) => {
         if(type === null && number !== null) {
+            console.log(type, phoneList);
             call({
                 number: number.replace(/-|\s/g,""),
                 prompt: false
             })
-        } else if (type !== null && number === null) {
-            if('phone' in phoneNumbers[type]) {
+        } else if (type !== null && phoneList !== null) {
+            console.log(type, phoneList);
+            if('phone' in phoneList[type]) {
                 call({
-                    number: phoneNumbers[type].phone.replace(/-|\s/g,""),
+                    number: phoneList[type].phone.replace(/-|\s/g,""),
                     prompt: false
                 })
             }
         }
     }
 
-    const findNumber = (type) => {
-        if(phoneNumbers && phoneNumbers[type]) {
+    const createCallButton = (type, phoneList) => {
+        console.log(phoneList);
+        if(phoneList && phoneList[type]) {
             return (
                 <Button
                     containerViewStyle={{marginTop: 30}}
                     backgroundColor='#74CC82'
-                    title={`${type}: ${phoneNumbers[type].phone}` }
+                    title={`${type}: ${phoneList[type].phone}` }
                     iconRight={{name: 'phone', type: 'Entypo'}}
-                    onPress={()=>callNumber(type)}
+                    onPress={()=>callNumber(type, phoneList, null)}
                 />
             );
         } 
@@ -99,7 +110,7 @@ export const CustomerFullDetails = (props) => {
                                         backgroundColor='#74CC82'
                                         title={ obj[key].phone }
                                         iconRight={{name: 'phone', type: 'Entypo'}}
-                                        onPress={() => callNumber(null, obj[key].phone)}
+                                        onPress={() => callNumber(null, null, obj[key].phone)}
                                     />
                                 </View>
                             </View>
@@ -118,16 +129,24 @@ export const CustomerFullDetails = (props) => {
                     <Text style= {styles.text}>{gender === 'M' ? 'Male' : 'Female'}</Text>
                     <Text style= {styles.text}>email: {email ? email : 'None found'}</Text>
                     <Text style= {styles.text}>DOB: {dob !== null ? Moment(dob).format("MMMM DD, YYYY") : 'Not found'}</Text>
-                    {findNumber('Mobile')}
-                    {findNumber('Work')}
-                    {findNumber('Home')}
+                    {createCallButton('Mobile', phoneNumbers)}
+                    {createCallButton('Work', phoneNumbers)}
+                    {createCallButton('Home', phoneNumbers)}
                 </View>
             </Card>
             {
                 is_child ?
-                <Card title="Emergency Contacts">
-                    {this.showEmergencyContacts(emergencyContacts)}
-                </Card>
+                <View>
+                    <Card title="Primary Contact" >
+                        <Text>{primaryContact.full_name}</Text> 
+                        {createCallButton('Mobile', primaryContactPhones)}
+                        {createCallButton('Work', primaryContactPhones)}
+                        {createCallButton('Home', primaryContactPhones)}
+                    </Card>
+                    <Card title="Emergency Contacts">
+                        {this.showEmergencyContacts(emergencyContacts)}
+                    </Card>
+                </View>
                 :
                 false
             }
