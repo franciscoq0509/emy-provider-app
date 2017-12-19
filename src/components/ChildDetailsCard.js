@@ -15,7 +15,7 @@ const Moment = require('moment');
 
 
 
-export const ChildDetailsCard = ({ schoolName, schoolYear, healthInformation, customerCreated, fullName, emergencyContacts, addresses }) => {
+export const ChildDetailsCard = ({ schoolName, schoolYear, healthInformation, customerCreated, fullName, emergencyContacts, addresses, familyDoctors }) => {
 
     callNumber = (number) => {
         call({
@@ -23,7 +23,7 @@ export const ChildDetailsCard = ({ schoolName, schoolYear, healthInformation, cu
             prompt: false
         })
     }
-    
+
     return (
         <Card>
             <View style={styles.infoCard}>
@@ -52,7 +52,28 @@ export const ChildDetailsCard = ({ schoolName, schoolYear, healthInformation, cu
                 :
                 <Text style= {styles.text}>No Health information was found on {fullName}!</Text>
             }
-            
+
+            {Object.keys(familyDoctors).length > 0 ?
+                <View style={styles.infoCard}>
+                    <Text style={styles.title}>Family Doctors</Text>
+                    {Object.keys(familyDoctors).map((d) => (
+                        <View key={familyDoctors[d]}>
+                            <Text style={styles.text}>{familyDoctors[d].medical_clinic}</Text>
+                            <Text style={styles.text}>Doctor: {familyDoctors[d].name}</Text>
+                            <Button
+                                small
+                                backgroundColor='#74CC82'
+                                title={ familyDoctors[d].phone }
+                                iconRight={{name: 'phone', type: 'Entypo'}}
+                                onPress={() => callNumber(familyDoctors[d].phone)}
+                            />
+                        </View>
+                    ))}
+                    
+                </View>
+                :
+                false
+            }
             <Text style= {styles.text}>Last Modified: {Moment(healthInformation.modified).format("DD of MMMM, YYYY")}</Text>
             <Text style= {styles.text}>Acount Created: {Moment(customerCreated).format("MMMM D, YYYY, h:mm:ss a")}</Text>
         </Card>

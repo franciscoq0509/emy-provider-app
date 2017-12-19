@@ -32,7 +32,7 @@ export const CustomerFullDetails = (props) => {
         primaryContact 
     } = props.allCustomerDetails;
 
-    console.log(primaryContact);
+    console.log(familyDoctors);
 
     let phoneNumbers = 0;
     if(phones !==undefined && typeof phones === 'object') {
@@ -162,6 +162,7 @@ export const CustomerFullDetails = (props) => {
                             customerCreated={created}
                             fullName={full_name}
                             addresses={addresses}
+                            familyDoctors={familyDoctors}
                         />
                         :
                         <ParentDetailsCard 
