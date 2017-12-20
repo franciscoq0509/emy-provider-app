@@ -4,9 +4,6 @@ import { requestCustomers, receiveNewCustomers, receiveCustomersError } from '..
 import CustomersListNavigator from '../components/CustomersListNavigator';
 import { getFilteredCustomers } from '../selectors/index';
 
-
-
-
 const fetchCustomers = (jwt) => (
     fetch(
         'https://emy-front-api.craig.27s-dev.net/providers-api/v1/55790419-dbb4-43b4-9c1d-7bae0a37004f/users?full_name=%',
@@ -43,6 +40,7 @@ class CustomersListContainer extends React.Component {
     }
 
     componentWillMount() {
+        console.log(this.props.jwt)
         this.setState(() => ({showSpinner: this.showLoadingSpinner, showLoadError: false}));
         this.props.dispatch(this.customersThunk())
         .then(

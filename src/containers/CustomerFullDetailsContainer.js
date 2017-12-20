@@ -7,7 +7,7 @@ import { saveCustomerDetails, saveCustomerDetailsFailure } from '../actions/cust
 
 
 const fetchCustomerDetails = (id, jwt) => {
-    return fetch(`https://emy-front-api.craig.27s-dev.net/providers-api/v1/55790419-dbb4-43b4-9c1d-7bae0a37004f/users/${id}`, 
+    return fetch(`https://emy-front-api.craig.27s-dev.net/providers-api/v1/55790419-dbb4-43b4-9c1d-7bae0a37004f/users/${id}?include_local_data=1`, 
         {
             headers: {
                 'Authorization': `Bearer ${jwt}`,

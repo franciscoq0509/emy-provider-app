@@ -56,6 +56,7 @@ export const CustomerFullDetails = (props) => {
             healthInformation = healthInfo[Object.keys(healthInfo)[0]] ? healthInfo[Object.keys(healthInfo)[0]] : 0; 
         } 
     }
+    console.log(healthInformation);
 
     const callNumber = (type = null, phoneList, number = null) => {
         if(type === null && number !== null) {

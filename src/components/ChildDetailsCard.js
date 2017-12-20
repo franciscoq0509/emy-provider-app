@@ -16,7 +16,7 @@ const Moment = require('moment');
 
 
 export const ChildDetailsCard = ({ schoolName, schoolYear, healthInformation, customerCreated, fullName, emergencyContacts, addresses, familyDoctors }) => {
-
+    console.log(fullName);
     callNumber = (number) => {
         call({
             number: number.replace(/-|\s/g,""),
@@ -31,13 +31,15 @@ export const ChildDetailsCard = ({ schoolName, schoolYear, healthInformation, cu
                 <Text style= {styles.text}>School: {schoolName ? schoolName : 'N/A'}</Text>
                 <Text style= {styles.text}>School Year: {schoolYear ? schoolYear : 'N/A'}</Text>
             </View>
+            
             {healthInformation ?
                 <View style={styles.infoCard}>
-                <Text style={styles.title}>Health Information</Text>
-                    <Text style= {styles.text}>Allergies: {healthInformation.allergies ? 
+                    <Text style={styles.title}>Health Information</Text>
+                    <Text style= {styles.text}>Allergies: {healthInformation.has_allergies ? 
                         `yes ${healthInformation.allergies}` 
                         : 
-                        'no'}</Text>
+                        'no'}
+                    </Text>
                     <Text style= {styles.text}>Bee Allergy Response: {
                         healthInformation.bee_allergy_response ?
                         <Text style= {styles.text}>{healthInformation.bee_allergy_response}</Text>
@@ -47,11 +49,12 @@ export const ChildDetailsCard = ({ schoolName, schoolYear, healthInformation, cu
                     </Text>
                     <Text style= {styles.text}>Has a condition: {healthInformation.has_conditions ? 'yes' : 'no'}</Text>
                     <Text style= {styles.text}>Has medication: {healthInformation.has_medication ? 'yes' : 'no'}</Text>
-                    {healthInformation.has_medication ? <Text style= {styles.text}>Medication: {healthInformation.medication}</Text> : 0}
+                    {healthInformation.has_medication ? <Text style= {styles.text}>Medication: {healthInformation.medication}</Text> : false}
                 </View>
                 :
                 <Text style= {styles.text}>No Health information was found on {fullName}!</Text>
             }
+            
 
             {Object.keys(familyDoctors).length > 0 ?
                 <View style={styles.infoCard}>
@@ -74,11 +77,14 @@ export const ChildDetailsCard = ({ schoolName, schoolYear, healthInformation, cu
                 :
                 false
             }
+            
             <Text style= {styles.text}>Last Modified: {Moment(healthInformation.modified).format("DD of MMMM, YYYY")}</Text>
             <Text style= {styles.text}>Acount Created: {Moment(customerCreated).format("MMMM D, YYYY, h:mm:ss a")}</Text>
         </Card>
     );
 };
+
+
 
 const styles = StyleSheet.create({
     infoCard: {

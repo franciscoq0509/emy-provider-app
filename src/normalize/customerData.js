@@ -70,6 +70,16 @@ console.log('phones');
         console.log('in');
         normalizedSchoolYear[customerDetails.id] = customerDetails.school_year;
     }
+    let normalizedAuthPickups = {[customerDetails.id] : 0};
+    if('authorized_pickups' in customerDetails) {
+        normalizedAuthPickups[customerDetails.id] = customerDetails.authorized_pickups.filter((key) => customerDetails.authorized_pickups[key] !== null);
+    }
+    let normalizedUnauthPickups = {[customerDetails] : 0};
+    if('unauthorized_persons' in customerDetails && customerDetails.unauthorized_persons.any_unauthorized_persons !== 0) {
+        console.log(customerDetails.unauthorized_persons);
+        normalizedUnauthPickups[customerDetails.id] = customerDetails.unauthorized_persons;
+        console.log(normalizedUnauthPickups);
+    }
 console.log(normalizedSchoolName);
     return {
         allDetails : normalizedAllDetails.entities.allCustomersDetails[customerDetails.id] ,
@@ -79,7 +89,9 @@ console.log(normalizedSchoolName);
         healthInfo : normalizedHealthInfo.entities[customerDetails.id],
         phoneNumbers : normalizedPhoneNumbers.entities[customerDetails.id],
         schoolName : normalizedSchoolName[customerDetails.id],
-        schoolYear : normalizedSchoolYear[customerDetails.id]
+        schoolYear : normalizedSchoolYear[customerDetails.id],
+        authPickups : normalizedAuthPickups[customerDetails.id],
+        unauthorizedPickups : normalizedUnauthPickups[customerDetails.id]
     };
 }
 

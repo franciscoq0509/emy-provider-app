@@ -53,6 +53,14 @@ export default (state = stateInit, action) => {
                         ...state.schoolInformation.schoolYear,
                         [action.id] : action.normalizedCustomerDetails.schoolYear
                     }
+                },
+                authorizedPickups : {
+                    ...state.authorizedPickups,
+                    [action.id] : action.normalizedCustomerDetails.authPickups
+                },
+                unauthorizedPickups : {
+                    ...state.unauthorizedPickups,
+                    [action.id] : action.normalizedCustomerDetails.unauthorizedPickups || 0
                 }
             
             };
