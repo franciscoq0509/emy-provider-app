@@ -33,9 +33,6 @@ export const receiveCustomersError = (error) => ({
 });
 
 
-
-
-
 //user clicks on customers name
 export const selectCustomerForDetails = (id) => ({ 
     type: 'SELECT_CUSTOMER_FOR_DETAILS',

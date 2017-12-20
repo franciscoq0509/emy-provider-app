@@ -15,7 +15,7 @@ const Moment = require('moment');
 
 
 
-export const ChildDetailsCard = ({ schoolName, schoolYear, healthInformation, customerCreated, fullName, emergencyContacts, addresses, familyDoctors }) => {
+export const ChildDetailsCard = ({ schoolName, schoolYear, healthInformation, customerCreated, fullName, emergencyContacts, addresses, familyDoctors, authorizedPickups, unauthorizedPickups }) => {
     console.log(fullName);
     callNumber = (number) => {
         call({
@@ -55,6 +55,42 @@ export const ChildDetailsCard = ({ schoolName, schoolYear, healthInformation, cu
                 <Text style= {styles.text}>No Health information was found on {fullName}!</Text>
             }
             
+
+            {authorizedPickups ?
+                <View style={styles.infoCard}> 
+                <Text style={styles.title}>Authorized Pickups</Text>
+                {authorizedPickups.map(({first_name, last_name, phone, active}, index) => (
+                    active ? 
+                        <View key={index}>
+                            {(first_name && last_name) ? <Text style={{fontSize: 20, alignSelf: 'center', marginTop: 50, marginBottom: 10}}>{first_name} {last_name}</Text> : false} 
+                            {phone ?
+                                <Button
+                                    small
+                                    backgroundColor='#74CC82'
+                                    title={ phone }
+                                    iconRight={{name: 'phone', type: 'Entypo'}}
+                                    onPress={() => callNumber(phone)}
+                                />
+                                :
+                                <Button
+                                    small
+                                    backgroundColor='#E5644E'
+                                    title={ 'None Number Found' }
+                                    onPress={false}
+                                />
+                            }
+                        </View>
+                        : 
+                        false
+                ))}
+                </View>
+                :
+                <View style={styles.infoCard}>
+                    <Text style={styles.title}>No auth pickups found</Text>
+                </View>
+            }
+
+
 
             {Object.keys(familyDoctors).length > 0 ?
                 <View style={styles.infoCard}>
