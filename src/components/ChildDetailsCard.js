@@ -4,19 +4,26 @@ import React from 'react';
 import call from 'react-native-phone-call';
 const Moment = require('moment');
 
-//emergency contact -- done
-//school info -- done
-//health info -- done
-//auth pickups/ non-auth pickups --not found
-//adresses -- onlu parent
-//...everything else in order
-//family doctor w/ call button
-//complete health info -- done
+//health info -- add provider health notes
+//auth pickups/ non-auth pickups --finish auth pickups. render non auth pickups
+//adresses -- do for both parent and child if exists
+//family doctor w/ call button -- do for parent
+//all other parent data found
 
-
-
-export const ChildDetailsCard = ({ schoolName, schoolYear, healthInformation, customerCreated, fullName, emergencyContacts, addresses, familyDoctors, authorizedPickups, unauthorizedPickups }) => {
-    console.log(fullName);
+export const ChildDetailsCard = ({ 
+        schoolName, 
+        schoolYear, 
+        healthInformation, 
+        customerCreated, 
+        fullName, 
+        emergencyContacts, 
+        addresses, 
+        familyDoctors, 
+        parentAuthorizedPickups, 
+        providerAuthorizedPickups, 
+        unauthorizedPickups 
+    }) => {
+    console.log(unauthorizedPickups);
     callNumber = (number) => {
         call({
             number: number.replace(/-|\s/g,""),
@@ -52,14 +59,15 @@ export const ChildDetailsCard = ({ schoolName, schoolYear, healthInformation, cu
                     {healthInformation.has_medication ? <Text style= {styles.text}>Medication: {healthInformation.medication}</Text> : false}
                 </View>
                 :
-                <Text style= {styles.text}>No Health information was found on {fullName}!</Text>
+                <View style={styles.infoCard}> 
+                    <Text style= {styles.title}>No Health information was found on {fullName}</Text>
+                </View>
             }
             
-
-            {authorizedPickups ?
+            {parentAuthorizedPickups ?
                 <View style={styles.infoCard}> 
-                <Text style={styles.title}>Authorized Pickups</Text>
-                {authorizedPickups.map(({first_name, last_name, phone, active}, index) => (
+                <Text style={styles.title}>Parent Authorized Pickups</Text>
+                {parentAuthorizedPickups.map(({first_name, last_name, phone, active}, index) => (
                     active ? 
                         <View key={index}>
                             {(first_name && last_name) ? <Text style={{fontSize: 20, alignSelf: 'center', marginTop: 50, marginBottom: 10}}>{first_name} {last_name}</Text> : false} 
@@ -75,7 +83,7 @@ export const ChildDetailsCard = ({ schoolName, schoolYear, healthInformation, cu
                                 <Button
                                     small
                                     backgroundColor='#E5644E'
-                                    title={ 'None Number Found' }
+                                    title={ 'No Number Found' }
                                     onPress={false}
                                 />
                             }
@@ -86,11 +94,27 @@ export const ChildDetailsCard = ({ schoolName, schoolYear, healthInformation, cu
                 </View>
                 :
                 <View style={styles.infoCard}>
-                    <Text style={styles.title}>No auth pickups found</Text>
+                    <Text style={styles.title}>No parent authorized pickups found</Text>
                 </View>
             }
 
-
+            {providerAuthorizedPickups ?
+                <View style={styles.infoCard}> 
+                <Text style={styles.title}>Provider Authorized Pickups</Text>
+                    <View>
+                        {
+                            (providerAuthorizedPickups.authorized_pickups) ? 
+                            <Text style={styles.text}>{providerAuthorizedPickups.authorized_pickups}</Text> 
+                            : 
+                            <Text style={styles.text}>No provider authorized Pickups found</Text>
+                        } 
+                    </View>
+                </View>
+                :
+                <View style={styles.infoCard}>
+                    <Text style={styles.title}>No provider authorized pickups found</Text>
+                </View>
+            }
 
             {Object.keys(familyDoctors).length > 0 ?
                 <View style={styles.infoCard}>
@@ -119,8 +143,6 @@ export const ChildDetailsCard = ({ schoolName, schoolYear, healthInformation, cu
         </Card>
     );
 };
-
-
 
 const styles = StyleSheet.create({
     infoCard: {

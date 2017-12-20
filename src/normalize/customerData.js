@@ -70,10 +70,16 @@ console.log('phones');
         console.log('in');
         normalizedSchoolYear[customerDetails.id] = customerDetails.school_year;
     }
-    let normalizedAuthPickups = {[customerDetails.id] : 0};
+    let normalizedParentAuthPickups = {[customerDetails.id] : 0};
     if('authorized_pickups' in customerDetails) {
-        normalizedAuthPickups[customerDetails.id] = customerDetails.authorized_pickups.filter((key) => customerDetails.authorized_pickups[key] !== null);
+        normalizedParentAuthPickups[customerDetails.id] = customerDetails.authorized_pickups.filter((key) => customerDetails.authorized_pickups[key] !== null);
     }
+    console.log('======parent auth pick up');
+    let normalizedProviderAuthPickups = {[customerDetails.id] : 0};
+    if('provider_notes' in customerDetails && customerDetails.provider_notes !== null) {
+        normalizedProviderAuthPickups[customerDetails.id] = customerDetails.provider_notes;
+    }
+    console.log('======provider auth pick up');
     let normalizedUnauthPickups = {[customerDetails] : 0};
     if('unauthorized_persons' in customerDetails && customerDetails.unauthorized_persons.any_unauthorized_persons !== 0) {
         console.log(customerDetails.unauthorized_persons);
@@ -90,8 +96,10 @@ console.log(normalizedSchoolName);
         phoneNumbers : normalizedPhoneNumbers.entities[customerDetails.id],
         schoolName : normalizedSchoolName[customerDetails.id],
         schoolYear : normalizedSchoolYear[customerDetails.id],
-        authPickups : normalizedAuthPickups[customerDetails.id],
+        parentAuthPickups : normalizedParentAuthPickups[customerDetails.id],
+        providerAuthPickups : normalizedProviderAuthPickups[customerDetails.id],
         unauthorizedPickups : normalizedUnauthPickups[customerDetails.id]
+        
     };
 }
 

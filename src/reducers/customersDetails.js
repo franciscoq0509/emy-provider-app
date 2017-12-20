@@ -9,7 +9,8 @@ const stateInit = {
         schoolName : {},
         schoolYear : {}
     },
-    authorizedPickups: {},
+    parentAuthorizedPickups: {},
+    providerAuthorizedPickups: {},
     unauthorizedPickups: {},
     customerDetailsError : ""
 };
@@ -54,9 +55,13 @@ export default (state = stateInit, action) => {
                         [action.id] : action.normalizedCustomerDetails.schoolYear
                     }
                 },
-                authorizedPickups : {
-                    ...state.authorizedPickups,
-                    [action.id] : action.normalizedCustomerDetails.authPickups
+                parentAuthorizedPickups : {
+                    ...state.parentAuthorizedPickups,
+                    [action.id] : action.normalizedCustomerDetails.parentAuthPickups
+                },
+                providerAuthorizedPickups : {
+                    ...state.providerAuthorizedPickups,
+                    [action.id] : action.normalizedCustomerDetails.providerAuthPickups
                 },
                 unauthorizedPickups : {
                     ...state.unauthorizedPickups,

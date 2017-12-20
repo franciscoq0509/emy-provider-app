@@ -30,7 +30,8 @@ export const CustomerFullDetails = (props) => {
         addresses,
         familyDoctors,
         primaryContact,
-        authorizedPickups,
+        parentAuthorizedPickups,
+        providerAuthorizedPickups, 
         unauthorizedPickups
     } = props.allCustomerDetails;
 
@@ -138,7 +139,7 @@ export const CustomerFullDetails = (props) => {
                 </View>
             </Card>
             {
-                is_child ?
+                is_child && primaryContact ?
                 <View>
                     <Card title="Primary Contact" >
                         <Text style={{alignSelf: 'center', fontSize: 18}}>{primaryContact.full_name}</Text> 
@@ -166,7 +167,8 @@ export const CustomerFullDetails = (props) => {
                             fullName={full_name}
                             addresses={addresses}
                             familyDoctors={familyDoctors}
-                            authorizedPickups={authorizedPickups}
+                            parentAuthorizedPickups={parentAuthorizedPickups}
+                            providerAuthorizedPickups={providerAuthorizedPickups}
                             unauthorizedPickups={unauthorizedPickups}
                         />
                         :
