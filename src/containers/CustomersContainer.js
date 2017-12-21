@@ -10,7 +10,7 @@ const ENV = null;
 
 
 const fetchCustomers = (jwt) => {
-    console.log(`${ENV.customersBasicUrl(providerGuid)}`, ENV.customersBasicHeaders(jwt).headers);
+    console.log(`${ENV.customersBasicUrl(providerGuid)}`, ENV.customersBasicHeaders(jwt));
     return fetch(
         ENV.customersBasicUrl(providerGuid),ENV.customersBasicHeaders(jwt)
     )
