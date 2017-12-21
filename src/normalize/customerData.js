@@ -80,11 +80,19 @@ console.log('phones');
         normalizedProviderAuthPickups[customerDetails.id] = customerDetails.provider_notes;
     }
     console.log('======provider auth pick up');
-    let normalizedUnauthPickups = {[customerDetails] : 0};
-    if('unauthorized_persons' in customerDetails && customerDetails.unauthorized_persons.any_unauthorized_persons !== 0) {
-        console.log(customerDetails.unauthorized_persons);
-        normalizedUnauthPickups[customerDetails.id] = customerDetails.unauthorized_persons;
-        console.log(normalizedUnauthPickups);
+    let normalizedProviderUnauthPickups = {[customerDetails] : 0};
+    if('unauthorized_persons' in customerDetails && customerDetails.unauthorized_persons.any_unauthorized_persons !== 0
+        && customerDetails.unauthorized_persons.provider_unauthorized_persons) {
+        //console.log(customerDetails.unauthorized_persons);
+        normalizedProviderUnauthPickups[customerDetails.id] = customerDetails.unauthorized_persons.provider_unauthorized_persons;
+        //console.log(normalizedUnauthPickups);
+    }
+    let normalizedParentUnauthPickups = {[customerDetails] : 0};
+    if('unauthorized_persons' in customerDetails && customerDetails.unauthorized_persons.any_unauthorized_persons !== 0
+        && customerDetails.unauthorized_persons.unauthorized_persons) {
+        //console.log(customerDetails.unauthorized_persons);
+        normalizedParentUnauthPickups[customerDetails.id] = customerDetails.unauthorized_persons.unauthorized_persons;
+        //console.log(normalizedUnauthPickups);
     }
 console.log(normalizedSchoolName);
     return {
@@ -98,7 +106,8 @@ console.log(normalizedSchoolName);
         schoolYear : normalizedSchoolYear[customerDetails.id],
         parentAuthPickups : normalizedParentAuthPickups[customerDetails.id],
         providerAuthPickups : normalizedProviderAuthPickups[customerDetails.id],
-        unauthorizedPickups : normalizedUnauthPickups[customerDetails.id]
+        providerUnauthorizedPickups : normalizedProviderUnauthPickups[customerDetails.id],
+        parentUnauthorizedPickups : normalizedParentUnauthPickups[customerDetails.id]
         
     };
 }

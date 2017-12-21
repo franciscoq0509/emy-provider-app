@@ -32,6 +32,12 @@ export default class Login extends React.Component {
                 <Header />
                 {this.state.showError && <ErrorMessage message={this.state.message}  errorStyle={'bubble'}/>}
                 <View  style={styles.wrapper}>
+                    {
+                        __DEV__ ?
+                            <Text>dev</Text>
+                        :
+                        <Text>prod</Text>
+                    }
                     <FormLabel>User Name</FormLabel>
                     <FormInput
                         inputStyle={styles.formField} 

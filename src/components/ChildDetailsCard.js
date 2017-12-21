@@ -21,7 +21,8 @@ export const ChildDetailsCard = ({
         familyDoctors, 
         parentAuthorizedPickups, 
         providerAuthorizedPickups, 
-        unauthorizedPickups 
+        providerUnauthorizedPickups,
+        parentUnauthorizedPickups 
     }) => {
     console.log(unauthorizedPickups);
     callNumber = (number) => {
@@ -115,6 +116,15 @@ export const ChildDetailsCard = ({
                     <Text style={styles.title}>No provider authorized pickups found</Text>
                 </View>
             }
+
+        {providerUnauthorizedPickups ?
+            <View style={styles.infoCard}>
+                <Text style={styles.title}>Provider Unauthorized pickups</Text>
+            </View>
+            :
+            false
+        }
+        
 
             {Object.keys(familyDoctors).length > 0 ?
                 <View style={styles.infoCard}>

@@ -32,7 +32,8 @@ export const CustomerFullDetails = (props) => {
         primaryContact,
         parentAuthorizedPickups,
         providerAuthorizedPickups, 
-        unauthorizedPickups
+        providerUnauthorizedPickups,
+        parentUnauthorizedPickups
     } = props.allCustomerDetails;
 
     console.log(familyDoctors);
@@ -169,7 +170,8 @@ export const CustomerFullDetails = (props) => {
                             familyDoctors={familyDoctors}
                             parentAuthorizedPickups={parentAuthorizedPickups}
                             providerAuthorizedPickups={providerAuthorizedPickups}
-                            unauthorizedPickups={unauthorizedPickups}
+                            providerUnauthorizedPickups={providerUnauthorizedPickups}
+                            parentUnauthorizedPickups={parentUnauthorizedPickups}
                         />
                         :
                         <ParentDetailsCard 
@@ -188,7 +190,7 @@ export const CustomerFullDetails = (props) => {
                         small
                         iconLeft
                         title='Show More'
-                        buttonStyle={ wrapper = {marginTop: 40} }
+                        buttonStyle={ wrapper = {marginTop: 40, marginBottom: 40} }
                         onPress={props.clickHandler}
                     />
                   }

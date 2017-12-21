@@ -5,4 +5,10 @@ import AppIndex from './src/components/AppIndex';
 AsyncStorage.removeItem('USER_TOKEN');
 console.log('running android');
 
+if(__DEV__) {
+    console.log('dev');
+} else {
+     console.log('prod')
+}
+
 AppRegistry.registerComponent('provider_app', () => AppIndex);

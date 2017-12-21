@@ -11,7 +11,8 @@ const stateInit = {
     },
     parentAuthorizedPickups: {},
     providerAuthorizedPickups: {},
-    unauthorizedPickups: {},
+    providerUnauthorizedPickups: {},
+    parentUnauthorizedPickups: {},
     customerDetailsError : ""
 };
 
@@ -63,9 +64,13 @@ export default (state = stateInit, action) => {
                     ...state.providerAuthorizedPickups,
                     [action.id] : action.normalizedCustomerDetails.providerAuthPickups
                 },
-                unauthorizedPickups : {
-                    ...state.unauthorizedPickups,
-                    [action.id] : action.normalizedCustomerDetails.unauthorizedPickups || 0
+                providerUnauthorizedPickups : {
+                    ...state.providerUnauthorizedPickups,
+                    [action.id] : action.normalizedCustomerDetails.providerUnauthorizedPickups || 0
+                },
+                parentUnauthorizedPickups : {
+                    ...state.parentUnauthorizedPickups,
+                    [action.id] : action.normalizedCustomerDetails.parentUnauthorizedPickups || 0
                 }
             
             };
