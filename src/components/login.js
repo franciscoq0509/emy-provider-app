@@ -3,12 +3,21 @@ import { View, Text } from 'react-native';
 import Header from './Header';
 import { ErrorMessage } from './ErrorMessage';
 import LoginSubmitButtonContainer from '../containers/LoginSubmitButtonContainer';
-import {FormLabel, FormInput} from 'react-native-elements';
+import {FormLabel, FormInput, CheckBox} from 'react-native-elements';
+import { setProviderGuid } from '../config/_ENV_';
 
 export default class Login extends React.Component {
     
     componentWillMount = () => {
-        this.setState(() => ({uname: "", pwd: "", showValidationError: false, showNetworkError: false, showUnknownError: false}));
+        this.setState(() => ({
+            uname: "", pwd: "", 
+            showValidationError: false, 
+            showNetworkError: false, 
+            showUnknownError: false,
+            pkcChecked : false,
+            premiumKidsCareChecked : false,
+            jerrysGymChecked : false 
+        }));
     }
 
     showErrorMessage = (err_message) => {
@@ -59,6 +68,48 @@ export default class Login extends React.Component {
                         textInputRef='password'
                         secureTextEntry={true}
                     />
+
+                    <CheckBox
+                        center
+                        title='PKC'
+                        check-square-o='check-square-o'
+                        uncheckedIcon='square-o'
+                        onPress={
+                            () => {
+                                console.log(this.state);
+                                setProviderGuid('pkc');
+                                this.setState({pkcChecked: true, premiumKidsCareChecked : false, jerrysGymChecked: false});
+                            }
+                        }
+                        checked={this.state.pkcChecked}
+                    />
+
+                    <CheckBox
+                        center
+                        title='Premium Kids Care'
+                        onPress={
+                            () => {
+                                console.log(this.state);
+                                setProviderGuid('premium-kids-care');
+                                this.setState({pkcChecked: false, premiumKidsCareChecked : true, jerrysGymChecked: false});
+                            }
+                        }
+                        checked={this.state.premiumKidsCareChecked}
+                    />
+
+                    <CheckBox
+                        center
+                        title='jerrys-gym'
+                        onPress={
+                            () => {
+                                console.log(this.state);
+                                setProviderGuid('jerrys-gym');
+                                this.setState({pkcChecked: false, premiumKidsCareChecked : false, jerrysGymChecked: true});
+                            }
+                        }
+                        checked={this.state.jerrysGymChecked}
+                    />
+
                     <View style={styles.submitButtonWrapper} >
                         <LoginSubmitButtonContainer 
                             

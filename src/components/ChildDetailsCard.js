@@ -117,17 +117,6 @@ export const ChildDetailsCard = ({
                 </View>
             }
 
-            {providerUnauthorizedPickups ?
-                <View style={styles.infoCard}>
-                    <Text style={styles.title}>Provider Unauthorized pickups</Text>
-                    <Text style={styles.text}>{providerUnauthorizedPickups}</Text>
-                </View>
-                :
-                <View style={styles.infoCard}>
-                    <Text style={styles.title}>No provider unauthorized pickups found</Text>
-                </View>
-            }
-
             {parentUnauthorizedPickups ?
                 <View style={styles.infoCard}>
                     <Text style={styles.title}>Parent Unauthorized pickups</Text>
@@ -138,7 +127,17 @@ export const ChildDetailsCard = ({
                     <Text style={styles.title}>No parent unauthorized pickups found</Text>
                 </View>
             }
-        
+
+            {providerUnauthorizedPickups ?
+                <View style={styles.infoCard}>
+                    <Text style={styles.title}>Provider Unauthorized pickups</Text>
+                    <Text style={styles.text}>{providerUnauthorizedPickups}</Text>
+                </View>
+                :
+                <View style={styles.infoCard}>
+                    <Text style={styles.title}>No provider unauthorized pickups found</Text>
+                </View>
+            }
 
             {Object.keys(familyDoctors).length > 0 ?
                 <View style={styles.infoCard}>
