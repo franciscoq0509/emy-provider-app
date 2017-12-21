@@ -43,21 +43,91 @@ export const ChildDetailsCard = ({
             {healthInformation ?
                 <View style={styles.infoCard}>
                     <Text style={styles.title}>Health Information</Text>
-                    <Text style= {styles.text}>Allergies: {healthInformation.has_allergies ? 
-                        `yes ${healthInformation.allergies}` 
+                    <Text style= {styles.boldText}>Allergies: </Text>
+                    {
+                        healthInformation.has_allergies ? 
+                        <View>
+                            <Text style={styles.subBoldText}>From Parent:</Text>
+                            <Text style={styles.text}>{healthInformation.allergies}</Text>
+                        </View>
                         : 
-                        'no'}
-                    </Text>
-                    <Text style= {styles.text}>Bee Allergy Response: {
+                        <Text style={styles.text}>None</Text>
+                    }
+                    {
+                        healthInformation.provider_allergies ? 
+                        <View>
+                            <Text style={styles.subBoldText}>From Provider:</Text>
+                            <Text style={styles.text}>{healthInformation.provider_allergies}</Text>
+                        </View>
+                        : 
+                        <View>
+                            <Text style={styles.subBoldText}>From Provider:</Text>
+                            <Text style={styles.text}>None</Text>
+                        </View>
+                        
+                    }
+                    <Text style= {styles.boldText}>Bee Allergy Response: </Text>
+                    {
                         healthInformation.bee_allergy_response ?
-                        <Text style= {styles.text}>{healthInformation.bee_allergy_response}</Text>
+                        <View>
+                            <Text style={styles.subBoldText}>From Parent:</Text>
+                            <Text style= {styles.text}>{healthInformation.bee_allergy_response}</Text>
+                        </View>
+                        
                         :
-                        <Text style= {styles.text}>None</Text>
-                        }
-                    </Text>
-                    <Text style= {styles.text}>Has a condition: {healthInformation.has_conditions ? 'yes' : 'no'}</Text>
-                    <Text style= {styles.text}>Has medication: {healthInformation.has_medication ? 'yes' : 'no'}</Text>
-                    {healthInformation.has_medication ? <Text style= {styles.text}>Medication: {healthInformation.medication}</Text> : false}
+                        <View>
+                            <Text style={styles.subBoldText}>From Parent:</Text>
+                            <Text style= {styles.text}>None</Text>
+                        </View>
+                        
+                    }
+                    {
+                        healthInformation.provider_bee_allergy_response ?
+                        <View>
+                            <Text style={styles.subBoldText}>From Provider:</Text>
+                            <Text style= {styles.text}>{healthInformation.provider_bee_allergy_response}</Text>
+                        </View>
+                        
+                        :
+                        <View>
+                            <Text style={styles.subBoldText}>From Provider:</Text>
+                            <Text style= {styles.text}>None</Text>
+                        </View>
+                        
+                    }
+                    <Text style= {styles.boldText}>Medical Information: </Text>
+                    {
+                        healthInformation.medical_info ?
+                        <View>
+                            <Text style={styles.subBoldText}>From Parent:</Text>
+                            <Text style= {styles.text}>{healthInformation.medical_info}</Text>
+                        </View>
+                        
+                        :
+                        <View>
+                            <Text style={styles.subBoldText}>From Parent:</Text>
+                            <Text style= {styles.text}>None</Text>
+                        </View>
+                        
+                    }
+                    {
+                        healthInformation.provider_medical_info ?
+                        <View>
+                            <Text style={styles.subBoldText}>From Provider:</Text>
+                            <Text style= {styles.text}>{healthInformation.provider_medical_info}</Text>
+                        </View>
+                        
+                        :
+                        <View>
+                            <Text style={styles.subBoldText}>From Provider:</Text>
+                            <Text style= {styles.text}>None</Text>
+                        </View>
+                        
+                    }
+                    <Text style= {styles.subBoldText}>Has a condition: {healthInformation.has_conditions ? 'yes' : 'no'}</Text>
+                    <Text style= {styles.subBoldText}>Has medication: {healthInformation.has_medication ? 'yes' : 'no'}</Text>
+                    {healthInformation.has_medication ? <Text style= {styles.text}>Medication From Parent: {healthInformation.medication}</Text> : false}
+                    {healthInformation.provider_medication ? <Text style= {styles.text}>Medication From Provider: {healthInformation.provider_medication}</Text> : false}
                 </View>
                 :
                 <View style={styles.infoCard}> 
@@ -184,6 +254,17 @@ const styles = StyleSheet.create({
         paddingLeft: 20,
         fontSize: 18,
         marginBottom: 15
+    },
+    subBoldText: {
+        paddingLeft: 20,
+        fontSize: 18,
+        color: '#2A2A2A'
+    },
+    boldText:{
+        paddingLeft: 20,
+        fontSize: 22,
+        marginBottom: 15,
+        color: 'black'
     },
     emergencyContactName: {
         alignSelf:'center',
