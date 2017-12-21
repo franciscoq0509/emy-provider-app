@@ -4,7 +4,7 @@ import { SearchBar } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { setCustomersSearchFilter } from '../actions/customerFilters';
 import { setActivitiesSearchFilter } from '../actions/activitiesFilter';
-import { Debounce } from 'react-throttle';
+//import { Debounce } from 'react-throttle';
 
 
 const StandardSearchbar = (props) => {
@@ -12,7 +12,7 @@ const StandardSearchbar = (props) => {
         switch (props.search) {
             case 'allCustomers':
                 return (
-                    <Debounce time="100" handler="onChangeText">
+                    //here
                         <SearchBar 
                             placeholder={this.setPlaceholder()} 
                             lightTheme 
@@ -21,11 +21,11 @@ const StandardSearchbar = (props) => {
                                 return props.dispatch(setCustomersSearchFilter(value))
                             }} 
                         />
-                    </Debounce>
+                    //end here
                 );  
             case 'allActivities':
                 return (
-                    <Debounce time="100" handler="onChangeText">
+                    //here
                         <SearchBar 
                             placeholder={this.setPlaceholder()} 
                             lightTheme 
@@ -34,7 +34,7 @@ const StandardSearchbar = (props) => {
                                 return props.dispatch(setActivitiesSearchFilter(value))
                             }} 
                         />
-                    </Debounce>
+                    //end here
                 );
             default:
                 return null;
@@ -63,3 +63,5 @@ const StandardSearchbar = (props) => {
 
 
 export default connect()(StandardSearchbar);
+
+//<Debounce time="100" handler="onChangeText">
