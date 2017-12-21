@@ -24,7 +24,7 @@ export const ChildDetailsCard = ({
         providerUnauthorizedPickups,
         parentUnauthorizedPickups 
     }) => {
-    console.log(unauthorizedPickups);
+    console.log(providerUnauthorizedPickups);
     callNumber = (number) => {
         call({
             number: number.replace(/-|\s/g,""),
@@ -117,13 +117,27 @@ export const ChildDetailsCard = ({
                 </View>
             }
 
-        {providerUnauthorizedPickups ?
-            <View style={styles.infoCard}>
-                <Text style={styles.title}>Provider Unauthorized pickups</Text>
-            </View>
-            :
-            false
-        }
+            {providerUnauthorizedPickups ?
+                <View style={styles.infoCard}>
+                    <Text style={styles.title}>Provider Unauthorized pickups</Text>
+                    <Text style={styles.text}>{providerUnauthorizedPickups}</Text>
+                </View>
+                :
+                <View style={styles.infoCard}>
+                    <Text style={styles.title}>No provider unauthorized pickups found</Text>
+                </View>
+            }
+
+            {parentUnauthorizedPickups ?
+                <View style={styles.infoCard}>
+                    <Text style={styles.title}>Parent Unauthorized pickups</Text>
+                    <Text style={styles.text}>{parentUnauthorizedPickups}</Text>
+                </View>
+                :
+                <View style={styles.infoCard}>
+                    <Text style={styles.title}>No parent unauthorized pickups found</Text>
+                </View>
+            }
         
 
             {Object.keys(familyDoctors).length > 0 ?

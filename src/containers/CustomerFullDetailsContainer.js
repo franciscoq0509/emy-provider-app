@@ -4,17 +4,12 @@ import { connect } from 'react-redux';
 import findId from '../utilities/findId';
 import { CustomerFullDetails } from '../components/CustomerFullDetails';
 import { saveCustomerDetails, saveCustomerDetailsFailure } from '../actions/customers';
+import { _ENV_, providerGuid } from '../config/_ENV_';
 
+const ENV = null;
 
 const fetchCustomerDetails = (id, jwt) => {
-    return fetch(`https://emy-front-api.craig.27s-dev.net/providers-api/v1/55790419-dbb4-43b4-9c1d-7bae0a37004f/users/${id}?include_local_data=1`, 
-        {
-            headers: {
-                'Authorization': `Bearer ${jwt}`,
-                'X-enrolmy-slug': '55790419-dbb4-43b4-9c1d-7bae0a37004f'
-            }
-        }
-    )
+    return fetch(ENV.customersFullUrl(providerGuid, id),ENV.customersFullHeaders(providerGuid, jwt)) 
 };
 
 
@@ -96,6 +91,7 @@ class CustomerDetails extends React.Component {
 
 
     componentWillMount() {
+        ENV = _ENV_();
         this.setState(() => ({showMoreClicked: false, clickHandler: this.clicked, advancedDataLoadFailed: false})); 
         if(this.props.navigation.state.params.customerId) {
             this.setState(() => ({

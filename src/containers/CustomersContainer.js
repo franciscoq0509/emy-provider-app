@@ -3,17 +3,18 @@ import { connect } from 'react-redux';
 import { requestCustomers, receiveNewCustomers, receiveCustomersError } from '../actions/customers';
 import CustomersListNavigator from '../components/CustomersListNavigator';
 import { getFilteredCustomers } from '../selectors/index';
+import { _ENV_, providerGuid } from '../config/_ENV_';
 
-const fetchCustomers = (jwt) => (
-    fetch(
-        'https://emy-front-api.craig.27s-dev.net/providers-api/v1/55790419-dbb4-43b4-9c1d-7bae0a37004f/users?full_name=%',
-        {
-            headers: {
-                Authorization: `Bearer ${jwt}`
-            }
-        }
+
+const ENV = null;
+
+
+const fetchCustomers = (jwt) => {
+    console.log(`${ENV.customersBasicUrl(providerGuid)}`, ENV.customersBasicHeaders(jwt).headers);
+    return fetch(
+        ENV.customersBasicUrl(providerGuid),ENV.customersBasicHeaders(jwt)
     )
-);
+};
 
 
 
@@ -40,7 +41,7 @@ class CustomersListContainer extends React.Component {
     }
 
     componentWillMount() {
-        console.log(this.props.jwt)
+        ENV = _ENV_();
         this.setState(() => ({showSpinner: this.showLoadingSpinner, showLoadError: false}));
         this.props.dispatch(this.customersThunk())
         .then(

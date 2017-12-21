@@ -40,11 +40,15 @@ export const setProviderGuid = (provider) => {
     switch (provider) {
         case 'jerrys-gym':
             providerGuid = '55790419-dbb4-43b4-9c1d-7bae0a37004f'
+            break;
         case 'pkc':
             providerGuid = '588a865b-da6c-4d19-a8e4-612e0a4d0aec'
+            break;
         case 'premium-kids-care':
             providerGuid = '562963ca-14b0-44aa-aa64-790c0a4d0aec '
+            break;
         default:
             providerGuid = '55790419-dbb4-43b4-9c1d-7bae0a37004f'
+            break;
     }
 };
