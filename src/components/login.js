@@ -16,7 +16,8 @@ export default class Login extends React.Component {
             showUnknownError: false,
             pkcChecked : false,
             premiumKidsCareChecked : false,
-            jerrysGymChecked : false 
+            jerrysGymChecked : false,
+            orgs : ['pkcChecked','premiumKidsCareChecked','jerrysGymChecked'] 
         }));
     }
 
@@ -117,6 +118,7 @@ export default class Login extends React.Component {
                             uname={this.state.uname} 
                             pwd={this.state.pwd}
                             showErrorMessage={this.showErrorMessage}
+                            orgSelected={this.state.orgs.filter((o)=>this.state[o]!==false)}
                         />
                     </View>
                     

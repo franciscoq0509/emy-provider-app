@@ -4,6 +4,7 @@ import { SubmitButton } from '../components/SubmitButton';
 import { connect } from 'react-redux';
 import { saveNewJwt } from '../actions/jwt';
 import { _setUserToken, loginTokenName, _checkUserLoggedIn } from '../utilities/userAuth';
+import { providerGuid } from '../config/_ENV_';
 
 
 const _options = (guid, uname, pwd) => ({
@@ -21,9 +22,12 @@ const fetchJwt = (uname, pwd, guid) => (
 
 class LoginSubmitButtonContainer extends React.Component {
    
-    
+    componentWillReceiveProps(props) {
+        console.log(providerGuid);
+    }
+
     startSubmitProcess = () => {
-        fetchJwt('jerrys@gymowner.cxm','L#N#marlin28', guid = '55790419-dbb4-43b4-9c1d-7bae0a37004f')//this.props.uname, this.props.pwd
+        fetchJwt('jerrys@gymowner.cxm','L#N#marlin28', guid = providerGuid)
         .then(
             (data) => {
                 if (data.status === 200 && data._bodyText) { 
@@ -41,6 +45,7 @@ class LoginSubmitButtonContainer extends React.Component {
     }
     
     render() {
+        
         return (
             <SubmitButton pressed={this.startSubmitProcess}/>
         );
