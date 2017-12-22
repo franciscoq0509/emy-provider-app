@@ -1,6 +1,6 @@
 import React from 'react';
 import { FlatList, Text, ActivityIndicator, View } from 'react-native'
-import { List } from 'react-native-elements';
+import { List, Button } from 'react-native-elements';
 import { CustomerItem } from './CustomerItem';
 import { StackNavigator } from 'react-navigation';
 import StandardSearchbar from './StandardSearchbar';
@@ -23,6 +23,7 @@ class CustomersList extends React.PureComponent {
     _keyExtractor = (item, index) => index;
 
     render() {
+        console.log(this.props);
         switch (this.props.screenProps.showLoadError) {
             case true:
                 return (
@@ -31,6 +32,15 @@ class CustomersList extends React.PureComponent {
             default:
                 return (
                     <View  style={ center = {flex:1} }>
+                        <View>
+                            <Text>something went wrong? click below to refresh</Text>
+                            <Button
+                                small
+                                backgroundColor='#74CC82'
+                                title='refresh'
+                                onPress={() => this.props.screenProps.errorLogout()}
+                            />
+                        </View>
                         
                         {this.props.screenProps.showSpinner() ? 
                             <View style={spinnerStyle.container}>

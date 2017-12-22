@@ -2,7 +2,7 @@ import { Card, Button, Badge } from 'react-native-elements';
 import { Text, View, StyleSheet } from 'react-native';
 import React from 'react';
 import call from 'react-native-phone-call';
-import { displayQuestionAndAnswer } from '../utilities/customQuestionParser';
+//import { displayQuestionAndAnswer } from '../utilities/customQuestionParser';
 const Moment = require('moment');
 
 //health info -- add provider health notes
@@ -41,6 +41,8 @@ export const ChildDetailsCard = ({
                 <Text style= {styles.text}>School: {schoolName ? schoolName : 'N/A'}</Text>
                 <Text style= {styles.text}>School Year: {schoolYear ? schoolYear : 'N/A'}</Text>
             </View>
+
+
             
             {healthInformation ?
                 <View style={styles.infoCard}>
@@ -232,31 +234,35 @@ export const ChildDetailsCard = ({
                 :
                 false
             }
-            {customQuestions && customQuestions.length > 0 ?
-                <View  style={styles.infoCard}>
-                {customQuestions.map((obj, index) => {
-                    const displayObject = displayQuestionAndAnswer(obj);
-                    console.log(displayObject);
-                    if(displayObject !== null) {
-                        return (
-                            <View key={index}>
-                                <Text>{displayObject.question} ?</Text>
-                                <Text>{displayObject.answer}</Text>
-                            </View>
-                        );
-                    }   
-                    return false;
-                })}
-                </View>
-                :
-                false
-            }
+            
             
             <Text style= {styles.text}>Last Modified: {Moment(healthInformation.modified).format("DD of MMMM, YYYY")}</Text>
             <Text style= {styles.text}>Acount Created: {Moment(customerCreated).format("MMMM D, YYYY, h:mm:ss a")}</Text>
         </Card>
     );
 };
+
+
+//custom questions WIP
+// {customQuestions && customQuestions.length > 0 ?
+//     <View  style={styles.infoCard}>
+//     {customQuestions.map((obj, index) => {
+//         const displayObject = displayQuestionAndAnswer(obj);
+//         console.log(displayObject);
+//         if(displayObject !== null) {
+//             return (
+//                 <View key={index}>
+//                     <Text>{displayObject.question} ?</Text>
+//                     <Text>{displayObject.answer}</Text>
+//                 </View>
+//             );
+//         }   
+//         return false;
+//     })}
+//     </View>
+//     :
+//     false
+// }
 
 const styles = StyleSheet.create({
     infoCard: {

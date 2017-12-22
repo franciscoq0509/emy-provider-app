@@ -7,6 +7,7 @@ import Header from '../components/Header';
 import ActivitiesNavigator from '../components/ActivitiesNavigator';
 import QuickBook from '../components/QuickBook';
 import { Icon } from 'react-native-elements';
+import Login from '../components/login';
 
 
 // const HomeScreen = ({ navigation }) => {
@@ -57,12 +58,19 @@ const SignedInNavigator = TabNavigator({
         Customers: {
             screen: CustomersScreen,
             navigationOptions: {
+                tabBarVisible: false,
                 headerTitle: 'All Customers',
                 tabBarIcon: () => (
                     <Icon name='users' type='entypo'/>
                   )
             },
         },
+        ErrorLogout: {
+            screen: Login,
+            navigationOptions: {
+                tabBarVisible: false
+            }
+        }
         // Activities: {
         //     screen: ActivitiesScreen,
         //     navigationOptions: {

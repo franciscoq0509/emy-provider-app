@@ -83,16 +83,12 @@ console.log('phones');
     let normalizedProviderUnauthPickups = {[customerDetails.id] : 0};
     if('unauthorized_persons' in customerDetails && customerDetails.unauthorized_persons.any_unauthorized_persons !== 0
         && customerDetails.unauthorized_persons.provider_unauthorized_persons) {
-        //console.log(customerDetails.unauthorized_persons);
         normalizedProviderUnauthPickups[customerDetails.id] = customerDetails.unauthorized_persons.provider_unauthorized_persons;
-        //console.log(normalizedUnauthPickups);
     }
     let normalizedParentUnauthPickups = {[customerDetails.id] : 0};
     if('unauthorized_persons' in customerDetails && customerDetails.unauthorized_persons.any_unauthorized_persons !== 0
         && customerDetails.unauthorized_persons.unauthorized_persons) {
-        //console.log(customerDetails.unauthorized_persons);
         normalizedParentUnauthPickups[customerDetails.id] = customerDetails.unauthorized_persons.unauthorized_persons;
-        //console.log(normalizedUnauthPickups);
     }
     let normalizedCustomQuestions = {[customerDetails.id] : 0};
     console.log(typeof customerDetails.custom_questions);
@@ -101,6 +97,17 @@ console.log('phones');
         && customerDetails.custom_questions.length > 0) {
             normalizedCustomQuestions[customerDetails.id] = customerDetails.custom_questions;
         }
+    // let photoConsent = {[customerDetails.id] : 'no'};
+    //     if('user_client_permissions' in customerDetails && 'has_consent_to_take_photo' in customerDetails.user_client_permissions) {
+    //         try {
+    //             photoConsent[customerDetails.id] = parseInt(customerDetails.user_client_permissions.has_consent_to_take_photo) ?
+    //                 'yes'
+    //                 :
+    //                 'no'
+    //         } catch {
+    //             photoConsent[customerDetails.id] = 'unknown';
+    //         }
+    //     } else photoConsent[customerDetails.id] = 'unknown';
 console.log(normalizedSchoolName);
     return {
         allDetails : normalizedAllDetails.entities.allCustomersDetails[customerDetails.id] ,
@@ -115,25 +122,7 @@ console.log(normalizedSchoolName);
         providerAuthPickups : normalizedProviderAuthPickups[customerDetails.id],
         providerUnauthorizedPickups : normalizedProviderUnauthPickups[customerDetails.id],
         parentUnauthorizedPickups : normalizedParentUnauthPickups[customerDetails.id],
-        customQuestions : normalizedCustomQuestions[customerDetails.id]
-        
+        customQuestions : normalizedCustomQuestions[customerDetails.id],
+        //photoConsent : photoConsent[customerDetails.id]
     };
 }
-
-//might need an entitiy with user uuid and user_id
-
-//full details all keyed by id
-
-//allCustomersDetails
-//addresses --
-//custom questions
-//educations
-//emergency contacts --
-//ethnic groups
-//family doctors --
-//health information --
-//phones --
-//residency status
-//unauthorized persons
-//user client permissions
-//

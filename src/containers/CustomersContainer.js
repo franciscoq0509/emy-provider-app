@@ -41,6 +41,8 @@ class CustomersListContainer extends React.Component {
     }
 
     componentWillMount() {
+    
+        //this.props.nav.navigation.navigate('ErrorLogout');
         ENV = _ENV_();
         this.setState(() => ({showSpinner: this.showLoadingSpinner, showLoadError: false}));
         this.props.dispatch(this.customersThunk())
@@ -66,6 +68,11 @@ class CustomersListContainer extends React.Component {
 
     }
 
+    goToLogin = () => {
+        console.log('error clicked');
+        this.props.nav.navigation.navigate('ErrorLogout')
+    }
+
 	componentWillReceiveProps(nextProps) { 
 		if(this.props !== nextProps) {
             this.setState(() => ({filteredCustomers : nextProps.filteredCustomers}));
@@ -80,7 +87,8 @@ class CustomersListContainer extends React.Component {
                         customers: this.state.customers, 
                         filteredCustomers: this.state.filteredCustomers, 
                         showSpinner: this.state.showSpinner,
-                        showLoadError: this.state.showLoadError
+                        showLoadError: this.state.showLoadError,
+                        errorLogout : ()=>this.goToLogin()
                     } 
                 } 
                 nav={this.props.nav}
