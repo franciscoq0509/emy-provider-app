@@ -69,48 +69,51 @@ export default class Login extends React.Component {
                         textInputRef='password'
                         secureTextEntry={true}
                     />
-
-                    <CheckBox
-                        center
-                        title='PKC'
-                        check-square-o='check-square-o'
-                        uncheckedIcon='square-o'
-                        onPress={
-                            () => {
-                                console.log(this.state);
-                                setProviderGuid('pkc');
-                                this.setState({pkcChecked: true, premiumKidsCareChecked : false, jerrysGymChecked: false});
+                    <View style={styles.checkboxWrapper}>
+                        <CheckBox
+                            textStyle={{fontSize: 10}}
+                            center
+                            title='PKC'
+                            check-square-o='check-square-o'
+                            uncheckedIcon='square-o'
+                            onPress={
+                                () => {
+                                    console.log(this.state);
+                                    setProviderGuid('pkc');
+                                    this.setState({pkcChecked: true, premiumKidsCareChecked : false, jerrysGymChecked: false});
+                                }
                             }
-                        }
-                        checked={this.state.pkcChecked}
-                    />
+                            checked={this.state.pkcChecked}
+                        />
 
-                    <CheckBox
-                        center
-                        title='Premium Kids Care'
-                        onPress={
-                            () => {
-                                console.log(this.state);
-                                setProviderGuid('premium-kids-care');
-                                this.setState({pkcChecked: false, premiumKidsCareChecked : true, jerrysGymChecked: false});
+                        <CheckBox
+                            textStyle={{fontSize: 10}}
+                            center
+                            title='Premium Kids Care'
+                            onPress={
+                                () => {
+                                    console.log(this.state);
+                                    setProviderGuid('premium-kids-care');
+                                    this.setState({pkcChecked: false, premiumKidsCareChecked : true, jerrysGymChecked: false});
+                                }
                             }
-                        }
-                        checked={this.state.premiumKidsCareChecked}
-                    />
+                            checked={this.state.premiumKidsCareChecked}
+                        />
 
-                    <CheckBox
-                        center
-                        title='jerrys-gym'
-                        onPress={
-                            () => {
-                                console.log(this.state);
-                                setProviderGuid('jerrys-gym');
-                                this.setState({pkcChecked: false, premiumKidsCareChecked : false, jerrysGymChecked: true});
+                        <CheckBox
+                            textStyle={{fontSize: 10}}
+                            center
+                            title='jerrys-gym'
+                            onPress={
+                                () => {
+                                    console.log(this.state);
+                                    setProviderGuid('jerrys-gym');
+                                    this.setState({pkcChecked: false, premiumKidsCareChecked : false, jerrysGymChecked: true});
+                                }
                             }
-                        }
-                        checked={this.state.jerrysGymChecked}
-                    />
-
+                            checked={this.state.jerrysGymChecked}
+                        />
+                    </View>
                     <View style={styles.submitButtonWrapper} >
                         <LoginSubmitButtonContainer 
                             
@@ -143,6 +146,10 @@ const styles = {
         paddingTop: 20,
         paddingLeft: 20,
         paddingRight: 20,
+    },
+    checkboxWrapper : {
+        flexDirection: 'row',
+        height: 60
     },
     submitButtonWrapper: {
         marginTop: 40,

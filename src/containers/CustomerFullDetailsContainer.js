@@ -33,7 +33,7 @@ class CustomerDetails extends React.Component {
 
     setDetailsState() {
         console.log(this.props.allCustomerDetails);
-        const { phoneNumbers, addresses, emergencyContacts, healthInfo, schoolInformation, allDetails, familyDoctors, parentAuthorizedPickups, providerAuthorizedPickups, providerUnauthorizedPickups, parentUnauthorizedPickups } = this.props.allCustomerDetails;
+        const { phoneNumbers, addresses, emergencyContacts, healthInfo, schoolInformation, allDetails, familyDoctors, parentAuthorizedPickups, providerAuthorizedPickups, providerUnauthorizedPickups, parentUnauthorizedPickups, customQuestions } = this.props.allCustomerDetails;
         const id = this.props.navigation.state.params.customerId;
         const primaryContact = this.findAndSetPrimaryContact(allDetails[id].primary_contact.id);
         console.log(primaryContact);
@@ -51,6 +51,7 @@ class CustomerDetails extends React.Component {
                     providerAuthorizedPickups : providerAuthorizedPickups[id],
                     providerUnauthorizedPickups : providerUnauthorizedPickups[id],  
                     parentUnauthorizedPickups : parentUnauthorizedPickups[id],
+                    customQuestions : customQuestions[id],
                     primaryContact
                 }
             }));

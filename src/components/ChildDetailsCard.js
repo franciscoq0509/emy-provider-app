@@ -2,6 +2,7 @@ import { Card, Button, Badge } from 'react-native-elements';
 import { Text, View, StyleSheet } from 'react-native';
 import React from 'react';
 import call from 'react-native-phone-call';
+import { displayQuestionAndAnswer } from '../utilities/customQuestionParser';
 const Moment = require('moment');
 
 //health info -- add provider health notes
@@ -22,9 +23,10 @@ export const ChildDetailsCard = ({
         parentAuthorizedPickups, 
         providerAuthorizedPickups, 
         providerUnauthorizedPickups,
-        parentUnauthorizedPickups 
+        parentUnauthorizedPickups,
+        customQuestions 
     }) => {
-    console.log(providerUnauthorizedPickups);
+    console.log(customQuestions);
     callNumber = (number) => {
         call({
             number: number.replace(/-|\s/g,""),
@@ -226,6 +228,25 @@ export const ChildDetailsCard = ({
                         </View>
                     ))}
                     
+                </View>
+                :
+                false
+            }
+            {customQuestions && customQuestions.length > 0 ?
+                <View  style={styles.infoCard}>
+                {customQuestions.map((obj, index) => {
+                    const displayObject = displayQuestionAndAnswer(obj);
+                    console.log(displayObject);
+                    if(displayObject !== null) {
+                        return (
+                            <View key={index}>
+                                <Text>{displayObject.question} ?</Text>
+                                <Text>{displayObject.answer}</Text>
+                            </View>
+                        );
+                    }   
+                    return false;
+                })}
                 </View>
                 :
                 false

@@ -80,20 +80,27 @@ console.log('phones');
         normalizedProviderAuthPickups[customerDetails.id] = customerDetails.provider_notes;
     }
     console.log('======provider auth pick up');
-    let normalizedProviderUnauthPickups = {[customerDetails] : 0};
+    let normalizedProviderUnauthPickups = {[customerDetails.id] : 0};
     if('unauthorized_persons' in customerDetails && customerDetails.unauthorized_persons.any_unauthorized_persons !== 0
         && customerDetails.unauthorized_persons.provider_unauthorized_persons) {
         //console.log(customerDetails.unauthorized_persons);
         normalizedProviderUnauthPickups[customerDetails.id] = customerDetails.unauthorized_persons.provider_unauthorized_persons;
         //console.log(normalizedUnauthPickups);
     }
-    let normalizedParentUnauthPickups = {[customerDetails] : 0};
+    let normalizedParentUnauthPickups = {[customerDetails.id] : 0};
     if('unauthorized_persons' in customerDetails && customerDetails.unauthorized_persons.any_unauthorized_persons !== 0
         && customerDetails.unauthorized_persons.unauthorized_persons) {
         //console.log(customerDetails.unauthorized_persons);
         normalizedParentUnauthPickups[customerDetails.id] = customerDetails.unauthorized_persons.unauthorized_persons;
         //console.log(normalizedUnauthPickups);
     }
+    let normalizedCustomQuestions = {[customerDetails.id] : 0};
+    console.log(typeof customerDetails.custom_questions);
+    if('custom_questions' in customerDetails 
+        && Array.isArray(customerDetails.custom_questions)
+        && customerDetails.custom_questions.length > 0) {
+            normalizedCustomQuestions[customerDetails.id] = customerDetails.custom_questions;
+        }
 console.log(normalizedSchoolName);
     return {
         allDetails : normalizedAllDetails.entities.allCustomersDetails[customerDetails.id] ,
@@ -107,7 +114,8 @@ console.log(normalizedSchoolName);
         parentAuthPickups : normalizedParentAuthPickups[customerDetails.id],
         providerAuthPickups : normalizedProviderAuthPickups[customerDetails.id],
         providerUnauthorizedPickups : normalizedProviderUnauthPickups[customerDetails.id],
-        parentUnauthorizedPickups : normalizedParentUnauthPickups[customerDetails.id]
+        parentUnauthorizedPickups : normalizedParentUnauthPickups[customerDetails.id],
+        customQuestions : normalizedCustomQuestions[customerDetails.id]
         
     };
 }

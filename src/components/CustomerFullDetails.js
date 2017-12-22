@@ -33,7 +33,8 @@ export const CustomerFullDetails = (props) => {
         parentAuthorizedPickups,
         providerAuthorizedPickups, 
         providerUnauthorizedPickups,
-        parentUnauthorizedPickups
+        parentUnauthorizedPickups,
+        customQuestions
     } = props.allCustomerDetails;
 
     console.log(familyDoctors);
@@ -172,6 +173,7 @@ export const CustomerFullDetails = (props) => {
                             providerAuthorizedPickups={providerAuthorizedPickups}
                             providerUnauthorizedPickups={providerUnauthorizedPickups}
                             parentUnauthorizedPickups={parentUnauthorizedPickups}
+                            customQuestions={customQuestions}
                         />
                         :
                         <ParentDetailsCard 
