@@ -22,9 +22,9 @@ const fetchJwt = (uname, pwd, guid) => (
 
 class LoginSubmitButtonContainer extends React.Component {
    
-    componentWillReceiveProps(props) {
-        console.log(providerGuid);
-    }
+    // componentWillReceiveProps(props) {
+    //     console.log(providerGuid);
+    // }
 
     startSubmitProcess = () => {
         fetchJwt('jerrys@gymowner.cxm','L#N#marlin28', guid = providerGuid)
@@ -45,7 +45,7 @@ class LoginSubmitButtonContainer extends React.Component {
     }
     
     render() {
-        
+        console.log('in login render')
         return (
             <SubmitButton pressed={this.startSubmitProcess}/>
         );

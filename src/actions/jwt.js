@@ -11,3 +11,9 @@ export const saveNewJwt = (jwt) => {
     };
 };
 
+export const deleteJwt = () => {
+    return {
+        type : 'DELETE_JWT'
+    }
+}
+

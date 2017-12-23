@@ -14,6 +14,7 @@ class saveJwtToStore extends React.Component {
         this.setState({jwt: false});
         _getUserToken()
             .then((token) => {
+                console.log('this is token from asyncStorage', token);
                 token ? 
                 this.props.dispatch(saveNewJwt(token))
                 :

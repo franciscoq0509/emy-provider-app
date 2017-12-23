@@ -42,6 +42,10 @@ export async function _setUserToken(key, item) {
     }
 };
 
-export const _signUserOut = () => {
-
+export async function _signUserOut() {
+    try {
+        await AsyncStorage.removeItem(loginTokenName);
+    } catch (error) {
+        console.log(error);
+    }
 };

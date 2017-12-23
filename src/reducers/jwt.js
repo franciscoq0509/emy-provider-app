@@ -6,6 +6,7 @@ const stateInit = {
 }
 
 export default (state = stateInit, action) => {
+    console.log('reducer', state);
     switch (action.type) {
         case 'SAVE_NEW_JWT':
             return  {
@@ -14,6 +15,13 @@ export default (state = stateInit, action) => {
                 payload: action.payload,
                 sig: action.sig,
             };
+        case 'DELETE_JWT':  
+            return {
+                fullJwt: null,
+                headers: null,
+                payload: null,
+                sig: null,
+            }
         default:
            return state;
     }

@@ -23,13 +23,15 @@ class CustomersList extends React.PureComponent {
     _keyExtractor = (item, index) => index;
 
     render() {
-        console.log(this.props);
+        console.log('custom list nav');
         switch (this.props.screenProps.showLoadError) {
             case true:
+            console.log('show load error');
                 return (
                     <ErrorMessage message={'Sorry we cannot find the resource you are looking for'} errorStyle={'block'} />
                 )
             default:
+            console.log('default');
                 return (
                     <View  style={ center = {flex:1} }>
                         <View>

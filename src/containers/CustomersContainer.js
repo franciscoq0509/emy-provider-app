@@ -4,6 +4,7 @@ import { requestCustomers, receiveNewCustomers, receiveCustomersError } from '..
 import CustomersListNavigator from '../components/CustomersListNavigator';
 import { getFilteredCustomers } from '../selectors/index';
 import { _ENV_, providerGuid } from '../config/_ENV_';
+import { deleteJwt } from '../actions/jwt';
 
 
 const ENV = null;
@@ -41,7 +42,7 @@ class CustomersListContainer extends React.Component {
     }
 
     componentWillMount() {
-    
+        console.log(this.props);
         //this.props.nav.navigation.navigate('ErrorLogout');
         ENV = _ENV_();
         this.setState(() => ({showSpinner: this.showLoadingSpinner, showLoadError: false}));
@@ -70,10 +71,14 @@ class CustomersListContainer extends React.Component {
 
     goToLogin = () => {
         console.log('error clicked');
-        this.props.nav.navigation.navigate('ErrorLogout')
+        console.log(this.props);
+        this.props.nav.navigation.navigate('ErrorLogout', {error: 'exit'});
+        //this.props.dispatch(deleteJwt());
+        
     }
 
-	componentWillReceiveProps(nextProps) { 
+	componentWillReceiveProps(nextProps) {
+        console.log(nextProps); 
 		if(this.props !== nextProps) {
             this.setState(() => ({filteredCustomers : nextProps.filteredCustomers}));
 		}
@@ -88,7 +93,7 @@ class CustomersListContainer extends React.Component {
                         filteredCustomers: this.state.filteredCustomers, 
                         showSpinner: this.state.showSpinner,
                         showLoadError: this.state.showLoadError,
-                        errorLogout : ()=>this.goToLogin()
+                        errorLogout : this.goToLogin
                     } 
                 } 
                 nav={this.props.nav}
