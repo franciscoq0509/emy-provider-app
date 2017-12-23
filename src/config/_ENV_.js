@@ -37,6 +37,7 @@
 
 export const _ENV_ = () => {
     if(__DEV__) {
+        console.log('using DEV 555555555');
         return {
             loginAPI : {
                 url : 'https://login-dev.enrolmy.com',

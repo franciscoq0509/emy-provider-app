@@ -38,6 +38,7 @@ class CustomersListContainer extends React.Component {
     };
 
     showLoadingSpinner = () => {
+        console.log('show loading spinnner called');
         return this.props.actions.isFetching ? true : false;
     }
 

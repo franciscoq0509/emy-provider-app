@@ -4,15 +4,22 @@ import { SubmitButton } from '../components/SubmitButton';
 import { connect } from 'react-redux';
 import { saveNewJwt } from '../actions/jwt';
 import { _setUserToken, loginTokenName, _checkUserLoggedIn } from '../utilities/userAuth';
-import { providerGuid } from '../config/_ENV_';
+import { providerGuid, _ENV_ } from '../config/_ENV_';
 
-
+const ENV = null;
 const _options = (guid, uname, pwd) => ({
+    // method: 'GET',
+    // uri: 'https://login-dev.enrolmy.com/login?scope=users,client-users,addresses,phones,ethnic-groups,emergency-contacts,family-doctors,educations',
+    // headers: {
+    //     'Authorization' : `Basic ${new Buffer(uname + ':' + pwd).toString('base64')}`,
+    //     'X-enrolmy-slug' : guid
+    // }
     method: 'GET',
-    uri: 'https://login-dev.enrolmy.com/login?scope=users,client-users,addresses,phones,ethnic-groups,emergency-contacts,family-doctors,educations',
+    uri: ENV.loginAPI.url,
     headers: {
         'Authorization' : `Basic ${new Buffer(uname + ':' + pwd).toString('base64')}`,
-        'X-enrolmy-slug' : guid
+         'X-enrolmy-slug' : guid,
+         'x-client-authorization' : ENV.loginAPI.apiKey
     }
 });
 
@@ -25,6 +32,10 @@ class LoginSubmitButtonContainer extends React.Component {
     // componentWillReceiveProps(props) {
     //     console.log(providerGuid);
     // }
+
+    componentWillMount() {
+        ENV = _ENV_();
+    }
 
     startSubmitProcess = () => {
         fetchJwt('jerrys@gymowner.cxm','L#N#marlin28', guid = providerGuid)

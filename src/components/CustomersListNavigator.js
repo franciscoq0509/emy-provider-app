@@ -20,6 +20,10 @@ class CustomersList extends React.PureComponent {
         return filteredCustomers.length !== 0 ? filteredCustomers.map(c => ({...c, nav: {...this.props.navigation}})) : filteredCustomers;
     };
 
+    timeoutToRenderRefresh() {
+        return setTimeout(()=>{return },5000);
+    };
+
     _keyExtractor = (item, index) => index;
 
     render() {
@@ -34,16 +38,6 @@ class CustomersList extends React.PureComponent {
             console.log('default');
                 return (
                     <View  style={ center = {flex:1} }>
-                        <View>
-                            <Text>something went wrong? click below to refresh</Text>
-                            <Button
-                                small
-                                backgroundColor='#74CC82'
-                                title='refresh'
-                                onPress={() => this.props.screenProps.errorLogout()}
-                            />
-                        </View>
-                        
                         {this.props.screenProps.showSpinner() ? 
                             <View style={spinnerStyle.container}>
                                 <ActivityIndicator
@@ -52,16 +46,25 @@ class CustomersList extends React.PureComponent {
                                 />
                             </View>
                             : 
-                            <List> 
-                                <FlatList
-                                    data={this.customersAndCallback()}
-                                    initialNumToRender={10}
-                                    onEndReachedThreshold={1200}
-                                    renderItem={CustomerItem}
-                                    keyExtractor={this._keyExtractor}
-                                    ListHeaderComponent={<StandardSearchbar search="allCustomers" />}
+                            <View>
+                                <Button
+                                    containerViewStyle = {{width: 80, alignSelf: 'flex-end'}}
+                                    small
+                                    backgroundColor='#74CC82'
+                                    title='logout'
+                                    onPress={() => this.props.screenProps.errorLogout()}
                                 />
-                            </List>
+                                <List> 
+                                    <FlatList
+                                        data={this.customersAndCallback()}
+                                        initialNumToRender={10}
+                                        onEndReachedThreshold={1200}
+                                        renderItem={CustomerItem}
+                                        keyExtractor={this._keyExtractor}
+                                        ListHeaderComponent={<StandardSearchbar search="allCustomers" />}
+                                    />
+                                </List> 
+                            </View>
                         }
                     </View>
                 );

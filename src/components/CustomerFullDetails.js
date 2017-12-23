@@ -159,7 +159,7 @@ export const CustomerFullDetails = (props) => {
             {
                 props.showMoreClicked ? 
                 <View>
-                    {is_child ? 
+                
                         <ChildDetailsCard 
                             schoolName={schoolName} 
                             schoolYear={schoolYear}
@@ -175,13 +175,7 @@ export const CustomerFullDetails = (props) => {
                             parentUnauthorizedPickups={parentUnauthorizedPickups}
                             customQuestions={customQuestions}
                         />
-                        :
-                        <ParentDetailsCard 
-                            customerCreated={created} 
-                            fullName={full_name}
-                            addresses={addresses}
-                        />
-                    }
+                          
                 </View>
                 :
                 <View>
