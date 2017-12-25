@@ -32,7 +32,16 @@ class CustomersList extends React.PureComponent {
             case true:
             console.log('show load error');
                 return (
-                    <ErrorMessage message={'Sorry we cannot find the resource you are looking for'} errorStyle={'block'} />
+                    <View>
+                        <Button
+                            containerViewStyle = {{width: 80, alignSelf: 'flex-end'}}
+                            small
+                            backgroundColor='#74CC82'
+                            title='logout'
+                            onPress={() => this.props.screenProps.errorLogout()}
+                        />
+                        <ErrorMessage message={'Sorry we cannot find the resource you are looking for'} errorStyle={'block'} />
+                    </View>
                 )
             default:
             console.log('default');

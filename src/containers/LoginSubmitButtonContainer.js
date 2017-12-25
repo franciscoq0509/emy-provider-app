@@ -8,14 +8,8 @@ import { providerGuid, _ENV_ } from '../config/_ENV_';
 
 const ENV = null;
 const _options = (guid, uname, pwd) => ({
-    // method: 'GET',
-    // uri: 'https://login-dev.enrolmy.com/login?scope=users,client-users,addresses,phones,ethnic-groups,emergency-contacts,family-doctors,educations',
-    // headers: {
-    //     'Authorization' : `Basic ${new Buffer(uname + ':' + pwd).toString('base64')}`,
-    //     'X-enrolmy-slug' : guid
-    // }
     method: 'GET',
-    uri: ENV.loginAPI.url,
+   // uri: ENV.loginAPI.url,
     headers: {
         'Authorization' : `Basic ${new Buffer(uname + ':' + pwd).toString('base64')}`,
          'X-enrolmy-slug' : guid,
@@ -23,8 +17,9 @@ const _options = (guid, uname, pwd) => ({
     }
 });
 
-const fetchJwt = (uname, pwd, guid) => (
-    fetch('https://login-dev.enrolmy.com/login?scope=users,client-users,addresses,phones,ethnic-groups,emergency-contacts,family-doctors,educations',_options(guid, uname, pwd))
+const fetchJwt = (uname = "login", pwd = "login", guid) => (
+    fetch(`${ENV.loginAPI.url}/login?scope=users,client-users,addresses,phones,ethnic-groups,emergency-contacts,family-doctors,educations`,_options(guid, uname, pwd))
+   // https://login-dev.enrolmy.com/login?scope=users,client-users,addresses,phones,ethnic-groups,emergency-contacts,family-doctors,educations
 );
 
 class LoginSubmitButtonContainer extends React.Component {
@@ -38,7 +33,7 @@ class LoginSubmitButtonContainer extends React.Component {
     }
 
     startSubmitProcess = () => {
-        fetchJwt('jerrys@gymowner.cxm','L#N#marlin28', guid = providerGuid)
+        fetchJwt(this.props.uname, this.props.pwd, providerGuid)
         .then(
             (data) => {
                 if (data.status === 200 && data._bodyText) { 

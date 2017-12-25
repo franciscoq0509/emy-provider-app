@@ -53,12 +53,6 @@ export default class Login extends React.Component {
                     <View  style={styles.wrapper}>
                         {this.state.showError && <ErrorMessage message={this.state.message}  errorStyle={'bubble'}/>}
                         <View>
-                            {
-                                __DEV__ ?
-                                    <Text>dev</Text>
-                                :
-                                <Text>prod</Text>
-                            }
                             <FormLabel>User Name</FormLabel>
                             <FormInput
                                 inputStyle={styles.formField} 
@@ -163,11 +157,12 @@ const styles = {
         paddingRight: 20,
     },
     checkboxWrapper : {
-        flexDirection: 'row',
-        height: 60
+        flexDirection: 'column',
+        height: 60,
+        marginBottom: 10
     },
     submitButtonWrapper: {
-        marginTop: 40,
+        marginTop: 110,
     }
 };
 

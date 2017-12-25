@@ -6,7 +6,7 @@ const Header = ()=> {
    return ( 
         <View style={wrapper}>
             <Image
-            style={{width: 300, resizeMode: 'contain'}}
+            style={{width: 300, height: 50, resizeMode: 'contain'}}
                 source={require('../assets/logo-white-LG.png')}
             />
         </View>
@@ -20,6 +20,7 @@ const styles = {
         alignItems: 'center',
         backgroundColor: '#3197EA',
         width: '100%',
+        height: 50,
         alignSelf: 'center'
     },
     text : {
