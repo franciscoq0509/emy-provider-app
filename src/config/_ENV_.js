@@ -1,3 +1,5 @@
+import { AsyncStorage } from 'react-native';
+
 // export const _ENV_ = () => {
 //     if(__DEV__) {
 //         return {
@@ -108,26 +110,40 @@ export const _ENV_ = () => {
 
 
 
-
-
-
-
-
-
-
-
 export let providerGuid = '';
+
+export async function getProviderGuid() {
+    if(providerGuid !== '') {
+        return providerGuid
+    } else {
+        try {
+            const storageGuid = await AsyncStorage.getItem('ORG_GUID');
+            if (storageGuid !== null) {
+                providerGuid = storageGuid;
+                return storageGuid;
+            }
+            else {
+                return false;
+            }
+        } catch (error) {
+            return error;
+        }
+    }
+}
 
 export const setProviderGuid = (provider) => {
     switch (provider) {
         case 'jerrys-gym':
+            AsyncStorage.setItem('ORG_GUID', '55790419-dbb4-43b4-9c1d-7bae0a37004f');
             providerGuid = '55790419-dbb4-43b4-9c1d-7bae0a37004f'
             break;
         case 'pkc':
+        AsyncStorage.setItem('ORG_GUID', '588a865b-da6c-4d19-a8e4-612e0a4d0aec');
             providerGuid = '588a865b-da6c-4d19-a8e4-612e0a4d0aec'
             break;
         case 'premium-kids-care':
-            providerGuid = '562963ca-14b0-44aa-aa64-790c0a4d0aec '
+        AsyncStorage.setItem('ORG_GUID', '562963ca-14b0-44aa-aa64-790c0a4d0aec');
+            providerGuid = '562963ca-14b0-44aa-aa64-790c0a4d0aec'
             break;
         default:
             providerGuid = '55790419-dbb4-43b4-9c1d-7bae0a37004f'

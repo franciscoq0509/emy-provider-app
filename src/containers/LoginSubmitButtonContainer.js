@@ -2,6 +2,7 @@ import React from 'react';
 const Buffer = require('buffer/').Buffer;
 import { SubmitButton } from '../components/SubmitButton';
 import { connect } from 'react-redux';
+import { View, Text } from 'react-native';
 import { saveNewJwt } from '../actions/jwt';
 import { _setUserToken, loginTokenName, _checkUserLoggedIn } from '../utilities/userAuth';
 import { providerGuid, _ENV_ } from '../config/_ENV_';
@@ -17,8 +18,8 @@ const _options = (guid, uname, pwd) => ({
     }
 });
 
-const fetchJwt = (uname = "login", pwd = "login", guid) => (
-    fetch(`${ENV.loginAPI.url}/login?scope=users,client-users,addresses,phones,ethnic-groups,emergency-contacts,family-doctors,educations`,_options(guid, uname, pwd))
+const fetchJwt = (uname, pwd, guid) => (
+    fetch(`${ENV.loginAPI.url}/login?scope=users,client-users,addresses,phones,ethnic-groups,emergency-contacts,family-doctors,educations`,_options(guid, uname.trim(), pwd.trim()))
    // https://login-dev.enrolmy.com/login?scope=users,client-users,addresses,phones,ethnic-groups,emergency-contacts,family-doctors,educations
 );
 
@@ -33,9 +34,11 @@ class LoginSubmitButtonContainer extends React.Component {
     }
 
     startSubmitProcess = () => {
+        console.log('start submit process');
         fetchJwt(this.props.uname, this.props.pwd, providerGuid)
         .then(
             (data) => {
+                console.log(data);
                 if (data.status === 200 && data._bodyText) { 
                         this.props.dispatch(saveNewJwt(data._bodyText)); 
                         _setUserToken(loginTokenName, data._bodyText)

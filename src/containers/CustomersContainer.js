@@ -3,14 +3,17 @@ import { connect } from 'react-redux';
 import { requestCustomers, receiveNewCustomers, receiveCustomersError } from '../actions/customers';
 import CustomersListNavigator from '../components/CustomersListNavigator';
 import { getFilteredCustomers } from '../selectors/index';
-import { _ENV_, providerGuid } from '../config/_ENV_';
+import { _ENV_, getProviderGuid } from '../config/_ENV_';
 import { deleteJwt } from '../actions/jwt';
 
 
 const ENV = null;
+const providerGuid = null;
 
 
 const fetchCustomers = (jwt) => {
+    console.log(jwt);
+    console.log(providerGuid);
     console.log(`${ENV.customersBasicUrl(providerGuid)}`, ENV.customersBasicHeaders(jwt));
     return fetch(
         ENV.customersBasicUrl(providerGuid),ENV.customersBasicHeaders(jwt)
@@ -47,26 +50,35 @@ class CustomersListContainer extends React.Component {
         //this.props.nav.navigation.navigate('ErrorLogout');
         ENV = _ENV_();
         this.setState(() => ({showSpinner: this.showLoadingSpinner, showLoadError: false}));
-        this.props.dispatch(this.customersThunk())
-        .then(
-            (resp) => { 
-                if('type' in resp) {
-                    console.log(resp);
-                    if(resp.type === 'RECEIVE_CUSTOMERS_SUCCESS') {
-                        this.setState({showLoadError: false});
-                        this.setState(() => ({filteredCustomers : this.props.filteredCustomers}));        
-                    } else {
-                        //error here
-                        this.setState({showLoadError: true});
-                    }
+        getProviderGuid()
+            .then((guid) => {
+                if(guid !== null) {
+                    providerGuid = guid;
+                    this.props.dispatch(this.customersThunk())
+                        .then(
+                            (resp) => { 
+                                if('type' in resp) {
+                                    console.log(resp);
+                                    if(resp.type === 'RECEIVE_CUSTOMERS_SUCCESS') {
+                                        this.setState({showLoadError: false});
+                                        this.setState(() => ({filteredCustomers : this.props.filteredCustomers}));        
+                                    } else {
+                                        //error here
+                                        this.setState({showLoadError: true});
+                                    }
 
-                } else {
-                    //error here
-                    this.setState({showLoadError: true});
+                                } else {
+                                    //error here
+                                    this.setState({showLoadError: true});
+                                }
+                                this.setState(() => ({filteredCustomers : this.props.filteredCustomers}));
+                            })
+                            .catch((err) => {console.log(`this is the customers errer ${err}`); this.setState({showLoadError: true});})
                 }
-                this.setState(() => ({filteredCustomers : this.props.filteredCustomers}));
             })
-            .catch((err) => {console.log(`this is the customers errer ${err}`); this.setState({showLoadError: true});})
+            .catch((err) => console.log(`error getting guid ${err}`));
+        
+        
 
     }
 

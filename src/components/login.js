@@ -74,6 +74,7 @@ export default class Login extends React.Component {
                                 textInputRef='password'
                                 secureTextEntry={true}
                             />
+                            
                             <View style={styles.checkboxWrapper}>
                                 <CheckBox
                                     textStyle={{fontSize: 10}}
