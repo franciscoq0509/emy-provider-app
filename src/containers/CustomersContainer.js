@@ -5,6 +5,7 @@ import CustomersListNavigator from '../components/CustomersListNavigator';
 import { getFilteredCustomers } from '../selectors/index';
 import { _ENV_, getProviderGuid } from '../config/_ENV_';
 import { deleteJwt } from '../actions/jwt';
+import { signUserOut } from '../utilities/userAuth';
 
 
 const ENV = null;
@@ -85,8 +86,11 @@ class CustomersListContainer extends React.Component {
     goToLogin = () => {
         console.log('error clicked');
         console.log(this.props);
-        this.props.nav.navigation.navigate('ErrorLogout', {error: 'exit'});
-        //this.props.dispatch(deleteJwt());
+        //this.props.nav.navigation.navigate('ErrorLogout', {error: 'exit'});
+        this.props.dispatch(deleteJwt());
+        //signUserOut(); already done in login component
+        this.props.nav.navigation.navigate('ErrorLogout');
+
         
     }
 

@@ -40,6 +40,7 @@ import { AsyncStorage } from 'react-native';
 export const _ENV_ = () => {
     if(__DEV__) {
         console.log('using DEV 555555555');
+        console.log('https://login-dev.enrolmy.com');
         return {
             loginAPI : {
                 url : 'https://login-dev.enrolmy.com',
@@ -61,42 +62,20 @@ export const _ENV_ = () => {
         }
     } 
     // USE THESE AS THE CONFIGURATION FOR TESTING THE APP
-    // else {
-    //     return {
-    //         loginAPI : {
-    //             url : 'https://login-dev.enrolmy.com',
-    //             apiKey : 'Basic MW9wUExqTERmelF3WU05dzYwTDlFN3RoZXAxaHlhalc6TzdhY3VPM2VmNzMxVGVmdDM4aGxtMTBzT01pblo5UG40NTFsWTg0MHFWTU5odHNj'
-    //         },
-    //         customersBasicUrl : (guid) =>`https://emy-front-api.craig.27s-dev.net/providers-api/v1/${guid}/users?full_name=%`,
-    //         customersBasicHeaders : (jwt) => ({
-    //             headers: {
-    //                 Authorization: `Bearer ${jwt}`
-    //             }
-    //         }),
-    //         customersFullUrl : (guid, id) => `https://emy-front-api.craig.27s-dev.net/providers-api/v1/${guid}/users/${id}?include_local_data=1`,
-    //         customersFullHeaders : (guid, jwt) => ({
-    //             headers: {
-    //                 'Authorization': `Bearer ${jwt}`,
-    //                 'X-enrolmy-slug': guid
-    //             }
-    //         })
-    //     }
-    // } 
-    // USE THESE AS THE CONFIGURATION FOR THE FINAL PROD VERSION
-
     else {
+        console.log('https://login-dev.enrolmy.com');
         return {
             loginAPI : {
-                url : 'https://login-api.enrolmy.com',
-                apiKey : 'Basic NXJVZGJYMDVyT2xUYzA1ZVgzN0hIWGpxTHZTQmpVVWc6QmU0SDU4eE0xcHZmeVpDNWhnaXJ1dzVMNm50Sks5SElIcEtPN1NqcktWd1JtVXJu'
+                url : 'https://login-dev.enrolmy.com',
+                apiKey : 'Basic MW9wUExqTERmelF3WU05dzYwTDlFN3RoZXAxaHlhalc6TzdhY3VPM2VmNzMxVGVmdDM4aGxtMTBzT01pblo5UG40NTFsWTg0MHFWTU5odHNj'
             },
-            customersBasicUrl : (guid) =>`https://api.enrolmy.com/providers-api/v1/${guid}/users?full_name=%`,
+            customersBasicUrl : (guid) =>`https://emy-front-api.craig.27s-dev.net/providers-api/v1/${guid}/users?full_name=%`,
             customersBasicHeaders : (jwt) => ({
                 headers: {
                     Authorization: `Bearer ${jwt}`
                 }
             }),
-            customersFullUrl : (guid, id) => `https://api.enrolmy.com/providers-api/v1/${guid}/users/${id}?include_local_data=1`,
+            customersFullUrl : (guid, id) => `https://emy-front-api.craig.27s-dev.net/providers-api/v1/${guid}/users/${id}?include_local_data=1`,
             customersFullHeaders : (guid, jwt) => ({
                 headers: {
                     'Authorization': `Bearer ${jwt}`,
@@ -104,7 +83,30 @@ export const _ENV_ = () => {
                 }
             })
         }
-    }
+    } 
+    // USE THESE AS THE CONFIGURATION FOR THE FINAL PROD VERSION
+
+    // else {
+    //     return {
+    //         loginAPI : {
+    //             url : 'https://login-api.enrolmy.com',
+    //             apiKey : 'Basic NXJVZGJYMDVyT2xUYzA1ZVgzN0hIWGpxTHZTQmpVVWc6QmU0SDU4eE0xcHZmeVpDNWhnaXJ1dzVMNm50Sks5SElIcEtPN1NqcktWd1JtVXJu'
+    //         },
+    //         customersBasicUrl : (guid) =>`https://api.enrolmy.com/providers-api/v1/${guid}/users?full_name=%`,
+    //         customersBasicHeaders : (jwt) => ({
+    //             headers: {
+    //                 Authorization: `Bearer ${jwt}`
+    //             }
+    //         }),
+    //         customersFullUrl : (guid, id) => `https://api.enrolmy.com/providers-api/v1/${guid}/users/${id}?include_local_data=1`,
+    //         customersFullHeaders : (guid, jwt) => ({
+    //             headers: {
+    //                 'Authorization': `Bearer ${jwt}`,
+    //                 'X-enrolmy-slug': guid
+    //             }
+    //         })
+    //     }
+    // }
 
 };
 
