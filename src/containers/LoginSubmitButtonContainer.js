@@ -35,6 +35,7 @@ class LoginSubmitButtonContainer extends React.Component {
 
     startSubmitProcess = () => {
         console.log('start submit process');
+        console.log(this.props.uname, this.props.pwd, providerGuid);
         fetchJwt(this.props.uname, this.props.pwd, providerGuid)
         .then(
             (data) => {
