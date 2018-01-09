@@ -78,9 +78,6 @@ class CustomersListContainer extends React.Component {
                 }
             })
             .catch((err) => console.log(`error getting guid ${err}`));
-        
-        
-
     }
 
     goToLogin = () => {

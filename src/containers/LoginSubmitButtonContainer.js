@@ -36,11 +36,14 @@ class LoginSubmitButtonContainer extends React.Component {
     startSubmitProcess = () => {
         console.log('start submit process');
         console.log(this.props.uname, this.props.pwd, providerGuid);
+        console.log(`Basic ${new Buffer(this.props.uname + ':' + this.props.pwd).toString('base64')}`);
         fetchJwt(this.props.uname, this.props.pwd, providerGuid)
         .then(
             (data) => {
                 console.log(data);
                 if (data.status === 200 && data._bodyText) { 
+                    //check jwt contains admin first before saving. 
+                    // otherwise throw error and display 'ur not authorized' message to login screen.
                         this.props.dispatch(saveNewJwt(data._bodyText)); 
                         _setUserToken(loginTokenName, data._bodyText)
                             .then((resp) => {
