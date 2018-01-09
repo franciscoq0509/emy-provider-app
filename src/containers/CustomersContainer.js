@@ -6,6 +6,8 @@ import { getFilteredCustomers } from '../selectors/index';
 import { _ENV_, getProviderGuid } from '../config/_ENV_';
 import { deleteJwt } from '../actions/jwt';
 import { signUserOut } from '../utilities/userAuth';
+//import { SignedOutNavigator } from '../navigator/SignedOutNavigator';
+import { NavigationActions } from 'react-navigation';
 
 
 const ENV = null;
@@ -86,8 +88,13 @@ class CustomersListContainer extends React.Component {
         //this.props.nav.navigation.navigate('ErrorLogout', {error: 'exit'});
         this.props.dispatch(deleteJwt());
         //signUserOut(); already done in login component
-        this.props.nav.navigation.navigate('ErrorLogout');
+        //this.props.nav.navigation.navigate('ErrorLogout');
+        const resetToLogin = NavigationActions.reset({
+            index: 0,
+            actions: []
+        });
 
+        this.props.navigation.navigate(resetToLogin);
         
     }
 

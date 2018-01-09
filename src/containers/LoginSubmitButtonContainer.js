@@ -45,7 +45,6 @@ class LoginSubmitButtonContainer extends React.Component {
                 if (data.status === 200 && data._bodyText) { 
                     const jwtIsAdmin = checkifAdmin(data._bodyText); 
                     if(jwtIsAdmin) {
-                    // otherwise throw error and display 'ur not authorized' message to login screen.
                         this.props.dispatch(saveNewJwt(data._bodyText)); 
                         _setUserToken(loginTokenName, data._bodyText)
                             .then((resp) => {
@@ -55,11 +54,11 @@ class LoginSubmitButtonContainer extends React.Component {
                     } else{
                         this.props.showErrorMessage('Sorry looks like you are trying to login without a provider account');
                     }
-                } else {console.log('failed to login'); this.props.showErrorMessage(data._bodyText);}
+                } else {console.log('failed to login'); this.props.showErrorMessage('whoops! looks like something went wrong');}
             },
-            (error) => {console.log('error'); this.props.showErrorMessage(error)}
+            (error) => {console.log('error'); this.props.showErrorMessage('whoops! looks like something went wrong')}
         )
-        .catch((err) => {console.log('catch error'); this.props.showErrorMessage(err)});
+        .catch((err) => {console.log('catch error'); this.props.showErrorMessage('whoops! looks like something went wrong')});
     }
     
     render() {
