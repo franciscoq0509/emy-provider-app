@@ -6,6 +6,7 @@ import { View, Text } from 'react-native';
 import { saveNewJwt } from '../actions/jwt';
 import { _setUserToken, loginTokenName, _checkUserLoggedIn } from '../utilities/userAuth';
 import { providerGuid, _ENV_ } from '../config/_ENV_';
+import checkifAdmin from '../utilities/checkJwtIsAdmin';
 
 const ENV = null;
 const _options = (guid, uname, pwd) => ({
@@ -42,7 +43,8 @@ class LoginSubmitButtonContainer extends React.Component {
             (data) => {
                 console.log(data);
                 if (data.status === 200 && data._bodyText) { 
-                    //check jwt contains admin first before saving. 
+                    const jwtIsAdmin = checkifAdmin(data._bodyText); 
+                    if(jwtIsAdmin) {
                     // otherwise throw error and display 'ur not authorized' message to login screen.
                         this.props.dispatch(saveNewJwt(data._bodyText)); 
                         _setUserToken(loginTokenName, data._bodyText)
@@ -50,6 +52,9 @@ class LoginSubmitButtonContainer extends React.Component {
                                 this.props.nav.navigate("SignedIn")
                             })
                             .catch((err) => console.log(err));        
+                    } else{
+                        this.props.showErrorMessage('Sorry looks like you are trying to login without a provider account');
+                    }
                 } else {console.log('failed to login'); this.props.showErrorMessage(data._bodyText);}
             },
             (error) => {console.log('error'); this.props.showErrorMessage(error)}

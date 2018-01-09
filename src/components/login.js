@@ -27,15 +27,23 @@ export default class Login extends React.Component {
     }
 
     showErrorMessage = (err_message) => {
+        console.log(err_message);
+        console.log(typeof err_message);
         if(typeof err_message === 'object' && Object.keys(err_message).length === 0) {
+            console.log('it doeantr make any sense...,');
             console.log(err_message);
             this.setState({showError: true, message: `Network error!\nMake sure your device has an internet connection.`});
         } else {
-            const errMessage = JSON.parse(err_message);
-            if('error_description' in errMessage && errMessage.error_description.toLowerCase().includes('invalid username and password')) {
-                this.setState({showError: true, message: `Sorry your username or password are incorrect.`});
-            } else {
-                this.setState({showError: true, message: `Woops! looks like something went wrong.`});
+            try {
+                //the try/catch is needed incase the error is not JSON and we just need to pass err_message to this.setState
+                const errMessage = JSON.parse(err_message);
+                if('error_description' in errMessage && errMessage.error_description.toLowerCase().includes('invalid username and password')) {
+                    this.setState({showError: true, message: `Sorry your username or password are incorrect.`});
+                } else {
+                    this.setState({showError: true, message: `Woops! looks like something went wrong.`});
+                }
+            } catch (err) {
+                this.setState({showError: true, message: err_message});
             }
         }
 
