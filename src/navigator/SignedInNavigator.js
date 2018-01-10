@@ -8,6 +8,7 @@ import ActivitiesNavigator from '../components/ActivitiesNavigator';
 import QuickBook from '../components/QuickBook';
 import { Icon } from 'react-native-elements';
 import Login from '../components/login';
+import { SignedOutNavigator } from './SignedOutNavigator';
 
 
 // const HomeScreen = ({ navigation }) => {
@@ -29,9 +30,11 @@ import Login from '../components/login';
 // };
 
 class CustomersScreen extends React.Component {
+    
     render() {
+        console.log(this.props);
         return (
-            <CustomersContainer nav={this.props}/>
+            <CustomersContainer rootNav={this.props.screenProps.rootNav}/>
         );
     }  
 };
@@ -66,7 +69,7 @@ const SignedInNavigator = TabNavigator({
             },
         },
         ErrorLogout: {
-            screen: Login,
+            screen: SignedOutNavigator,
             navigationOptions: {
                 tabBarVisible: false
             }
@@ -99,6 +102,6 @@ const SignedInNavigator = TabNavigator({
 
 );
 
-addNavigationHelpers(SignedInNavigator);
+//addNavigationHelpers(SignedInNavigator);
 
 export default SignedInNavigator;

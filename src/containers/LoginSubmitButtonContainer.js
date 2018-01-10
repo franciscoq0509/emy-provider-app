@@ -62,7 +62,8 @@ class LoginSubmitButtonContainer extends React.Component {
     }
     
     render() {
-        console.log('in login render')
+        console.log('in login render');
+        console.log(this.props);
         return (
             <SubmitButton pressed={this.startSubmitProcess}/>
         );
@@ -70,10 +71,10 @@ class LoginSubmitButtonContainer extends React.Component {
 };
 
 const mapStateToProps = (state) => ({
-    jwt : state.jwt.fullJwt,
-    jwtHeaders: state.jwt.headers,
-    jwtPayload: state.jwt.payload,
-    jwtSignature: state.jwt.sig
+    // jwt : state.jwt.fullJwt,
+    // jwtHeaders: state.jwt.headers,
+    // jwtPayload: state.jwt.payload,
+    // jwtSignature: state.jwt.sig
 });
 
 export default connect(mapStateToProps)(LoginSubmitButtonContainer);

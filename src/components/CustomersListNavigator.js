@@ -16,6 +16,7 @@ class CustomersList extends React.PureComponent {
     //   });
     
     customersAndCallback() {
+        console.log(this.props);
         const filteredCustomers = (this.props.screenProps.filteredCustomers !== undefined) ? [...Object.values(this.props.screenProps.filteredCustomers)] : []; 
         return filteredCustomers.length !== 0 ? filteredCustomers.map(c => ({...c, nav: {...this.props.navigation}})) : filteredCustomers;
     };

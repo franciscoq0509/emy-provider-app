@@ -8,6 +8,9 @@ import { deleteJwt } from '../actions/jwt';
 import { signUserOut } from '../utilities/userAuth';
 //import { SignedOutNavigator } from '../navigator/SignedOutNavigator';
 import { NavigationActions } from 'react-navigation';
+import { _signUserOut } from '../utilities/userAuth';
+import configureStore from '../store/configureStore';
+import AppIndex from '../components/AppIndex';
 
 
 const ENV = null;
@@ -22,8 +25,6 @@ const fetchCustomers = (jwt) => {
         ENV.customersBasicUrl(providerGuid),ENV.customersBasicHeaders(jwt)
     )
 };
-
-
 
 class CustomersListContainer extends React.Component {
 
@@ -42,6 +43,17 @@ class CustomersListContainer extends React.Component {
                 .catch((err) => dispatch(receiveCustomersError(err)))
         };
     };
+
+    // deletJwtThunk = (dispatch) => {
+    //     return (dispatch) => {
+    //         return new Promise (dispatch => dispatch(deleteJwt()));
+    //             // .then(
+    //             //     (resp) => resp,
+    //             //     (error) => error
+    //             // ).catch((err) => err));
+    //     }
+        
+    // }
 
     showLoadingSpinner = () => {
         console.log('show loading spinnner called');
@@ -86,15 +98,56 @@ class CustomersListContainer extends React.Component {
         console.log('error clicked');
         console.log(this.props);
         //this.props.nav.navigation.navigate('ErrorLogout', {error: 'exit'});
-        this.props.dispatch(deleteJwt());
+        console.log(this.props);
+        ////////////////////
+        // this.props.dispatch(this.deletJwtThunk())
+        //     .then((resp) => {
+        //         console.log(resp);
+        //         console.log(this.props.jwt);
+     
+        //     })
+        //     .catch((err) => err);
         //signUserOut(); already done in login component
         //this.props.nav.navigation.navigate('ErrorLogout');
-        const resetToLogin = NavigationActions.reset({
-            index: 0,
-            actions: []
-        });
+        ///////////////////////
+        
+        _signUserOut()
+            .then(()=> {
+                console.log('deleted, signUserOut');
+                console.log(this.props);
+                this.props.dispatch(deleteJwt());
+                console.log('after dispatch...');
+                    // .then(() => {
+                        //console.log('=================.then of dispatch');
+                        // const resetToLogin = NavigationActions.reset({
+                        //     index: 0,
+                        //     actions: [
+                        //         NavigationActions.navigate({ routeName: 'ErrorLogout' })
+                        //     ]
+                        // }); 
+                        //this.props.nav.navigation.navigate('ErrorLogout');
+                    // })
+                
+                // setTimeout(()=>{
+                    
+                // },2000);
+                console.log('=================.then of dispatch');
+                //configureStore().deleteStore();
+                //this.props.nav.navigation.navigate('SignedOut');
 
-        this.props.navigation.navigate(resetToLogin);
+
+                const resetToLogin = NavigationActions.reset({
+                    index: 2,
+                    actions: [
+                        NavigationActions.navigate({ routeName: 'SignedOut' })
+                    ]
+                }); 
+                this.props.rootNav.navigate('SignedOut');
+                
+                
+            });
+
+        
         
     }
 
@@ -105,7 +158,8 @@ class CustomersListContainer extends React.Component {
 		}
 	}
 
-    render() {      
+    render() { 
+        console.log(this.props);     
         return (
             <CustomersListNavigator 
                 screenProps = { 

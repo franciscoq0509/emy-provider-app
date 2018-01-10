@@ -12,6 +12,7 @@ export const saveNewJwt = (jwt) => {
 };
 
 export const deleteJwt = () => {
+    console.log('in delete_jwt action');
     return {
         type : 'DELETE_JWT'
     }

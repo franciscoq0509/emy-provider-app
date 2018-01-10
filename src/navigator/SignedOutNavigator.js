@@ -1,6 +1,7 @@
 import { StackNavigator } from 'react-navigation';
 import Login from '../components/login';
 
+console.log('in signed out nav');
 
 export const SignedOutNavigator = StackNavigator({
     LoginScreen: {
@@ -9,4 +10,11 @@ export const SignedOutNavigator = StackNavigator({
             title: "Login"
         }
     }
-});
+},
+{   
+    initialRouteName: "LoginScreen",
+    animationEnabled: false,
+    lazy: true,
+    swipeEnabled: false   
+}
+);

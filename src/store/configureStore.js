@@ -10,19 +10,49 @@ import jwt from '../reducers/jwt';
 import thunk from 'redux-thunk';
 
 export default () => {
-    const store = createStore(
-        combineReducers({
-            customersData: CustomersReducer,
-            customersDetails: CustomersDetails,
-            currentCustomerAction: currentCustomerAction,
-            customersFilter: CustomersFilter,
-            activities: activitiesReducer,
-            activitiesFilter: activitiesFilter,
-            orgGuid,
-            jwt
-        }), 
-        applyMiddleware(thunk)
-    );
+    return {
+        store : {},
+        createStore : () => {
+            this.store = createStore(
+                combineReducers({
+                    customersData: CustomersReducer,
+                    customersDetails: CustomersDetails,
+                    currentCustomerAction: currentCustomerAction,
+                    customersFilter: CustomersFilter,
+                    activities: activitiesReducer,
+                    activitiesFilter: activitiesFilter,
+                    orgGuid,
+                    jwt
+                }), 
+                applyMiddleware(thunk)
+            );
+            return this.store;
+        },
+        deleteStore : () => {
+            this.store = {};
+        }
+    }
+    // let store = {};
+    // this.createStore = () => {
+    //     store = createStore(
+    //         combineReducers({
+    //             customersData: CustomersReducer,
+    //             customersDetails: CustomersDetails,
+    //             currentCustomerAction: currentCustomerAction,
+    //             customersFilter: CustomersFilter,
+    //             activities: activitiesReducer,
+    //             activitiesFilter: activitiesFilter,
+    //             orgGuid,
+    //             jwt
+    //         }), 
+    //         applyMiddleware(thunk)
+    //     );
+    
+    //     return store;
+    // };
 
-    return store;
+    // this.deleteStore = () => {
+    //     store = {};
+    // };
+    
 }

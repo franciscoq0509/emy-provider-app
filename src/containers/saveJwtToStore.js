@@ -29,20 +29,25 @@ class saveJwtToStore extends React.Component {
     }
 
     render() {
+        console.log(this.props);
         let renderJsx = (
             this.jwtSaved() ?
-                <SignedInNavigator />
+                <SignedInNavigator 
+                    screenProps={{rootNav :this.props.navigation}}
+                />
                 :
                 <View style={spinnerStyle.container}>
-                    <ActivityIndicator
-                        animating = {true}
-                        size = "large"
-                    />
+                    <Text>jwttostore</Text>            
                 </View>
             );
             return renderJsx;
     }
 }
+
+// <ActivityIndicator
+// animating = {true}
+// size = "large"
+// />
 
 const mapStateToProps = (state) => ({
     jwt: state.jwt.fullJwt 

@@ -10,10 +10,7 @@ import { _signUserOut } from '../utilities/userAuth';
 export default class Login extends React.Component {
     
     componentWillMount = () => {
-        _signUserOut()
-            .then(()=> {
-                console.log('deleted');
-            })
+            //console.log(this.props);
             this.setState(() => ({
                 uname: "", pwd: "", 
                 showValidationError: false, 
@@ -25,6 +22,21 @@ export default class Login extends React.Component {
                 orgs : ['pkcChecked','premiumKidsCareChecked','jerrysGymChecked'] 
             }));
     }
+
+    // constructor(props) {
+    //     super(props);
+    //     this.setState(() => ({
+    //         uname: "", pwd: "", 
+    //         showValidationError: false, 
+    //         showNetworkError: false, 
+    //         showUnknownError: false,
+    //         pkcChecked : false,
+    //         showError : false,
+    //         premiumKidsCareChecked : false,
+    //         jerrysGymChecked : false,
+    //         orgs : ['pkcChecked','premiumKidsCareChecked','jerrysGymChecked'] 
+    //     }));
+    // }
 
     showErrorMessage = (err_message) => {
         console.log(err_message);
@@ -52,7 +64,7 @@ export default class Login extends React.Component {
     render() {
         console.log('login screen');
         console.log(this.props);
-        return (
+        return this.state ? 
             <View style={ {flex: 1} }>
                 <Header />
                 {this.props.navigation.state.params && this.props.navigation.state.params.error ? 
@@ -145,7 +157,10 @@ export default class Login extends React.Component {
                 }
                 
             </View>
-        );
+        :
+        <View>
+            <Text>Spinner</Text>
+        </View>
     }
     
 };
