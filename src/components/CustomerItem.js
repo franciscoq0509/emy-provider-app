@@ -16,7 +16,12 @@ export const CustomerItem = (props) => {
                     onPress={() => {props.item.nav.navigate('fullDetail', { customerId : props.item.id })}}
                 />
             :
-            <View></View>
+            <View>
+                <ActivityIndicator
+                    animating = {true}
+                    size = "large"
+                />
+            </View>
         }
         </View>
     );

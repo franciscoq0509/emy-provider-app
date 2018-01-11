@@ -11,7 +11,6 @@ import spinnerStyle from './styles/spinnerStyle';
 export default class Login extends React.Component {
     
     componentWillMount = () => {
-            //console.log(this.props);
             this.setState(() => ({
                 uname: "", pwd: "", 
                 showValidationError: false, 
@@ -28,7 +27,6 @@ export default class Login extends React.Component {
         console.log(err_message);
         console.log(typeof err_message);
         if(typeof err_message === 'object' && Object.keys(err_message).length === 0) {
-            console.log('it doeantr make any sense...,');
             console.log(err_message);
             this.setState({showError: true, message: `Network error!\nMake sure your device has an internet connection.`});
         } else {
@@ -128,7 +126,6 @@ export default class Login extends React.Component {
                             </View>
                             <View style={styles.submitButtonWrapper} >
                                 <LoginSubmitButtonContainer 
-                                    
                                     nav={this.props.navigation} 
                                     uname={this.state.uname} 
                                     pwd={this.state.pwd}
