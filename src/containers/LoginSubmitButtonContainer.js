@@ -11,7 +11,6 @@ import checkifAdmin from '../utilities/checkJwtIsAdmin';
 const ENV = null;
 const _options = (guid, uname, pwd) => ({
     method: 'GET',
-   // uri: ENV.loginAPI.url,
     headers: {
         'Authorization' : `Basic ${new Buffer(uname + ':' + pwd).toString('base64')}`,
          'X-enrolmy-slug' : guid,
@@ -21,14 +20,9 @@ const _options = (guid, uname, pwd) => ({
 
 const fetchJwt = (uname, pwd, guid) => (
     fetch(`${ENV.loginAPI.url}/login?scope=users,client-users,addresses,phones,ethnic-groups,emergency-contacts,family-doctors,educations`,_options(guid, uname.trim(), pwd.trim()))
-   // https://login-dev.enrolmy.com/login?scope=users,client-users,addresses,phones,ethnic-groups,emergency-contacts,family-doctors,educations
 );
 
 class LoginSubmitButtonContainer extends React.Component {
-   
-    // componentWillReceiveProps(props) {
-    //     console.log(providerGuid);
-    // }
 
     componentWillMount() {
         ENV = _ENV_();
@@ -52,18 +46,17 @@ class LoginSubmitButtonContainer extends React.Component {
                             })
                             .catch((err) => console.log(err));        
                     } else{
-                        this.props.showErrorMessage('Sorry looks like you are trying to login without a provider account');
+                        this.props.showErrorMessage('Sorry looks like you are trying to login without a provider account.');
                     }
-                } else {console.log('failed to login'); this.props.showErrorMessage('whoops! looks like something went wrong');}
+                } else {console.log('failed to login'); this.props.showErrorMessage(data._bodyText);}
             },
-            (error) => {console.log('error'); this.props.showErrorMessage('whoops! looks like something went wrong')}
+            (error) => {console.log('error'); this.props.showErrorMessage(error)}
         )
-        .catch((err) => {console.log('catch error'); this.props.showErrorMessage('whoops! looks like something went wrong')});
+        .catch((err) => {console.log('catch error'); this.props.showErrorMessage(err)});
     }
     
     render() {
-        console.log('in login render');
-        console.log(this.props);
+        console.log('in login render')
         return (
             <SubmitButton pressed={this.startSubmitProcess}/>
         );

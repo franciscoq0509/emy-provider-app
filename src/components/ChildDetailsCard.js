@@ -5,12 +5,6 @@ import call from 'react-native-phone-call';
 //import { displayQuestionAndAnswer } from '../utilities/customQuestionParser';
 const Moment = require('moment');
 
-//health info -- add provider health notes
-//auth pickups/ non-auth pickups --finish auth pickups. render non auth pickups
-//adresses -- do for both parent and child if exists
-//family doctor w/ call button -- do for parent
-//all other parent data found
-
 export const ChildDetailsCard = ({ 
         schoolName, 
         schoolYear, 

@@ -15,8 +15,6 @@ const Header = ()=> {
 
 const styles = {
     wrapper : {
-        //paddingBottom: 10,
-        //marginTop: 20,
         alignItems: 'center',
         backgroundColor: '#3197EA',
         width: '100%',

@@ -4,21 +4,6 @@ import { Badge, Tile } from 'react-native-elements';
 
 export const ErrorMessage = ({ message, errorStyle }) => {
 
-    // returnErrorMessage = (type) => {
-    //     switch (type) {
-    //         case 'validation':
-    //             return `Sorry your username or password are incorrect.`
-    //         case 'network':
-    //             return `Network error!\nMake sure your device has an internet connection.`
-    //         case 'customerListFailed':
-    //             return `Sorry but we can't find the resource you are requesting at this time.`
-    //         case 'unknown':
-    //             return `Woops! looks like something went wrong.`
-    //         default:
-    //             return `Woops! looks like something went wrong.`
-    //     }
-    // }
-
     switch (errorStyle) {
         case 'bubble':
             return (

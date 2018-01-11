@@ -1,11 +1,12 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, ActivityIndicator } from 'react-native';
 import Header from './Header';
 import { ErrorMessage } from './ErrorMessage';
 import LoginSubmitButtonContainer from '../containers/LoginSubmitButtonContainer';
 import {FormLabel, FormInput, CheckBox} from 'react-native-elements';
 import { setProviderGuid } from '../config/_ENV_';
 import { _signUserOut } from '../utilities/userAuth';
+import spinnerStyle from './styles/spinnerStyle';
 
 export default class Login extends React.Component {
     
@@ -23,21 +24,6 @@ export default class Login extends React.Component {
             }));
     }
 
-    // constructor(props) {
-    //     super(props);
-    //     this.setState(() => ({
-    //         uname: "", pwd: "", 
-    //         showValidationError: false, 
-    //         showNetworkError: false, 
-    //         showUnknownError: false,
-    //         pkcChecked : false,
-    //         showError : false,
-    //         premiumKidsCareChecked : false,
-    //         jerrysGymChecked : false,
-    //         orgs : ['pkcChecked','premiumKidsCareChecked','jerrysGymChecked'] 
-    //     }));
-    // }
-
     showErrorMessage = (err_message) => {
         console.log(err_message);
         console.log(typeof err_message);
@@ -47,8 +33,8 @@ export default class Login extends React.Component {
             this.setState({showError: true, message: `Network error!\nMake sure your device has an internet connection.`});
         } else {
             try {
-                //the try/catch is needed incase the error is not JSON and we just need to pass err_message to this.setState
                 const errMessage = JSON.parse(err_message);
+                console.log(errMessage);
                 if('error_description' in errMessage && errMessage.error_description.toLowerCase().includes('invalid username and password')) {
                     this.setState({showError: true, message: `Sorry your username or password are incorrect.`});
                 } else {
@@ -158,8 +144,11 @@ export default class Login extends React.Component {
                 
             </View>
         :
-        <View>
-            <Text>Spinner</Text>
+        <View style={spinnerStyle.container}>
+            <ActivityIndicator
+                animating = {true}
+                size = "large"
+            />
         </View>
     }
     

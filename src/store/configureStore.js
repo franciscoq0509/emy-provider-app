@@ -32,27 +32,4 @@ export default () => {
             this.store = {};
         }
     }
-    // let store = {};
-    // this.createStore = () => {
-    //     store = createStore(
-    //         combineReducers({
-    //             customersData: CustomersReducer,
-    //             customersDetails: CustomersDetails,
-    //             currentCustomerAction: currentCustomerAction,
-    //             customersFilter: CustomersFilter,
-    //             activities: activitiesReducer,
-    //             activitiesFilter: activitiesFilter,
-    //             orgGuid,
-    //             jwt
-    //         }), 
-    //         applyMiddleware(thunk)
-    //     );
-    
-    //     return store;
-    // };
-
-    // this.deleteStore = () => {
-    //     store = {};
-    // };
-    
-}
+};

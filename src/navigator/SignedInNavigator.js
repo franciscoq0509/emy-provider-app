@@ -39,20 +39,20 @@ class CustomersScreen extends React.Component {
     }  
 };
 
-class ActivitiesScreen extends React.Component {
-    render() {
-        return(
-            <ActivitiesNavigator />
-        );
-    };  
-};
+// class ActivitiesScreen extends React.Component {
+//     render() {
+//         return(
+//             <ActivitiesNavigator />
+//         );
+//     };  
+// };
 
-const QuickBookScreen = () => (
-    <View>
-        <Header />
-        <QuickBook />
-    </View>
-);
+// const QuickBookScreen = () => (
+//     <View>
+//         <Header />
+//         <QuickBook />
+//     </View>
+// );
 
 const SignedInNavigator = TabNavigator({
     // Home: {
@@ -68,12 +68,6 @@ const SignedInNavigator = TabNavigator({
                   )
             },
         },
-        ErrorLogout: {
-            screen: SignedOutNavigator,
-            navigationOptions: {
-                tabBarVisible: false
-            }
-        }
         // Activities: {
         //     screen: ActivitiesScreen,
         //     navigationOptions: {

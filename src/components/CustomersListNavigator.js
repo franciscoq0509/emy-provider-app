@@ -10,10 +10,6 @@ import { ErrorMessage } from './ErrorMessage';
 
 
 class CustomersList extends React.PureComponent {
-
-    // static navigationOptions = ({ navigation }) => ({
-    //     title: `All Customers`,
-    //   });
     
     customersAndCallback() {
         console.log(this.props);

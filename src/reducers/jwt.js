@@ -6,7 +6,6 @@ const stateInit = {
 }
 
 export default (state = stateInit, action) => {
-    console.log('reducer', state);
     switch (action.type) {
         case 'SAVE_NEW_JWT':
             return  {

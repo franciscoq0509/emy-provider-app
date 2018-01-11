@@ -7,8 +7,6 @@ import { View, Text, ActivityIndicator } from 'react-native';
 import spinnerStyle from '../components/styles/spinnerStyle';
 
 
-
-
 class saveJwtToStore extends React.Component {
     componentWillMount() {
         this.setState({jwt: false});
@@ -36,18 +34,14 @@ class saveJwtToStore extends React.Component {
                     screenProps={{rootNav :this.props.navigation}}
                 />
                 :
-                <View style={spinnerStyle.container}>
-                    <Text>jwttostore</Text>            
-                </View>
+                <ActivityIndicator
+                    animating = {true}
+                    size = "large"
+                />
             );
             return renderJsx;
     }
 }
-
-// <ActivityIndicator
-// animating = {true}
-// size = "large"
-// />
 
 const mapStateToProps = (state) => ({
     jwt: state.jwt.fullJwt 
