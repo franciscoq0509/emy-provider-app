@@ -16,11 +16,7 @@ class CustomersList extends React.PureComponent {
         const filteredCustomers = (this.props.screenProps.filteredCustomers !== undefined) ? [...Object.values(this.props.screenProps.filteredCustomers)] : []; 
         return filteredCustomers.length !== 0 ? filteredCustomers.map(c => ({...c, nav: {...this.props.navigation}})) : filteredCustomers;
     };
-
-    timeoutToRenderRefresh() {
-        return setTimeout(()=>{return },5000);
-    };
-
+    
     _keyExtractor = (item, index) => index;
 
     render() {
