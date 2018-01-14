@@ -10,6 +10,7 @@ const Moment = require('moment');
 
 //primary contact and emergency contacts in first render
 export const CustomerFullDetails = (props) => {
+    console.log(props);
     const { 
         full_name, 
         dob, 
@@ -40,7 +41,7 @@ export const CustomerFullDetails = (props) => {
     console.log(familyDoctors);
 
     let phoneNumbers = 0;
-    if(phones !==undefined && typeof phones === 'object') {
+    if(phones !== undefined && typeof phones === 'object') {
         phoneNumbers = {
             Mobile : phones[Object.keys(phones).find((key) => phones[key].name === 'Mobile')],
             Home : phones[Object.keys(phones).find((key) => phones[key].name === 'Home')],
@@ -131,9 +132,9 @@ export const CustomerFullDetails = (props) => {
         <ScrollView>
             <Card title="Details">
                 <View>
-                    <Text style= {styles.text}>{full_name}</Text>
-                    <Text style= {styles.text}>{gender === 'M' ? 'Male' : 'Female'}</Text>
-                    <Text style= {styles.text}>email: {email ? email : 'None found'}</Text>
+                    <Text style = {styles.text}>{full_name}</Text>
+                    <Text style = {styles.text}>{gender === 'M' ? 'Male' : 'Female'}</Text>
+                    {email ? <Text style= {styles.text}>email: {email} </Text> : false}
                     <Text style= {styles.text}>DOB: {dob !== null ? Moment(dob).format("MMMM DD, YYYY") : 'Not found'}</Text>
                     {createCallButton('Mobile', phoneNumbers)}
                     {createCallButton('Work', phoneNumbers)}
@@ -148,6 +149,7 @@ export const CustomerFullDetails = (props) => {
                         {createCallButton('Mobile', primaryContactPhones)}
                         {createCallButton('Work', primaryContactPhones)}
                         {createCallButton('Home', primaryContactPhones)}
+                        {primaryContact.email != "" ? <Text style = { [styles.text, { marginTop : 20} ] }>Email : {primaryContact.email}</Text> : false}
                     </Card>
                     <Card title="Emergency Contacts">
                         {this.showEmergencyContacts(emergencyContacts)}
@@ -159,23 +161,21 @@ export const CustomerFullDetails = (props) => {
             {
                 props.showMoreClicked ? 
                 <View>
-                
-                        <ChildDetailsCard 
-                            schoolName={schoolName} 
-                            schoolYear={schoolYear}
-                            healthInformation={healthInformation}
-                            emergencyContacts={emergencyContacts}
-                            customerCreated={created}
-                            fullName={full_name}
-                            addresses={addresses}
-                            familyDoctors={familyDoctors}
-                            parentAuthorizedPickups={parentAuthorizedPickups}
-                            providerAuthorizedPickups={providerAuthorizedPickups}
-                            providerUnauthorizedPickups={providerUnauthorizedPickups}
-                            parentUnauthorizedPickups={parentUnauthorizedPickups}
-                            customQuestions={customQuestions}
-                        />
-                          
+                    <ChildDetailsCard 
+                        schoolName={schoolName} 
+                        schoolYear={schoolYear}
+                        healthInformation={healthInformation}
+                        emergencyContacts={emergencyContacts}
+                        customerCreated={created}
+                        fullName={full_name}
+                        addresses={addresses}
+                        familyDoctors={familyDoctors}
+                        parentAuthorizedPickups={parentAuthorizedPickups}
+                        providerAuthorizedPickups={providerAuthorizedPickups}
+                        providerUnauthorizedPickups={providerUnauthorizedPickups}
+                        parentUnauthorizedPickups={parentUnauthorizedPickups}
+                        customQuestions={customQuestions}
+                    />    
                 </View>
                 :
                 <View>

@@ -34,6 +34,7 @@ class CustomerDetails extends React.Component {
     setDetailsState() {
         console.log(this.props.allCustomerDetails);
         const { phoneNumbers, addresses, emergencyContacts, healthInfo, schoolInformation, allDetails, familyDoctors, parentAuthorizedPickups, providerAuthorizedPickups, providerUnauthorizedPickups, parentUnauthorizedPickups, customQuestions } = this.props.allCustomerDetails;
+        console.log(schoolInformation);
         const id = this.props.navigation.state.params.customerId;
         const primaryContact = this.findAndSetPrimaryContact(allDetails[id].primary_contact.id);
         console.log(primaryContact);
