@@ -32,12 +32,12 @@ class CustomerDetails extends React.Component {
     }; 
 
     setDetailsState() {
-        console.log(this.props.allCustomerDetails);
+        //console.log(this.props.allCustomerDetails);
         const { phoneNumbers, addresses, emergencyContacts, healthInfo, schoolInformation, allDetails, familyDoctors, parentAuthorizedPickups, providerAuthorizedPickups, providerUnauthorizedPickups, parentUnauthorizedPickups, customQuestions } = this.props.allCustomerDetails;
-        console.log(schoolInformation);
+        //console.log(schoolInformation);
         const id = this.props.navigation.state.params.customerId;
         const primaryContact = this.findAndSetPrimaryContact(allDetails[id].primary_contact.id);
-        console.log(primaryContact);
+        console.log(emergencyContacts[id]);
         if(primaryContact !== false && 'success' in primaryContact && primaryContact.success === true) {
             this.setState(() => ({
                 allCustomerDetails: {
@@ -57,7 +57,7 @@ class CustomerDetails extends React.Component {
                 }
             }));
         } else {
-            console.log('disptching new fetch for primary contact details');
+            //console.log('disptching new fetch for primary contact details');
             this.dispatchNewCustomerDetails(allDetails[id].primary_contact.id);
         }
     };
@@ -110,7 +110,7 @@ class CustomerDetails extends React.Component {
         }
     };
 
-    render(){
+    render() {
         return (
             <View>
                 { this.state.allCustomerDetails && <CustomerFullDetails
