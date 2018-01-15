@@ -29,7 +29,7 @@ class CustomersListContainer extends React.Component {
     customersThunk = (dispatch) => {
         
         return (dispatch) => {
-            dispatch(requestCustomers());
+            
             return fetchCustomers(this.props.jwt)
                 .then(
                     (customersObject) => customersObject.json(),
@@ -43,11 +43,13 @@ class CustomersListContainer extends React.Component {
 
     showLoadingSpinner = () => {
         console.log('show loading spinnner called');
+        console.log(this.props.actions.isFetching);
         return this.props.actions.isFetching ? true : false;
     }
 
     componentWillMount() {
         ENV = _ENV_();
+        this.props.dispatch(requestCustomers());
         this.setState(() => ({showSpinner: this.showLoadingSpinner, showLoadError: false}));
         getProviderGuid()
             .then((guid) => {

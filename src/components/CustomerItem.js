@@ -14,14 +14,14 @@ export const CustomerItem = (props) => {
                     roundAvatar
                     title={`${props.item.first_name} ${props.item.last_name}`}
                     onPress={() => {props.item.nav.navigate('fullDetail', { 
-                                customerId : props.item.id,
-                                nav: props.item.nav 
-                            })
+                                    customerId : props.item.id,
+                                    nav: props.item.nav 
+                                })
+                            }
                         }
-                    }
                 />
             :
-            <View>
+            <View style={spinnerStyle.container}>
                 <ActivityIndicator
                     animating = {true}
                     size = "large"

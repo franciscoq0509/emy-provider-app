@@ -108,7 +108,7 @@ export const normalizedFullCustomerDetails = (customerDetails) => {
     //             photoConsent[customerDetails.id] = 'unknown';
     //         }
     //     } else photoConsent[customerDetails.id] = 'unknown';
-//console.log(normalizedSchoolName);
+console.log('about to return norm data');
     return {
         allDetails : normalizedAllDetails.entities.allCustomersDetails[customerDetails.id] ,
         addresses : normalizedAddresses.entities[customerDetails.id],

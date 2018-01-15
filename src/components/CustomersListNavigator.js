@@ -38,6 +38,7 @@ class CustomersList extends React.PureComponent {
                 )
             default:
             console.log('default');
+            console.log(this.props.screenProps.showSpinner());
                 return (
                     <View  style={ center = {flex:1} }>
                         {this.props.screenProps.showSpinner() ? 
@@ -47,8 +48,10 @@ class CustomersList extends React.PureComponent {
                                     size = "large"
                                 />
                             </View>
-                            : 
+                            :
+                            
                             <View>
+                                <View>{console.log('rendering logout button and flatlist')}</View> 
                                 <Button
                                     containerViewStyle = {{width: 80, alignSelf: 'flex-end'}}
                                     small

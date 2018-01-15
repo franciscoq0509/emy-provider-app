@@ -17,7 +17,7 @@ export default (
                     didFail: false
                 };
             case 'REQUEST_CUSTOMERS':
-                return {
+                return {    
                     //...state,
                     isFetching: true,
                     didInvalidate: false,
@@ -32,9 +32,7 @@ export default (
                 }
             default:
                 return {
-                    isFetching: false,
-                    didInvalidate: false,
-                    didFail: false
+                    ...state
                 };
         }
     };
