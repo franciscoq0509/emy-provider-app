@@ -96,6 +96,7 @@ class CustomerDetails extends React.Component {
         ENV = _ENV_();
         this.setState(() => ({showMoreClicked: false, clickHandler: this.clicked, advancedDataLoadFailed: false})); 
         if(this.props.navigation.state.params.customerId) {
+            console.log(this.props);
             this.setState(() => ({
                     basicCustomerDetails: this.props.screenProps.filteredCustomers[this.props.navigation.state.params.customerId]
                 })
@@ -119,6 +120,7 @@ class CustomerDetails extends React.Component {
                     showMoreClicked={this.state.showMoreClicked}
                     clickHandler={this.state.clickHandler}
                     advancedDataLoadFailed  = {this.state.advancedDataLoadFailed}
+                    nav = {this.props.navigation.state.params.nav}
                 />}
             </View>
         );

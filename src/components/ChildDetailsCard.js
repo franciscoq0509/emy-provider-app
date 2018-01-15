@@ -2,8 +2,10 @@ import { Card, Button, Badge } from 'react-native-elements';
 import { Text, View, StyleSheet } from 'react-native';
 import React from 'react';
 import call from 'react-native-phone-call';
+import { ErrorMessage } from './ErrorMessage';
 //import { displayQuestionAndAnswer } from '../utilities/customQuestionParser';
 const Moment = require('moment');
+
 
 export const ChildDetailsCard = ({ 
         schoolName, 
@@ -132,79 +134,97 @@ export const ChildDetailsCard = ({
                     <Text style= {styles.title}>No Health information was found on {fullName}</Text>
                 </View>
             }
-            
-            {parentAuthorizedPickups ?
-                <View style={styles.infoCard}> 
-                <Text style={styles.title}>Parent Authorized Pickups</Text>
-                {parentAuthorizedPickups.map(({first_name, last_name, phone, active}, index) => (
-                    active ? 
-                        <View key={index}>
-                            {(first_name && last_name) ? <Text style={{fontSize: 20, alignSelf: 'center', marginTop: 50, marginBottom: 10}}>{first_name} {last_name}</Text> : false} 
-                            {phone ?
-                                <Button
-                                    small
-                                    backgroundColor='#74CC82'
-                                    title={ phone }
-                                    iconRight={{name: 'phone', type: 'Entypo'}}
-                                    onPress={() => callNumber(phone)}
-                                />
-                                :
-                                <Button
-                                    small
-                                    backgroundColor='#E5644E'
-                                    title={ 'No Number Found' }
-                                    onPress={false}
-                                />
-                            }
-                        </View>
-                        : 
-                        false
-                ))}
-                </View>
-                :
-                <View style={styles.infoCard}>
-                    <Text style={styles.title}>No parent authorized pickups found</Text>
-                </View>
-            }
 
-            {providerAuthorizedPickups ?
-                <View style={styles.infoCard}> 
-                <Text style={styles.title}>Provider Authorized Pickups</Text>
+            {
+                !parentAuthorizedPickups && ! providerAuthorizedPickups  ?
+                    <Badge containerStyle={{ backgroundColor: '#ff8e00', marginBottom: 15}}>
+                        <Text style={{fontSize: 19, color: '#fff'}}>No authorized pickups found</Text>
+                    </Badge>
+                :
                     <View>
-                        {
-                            (providerAuthorizedPickups.authorized_pickups) ? 
-                            <Text style={styles.text}>{providerAuthorizedPickups.authorized_pickups}</Text> 
-                            : 
-                            <Text style={styles.text}>No provider authorized Pickups found</Text>
-                        } 
+                        {parentAuthorizedPickups ?
+                            <View style={styles.infoCard}> 
+                            <Text style={styles.title}>Parent Authorized Pickups</Text>
+                            {parentAuthorizedPickups.map(({first_name, last_name, phone, active}, index) => (
+                                active ? 
+                                    <View key={index}>
+                                        {(first_name && last_name) ? <Text style={{fontSize: 20, alignSelf: 'center', marginTop: 50, marginBottom: 10}}>{first_name} {last_name}</Text> : false} 
+                                        {phone ?
+                                            <Button
+                                                small
+                                                backgroundColor='#74CC82'
+                                                title={ phone }
+                                                iconRight={{name: 'phone', type: 'Entypo'}}
+                                                onPress={() => callNumber(phone)}
+                                            />
+                                            :
+                                            <Button
+                                                small
+                                                backgroundColor='#E5644E'
+                                                title={ 'No Number Found' }
+                                                onPress={false}
+                                            />
+                                        }
+                                    </View>
+                                    : 
+                                    false
+                            ))}
+                            </View>
+                            :
+                            <View style={styles.infoCard}>
+                                <Text style={styles.title}>No parent authorized pickups found</Text>
+                            </View>
+                        }
+            
+                        {providerAuthorizedPickups ?
+                            <View style={styles.infoCard}> 
+                            <Text style={styles.title}>Provider Authorized Pickups</Text>
+                                <View>
+                                    {
+                                        (providerAuthorizedPickups.authorized_pickups) ? 
+                                        <Text style={styles.text}>{providerAuthorizedPickups.authorized_pickups}</Text> 
+                                        : 
+                                        <Text style={styles.text}>No provider authorized Pickups found</Text>
+                                    } 
+                                </View>
+                            </View>
+                            :
+                            <View style={styles.infoCard}>
+                                <Text style={styles.title}>No provider authorized pickups found</Text>
+                            </View>
+                        }
                     </View>
-                </View>
-                :
-                <View style={styles.infoCard}>
-                    <Text style={styles.title}>No provider authorized pickups found</Text>
-                </View>
-            }
 
-            {parentUnauthorizedPickups ?
-                <View style={styles.infoCard}>
-                    <Text style={styles.title}>Parent Unauthorized pickups</Text>
-                    <Text style={styles.text}>{parentUnauthorizedPickups}</Text>
-                </View>
-                :
-                <View style={styles.infoCard}>
-                    <Text style={styles.title}>No parent unauthorized pickups found</Text>
-                </View>
             }
-
-            {providerUnauthorizedPickups ?
-                <View style={styles.infoCard}>
-                    <Text style={styles.title}>Provider Unauthorized pickups</Text>
-                    <Text style={styles.text}>{providerUnauthorizedPickups}</Text>
-                </View>
+            {
+                !parentUnauthorizedPickups && !providerUnauthorizedPickups ?
+                    <Badge containerStyle={{ backgroundColor: '#ff8e00', marginBottom: 15}}>
+                        <Text style={{fontSize: 19, color: '#fff'}}>No unauthorized pickups found</Text>
+                    </Badge>   
                 :
-                <View style={styles.infoCard}>
-                    <Text style={styles.title}>No provider unauthorized pickups found</Text>
-                </View>
+                    <View>
+                    {parentUnauthorizedPickups ?
+                        <View style={styles.infoCard}>
+                            <Text style={styles.title}>Parent Unauthorized pickups</Text>
+                            <Text style={styles.text}>{parentUnauthorizedPickups}</Text>
+                        </View>
+                    :
+                        <View style={styles.infoCard}>
+                            <Text style={styles.title}>No parent unauthorized pickups found</Text>
+                        </View>
+                    }
+        
+                    {providerUnauthorizedPickups ?
+                        <View style={styles.infoCard}>
+                            <Text style={styles.title}>Provider Unauthorized pickups</Text>
+                            <Text style={styles.text}>{providerUnauthorizedPickups}</Text>
+                        </View>
+                    :
+                        <View style={styles.infoCard}>
+                            <Text style={styles.title}>No provider unauthorized pickups found</Text>
+                        </View>
+                    }
+                    </View>
             }
 
             {Object.keys(familyDoctors).length > 0 ?

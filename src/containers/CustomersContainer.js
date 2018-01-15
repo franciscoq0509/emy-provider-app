@@ -81,7 +81,7 @@ class CustomersListContainer extends React.Component {
     goToLogin = () => {
         console.log('error clicked');
         _signUserOut()
-            .then(()=> {
+            .then(() => {
                 console.log('deleted, signUserOut');
                 console.log(this.props);
                 this.props.dispatch(deleteJwt());

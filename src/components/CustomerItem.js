@@ -13,7 +13,12 @@ export const CustomerItem = (props) => {
                     containerStyle={props.item.is_child ? {} : {backgroundColor: '#e6f4f4'}}
                     roundAvatar
                     title={`${props.item.first_name} ${props.item.last_name}`}
-                    onPress={() => {props.item.nav.navigate('fullDetail', { customerId : props.item.id })}}
+                    onPress={() => {props.item.nav.navigate('fullDetail', { 
+                                customerId : props.item.id,
+                                nav: props.item.nav 
+                            })
+                        }
+                    }
                 />
             :
             <View>

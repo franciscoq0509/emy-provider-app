@@ -3,14 +3,25 @@ import { View, Text, ScrollView, StyleSheet } from 'react-native';
 import { Button, Card, Badge, Icon } from 'react-native-elements';
 import { ParentDetailsCard } from './ParentDetailsCard';
 import { ChildDetailsCard } from './ChildDetailsCard';
-import { ErrorMessage } from '../components/ErrorMessage';
+//import { ErrorMessage } from '../components/ErrorMessage';
 import call from 'react-native-phone-call';
+import { ErrorMessage } from './ErrorMessage';
 
 const Moment = require('moment');
 
 //primary contact and emergency contacts in first render
 export const CustomerFullDetails = (props) => {
     console.log(props);
+    if (props.basicCustomerDetails === undefined) {
+        return (
+            <View>
+                <ErrorMessage 
+                    message={'Sorry we cannot find any information on this person.'} 
+                    errorStyle={'block'}  
+                />
+            </View>
+        );
+    }
     const { 
         full_name, 
         dob, 
@@ -37,6 +48,7 @@ export const CustomerFullDetails = (props) => {
         parentUnauthorizedPickups,
         customQuestions
     } = props.allCustomerDetails;
+
 
     console.log(familyDoctors);
 
@@ -150,6 +162,17 @@ export const CustomerFullDetails = (props) => {
                         {createCallButton('Work', primaryContactPhones)}
                         {createCallButton('Home', primaryContactPhones)}
                         {primaryContact.email != "" ? <Text style = { [styles.text, { marginTop : 20} ] }>Email : {primaryContact.email}</Text> : false}
+                        <Button
+                            containerViewStyle={{marginTop: 30}}
+                            backgroundColor='#74CC82'
+                            title={`Full details` }
+                            iconRight={{name: 'phone', type: 'Entypo'}}
+                            onPress={()=>props.nav.navigate('fullDetail', { 
+                                customerId : primaryContact.id,
+                                nav: props.nav 
+                            })}
+                        />
+
                     </Card>
                     <Card title="Emergency Contacts">
                         {this.showEmergencyContacts(emergencyContacts)}
