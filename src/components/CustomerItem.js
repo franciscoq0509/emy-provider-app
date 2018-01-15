@@ -10,7 +10,7 @@ export const CustomerItem = (props) => {
         {
             props.item !== undefined ?
                 <ListItem
-                    containerStyle={props.item.is_child ? {} : {backgroundColor: '#e6f4f4'}}
+                    containerStyle={props.item.is_child ? {} : {backgroundColor: '#E3F2FD'}}
                     roundAvatar
                     title={`${props.item.first_name} ${props.item.last_name}`}
                     onPress={() => {props.item.nav.navigate('fullDetail', { 

@@ -100,7 +100,7 @@ export const CustomerFullDetails = (props) => {
             return (
                 <Button
                     containerViewStyle={{marginTop: 30}}
-                    backgroundColor='#74CC82'
+                    backgroundColor='#4CAF50'
                     title={`${type}: ${phoneList[type].phone}` }
                     iconRight={{name: 'phone', type: 'Entypo'}}
                     onPress={()=>callNumber(type, phoneList, null)}
@@ -126,7 +126,7 @@ export const CustomerFullDetails = (props) => {
                                     <Text style= {styles.subText}>Relationship: { obj[key].relationship }</Text>
                                     <Button
                                         small
-                                        backgroundColor='#74CC82'
+                                        backgroundColor='#4CAF50'
                                         title={ obj[key].phone }
                                         iconRight={{name: 'phone', type: 'Entypo'}}
                                         onPress={() => callNumber(null, null, obj[key].phone)}
@@ -161,12 +161,12 @@ export const CustomerFullDetails = (props) => {
                         {createCallButton('Mobile', primaryContactPhones)}
                         {createCallButton('Work', primaryContactPhones)}
                         {createCallButton('Home', primaryContactPhones)}
-                        {primaryContact.email != "" ? <Text style = { [styles.text, { marginTop : 20} ] }>Email : {primaryContact.email}</Text> : false}
+                        {primaryContact.email != "" ? <Text style = { styles.staticEmail }>Email : {primaryContact.email}</Text> : false}
                         <Button
-                            containerViewStyle={{marginTop: 30}}
-                            backgroundColor='#74CC82'
+                            containerViewStyle={{marginTop: 20}}
+                            backgroundColor='#1976D2'
                             title={`Full details` }
-                            iconRight={{name: 'phone', type: 'Entypo'}}
+                            iconRight={{name: 'folder-shared', type: 'Entypo', size: 25}}
                             onPress={()=>props.nav.navigate('fullDetail', { 
                                 customerId : primaryContact.id,
                                 nav: props.nav 
@@ -223,7 +223,7 @@ const styles = StyleSheet.create({
     infoCard: {
         paddingBottom: 15,
         paddingTop: 15,
-        backgroundColor: '#e6f4f4',
+        backgroundColor: '#E3F2FD',
         marginBottom: 15
     },
     title: {
@@ -235,6 +235,12 @@ const styles = StyleSheet.create({
     text: {
         paddingLeft: 20,
         fontSize: 18,
+        marginBottom: 15
+    },
+    staticEmail: {
+        marginTop : 20,
+        alignSelf: 'center',
+        fontSize: 20,
         marginBottom: 15
     },
     emergencyContactName: {

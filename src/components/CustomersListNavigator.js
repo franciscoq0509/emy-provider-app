@@ -52,7 +52,7 @@ class CustomersList extends React.PureComponent {
                                 <Button
                                     containerViewStyle = {{width: 80, alignSelf: 'flex-end'}}
                                     small
-                                    backgroundColor='#74CC82'
+                                    backgroundColor='#4CAF50'
                                     title='logout'
                                     onPress={() => this.props.screenProps.errorLogout()}
                                 />

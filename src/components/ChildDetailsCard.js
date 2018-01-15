@@ -236,7 +236,7 @@ export const ChildDetailsCard = ({
                             <Text style={styles.text}>Doctor: {familyDoctors[d].name}</Text>
                             <Button
                                 small
-                                backgroundColor='#74CC82'
+                                backgroundColor='#4CAF50'
                                 title={ familyDoctors[d].phone }
                                 iconRight={{name: 'phone', type: 'Entypo'}}
                                 onPress={() => callNumber(familyDoctors[d].phone)}
@@ -282,7 +282,7 @@ const styles = StyleSheet.create({
     infoCard: {
         paddingBottom: 15,
         paddingTop: 15,
-        backgroundColor: '#e6f4f4',
+        backgroundColor: '#E3F2FD',
         marginBottom: 15
     },
     title: {
