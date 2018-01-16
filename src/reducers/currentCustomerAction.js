@@ -29,6 +29,21 @@ export default (
                     isFetching: false,
                     didInvalidate: false,
                     didFail: false
+                };
+            case 'REQUEST_CUSTOMER_DETAILS':
+            console.log('is fetching to true');
+                return {    
+                    //...state,
+                    isFetching: true,
+                    didInvalidate: false,
+                    didFail: false
+                };
+            case 'SAVE_FULL_CUSTOMER_DETAILS':
+            console.log('is fetching to false');
+                return {
+                    isFetching: false,
+                    didInvalidate: false,
+                    didFail: false
                 }
             default:
                 return {

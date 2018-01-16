@@ -1,10 +1,11 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { Text, View, ActivityIndicator } from 'react-native';
 import { connect } from 'react-redux';
 import findId from '../utilities/findId';
 import { CustomerFullDetails } from '../components/CustomerFullDetails';
-import { saveCustomerDetails, saveCustomerDetailsFailure } from '../actions/customers';
+import { saveCustomerDetails, saveCustomerDetailsFailure, requestCustomerDetails } from '../actions/customers';
 import { _ENV_, providerGuid } from '../config/_ENV_';
+import spinnerStyle from '../components/styles/spinnerStyle';
 
 const ENV = null;
 
@@ -20,6 +21,7 @@ class CustomerDetails extends React.Component {
         this.setDetailsState = this.setDetailsState.bind(this);  
         this.findAndSetPrimaryContact = this.findAndSetPrimaryContact.bind(this); 
         this.dispatchNewCustomerDetails = this.dispatchNewCustomerDetails.bind(this); 
+        this.showSpinner = this.showSpinner.bind(this);
     }
     
     clicked() {
@@ -64,6 +66,7 @@ class CustomerDetails extends React.Component {
 
     returnCustomerDetails = (id, jwt) => {
         return (dispatch) => {
+            dispatch(requestCustomerDetails());
             return fetchCustomerDetails(id, jwt)
                 .then(
                     (details) => details.json(),
@@ -91,6 +94,11 @@ class CustomerDetails extends React.Component {
         .catch((err) => {console.log('about to set state for failed');this.setState({advancedDataLoadFailed: true, allCustomerDetails: 'error loading'})})
     };
 
+    showSpinner() {
+        console.log(this.props.actions.isFetching);
+        return this.props.actions.isFetching ? true : false;
+    }
+
 
     componentWillMount() {
         ENV = _ENV_();
@@ -112,16 +120,27 @@ class CustomerDetails extends React.Component {
     };
 
     render() {
+        
         return (
-            <View>
-                { this.state.allCustomerDetails && <CustomerFullDetails
-                    basicCustomerDetails={this.state.basicCustomerDetails} 
-                    allCustomerDetails = {this.state.allCustomerDetails} 
-                    showMoreClicked={this.state.showMoreClicked}
-                    clickHandler={this.state.clickHandler}
-                    advancedDataLoadFailed  = {this.state.advancedDataLoadFailed}
-                    nav = {this.props.navigation.state.params.nav}
-                />}
+            <View style={ center = {flex:1} }>
+                {
+                    this.showSpinner() ? 
+                        <View style={spinnerStyle.container}>
+                            <ActivityIndicator
+                                animating = {true}
+                                size = "large"
+                            />
+                        </View>
+                    : 
+                        this.state.allCustomerDetails && <CustomerFullDetails
+                            basicCustomerDetails={this.state.basicCustomerDetails} 
+                            allCustomerDetails = {this.state.allCustomerDetails} 
+                            showMoreClicked={this.state.showMoreClicked}
+                            clickHandler={this.state.clickHandler}
+                            advancedDataLoadFailed  = {this.state.advancedDataLoadFailed}
+                            nav = {this.props.navigation.state.params.nav}
+                        />
+                }
             </View>
         );
     };
@@ -131,7 +150,8 @@ const mapStateToProps = (state) => {
     return {
         customerData: state.customersData.allCustomers,
         allCustomerDetails: state.customersDetails,
-        fullJwt: state.jwt.fullJwt
+        fullJwt: state.jwt.fullJwt,
+        actions: state.currentCustomerAction
     }
 };
 
