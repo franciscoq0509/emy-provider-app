@@ -84,6 +84,8 @@ export default (state = stateInit, action) => {
                 ...state,
                 customerDetailsError : action.customersDetails
             }
+        case 'USER_LOGOUT':
+            return stateInit;
         default:
             return state;
     }   

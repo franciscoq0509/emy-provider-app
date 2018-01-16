@@ -5,6 +5,7 @@ import CustomersListNavigator from '../components/CustomersListNavigator';
 import { getFilteredCustomers } from '../selectors/index';
 import { _ENV_, getProviderGuid } from '../config/_ENV_';
 import { deleteJwt } from '../actions/jwt';
+import { resetState } from '../actions/resetState';
 import { signUserOut } from '../utilities/userAuth';
 import { NavigationActions } from 'react-navigation';
 import { _signUserOut } from '../utilities/userAuth';
@@ -86,7 +87,7 @@ class CustomersListContainer extends React.Component {
             .then(() => {
                 console.log('deleted, signUserOut');
                 console.log(this.props);
-                this.props.dispatch(deleteJwt());
+                this.props.dispatch(resetState());
                 console.log('after dispatch...');
                 //below not working..navigating to signedIn even though specifically told to route to signedOut
                 // const resetToLogin = NavigationActions.reset({
@@ -128,7 +129,8 @@ class CustomersListContainer extends React.Component {
 const mapStateToProps = (state) => ({
     filteredCustomers: getFilteredCustomers(state, state, state),
     actions: state.currentCustomerAction,
-    jwt: state.jwt.fullJwt 
+    jwt: state.jwt.fullJwt, 
+    all: state
     
 });
 

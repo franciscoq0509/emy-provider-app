@@ -12,6 +12,8 @@ export default (state = stateInit, action) => {
                 allCustomerIds: action.allCustomerIds,
                 receivedAt:  action.receivedAt
             };
+        case 'USER_LOGOUT':
+            return stateInit;
         default:
             return state;
     }   

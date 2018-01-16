@@ -1,11 +1,11 @@
-const initState = {
+const stateInit = {
     isFetching: false,
     didInvalidate: false,
     didFail: false
 };
 
 export default (
-    state = initState,
+    state = stateInit,
     action
     ) => {
         switch (action.type) {
@@ -44,7 +44,9 @@ export default (
                     isFetching: false,
                     didInvalidate: false,
                     didFail: false
-                }
+                };
+            case 'USER_LOGOUT':
+                return stateInit;
             default:
                 return {
                     ...state

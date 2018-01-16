@@ -9,9 +9,9 @@ export default (state = stateInit, action) => {
                 orgGuid: action.guid
             };
         case 'DELETE_ORG_GUID':  
-            return {
-                orgGuid: null
-            }
+            return stateInit;
+        case 'USER_LOGOUT':
+            return stateInit;
         default:
            return state;
     }

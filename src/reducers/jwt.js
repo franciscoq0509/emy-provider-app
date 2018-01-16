@@ -15,13 +15,9 @@ export default (state = stateInit, action) => {
                 sig: action.sig,
             };
         case 'DELETE_JWT':  
-            console.log('about to delete jwt from store..');
-            return {
-                fullJwt: null,
-                headers: null,
-                payload: null,
-                sig: null,
-            }
+            return stateInit;
+        case 'USER_LOGOUT':
+            return stateInit;
         default:
            return state;
     }
