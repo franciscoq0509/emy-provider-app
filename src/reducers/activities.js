@@ -4,7 +4,7 @@ const stateInit = {
     errorMessage: "",
     revievedAt: null
 };
-//comment
+
 export default (state = stateInit, action) => {
     switch (action.type) {
         case 'RECEIVE_ACTIVITIES_SUCCESS':

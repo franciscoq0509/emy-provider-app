@@ -18,7 +18,6 @@ const stateInit = {
 };
 
 export default (state = stateInit, action) => {
-    console.log('action.normalizedCustomerDetails', action.normalizedCustomerDetails);
     switch (action.type) {
         case 'SAVE_FULL_CUSTOMER_DETAILS':
             return {
