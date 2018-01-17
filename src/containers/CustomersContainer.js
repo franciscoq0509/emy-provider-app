@@ -36,6 +36,7 @@ class CustomersListContainer extends React.Component {
                     (customersObject) => customersObject.json(),
                     (error) => dispatch(receiveCustomersError(error))
                 ).then((customers) => {
+                    console.log(customers);
                     return dispatch(receiveNewCustomers(customers.users));
                 })
                 .catch((err) => dispatch(receiveCustomersError(err)))
