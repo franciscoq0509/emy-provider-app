@@ -62,7 +62,7 @@ class CustomersList extends React.PureComponent {
                                 <List> 
                                     <FlatList
                                         data={this.customersAndCallback()}
-                                        initialNumToRender={10}
+                                        initialNumToRender={30}
                                         onEndReachedThreshold={1200}
                                         renderItem={CustomerItem}
                                         keyExtractor={this._keyExtractor}
