@@ -9,13 +9,22 @@ import spinnerStyle from './styles/spinnerStyle';
 import { ErrorMessage } from './ErrorMessage';
 
 
-class CustomersList extends React.PureComponent {
+class CustomersList extends React.Component {
+    constructor(props) {
+        super(props);
+        this.logout = this.logout.bind(this);
+    }
     
     customersAndCallback() {
         console.log(this.props);
         const filteredCustomers = (this.props.screenProps.filteredCustomers !== undefined) ? [...Object.values(this.props.screenProps.filteredCustomers)] : []; 
         return filteredCustomers.length !== 0 ? filteredCustomers.map(c => ({...c, nav: {...this.props.navigation}})) : filteredCustomers;
     };
+
+    logout = () => {
+        console.log(this.props);
+        this.props.screenProps.errorLogout();
+    }
     
     _keyExtractor = (item, index) => index;
 
@@ -31,14 +40,15 @@ class CustomersList extends React.PureComponent {
                             small
                             backgroundColor='#74CC82'
                             title='logout'
-                            onPress={() => this.props.screenProps.errorLogout()}
+                            onPress={this.logout}
                         />
                         <ErrorMessage message={'Sorry we cannot find the resource you are looking for'} errorStyle={'block'} />
                     </View>
                 )
             default:
-            console.log('default');
-            console.log(this.props.screenProps.showSpinner());
+            //console.log('default');
+            //console.log(this.props.screenProps.showSpinner());
+            console.log(this.customersAndCallback());
                 return (
                     <View  style={ center = {flex:1} }>
                         {this.props.screenProps.showSpinner() ? 
@@ -57,9 +67,9 @@ class CustomersList extends React.PureComponent {
                                     small
                                     backgroundColor='#4CAF50'
                                     title='logout'
-                                    onPress={() => this.props.screenProps.errorLogout()}
+                                    onPress={this.logout}
                                 />
-                                <List> 
+                                <List>
                                     <FlatList
                                         data={this.customersAndCallback()}
                                         initialNumToRender={30}
@@ -68,7 +78,7 @@ class CustomersList extends React.PureComponent {
                                         keyExtractor={this._keyExtractor}
                                         ListHeaderComponent={<StandardSearchbar search="allCustomers" />}
                                     />
-                                </List> 
+                                </List>
                             </View>
                         }
                     </View>
