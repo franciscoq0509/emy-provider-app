@@ -24,15 +24,11 @@ export default class Login extends React.Component {
     }
 
     showErrorMessage = (err_message) => {
-        console.log(err_message);
-        console.log(typeof err_message);
         if(typeof err_message === 'object' && Object.keys(err_message).length === 0) {
-            console.log(err_message);
             this.setState({showError: true, message: `Network error!\nMake sure your device has an internet connection.`});
         } else {
             try {
                 const errMessage = JSON.parse(err_message);
-                console.log(errMessage);
                 if('error_description' in errMessage && errMessage.error_description.toLowerCase().includes('invalid username and password')) {
                     this.setState({showError: true, message: `Sorry your username or password are incorrect.`});
                 } else {
@@ -46,8 +42,6 @@ export default class Login extends React.Component {
     }
 
     render() {
-        console.log('login screen');
-        console.log(this.props);
         return this.state ? 
             <View style={ {flex: 1} }>
                 <Header />
@@ -88,7 +82,6 @@ export default class Login extends React.Component {
                                     uncheckedIcon='square-o'
                                     onPress={
                                         () => {
-                                            console.log(this.state);
                                             setProviderGuid('pkc');
                                             this.setState({pkcChecked: true, premiumKidsCareChecked : false, jerrysGymChecked: false});
                                         }
@@ -102,7 +95,6 @@ export default class Login extends React.Component {
                                     title='Premium Kids Care'
                                     onPress={
                                         () => {
-                                            console.log(this.state);
                                             setProviderGuid('premium-kids-care');
                                             this.setState({pkcChecked: false, premiumKidsCareChecked : true, jerrysGymChecked: false});
                                         }
@@ -116,7 +108,6 @@ export default class Login extends React.Component {
                                     title='jerrys-gym'
                                     onPress={
                                         () => {
-                                            console.log(this.state);
                                             setProviderGuid('jerrys-gym');
                                             this.setState({pkcChecked: false, premiumKidsCareChecked : false, jerrysGymChecked: true});
                                         }

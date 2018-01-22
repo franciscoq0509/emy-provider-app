@@ -16,9 +16,6 @@ const providerGuid = null;
 
 
 const fetchCustomers = (jwt) => {
-    console.log(jwt);
-    console.log(providerGuid);
-    console.log(`${ENV.customersBasicUrl(providerGuid)}`, ENV.customersBasicHeaders(jwt));
     return fetch(
         ENV.customersBasicUrl(providerGuid),ENV.customersBasicHeaders(jwt)
     )
@@ -36,7 +33,6 @@ class CustomersListContainer extends React.Component {
                     (customersObject) => customersObject.json(),
                     (error) => dispatch(receiveCustomersError(error))
                 ).then((customers) => {
-                    console.log(customers);
                     return dispatch(receiveNewCustomers(customers.users));
                 })
                 .catch((err) => dispatch(receiveCustomersError(err)))
@@ -44,8 +40,6 @@ class CustomersListContainer extends React.Component {
     };
 
     showLoadingSpinner = () => {
-        console.log('show loading spinnner called');
-        console.log(this.props.actions.isFetching);
         return this.props.actions.isFetching ? true : false;
     }
 
@@ -61,7 +55,6 @@ class CustomersListContainer extends React.Component {
                         .then(
                             (resp) => { 
                                 if('type' in resp) {
-                                    console.log(resp);
                                     if(resp.type === 'RECEIVE_CUSTOMERS_SUCCESS') {
                                         this.setState({showLoadError: false});
                                         this.setState(() => ({filteredCustomers : this.props.filteredCustomers}));        
@@ -83,13 +76,9 @@ class CustomersListContainer extends React.Component {
     }
 
     goToLogin = () => {
-        console.log('error clicked');
         _signUserOut()
             .then(() => {
-                console.log('deleted, signUserOut');
-                console.log(this.props);
                 this.props.dispatch(resetState());
-                console.log('after dispatch...');
                 //below not working..navigating to signedIn even though specifically told to route to signedOut
                 // const resetToLogin = NavigationActions.reset({
                 //     index: 2,
@@ -102,14 +91,12 @@ class CustomersListContainer extends React.Component {
     }
 
 	componentWillReceiveProps(nextProps) {
-        console.log(nextProps); 
 		if(this.props !== nextProps) {
             this.setState(() => ({filteredCustomers : nextProps.filteredCustomers}));
 		}
 	}
 
     render() { 
-        console.log(this.props);     
         return (
             <CustomersListNavigator 
                 screenProps = { 

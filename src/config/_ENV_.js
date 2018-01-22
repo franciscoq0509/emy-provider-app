@@ -39,8 +39,6 @@ import { AsyncStorage } from 'react-native';
 
 export const _ENV_ = () => {
     // if(__DEV__) {
-    //     console.log('using DEV 555555555');
-    //     console.log('https://login-dev.enrolmy.com');
     //     return {
     //         loginAPI : {
     //             url : 'https://login-dev.enrolmy.com',
@@ -63,7 +61,6 @@ export const _ENV_ = () => {
     // } 
     // USE THESE AS THE CONFIGURATION FOR TESTING THE APP
     // else {
-    //     console.log('https://login-dev.enrolmy.com');
     //     return {
     //         loginAPI : {
     //             url : 'https://login-dev.enrolmy.com',

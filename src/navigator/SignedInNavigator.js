@@ -32,7 +32,6 @@ import { SignedOutNavigator } from './SignedOutNavigator';
 class CustomersScreen extends React.Component {
     
     render() {
-        console.log(this.props);
         return (
             <CustomersContainer rootNav={this.props.screenProps.rootNav}/>
         );

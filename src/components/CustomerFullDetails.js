@@ -11,7 +11,6 @@ const Moment = require('moment');
 
 //primary contact and emergency contacts in first render
 export const CustomerFullDetails = (props) => {
-    console.log(props);
     if (props.basicCustomerDetails === undefined) {
         return (
             <View>
@@ -49,9 +48,6 @@ export const CustomerFullDetails = (props) => {
         customQuestions
     } = props.allCustomerDetails;
 
-
-    console.log(familyDoctors);
-
     let phoneNumbers = 0;
     if(phones !== undefined && typeof phones === 'object') {
         phoneNumbers = {
@@ -74,17 +70,14 @@ export const CustomerFullDetails = (props) => {
             healthInformation = healthInfo[Object.keys(healthInfo)[0]] ? healthInfo[Object.keys(healthInfo)[0]] : 0; 
         } 
     }
-    console.log(healthInformation);
 
     const callNumber = (type = null, phoneList, number = null) => {
         if(type === null && number !== null) {
-            console.log(type, phoneList);
             call({
                 number: number.replace(/-|\s/g,""),
                 prompt: false
             })
         } else if (type !== null && phoneList !== null) {
-            console.log(type, phoneList);
             if('phone' in phoneList[type]) {
                 call({
                     number: phoneList[type].phone.replace(/-|\s/g,""),
@@ -95,7 +88,6 @@ export const CustomerFullDetails = (props) => {
     }
 
     const createCallButton = (type, phoneList) => {
-        console.log(phoneList);
         if(phoneList && phoneList[type]) {
             return (
                 <Button

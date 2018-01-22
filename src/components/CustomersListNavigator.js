@@ -16,23 +16,19 @@ class CustomersList extends React.Component {
     }
     
     customersAndCallback() {
-        console.log(this.props);
         const filteredCustomers = (this.props.screenProps.filteredCustomers !== undefined) ? [...Object.values(this.props.screenProps.filteredCustomers)] : []; 
         return filteredCustomers.length !== 0 ? filteredCustomers.map(c => ({...c, nav: {...this.props.navigation}})) : filteredCustomers;
     };
 
     logout = () => {
-        console.log(this.props);
         this.props.screenProps.errorLogout();
     }
     
     _keyExtractor = (item, index) => index;
 
     render() {
-        console.log('custom list nav');
         switch (this.props.screenProps.showLoadError) {
             case true:
-            console.log('show load error');
                 return (
                     <View>
                         <Button
@@ -46,9 +42,6 @@ class CustomersList extends React.Component {
                     </View>
                 )
             default:
-            //console.log('default');
-            //console.log(this.props.screenProps.showSpinner());
-            console.log(this.customersAndCallback());
                 return (
                     <View  style={ center = {flex:1} }>
                         {this.props.screenProps.showSpinner() ? 
@@ -61,7 +54,6 @@ class CustomersList extends React.Component {
                             :
                             
                             <View>
-                                <View>{console.log('rendering logout button and flatlist')}</View> 
                                 <Button
                                     containerViewStyle = {{width: 80, alignSelf: 'flex-end'}}
                                     small

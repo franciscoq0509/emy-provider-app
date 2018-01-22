@@ -29,13 +29,9 @@ class LoginSubmitButtonContainer extends React.Component {
     }
 
     startSubmitProcess = () => {
-        console.log('start submit process');
-        console.log(this.props.uname, this.props.pwd, providerGuid);
-        console.log(`Basic ${new Buffer(this.props.uname + ':' + this.props.pwd).toString('base64')}`);
         fetchJwt(this.props.uname, this.props.pwd, providerGuid)
         .then(
             (data) => {
-                console.log(data);
                 if (data.status === 200 && data._bodyText) { 
                     const jwtIsAdmin = checkifAdmin(data._bodyText); 
                     if(jwtIsAdmin) {
@@ -48,15 +44,14 @@ class LoginSubmitButtonContainer extends React.Component {
                     } else{
                         this.props.showErrorMessage('Sorry looks like you are trying to login without a provider account.');
                     }
-                } else {console.log('failed to login'); this.props.showErrorMessage(data._bodyText);}
+                } else {this.props.showErrorMessage(data._bodyText);}
             },
-            (error) => {console.log('error'); this.props.showErrorMessage(error)}
+            (error) => {this.props.showErrorMessage(error)}
         )
-        .catch((err) => {console.log('catch error'); this.props.showErrorMessage(err)});
+        .catch((err) => {this.props.showErrorMessage(err)});
     }
     
     render() {
-        console.log('in login render')
         return (
             <SubmitButton pressed={this.startSubmitProcess}/>
         );

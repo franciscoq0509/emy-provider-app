@@ -4,7 +4,6 @@ import React from 'react';
 const Moment = require('moment');
 
 export const ParentDetailsCard = ({ customerCreated, fullName }) => {
-    //console.log(addresses);
     return (
         <Card>
             <Text style= {styles.text}>Account Created: {Moment(customerCreated).format("MMMM D, YYYY, h:mm:ss a")}</Text>

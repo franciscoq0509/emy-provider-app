@@ -34,12 +34,9 @@ class CustomerDetails extends React.Component {
     }; 
 
     setDetailsState() {
-        //console.log(this.props.allCustomerDetails);
         const { phoneNumbers, addresses, emergencyContacts, healthInfo, schoolInformation, allDetails, familyDoctors, parentAuthorizedPickups, providerAuthorizedPickups, providerUnauthorizedPickups, parentUnauthorizedPickups, customQuestions } = this.props.allCustomerDetails;
-        //console.log(schoolInformation);
         const id = this.props.navigation.state.params.customerId;
         const primaryContact = this.findAndSetPrimaryContact(allDetails[id].primary_contact.id);
-        console.log(emergencyContacts[id]);
         if(primaryContact !== false && 'success' in primaryContact && primaryContact.success === true) {
             this.setState(() => ({
                 allCustomerDetails: {
@@ -59,7 +56,6 @@ class CustomerDetails extends React.Component {
                 }
             }));
         } else {
-            //console.log('disptching new fetch for primary contact details');
             this.dispatchNewCustomerDetails(allDetails[id].primary_contact.id);
         }
     };
@@ -95,7 +91,6 @@ class CustomerDetails extends React.Component {
     };
 
     showSpinner() {
-        console.log(this.props.actions.isFetching);
         return this.props.actions.isFetching ? true : false;
     }
 
@@ -104,7 +99,6 @@ class CustomerDetails extends React.Component {
         ENV = _ENV_();
         this.setState(() => ({showMoreClicked: false, clickHandler: this.clicked, advancedDataLoadFailed: false})); 
         if(this.props.navigation.state.params.customerId) {
-            console.log(this.props);
             this.setState(() => ({
                     basicCustomerDetails: this.props.screenProps.filteredCustomers[this.props.navigation.state.params.customerId]
                 })

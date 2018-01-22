@@ -1,5 +1,4 @@
 export const displayQuestionAndAnswer = (questionObject = null) => {
-    console.log(questionObject);
     if (
         questionObject !== null 
         && questionObject !== 0 
@@ -7,7 +6,6 @@ export const displayQuestionAndAnswer = (questionObject = null) => {
         && 'value' in questionObject
         && 'type' in questionObject.question 
     ) {
-        console.log('check 1');
         if(questionObject.question.type === 'select' 
             && !'options' in questionObject
             && questionObject.question.question !== null ) {
@@ -19,7 +17,6 @@ export const displayQuestionAndAnswer = (questionObject = null) => {
             questionObject.question.type === 'select' 
             && 'options' in questionObject.question 
             && questionObject.question.question !== null) {
-                console.log('check 2');
                 return {
                     question: questionObject.question.question,
                     answer: (
@@ -33,7 +30,6 @@ export const displayQuestionAndAnswer = (questionObject = null) => {
                 };
             
         } else {
-            console.log('error 4434');    
             return null
         };
 
@@ -45,7 +41,6 @@ export const displayQuestionAndAnswer = (questionObject = null) => {
         }
 
     } else {
-        console.log('error 4435');
         return null
     };
 }

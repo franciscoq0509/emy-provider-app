@@ -22,7 +22,6 @@ export const ChildDetailsCard = ({
         parentUnauthorizedPickups,
         customQuestions 
     }) => {
-    console.log(customQuestions);
     callNumber = (number) => {
         call({
             number: number.replace(/-|\s/g,""),
@@ -262,7 +261,7 @@ export const ChildDetailsCard = ({
 //     <View  style={styles.infoCard}>
 //     {customQuestions.map((obj, index) => {
 //         const displayObject = displayQuestionAndAnswer(obj);
-//         console.log(displayObject);
+
 //         if(displayObject !== null) {
 //             return (
 //                 <View key={index}>

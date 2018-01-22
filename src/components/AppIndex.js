@@ -7,7 +7,6 @@ import configureStore from '../store/configureStore';
 import { Provider } from 'react-redux';
 
 const store = configureStore().createStore();
-console.log(store);
 
 export default class App extends React.Component {
     //return either SignedOutNavigator if not signed in
@@ -38,7 +37,6 @@ export default class App extends React.Component {
         if(!checkedSignedIn) {
             return null;
         }
-        console.log('appindex====');
 
         const Layout = createRootNavigator(signedIn);
 
