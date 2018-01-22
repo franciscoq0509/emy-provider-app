@@ -27,6 +27,7 @@ class CustomersList extends React.Component {
     _keyExtractor = (item, index) => index;
 
     render() {
+        console.log('about to render show spinner or flat list');
         switch (this.props.screenProps.showLoadError) {
             case true:
                 return (
@@ -46,6 +47,7 @@ class CustomersList extends React.Component {
                     <View  style={ center = {flex:1} }>
                         {this.props.screenProps.showSpinner() ? 
                             <View style={spinnerStyle.container}>
+                            <Text>{console.log('rendering loading screen')}</Text>
                                 <ActivityIndicator
                                     animating = {true}
                                     size = "large"
@@ -54,6 +56,7 @@ class CustomersList extends React.Component {
                             :
                             
                             <View>
+                            <Text>{console.log('trying to render flatlist')}</Text>
                                 <Button
                                     containerViewStyle = {{width: 80, alignSelf: 'flex-end'}}
                                     small

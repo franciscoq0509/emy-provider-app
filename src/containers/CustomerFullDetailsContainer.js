@@ -1,5 +1,6 @@
 import React from 'react';
-import { Text, View, ActivityIndicator } from 'react-native';
+import { Text, View, ActivityIndicator, DeviceEventEmitter } from 'react-native';
+import {Button} from 'react-native-elements';
 import { connect } from 'react-redux';
 import findId from '../utilities/findId';
 import { CustomerFullDetails } from '../components/CustomerFullDetails';
@@ -22,6 +23,11 @@ class CustomerDetails extends React.Component {
         this.findAndSetPrimaryContact = this.findAndSetPrimaryContact.bind(this); 
         this.dispatchNewCustomerDetails = this.dispatchNewCustomerDetails.bind(this); 
         this.showSpinner = this.showSpinner.bind(this);
+        this.backButtonPressed = this.backButtonPressed.bind(this);
+    }
+
+    componentWillMount() {
+
     }
     
     clicked() {
@@ -113,8 +119,12 @@ class CustomerDetails extends React.Component {
         }
     };
 
+    static navigationOptions = ({ navigation}) => ({
+        headerLeft: <Button title="Home" onPress={() => {console.log(navigation); navigation.goBack()}} />
+    });
+
     render() {
-        
+        console.log('about to render show spinner or full details');
         return (
             <View style={ center = {flex:1} }>
                 {
@@ -135,10 +145,21 @@ class CustomerDetails extends React.Component {
                             nav = {this.props.navigation.state.params.nav}
                         />
                 }
-            </View>
+            </View>            
         );
     };
 };
+
+// <View style={ center = {flex:1} }>
+//     <View style={spinnerStyle.container}>
+//         <ActivityIndicator
+//             animating = {true}
+//             size = "large"
+//         />
+//     </View>
+// </View>
+
+
 
 const mapStateToProps = (state) => {
     return {
