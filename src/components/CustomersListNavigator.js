@@ -24,13 +24,16 @@ class CustomersList extends React.Component {
     logout = () => {
         this.props.screenProps.errorLogout();
     }
+    componentWillUpdate() {
+        this.props.screenProps.dispatch(userCancelledDetailsRequest());
+    }
     
     _keyExtractor = (item, index) => index;
 
     render() {
         console.log('MAIN LIST ++++++++++++++++++++++++');
         console.log('details flag to false');
-        this.props.screenProps.dispatch(userCancelledDetailsRequest());
+        
         switch (this.props.screenProps.showLoadError) {
             case true:
                 return (
