@@ -1,5 +1,6 @@
 const stateInit = {
-    isFetching: false,
+    isCustomerFetching: false,
+    isCustomerDetailsFetching: false,
     didInvalidate: false,
     didFail: false
 };
@@ -12,33 +13,43 @@ export default (
             case 'INVALIDATE_CUSTOMERS':
                 return {
                     didInvalidate: true,
-                    isFetching: false,
+                    isCustomerFetching: false,
+                    isCustomerDetailsFetching: false,
                     didFail: false
                 };
             case 'REQUEST_CUSTOMERS':
                 return {    
-                    isFetching: true,
+                    isCustomerFetching: true,
+                    isCustomerDetailsFetching: false,
                     didInvalidate: false,
                     didFail: false
                 };
             case 'RECEIVE_CUSTOMERS_SUCCESS':
                 return {
-                    isFetching: false,
+                    isCustomerFetching: false,
+                    isCustomerDetailsFetching: false,
                     didInvalidate: false,
                     didFail: false
                 };
             case 'REQUEST_CUSTOMER_DETAILS':
                 return {    
-                    isFetching: true,
+                    isCustomerFetching: false,
+                    isCustomerDetailsFetching: true,
                     didInvalidate: false,
                     didFail: false
                 };
             case 'SAVE_FULL_CUSTOMER_DETAILS':
                 return {
-                    isFetching: false,
+                    isCustomerFetching: false,
+                    isCustomerDetailsFetching: false,
                     didInvalidate: false,
                     didFail: false
                 };
+            case 'USER_CANCELLED_DETAILS_REQUEST':
+                return {
+                    ...state,
+                    isCustomerDetailsFetching: false
+                }
             case 'USER_LOGOUT':
                 return stateInit;
             default:

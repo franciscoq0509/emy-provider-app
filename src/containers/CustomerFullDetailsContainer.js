@@ -4,7 +4,7 @@ import {Button} from 'react-native-elements';
 import { connect } from 'react-redux';
 import findId from '../utilities/findId';
 import { CustomerFullDetails } from '../components/CustomerFullDetails';
-import { saveCustomerDetails, saveCustomerDetailsFailure, requestCustomerDetails } from '../actions/customers';
+import { saveCustomerDetails, saveCustomerDetailsFailure, requestCustomerDetails, userCancelledDetailsRequest } from '../actions/customers';
 import { _ENV_, providerGuid } from '../config/_ENV_';
 import spinnerStyle from '../components/styles/spinnerStyle';
 
@@ -23,11 +23,6 @@ class CustomerDetails extends React.Component {
         this.findAndSetPrimaryContact = this.findAndSetPrimaryContact.bind(this); 
         this.dispatchNewCustomerDetails = this.dispatchNewCustomerDetails.bind(this); 
         this.showSpinner = this.showSpinner.bind(this);
-        this.backButtonPressed = this.backButtonPressed.bind(this);
-    }
-
-    componentWillMount() {
-
     }
     
     clicked() {
@@ -67,8 +62,11 @@ class CustomerDetails extends React.Component {
     };
 
     returnCustomerDetails = (id, jwt) => {
+
         return (dispatch) => {
-            dispatch(requestCustomerDetails());
+            console.log('about to call the fetch');
+            console.log(id);
+            console.log(`details fetching flag ${this.props.isCustomerDetailsFetching}`);
             return fetchCustomerDetails(id, jwt)
                 .then(
                     (details) => details.json(),
@@ -76,7 +74,14 @@ class CustomerDetails extends React.Component {
                 )
                 .then(
                     (customerDetailsObject) => {
-                        return dispatch(saveCustomerDetails(customerDetailsObject));
+                        if(this.props.navigation.state.routeName === 'fullDetail') {
+                            console.log(this.props.navigation.state.routeName);
+                            console.log('this is fullDetail^^^^^^^^^^^^^^^^^');
+                            return dispatch(saveCustomerDetails(customerDetailsObject));
+                        } else {
+                            console.log('this is NOT fullDetail]]]]]]]]]]]]');
+                            return dispatch(userCancelledDetailsRequest());
+                        }
                     }
                 )
                 .catch((err) => err);
@@ -84,47 +89,75 @@ class CustomerDetails extends React.Component {
     };
 
     dispatchNewCustomerDetails(id = this.props.navigation.state.params.customerId) {
+        this.props.dispatch(requestCustomerDetails());
         this.props.dispatch(this.returnCustomerDetails(id, this.props.fullJwt))
         .then((result) => 
             {   
                 if('type' in result && result.type === 'SAVE_FULL_CUSTOMER_DETAILS') {
                     this.setDetailsState();
-                } else {
+                } else if ('type' in result && result.type !== 'USER_CANCELLED_DETAILS_REQUEST'){
                     this.setState({advancedDataLoadFailed: true, allCustomerDetails: 'error loading'});
                 }
             })
-        .catch((err) => {console.log('about to set state for failed');this.setState({advancedDataLoadFailed: true, allCustomerDetails: 'error loading'})})
+        .catch((err) => {
+            console.log('about to set state for failed');
+            if(this.props.navigation.state.routeName === 'fullDetail') {
+                this.setState({advancedDataLoadFailed: true, allCustomerDetails: 'error loading'})
+            }
+        })
     };
 
     showSpinner() {
-        return this.props.actions.isFetching ? true : false;
+        return this.props.isCustomerDetailsFetching ? true : false;
     }
-
 
     componentWillMount() {
         ENV = _ENV_();
+        this.props.navigation.state.routeName = 'fullDetail';
         this.setState(() => ({showMoreClicked: false, clickHandler: this.clicked, advancedDataLoadFailed: false})); 
-        if(this.props.navigation.state.params.customerId) {
-            this.setState(() => ({
-                    basicCustomerDetails: this.props.screenProps.filteredCustomers[this.props.navigation.state.params.customerId]
-                })
-            );
-            const fullDetailsFromStore = findId(this.props.navigation.state.params.customerId, this.props.allCustomerDetails.allDetails);
-            if(fullDetailsFromStore) {
-                this.setDetailsState();               
-            } else {
-                this.dispatchNewCustomerDetails();
+        //setTimeout(()=>{
+            console.log('FULL DETAILS COMP WILL MOUNT +=+=+=+++++=+==++=');
+            console.log(this.props.navigation.state.routeName);
+            console.log(this.props);
+            if(this.props.navigation.state.params.customerId) {
+                this.setState(() => ({
+                        basicCustomerDetails: this.props.screenProps.filteredCustomers[this.props.navigation.state.params.customerId]
+                    })
+                );
+                const fullDetailsFromStore = findId(this.props.navigation.state.params.customerId, this.props.allCustomerDetails.allDetails);
+                if(fullDetailsFromStore) {
+                    this.setDetailsState();               
+                } else {
+                    console.log('about to request new customer details');
+                    
+                    this.dispatchNewCustomerDetails();
+                }
+    
             }
-
-        }
+        //},1500); 
+        
     };
 
-    static navigationOptions = ({ navigation}) => ({
-        headerLeft: <Button title="Home" onPress={() => {console.log(navigation); navigation.goBack()}} />
-    });
+    static navigationOptions = ({ navigation }) => ({
+        headerLeft: <Button title="Home" onPress={() => {
+                        console.log('about to go back'); 
+                        navigation.state.routeName = 'mainList';
+                        navigation.goBack(navigation.state.key);
+                    }
+                } />
+            });
+
+    // shouldComponentUpdate(nextProps, nextState) {
+    //     if(nextProps.filteredCustomers !== this.props.filteredCustomers || nextProps.isCustomerFetching !== this.props.isCustomerFetching) {
+    //         return true;
+    //     }
+    //     return false;
+    // }
 
     render() {
-        console.log('about to render show spinner or full details');
+        console.log('FULL DETAILS ===============================');
+        console.log(this.props.navigation.state.routeName);
+        console.log(this.props.isCustomerDetailsFetching);
         return (
             <View style={ center = {flex:1} }>
                 {
@@ -143,6 +176,7 @@ class CustomerDetails extends React.Component {
                             clickHandler={this.state.clickHandler}
                             advancedDataLoadFailed  = {this.state.advancedDataLoadFailed}
                             nav = {this.props.navigation.state.params.nav}
+                            navigation = {this.props.navigation}
                         />
                 }
             </View>            
@@ -166,7 +200,7 @@ const mapStateToProps = (state) => {
         customerData: state.customersData.allCustomers,
         allCustomerDetails: state.customersDetails,
         fullJwt: state.jwt.fullJwt,
-        actions: state.currentCustomerAction
+        isCustomerDetailsFetching: state.currentCustomerAction.isCustomerDetailsFetching
     }
 };
 

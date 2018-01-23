@@ -11,6 +11,7 @@ const Moment = require('moment');
 
 //primary contact and emergency contacts in first render
 export const CustomerFullDetails = (props) => {
+    console.log(props.nav.state.routeName);
     if (props.basicCustomerDetails === undefined) {
         return (
             <View>
@@ -159,10 +160,12 @@ export const CustomerFullDetails = (props) => {
                             backgroundColor='#1976D2'
                             title={`Full details` }
                             iconRight={{name: 'folder-shared', type: 'Entypo', size: 25}}
-                            onPress={()=>props.nav.navigate('fullDetail', { 
+                            onPress={()=>{
+                                props.navigation.state.routeName = 'fullDetail';
+                                props.navigation.navigate('fullDetail', { 
                                 customerId : primaryContact.id,
                                 nav: props.nav 
-                            })}
+                            })}}
                         />
 
                     </Card>

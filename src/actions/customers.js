@@ -74,4 +74,8 @@ export const saveCustomerDetailsFailure = (customersDetails) => {
  }
 };
 
+export const userCancelledDetailsRequest = () => ({
+    type: 'USER_CANCELLED_DETAILS_REQUEST'
+});
+
 //create a new action creator that handles request failures

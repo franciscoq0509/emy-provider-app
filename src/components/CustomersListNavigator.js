@@ -7,6 +7,7 @@ import StandardSearchbar from './StandardSearchbar';
 import CustomerFullDetailsContainer from '../containers/CustomerFullDetailsContainer';
 import spinnerStyle from './styles/spinnerStyle';
 import { ErrorMessage } from './ErrorMessage';
+import { userCancelledDetailsRequest } from '../actions/customers';
 
 
 class CustomersList extends React.Component {
@@ -27,7 +28,9 @@ class CustomersList extends React.Component {
     _keyExtractor = (item, index) => index;
 
     render() {
-        console.log('about to render show spinner or flat list');
+        console.log('MAIN LIST ++++++++++++++++++++++++');
+        console.log('details flag to false');
+        this.props.screenProps.dispatch(userCancelledDetailsRequest());
         switch (this.props.screenProps.showLoadError) {
             case true:
                 return (
@@ -47,7 +50,8 @@ class CustomersList extends React.Component {
                     <View  style={ center = {flex:1} }>
                         {this.props.screenProps.showSpinner() ? 
                             <View style={spinnerStyle.container}>
-                            <Text>{console.log('rendering loading screen')}</Text>
+                            <Text>{console.log('loading screen MAIN LIST')}</Text>
+                            <Text>{console.log(this.props.screenProps.showSpinner())}</Text>
                                 <ActivityIndicator
                                     animating = {true}
                                     size = "large"
@@ -56,7 +60,6 @@ class CustomersList extends React.Component {
                             :
                             
                             <View>
-                            <Text>{console.log('trying to render flatlist')}</Text>
                                 <Button
                                     containerViewStyle = {{width: 80, alignSelf: 'flex-end'}}
                                     small
@@ -64,6 +67,7 @@ class CustomersList extends React.Component {
                                     title='logout'
                                     onPress={this.logout}
                                 />
+                                <View>{console.log('about to render flat list')}</View>
                                 <List>
                                     <FlatList
                                         data={this.customersAndCallback()}
@@ -95,6 +99,9 @@ const CustomersListNavigator = StackNavigator({
         screen: CustomerFullDetailsContainer,
     }
 });
+
+
+
 
 
 

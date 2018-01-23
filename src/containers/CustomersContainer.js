@@ -40,11 +40,15 @@ class CustomersListContainer extends React.Component {
     };
 
     showLoadingSpinner = () => {
-        return this.props.actions.isFetching ? true : false;
+        console.log('show spinner');
+        console.log(`customer fetch ${this.props.isCustomerFetching}`);
+        console.log(`details fetch ${this.props.isDetailFetching}`);
+        return this.props.isCustomerFetching ? true : false;
     }
 
     componentWillMount() {
         ENV = _ENV_();
+        
         this.props.dispatch(requestCustomers());
         this.setState(() => ({showSpinner: this.showLoadingSpinner, showLoadError: false}));
         getProviderGuid()
@@ -94,7 +98,14 @@ class CustomersListContainer extends React.Component {
 		if(this.props !== nextProps) {
             this.setState(() => ({filteredCustomers : nextProps.filteredCustomers}));
 		}
-	}
+    }
+    
+    // shouldComponentUpdate(nextProps, nextState) {
+    //     if(nextProps.filteredCustomers !== this.props.filteredCustomers || nextProps.isCustomerFetching !== this.props.isCustomerFetching) {
+    //         return true;
+    //     }
+    //     return false;
+    // }
 
     render() { 
         return (
@@ -105,7 +116,8 @@ class CustomersListContainer extends React.Component {
                         filteredCustomers: this.state.filteredCustomers, 
                         showSpinner: this.state.showSpinner,
                         showLoadError: this.state.showLoadError,
-                        errorLogout : this.goToLogin
+                        errorLogout : this.goToLogin,
+                        dispatch : this.props.dispatch
                     } 
                 } 
                 nav={this.props.nav}
@@ -116,10 +128,9 @@ class CustomersListContainer extends React.Component {
 
 const mapStateToProps = (state) => ({
     filteredCustomers: getFilteredCustomers(state, state, state),
-    actions: state.currentCustomerAction,
+    isCustomerFetching: state.currentCustomerAction.isCustomerFetching,
+    //isDetailFetching: state.currentCustomerAction.isCustomerDetailsFetching,
     jwt: state.jwt.fullJwt, 
-    all: state
-    
 });
 
 export default connect(mapStateToProps)(CustomersListContainer);
