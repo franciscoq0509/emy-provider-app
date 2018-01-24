@@ -26,12 +26,12 @@ class CustomersList extends React.Component {
         this.props.screenProps.errorLogout();
     }
     componentWillUpdate() {
-        console.log('====custom list nav about to dispatch user cancelled request =======');
+        //console.log('====custom list nav about to dispatch user cancelled request =======');
         this.props.screenProps.dispatch(userCancelledDetailsRequest());
     }
 
     routeName() {
-        console.log(this.props.navigation.state.routeName);
+        //console.log(this.props.navigation.state.routeName);
     }
     
     _keyExtractor = (item, index) => index;
@@ -57,8 +57,6 @@ class CustomersList extends React.Component {
                     <View  style={ center = {flex:1} }>
                         {this.props.screenProps.showSpinner() ? 
                             <View style={spinnerStyle.container}>
-                            <Text>{console.log('loading screen MAIN LIST')}</Text>
-                            <Text>{console.log(this.props.screenProps.showSpinner())}</Text>
                                 <ActivityIndicator
                                     animating = {true}
                                     size = "large"
@@ -74,7 +72,6 @@ class CustomersList extends React.Component {
                                     title='logout'
                                     onPress={this.logout}
                                 />
-                                <View>{console.log('about to render flat list')}</View>
                                 <List>
                                     <FlatList
                                         data={this.customersAndCallback()}

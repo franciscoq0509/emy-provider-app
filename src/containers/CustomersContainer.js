@@ -40,9 +40,9 @@ class CustomersListContainer extends React.Component {
     };
 
     showLoadingSpinner = () => {
-        console.log('show spinner');
-        console.log(`customer fetch ${this.props.isCustomerFetching}`);
-        console.log(`details fetch ${this.props.isDetailFetching}`);
+       // console.log('show spinner');
+        //console.log(`customer fetch ${this.props.isCustomerFetching}`);
+        //console.log(`details fetch ${this.props.isDetailFetching}`);
         return this.props.isCustomerFetching ? true : false;
     }
 
@@ -111,12 +111,12 @@ class CustomersListContainer extends React.Component {
         return (
             <CustomersListNavigator 
                 onNavigationStateChange = {(prev, current) => {
-                    console.log('PREV: ');
-                    console.log(prev);
-                    console.log('CURRENT: ');
-                    console.log(current);
+                    //console.log('PREV: ');
+                    //console.log(prev);
+                    //console.log('CURRENT: ');
+                    //console.log(current);
                     if(current.index === 0) {
-                        console.log('index is 0 cancel details request');
+                        //console.log('index is 0 cancel details request');
                         this.props.dispatch(userCancelledDetailsRequest());
                     }
                 }}

@@ -30,16 +30,16 @@ class CustomerDetails extends React.Component {
     };
 
     findAndSetPrimaryContact(id) {
-        console.log('findAndSetPrimaryContact');
-        console.log(id);
-        console.log(this.props.allCustomerDetails.allDetails);
+        //console.log('findAndSetPrimaryContact');
+        //console.log(id);
+        //console.log(this.props.allCustomerDetails.allDetails);
         let primaryContact = Object.keys(this.props.allCustomerDetails.allDetails).find(arr_id => arr_id === id) 
             ? 
                 this.props.allCustomerDetails.allDetails[id] 
             : 
                 false
 
-        console.log(primaryContact);
+        //console.log(primaryContact);
         return primaryContact;
         //const primaryContact = findId(id, this.props.allCustomerDetails.allDetails);
         //return primaryContact;
@@ -49,8 +49,8 @@ class CustomerDetails extends React.Component {
         const { phoneNumbers, addresses, emergencyContacts, healthInfo, schoolInformation, allDetails, familyDoctors, parentAuthorizedPickups, providerAuthorizedPickups, providerUnauthorizedPickups, parentUnauthorizedPickups, customQuestions } = this.props.allCustomerDetails;
         const id = this.props.navigation.state.params.customerId;
         const primaryContact = this.findAndSetPrimaryContact(allDetails[id].primary_contact.id);
-        console.log('.........>>>>>..........');
-        console.log(primaryContact);
+        //console.log('.........>>>>>..........');
+        //console.log(primaryContact);
         if(primaryContact !== false && 'success' in primaryContact && primaryContact.success === true) {
             this.setState(() => ({
                 allCustomerDetails: {
@@ -70,8 +70,8 @@ class CustomerDetails extends React.Component {
                 }
             }));
         } else {
-            console.log('uauauauauaua');
-            console.log(allDetails[id].primary_contact.id);
+            //console.log('uauauauauaua');
+           // console.log(allDetails[id].primary_contact.id);
             this.dispatchNewCustomerDetails(allDetails[id].primary_contact.id);
         }
     };
@@ -79,9 +79,9 @@ class CustomerDetails extends React.Component {
     returnCustomerDetails = (id, jwt) => {
 
         return (dispatch) => {
-            console.log('about to call the fetch');
-            console.log(id);
-            console.log(`details fetching flag ${this.props.isCustomerDetailsFetching}`);
+           // console.log('about to call the fetch');
+           // console.log(id);
+           // console.log(`details fetching flag ${this.props.isCustomerDetailsFetching}`);
             return fetchCustomerDetails(id, jwt)
                 .then(
                     (details) => details.json(),
@@ -90,11 +90,11 @@ class CustomerDetails extends React.Component {
                 .then(
                     (customerDetailsObject) => {
                         if(this.props.isCustomerDetailsFetching) {
-                            console.log(this.props.navigation.state);
-                            console.log('this is fullDetail^^^^^^^^^^^^^^^^^');
+                            //console.log(this.props.navigation.state);
+                           // console.log('this is fullDetail^^^^^^^^^^^^^^^^^');
                             return dispatch(saveCustomerDetails(customerDetailsObject));
                         } else {
-                            console.log('this is NOT fullDetail]]]]]]]]]]]]');
+                            //console.log('this is NOT fullDetail]]]]]]]]]]]]');
                             return dispatch(userCancelledDetailsRequest());
                         }
                     }
@@ -107,19 +107,19 @@ class CustomerDetails extends React.Component {
         this.props.dispatch(requestCustomerDetails());
         const fullDetailsFromStore = findId(this.props.navigation.state.params.customerId, this.props.allCustomerDetails.allDetails);
         // if(!fullDetailsFromStore){
-            console.log('============about to dispatch return customer details');
+            //console.log('============about to dispatch return customer details');
             this.props.dispatch(this.returnCustomerDetails(id, this.props.fullJwt))
             .then((result) => 
                 {   
                     if('type' in result && result.type === 'SAVE_FULL_CUSTOMER_DETAILS') {
-                        console.log('ksksksksksksksks');
+                        //console.log('ksksksksksksksks');
                         this.setDetailsState();
                     } else if ('type' in result && result.type !== 'USER_CANCELLED_DETAILS_REQUEST'){
                         this.setState({advancedDataLoadFailed: true, allCustomerDetails: 'error loading'});
                     }
                 })
             .catch((err) => {
-                console.log('about to set state for failed');
+                //console.log('about to set state for failed');
                 if(this.props.navigation.state.routeName === 'fullDetail' || this.props.navigation.state.routeName === 'mainList') {
                     this.setState({advancedDataLoadFailed: true, allCustomerDetails: 'error loading'})
                 }
@@ -131,7 +131,7 @@ class CustomerDetails extends React.Component {
     };
 
     showSpinner() {
-        console.log(`show spinner  ${this.props.isCustomerDetailsFetching}`);
+        //console.log(`show spinner  ${this.props.isCustomerDetailsFetching}`);
         return this.props.isCustomerDetailsFetching ? true : false;
     }
 
@@ -140,9 +140,9 @@ class CustomerDetails extends React.Component {
         //this.props.navigation.state.routeName = 'fullDetail';
         this.setState(() => ({showMoreClicked: false, clickHandler: this.clicked, advancedDataLoadFailed: false})); 
         //setTimeout(()=>{
-            console.log('FULL DETAILS COMP WILL MOUNT +=+=+=+++++=+==++=');
-            console.log(this.props.navigation.state.routeName);
-            console.log(this.props);
+            //console.log('FULL DETAILS COMP WILL MOUNT +=+=+=+++++=+==++=');
+           // console.log(this.props.navigation.state.routeName);
+            //console.log(this.props);
             if(this.props.navigation.state.params.customerId) {
                 this.setState(() => ({
                         basicCustomerDetails: this.props.screenProps.filteredCustomers[this.props.navigation.state.params.customerId]
@@ -150,13 +150,13 @@ class CustomerDetails extends React.Component {
                 );
                 const fullDetailsFromStore = findId(this.props.navigation.state.params.customerId, this.props.allCustomerDetails.allDetails);
                 if(fullDetailsFromStore) {
-                    console.log('0-0-0-0-0-0-0-0-0');
+                   // console.log('0-0-0-0-0-0-0-0-0');
                     this.setDetailsState();               
                 } else {
                     
                     //setTimeout(()=>{
                         //if(this.props.isCustomerDetailsFetching) {
-                            console.log('oqoqoqoqoqoqoq');
+                            //console.log('oqoqoqoqoqoqoq');
                             this.dispatchNewCustomerDetails(this.props.navigation.state.params.customerId);
                       //  }
                     //},1000);
@@ -186,9 +186,9 @@ class CustomerDetails extends React.Component {
     // }
 
     render() {
-        console.log('FULL DETAILS ===============================');
-        console.log(this.props.navigation.state.routeName);
-        console.log(this.props.isCustomerDetailsFetching);
+       // console.log('FULL DETAILS ===============================');
+       // console.log(this.props.navigation.state.routeName);
+       // console.log(this.props.isCustomerDetailsFetching);
         return (
             <View style={ center = {flex:1} }>
                 {

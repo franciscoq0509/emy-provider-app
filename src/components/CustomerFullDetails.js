@@ -11,7 +11,7 @@ const Moment = require('moment');
 
 //primary contact and emergency contacts in first render
 export const CustomerFullDetails = (props) => {
-    console.log(props.navigation.state.routeName);
+   // console.log(props.navigation.state.routeName);
     if (props.basicCustomerDetails === undefined) {
         return (
             <View>
