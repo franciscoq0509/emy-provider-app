@@ -1,4 +1,5 @@
 export default (id, list) => {
+    console.log(typeof list);
     if(typeof list === 'array') {
         return list.filter((el) => el.id === id);
     }

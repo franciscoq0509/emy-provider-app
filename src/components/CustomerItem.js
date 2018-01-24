@@ -22,6 +22,7 @@ export const CustomerItem = (props) => {
                             roundAvatar
                             title={`${props.item.first_name} ${props.item.last_name}`}
                             onPress={this.navigate}
+                            underlayColor={'#D9D9D9'}
                         />
                     :
                     <View style={spinnerStyle.container}>

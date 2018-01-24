@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { requestCustomers, receiveNewCustomers, receiveCustomersError } from '../actions/customers';
+import { requestCustomers, receiveNewCustomers, receiveCustomersError, userCancelledDetailsRequest } from '../actions/customers';
 import CustomersListNavigator from '../components/CustomersListNavigator';
 import { getFilteredCustomers } from '../selectors/index';
 import { _ENV_, getProviderGuid } from '../config/_ENV_';
@@ -110,6 +110,16 @@ class CustomersListContainer extends React.Component {
     render() { 
         return (
             <CustomersListNavigator 
+                onNavigationStateChange = {(prev, current) => {
+                    console.log('PREV: ');
+                    console.log(prev);
+                    console.log('CURRENT: ');
+                    console.log(current);
+                    if(current.index === 0) {
+                        console.log('index is 0 cancel details request');
+                        this.props.dispatch(userCancelledDetailsRequest());
+                    }
+                }}
                 screenProps = { 
                     {   
                         customers: this.state.customers, 
@@ -120,7 +130,6 @@ class CustomersListContainer extends React.Component {
                         dispatch : this.props.dispatch
                     } 
                 } 
-                nav={this.props.nav}
             />
         );
     };

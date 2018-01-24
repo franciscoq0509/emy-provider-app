@@ -11,7 +11,7 @@ const Moment = require('moment');
 
 //primary contact and emergency contacts in first render
 export const CustomerFullDetails = (props) => {
-    console.log(props.nav.state.routeName);
+    console.log(props.navigation.state.routeName);
     if (props.basicCustomerDetails === undefined) {
         return (
             <View>
@@ -161,7 +161,6 @@ export const CustomerFullDetails = (props) => {
                             title={`Full details` }
                             iconRight={{name: 'folder-shared', type: 'Entypo', size: 25}}
                             onPress={()=>{
-                                props.navigation.state.routeName = 'fullDetail';
                                 props.navigation.navigate('fullDetail', { 
                                 customerId : primaryContact.id,
                                 nav: props.nav 
