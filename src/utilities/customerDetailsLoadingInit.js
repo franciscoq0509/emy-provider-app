@@ -1,4 +1,7 @@
-export const setState = (id) => ({
+let rp = require('request-promise');
+
+export const initReqObject = (id) => ({
     id,
-    //bluebird promise to wrap fetch
+    sendReq: (options) => rp(options),
+    allowedToFetch: false
 });

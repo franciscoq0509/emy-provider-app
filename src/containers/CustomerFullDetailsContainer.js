@@ -7,6 +7,7 @@ import { CustomerFullDetails } from '../components/CustomerFullDetails';
 import { saveCustomerDetails, saveCustomerDetailsFailure, requestCustomerDetails, userCancelledDetailsRequest } from '../actions/customers';
 import { _ENV_, providerGuid } from '../config/_ENV_';
 import spinnerStyle from '../components/styles/spinnerStyle';
+//import { initReqObject } from '../utilities/customerDetailsLoadingInit';
 
 const ENV = null;
 

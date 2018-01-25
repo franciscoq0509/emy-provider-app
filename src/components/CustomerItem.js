@@ -3,13 +3,16 @@ import { View, Text, ActivityIndicator } from 'react-native';
 import { ListItem } from 'react-native-elements';
 import { addNavigationHelpers } from 'react-navigation';
 import spinnerStyle from './styles/spinnerStyle';
+//import { initReqObject } from '../utilities/customerDetailsLoadingInit';
 
 export const CustomerItem = (props) => {
 
     navigate = () => {
+        //let reqObj = initReqObject(props.item.id);
         props.item.nav.navigate('fullDetail', { 
             customerId : props.item.id,
-            nav: props.item.nav 
+            nav: props.item.nav,
+            reqObj 
         })
     }
 
