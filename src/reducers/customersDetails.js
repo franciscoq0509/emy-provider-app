@@ -14,7 +14,8 @@ const stateInit = {
     providerUnauthorizedPickups: {},
     parentUnauthorizedPickups: {},
     customQuestions : {},
-    customerDetailsError : ""
+    customerDetailsError : "",
+    customerDetailsDataLoading : {}
 };
 
 export default (state = stateInit, action) => {
