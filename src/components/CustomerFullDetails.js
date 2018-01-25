@@ -3,7 +3,6 @@ import { View, Text, ScrollView, StyleSheet } from 'react-native';
 import { Button, Card, Badge, Icon } from 'react-native-elements';
 import { ParentDetailsCard } from './ParentDetailsCard';
 import { ChildDetailsCard } from './ChildDetailsCard';
-//import { ErrorMessage } from '../components/ErrorMessage';
 import call from 'react-native-phone-call';
 import { ErrorMessage } from './ErrorMessage';
 
@@ -11,7 +10,6 @@ const Moment = require('moment');
 
 //primary contact and emergency contacts in first render
 export const CustomerFullDetails = (props) => {
-   // console.log(props.navigation.state.routeName);
     if (props.basicCustomerDetails === undefined) {
         return (
             <View>

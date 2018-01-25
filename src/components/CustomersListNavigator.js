@@ -26,18 +26,12 @@ class CustomersList extends React.Component {
         this.props.screenProps.errorLogout();
     }
     componentWillUpdate() {
-        //console.log('====custom list nav about to dispatch user cancelled request =======');
         this.props.screenProps.dispatch(userCancelledDetailsRequest());
-    }
-
-    routeName() {
-        //console.log(this.props.navigation.state.routeName);
     }
     
     _keyExtractor = (item, index) => index;
 
     render() {
-        this.routeName();
         switch (this.props.screenProps.showLoadError) {
             case true:
                 return (
