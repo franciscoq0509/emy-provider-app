@@ -30,7 +30,7 @@ export const ChildDetailsCard = ({
     }
 
     return (
-        <Card>
+        <Card style={styles.cardWrapper}>
             <View style={styles.infoCard}>
                 <Text style={styles.title}>School Information</Text>
                 <Text style= {styles.text}>School: {schoolName ? schoolName : 'N/A'}</Text>
@@ -278,6 +278,9 @@ export const ChildDetailsCard = ({
 // }
 
 const styles = StyleSheet.create({
+    cardWrapper: {
+        marginBottom: 100
+    },
     infoCard: {
         paddingBottom: 15,
         paddingTop: 15,

@@ -14,7 +14,6 @@ class CustomersList extends React.Component {
     constructor(props) {
         super(props);
         this.logout = this.logout.bind(this);
-        this.routeName = this.routeName.bind(this);
     }
     
     customersAndCallback() {
