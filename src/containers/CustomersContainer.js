@@ -9,6 +9,7 @@ import { resetState } from '../actions/resetState';
 import { signUserOut } from '../utilities/userAuth';
 import { NavigationActions } from 'react-navigation';
 import { _signUserOut } from '../utilities/userAuth';
+import { clickCount } from '../utilities/customerListClickCount';
 
 
 const ENV = null;
@@ -117,6 +118,7 @@ class CustomersListContainer extends React.Component {
                     //console.log(current);
                     if(current.index === 0) {
                         //console.log('index is 0 cancel details request');
+                        clickCount.count = 0;
                         this.props.dispatch(userCancelledDetailsRequest());
                     }
                 }}
