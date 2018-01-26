@@ -44,7 +44,7 @@ export default class Login extends React.Component {
 
     render() {
         return this.state ? 
-            <View style={ {flex: 1} }>
+            <View style={ {flex: 1, backgroundColor: '#3197EA'} }>
                 <Header />
                 {this.props.navigation.state.params && this.props.navigation.state.params.error ? 
                     <ErrorMessage message={'Sorry something has gone wrong. Please exit and restart this application before logging in again.'} errorStyle={'block'} />
@@ -52,9 +52,10 @@ export default class Login extends React.Component {
                     <View  style={styles.wrapper}>
                         {this.state.showError && <ErrorMessage message={this.state.message}  errorStyle={'bubble'}/>}
                         <View>
-                            <FormLabel>User Name</FormLabel>
+                            <FormLabel labelStyle={{color: '#fff'}}>User Name</FormLabel>
                             <FormInput
                                 inputStyle={styles.formField} 
+                                
                                 onChangeText={
                                     (text) => {
                                         this.setState({uname: text});
@@ -62,7 +63,7 @@ export default class Login extends React.Component {
                                 }
                                 textInputRef='username'
                             />
-                            <FormLabel>Password</FormLabel>
+                            <FormLabel labelStyle={{color: '#fff'}}>Password</FormLabel>
                             <FormInput 
                             inputStyle={styles.formField} 
                             onChangeText={
@@ -78,7 +79,8 @@ export default class Login extends React.Component {
 
                             <Picker 
                                 onValueChange={(itemValue,itemIndex)=>{setProviderGuid(itemValue); this.setState({orgSelected:itemValue})}}
-                                selectedValue={this.state.orgSelected}> 
+                                selectedValue={this.state.orgSelected}
+                                itemStyle={{color:'#fff'}}> 
                                     <Picker.item label="PKC" value="pkc"/>
                                     <Picker.item label="Premium Kids Care" value='premium-kids-care'/>
                                     <Picker.item label="jerrys-gym" value='jerrys-gym'/>
@@ -158,7 +160,8 @@ const styles = {
     orgSelectHeader: {
         flexDirection: 'row',
         alignSelf: 'center',
-        marginTop: 20
+        marginTop: 20,
+        color:'#fff'
     },
     wrapper: {
         marginTop: 10,
