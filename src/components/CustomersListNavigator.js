@@ -1,6 +1,6 @@
 import React from 'react';
 import { FlatList, Text, ActivityIndicator, View } from 'react-native'
-import { List, Button } from 'react-native-elements';
+import { List, Button, Icon } from 'react-native-elements';
 import { CustomerItem } from './CustomerItem';
 import { StackNavigator } from 'react-navigation';
 import StandardSearchbar from './StandardSearchbar';
@@ -11,6 +11,18 @@ import { userCancelledDetailsRequest } from '../actions/customers';
 
 
 class CustomersList extends React.Component {
+
+    static navigationOptions = ({ navigation }) => {
+        const { params = {} } = navigation.state;
+        let headerRight = ( <Icon name="exit-to-app" type="material-icons" onPress={()=>params.logout ? params.logout() : () => null}/>);
+        return { headerRight };
+    };
+
+    componentDidMount() {
+        this.props.navigation.setParams({logout: this.logout})
+    }
+
+
     constructor(props) {
         super(props);
         this.logout = this.logout.bind(this);
