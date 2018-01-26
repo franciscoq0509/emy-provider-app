@@ -15,6 +15,7 @@ const StandardSearchbar = (props) => {
                     //here
                         <SearchBar 
                             placeholder={this.setPlaceholder()} 
+                            clearIcon={{color:'#86939e', name:'clear'}}
                             lightTheme 
                             round
                             onChangeText={(value) => {
