@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, ActivityIndicator } from 'react-native';
+import { View, Text, ActivityIndicator, Picker } from 'react-native';
 import Header from './Header';
 import { ErrorMessage } from './ErrorMessage';
 import LoginSubmitButtonContainer from '../containers/LoginSubmitButtonContainer';
@@ -19,6 +19,7 @@ export default class Login extends React.Component {
                 pkcChecked : false,
                 premiumKidsCareChecked : false,
                 jerrysGymChecked : false,
+                orgSelected: 'pck',
                 orgs : ['pkcChecked','premiumKidsCareChecked','jerrysGymChecked'] 
             }));
     }
@@ -72,49 +73,17 @@ export default class Login extends React.Component {
                                 textInputRef='password'
                                 secureTextEntry={true}
                             />
-                            
-                            <View style={styles.checkboxWrapper}>
-                                <CheckBox
-                                    textStyle={{fontSize: 10}}
-                                    center
-                                    title='PKC'
-                                    check-square-o='check-square-o'
-                                    uncheckedIcon='square-o'
-                                    onPress={
-                                        () => {
-                                            setProviderGuid('pkc');
-                                            this.setState({pkcChecked: true, premiumKidsCareChecked : false, jerrysGymChecked: false});
-                                        }
-                                    }
-                                    checked={this.state.pkcChecked}
-                                />
-        
-                                <CheckBox
-                                    textStyle={{fontSize: 10}}
-                                    center
-                                    title='Premium Kids Care'
-                                    onPress={
-                                        () => {
-                                            setProviderGuid('premium-kids-care');
-                                            this.setState({pkcChecked: false, premiumKidsCareChecked : true, jerrysGymChecked: false});
-                                        }
-                                    }
-                                    checked={this.state.premiumKidsCareChecked}
-                                />
-        
-                                <CheckBox
-                                    textStyle={{fontSize: 10}}
-                                    center
-                                    title='jerrys-gym'
-                                    onPress={
-                                        () => {
-                                            setProviderGuid('jerrys-gym');
-                                            this.setState({pkcChecked: false, premiumKidsCareChecked : false, jerrysGymChecked: true});
-                                        }
-                                    }
-                                    checked={this.state.jerrysGymChecked}
-                                />
-                            </View>
+
+                            <Text style={styles.orgSelectHeader}>Select your organisation below</Text>
+
+                            <Picker 
+                                onValueChange={(itemValue,itemIndex)=>{setProviderGuid(itemValue); this.setState({orgSelected:itemValue})}}
+                                selectedValue={this.state.orgSelected}> 
+                                    <Picker.item label="PKC" value="pkc"/>
+                                    <Picker.item label="Premium Kids Care" value='premium-kids-care'/>
+                                    <Picker.item label="jerrys-gym" value='jerrys-gym'/>
+                            </Picker>
+
                             <View style={styles.submitButtonWrapper} >
                                 <LoginSubmitButtonContainer 
                                     nav={this.props.navigation} 
@@ -142,7 +111,55 @@ export default class Login extends React.Component {
     
 };
 
+// <View style={styles.checkboxWrapper}>
+//                                 <CheckBox
+//                                     textStyle={{fontSize: 10}}
+//                                     center
+//                                     title='PKC'
+//                                     check-square-o='check-square-o'
+//                                     uncheckedIcon='square-o'
+//                                     onPress={
+//                                         () => {
+//                                             setProviderGuid('pkc');
+//                                             this.setState({pkcChecked: true, premiumKidsCareChecked : false, jerrysGymChecked: false});
+//                                         }
+//                                     }
+//                                     checked={this.state.pkcChecked}
+//                                 />
+        
+//                                 <CheckBox
+//                                     textStyle={{fontSize: 10}}
+//                                     center
+//                                     title='Premium Kids Care'
+//                                     onPress={
+//                                         () => {
+//                                             setProviderGuid('premium-kids-care');
+//                                             this.setState({pkcChecked: false, premiumKidsCareChecked : true, jerrysGymChecked: false});
+//                                         }
+//                                     }
+//                                     checked={this.state.premiumKidsCareChecked}
+//                                 />
+        
+//                                 <CheckBox
+//                                     textStyle={{fontSize: 10}}
+//                                     center
+//                                     title='jerrys-gym'
+//                                     onPress={
+//                                         () => {
+//                                             setProviderGuid('jerrys-gym');
+//                                             this.setState({pkcChecked: false, premiumKidsCareChecked : false, jerrysGymChecked: true});
+//                                         }
+//                                     }
+//                                     checked={this.state.jerrysGymChecked}
+//                                 />
+//                             </View>
+
 const styles = {
+    orgSelectHeader: {
+        flexDirection: 'row',
+        alignSelf: 'center',
+        marginTop: 20
+    },
     wrapper: {
         marginTop: 10,
         flex: 1,
