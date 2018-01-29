@@ -14,8 +14,19 @@ class CustomersList extends React.Component {
 
     static navigationOptions = ({ navigation }) => {
         const { params = {} } = navigation.state;
-        let headerRight = ( <Icon name="exit-to-app" type="material-icons" onPress={()=>params.logout ? params.logout() : () => null}/>);
-        return { headerRight };
+        let headerRight = ( 
+                <Icon  
+                        containerStyle={{paddingRight:15}}
+                        name="exit-to-app" 
+                        type="material-icons" 
+                        color="#fff"
+                        onPress={()=>params.logout ? params.logout() : () => null}
+                />
+            );
+        // let title = (
+            
+        // );
+        return { headerRight, title: 'All Customers' };
     };
 
     componentDidMount() {
@@ -95,11 +106,16 @@ const CustomersListNavigator = StackNavigator({
     mainList: {
         screen: CustomersList,
         navigationOptions: {
-            customers: this.props
+            customers: this.props,
+            headerStyle: {backgroundColor:'#2196F3'},
+            headerTintColor: '#fff'
         }
     },
     fullDetail: {
         screen: CustomerFullDetailsContainer,
+        navigationOptions: {
+            headerStyle: {backgroundColor:'#2196F3'}
+        }
     }
 });
 
