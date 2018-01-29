@@ -70,13 +70,7 @@ class CustomersList extends React.Component {
                             :
                             
                             <View>
-                                <Button
-                                    containerViewStyle = {{width: 80, alignSelf: 'flex-end'}}
-                                    small
-                                    backgroundColor='#4CAF50'
-                                    title='logout'
-                                    onPress={this.logout}
-                                />
+                                <StandardSearchbar search="allCustomers" />
                                 <List>
                                     <FlatList
                                         data={this.customersAndCallback()}
@@ -84,7 +78,7 @@ class CustomersList extends React.Component {
                                         onEndReachedThreshold={1200}
                                         renderItem={CustomerItem}
                                         keyExtractor={this._keyExtractor}
-                                        ListHeaderComponent={<StandardSearchbar search="allCustomers" />}
+                            
                                     />
                                 </List>
                             </View>

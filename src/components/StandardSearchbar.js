@@ -14,6 +14,7 @@ const StandardSearchbar = (props) => {
                 return (
                     //here
                         <SearchBar 
+                            containerStyle={{marginBottom: -25, paddingBottom: 5}}
                             placeholder={this.setPlaceholder()} 
                             clearIcon={{color:'#86939e', name:'clear'}}
                             lightTheme 
