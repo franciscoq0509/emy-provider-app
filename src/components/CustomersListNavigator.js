@@ -23,9 +23,7 @@ class CustomersList extends React.Component {
                         onPress={()=>params.logout ? params.logout() : () => null}
                 />
             );
-        // let title = (
-            
-        // );
+
         return { headerRight, title: 'All Customers' };
     };
 
@@ -67,7 +65,7 @@ class CustomersList extends React.Component {
                         />
                         <ErrorMessage message={'Sorry we cannot find the resource you are looking for'} errorStyle={'block'} />
                     </View>
-                )
+                );
             default:
                 return (
                     <View  style={ center = {flex:1} }>
@@ -108,13 +106,14 @@ const CustomersListNavigator = StackNavigator({
         navigationOptions: {
             customers: this.props,
             headerStyle: {backgroundColor:'#2196F3'},
-            headerTintColor: '#fff'
+            headerTintColor: '#fff',
         }
     },
     fullDetail: {
         screen: CustomerFullDetailsContainer,
         navigationOptions: {
-            headerStyle: {backgroundColor:'#2196F3'}
+            headerStyle: {backgroundColor:'#2196F3'},
+            headerTintColor: '#fff',
         }
     }
 });

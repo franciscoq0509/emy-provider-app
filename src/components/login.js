@@ -55,7 +55,7 @@ export default class Login extends React.Component {
                             <FormLabel labelStyle={{color: '#fff'}}>User Name</FormLabel>
                             <FormInput
                                 inputStyle={styles.formField} 
-                                
+                                containerStyle={styles.formWrapper}    
                                 onChangeText={
                                     (text) => {
                                         this.setState({uname: text});
@@ -65,7 +65,8 @@ export default class Login extends React.Component {
                             />
                             <FormLabel labelStyle={{color: '#fff'}}>Password</FormLabel>
                             <FormInput 
-                            inputStyle={styles.formField} 
+                            inputStyle={styles.formField}
+                            containerStyle={styles.formWrapper}
                             onChangeText={
                                 (text) => {
                                     this.setState({pwd: text});
@@ -173,9 +174,14 @@ const styles = {
     },
     formField: {
         //marginTop: 50,
-        paddingTop: 20,
+        paddingTop: 0,
         paddingLeft: 20,
         paddingRight: 20,
+    },
+    formWrapper: {
+        backgroundColor: "#D9D9D9", 
+        borderRadius: 4, 
+        height: 35
     },
     checkboxWrapper : {
         flexDirection: 'column',
