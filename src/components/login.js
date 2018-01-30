@@ -77,16 +77,17 @@ export default class Login extends React.Component {
                             />
 
                             <Text style={styles.orgSelectHeader}>Select your organisation below</Text>
-
-                            <Picker 
-                                onValueChange={(itemValue,itemIndex)=>{setProviderGuid(itemValue); this.setState({orgSelected:itemValue})}}
-                                selectedValue={this.state.orgSelected}
-                                itemStyle={{color:'#fff'}}> 
-                                    <Picker.item label="PKC" value="pkc"/>
-                                    <Picker.item label="Premium Kids Care" value='premium-kids-care'/>
-                                    <Picker.item label="jerrys-gym" value='jerrys-gym'/>
-                            </Picker>
-
+                            <View style={{backgroundColor: '#D9D9D9', width: '90%',
+                            alignSelf: 'center', borderRadius: 4, marginTop: 10}}>
+                                <Picker 
+                                    onValueChange={(itemValue,itemIndex)=>{setProviderGuid(itemValue); this.setState({orgSelected:itemValue})}}
+                                    selectedValue={this.state.orgSelected} 
+                                    mode='dropdown'>
+                                        <Picker.Item label="PKC" value="pkc" />
+                                        <Picker.Item label="Premium Kids Care" value='premium-kids-care'/>
+                                        <Picker.Item label="jerrys-gym" value='jerrys-gym'/>
+                                </Picker>
+                            </View>
                             <View style={styles.submitButtonWrapper} >
                                 <LoginSubmitButtonContainer 
                                     nav={this.props.navigation} 
@@ -113,49 +114,6 @@ export default class Login extends React.Component {
     }
     
 };
-
-// <View style={styles.checkboxWrapper}>
-//                                 <CheckBox
-//                                     textStyle={{fontSize: 10}}
-//                                     center
-//                                     title='PKC'
-//                                     check-square-o='check-square-o'
-//                                     uncheckedIcon='square-o'
-//                                     onPress={
-//                                         () => {
-//                                             setProviderGuid('pkc');
-//                                             this.setState({pkcChecked: true, premiumKidsCareChecked : false, jerrysGymChecked: false});
-//                                         }
-//                                     }
-//                                     checked={this.state.pkcChecked}
-//                                 />
-        
-//                                 <CheckBox
-//                                     textStyle={{fontSize: 10}}
-//                                     center
-//                                     title='Premium Kids Care'
-//                                     onPress={
-//                                         () => {
-//                                             setProviderGuid('premium-kids-care');
-//                                             this.setState({pkcChecked: false, premiumKidsCareChecked : true, jerrysGymChecked: false});
-//                                         }
-//                                     }
-//                                     checked={this.state.premiumKidsCareChecked}
-//                                 />
-        
-//                                 <CheckBox
-//                                     textStyle={{fontSize: 10}}
-//                                     center
-//                                     title='jerrys-gym'
-//                                     onPress={
-//                                         () => {
-//                                             setProviderGuid('jerrys-gym');
-//                                             this.setState({pkcChecked: false, premiumKidsCareChecked : false, jerrysGymChecked: true});
-//                                         }
-//                                     }
-//                                     checked={this.state.jerrysGymChecked}
-//                                 />
-//                             </View>
 
 const styles = {
     orgSelectHeader: {
@@ -189,7 +147,7 @@ const styles = {
         marginBottom: 10
     },
     submitButtonWrapper: {
-        marginTop: 110,
+        marginTop: 20,
     }
 };
 
