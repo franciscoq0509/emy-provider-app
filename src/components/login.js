@@ -36,7 +36,7 @@ export default class Login extends React.Component {
                     this.setState({showError: true, message: `Woops! looks like something went wrong.`});
                 }
             } catch (err) {
-                this.setState({showError: true, message: err_message});
+                this.setState({showError: true, message: `Woops! looks like something went wrong.`});
             }
         }
 
@@ -65,13 +65,13 @@ export default class Login extends React.Component {
                             />
                             <FormLabel labelStyle={{color: '#fff'}}>Password</FormLabel>
                             <FormInput 
-                            inputStyle={styles.formField}
-                            containerStyle={styles.formWrapper}
-                            onChangeText={
-                                (text) => {
-                                    this.setState({pwd: text});
-                                }
-                            } 
+                                inputStyle={styles.formField}
+                                containerStyle={styles.formWrapper}
+                                onChangeText={
+                                    (text) => {
+                                        this.setState({pwd: text});
+                                    }
+                                } 
                                 textInputRef='password'
                                 secureTextEntry={true}
                             />
@@ -126,12 +126,9 @@ const styles = {
         marginTop: 10,
         flex: 1,
         flexDirection: 'column',
-        //alignItems: 'center',
         justifyContent: 'flex-start',
-        //alignSelf: 'center'
     },
     formField: {
-        //marginTop: 50,
         paddingTop: 0,
         paddingLeft: 20,
         paddingRight: 20,
