@@ -41,9 +41,6 @@ class CustomersListContainer extends React.Component {
     };
 
     showLoadingSpinner = () => {
-       // console.log('show spinner');
-        //console.log(`customer fetch ${this.props.isCustomerFetching}`);
-        //console.log(`details fetch ${this.props.isDetailFetching}`);
         return this.props.isCustomerFetching ? true : false;
     }
 
@@ -64,12 +61,10 @@ class CustomersListContainer extends React.Component {
                                         this.setState({showLoadError: false});
                                         this.setState(() => ({filteredCustomers : this.props.filteredCustomers}));        
                                     } else {
-                                        //error here
                                         this.setState({showLoadError: true});
                                     }
 
                                 } else {
-                                    //error here
                                     this.setState({showLoadError: true});
                                 }
                                 this.setState(() => ({filteredCustomers : this.props.filteredCustomers}));
@@ -84,13 +79,6 @@ class CustomersListContainer extends React.Component {
         _signUserOut()
             .then(() => {
                 this.props.dispatch(resetState());
-                //below not working..navigating to signedIn even though specifically told to route to signedOut
-                // const resetToLogin = NavigationActions.reset({
-                //     index: 2,
-                //     actions: [
-                //         NavigationActions.navigate({ routeName: 'SignedOut' })
-                //     ]
-                // }); 
                 this.props.rootNav.navigate('SignedOut');
             });
     }
@@ -100,24 +88,12 @@ class CustomersListContainer extends React.Component {
             this.setState(() => ({filteredCustomers : nextProps.filteredCustomers}));
 		}
     }
-    
-    // shouldComponentUpdate(nextProps, nextState) {
-    //     if(nextProps.filteredCustomers !== this.props.filteredCustomers || nextProps.isCustomerFetching !== this.props.isCustomerFetching) {
-    //         return true;
-    //     }
-    //     return false;
-    // }
 
     render() { 
         return (
             <CustomersListNavigator 
                 onNavigationStateChange = {(prev, current) => {
-                    //console.log('PREV: ');
-                    //console.log(prev);
-                    //console.log('CURRENT: ');
-                    //console.log(current);
                     if(current.index === 0) {
-                        //console.log('index is 0 cancel details request');
                         clickCount.count = 0;
                         this.props.dispatch(userCancelledDetailsRequest());
                     }
@@ -140,7 +116,6 @@ class CustomersListContainer extends React.Component {
 const mapStateToProps = (state) => ({
     filteredCustomers: getFilteredCustomers(state, state, state),
     isCustomerFetching: state.currentCustomerAction.isCustomerFetching,
-    //isDetailFetching: state.currentCustomerAction.isCustomerDetailsFetching,
     jwt: state.jwt.fullJwt, 
 });
 

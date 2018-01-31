@@ -9,8 +9,7 @@ import { Provider } from 'react-redux';
 const store = configureStore().createStore();
 
 export default class App extends React.Component {
-    //return either SignedOutNavigator if not signed in
-    //or signedInNavigator if JWT found in Async_Storage.
+    
 
     constructor(props) {
         super(props);

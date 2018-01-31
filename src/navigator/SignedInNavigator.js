@@ -95,6 +95,4 @@ const SignedInNavigator = TabNavigator({
 
 );
 
-//addNavigationHelpers(SignedInNavigator);
-
 export default SignedInNavigator;

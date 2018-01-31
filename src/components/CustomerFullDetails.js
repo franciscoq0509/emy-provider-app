@@ -8,7 +8,6 @@ import { ErrorMessage } from './ErrorMessage';
 
 const Moment = require('moment');
 
-//primary contact and emergency contacts in first render
 export const CustomerFullDetails = (props) => {
     if (props.basicCustomerDetails === undefined) {
         return (
@@ -104,7 +103,7 @@ export const CustomerFullDetails = (props) => {
         if(obj === 0 || obj === undefined){
             return (
                 <Badge containerStyle={{ backgroundColor: '#ff8e00', marginBottom: 15}}>
-                    <Text style={{fontSize: 19, color: '#fff'}}>No emergency contacts found</Text>
+                    <Text style={{fontSize: 16, color: '#fff'}}>No emergency contacts found</Text>
                 </Badge>
             );
         } else {

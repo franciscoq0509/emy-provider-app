@@ -87,7 +87,9 @@ class CustomersList extends React.Component {
                                         onEndReachedThreshold={1200}
                                         renderItem={CustomerItem}
                                         keyExtractor={this._keyExtractor}
-                            
+                                        getItemLayout={(data, index) => (
+                                            {length: 50, offset: 50 * index, index}
+                                          )}
                                     />
                                 </List>
                             </View>

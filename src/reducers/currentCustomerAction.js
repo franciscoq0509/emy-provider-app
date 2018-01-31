@@ -25,7 +25,6 @@ export default (
                     didFail: false
                 };
             case 'RECEIVE_CUSTOMERS_SUCCESS':
-            //console.log('recieve_customers_success');
                 return {
                     isCustomerFetching: false,
                     isCustomerDetailsFetching: false,
@@ -40,7 +39,6 @@ export default (
                     didFail: false
                 };
             case 'SAVE_FULL_CUSTOMER_DETAILS':
-            //console.log('save_customers');
                 return {
                     isCustomerFetching: false,
                     isCustomerDetailsFetching: false,

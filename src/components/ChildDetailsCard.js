@@ -30,7 +30,7 @@ export const ChildDetailsCard = ({
     }
 
     return (
-        <Card style={styles.cardWrapper}>
+        <Card containerStyle={styles.cardWrapper}>
             <View style={styles.infoCard}>
                 <Text style={styles.title}>School Information</Text>
                 <Text style= {styles.text}>School: {schoolName ? schoolName : 'N/A'}</Text>
@@ -137,7 +137,7 @@ export const ChildDetailsCard = ({
             {
                 !parentAuthorizedPickups && ! providerAuthorizedPickups  ?
                     <Badge containerStyle={{ backgroundColor: '#ff8e00', marginBottom: 15}}>
-                        <Text style={{fontSize: 19, color: '#fff'}}>No authorized pickups found</Text>
+                        <Text style={{fontSize: 16, color: '#fff'}}>No authorized pickups found</Text>
                     </Badge>
                 :
                     <View>
@@ -198,7 +198,7 @@ export const ChildDetailsCard = ({
             {
                 !parentUnauthorizedPickups && !providerUnauthorizedPickups ?
                     <Badge containerStyle={{ backgroundColor: '#ff8e00', marginBottom: 15}}>
-                        <Text style={{fontSize: 19, color: '#fff'}}>No unauthorized pickups found</Text>
+                        <Text style={{fontSize: 16, color: '#fff'}}>No unauthorized pickups found</Text>
                     </Badge>   
                 :
                     <View>
@@ -279,7 +279,7 @@ export const ChildDetailsCard = ({
 
 const styles = StyleSheet.create({
     cardWrapper: {
-        marginBottom: 100
+        marginBottom: 50
     },
     infoCard: {
         paddingBottom: 15,
