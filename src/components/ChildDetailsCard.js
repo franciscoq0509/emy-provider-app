@@ -25,7 +25,7 @@ export const ChildDetailsCard = ({
     callNumber = (number) => {
         call({
             number: number.replace(/-|\s/g,""),
-            prompt: false
+            prompt: true
         })
     }
 
@@ -249,7 +249,7 @@ export const ChildDetailsCard = ({
             }
             
             
-            <Text style= {styles.text}>Last Modified: {Moment(healthInformation.modified).format("DD of MMMM, YYYY")}</Text>
+            <Text style= {styles.text}>Last Modified: {Moment(healthInformation.modified).format("DD of MMMM, YYYY") === 'Invalid date' ? 'Unknown': Moment(healthInformation.modified).format("DD of MMMM, YYYY")}</Text>
             <Text style= {styles.text}>Acount Created: {Moment(customerCreated).format("MMMM D, YYYY, h:mm:ss a")}</Text>
         </Card>
     );

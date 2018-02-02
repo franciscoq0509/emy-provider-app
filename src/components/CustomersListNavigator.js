@@ -45,6 +45,7 @@ class CustomersList extends React.Component {
     logout = () => {
         this.props.screenProps.errorLogout();
     }
+    
     componentWillUpdate() {
         this.props.screenProps.dispatch(userCancelledDetailsRequest());
     }
