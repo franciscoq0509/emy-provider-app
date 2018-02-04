@@ -131,43 +131,37 @@ export const CustomerFullDetails = (props) => {
     }
     
     return (
-        <ScrollView>
-            <Card title="Details">
-                <View>
-                    <Text style = {styles.text}>{full_name}</Text>
-                    <Text style = {styles.text}>{gender === 'M' ? 'Male' : 'Female'}</Text>
-                    {email ? <Text style= {styles.text}>email: {email} </Text> : false}
-                    <Text style= {styles.text}>DOB: {dob !== null ? Moment(dob).format("MMMM DD, YYYY") : 'Not found'}</Text>
-                    {createCallButton('Mobile', phoneNumbers)}
-                    {createCallButton('Work', phoneNumbers)}
-                    {createCallButton('Home', phoneNumbers)}
-                </View>
-            </Card>
+        <ScrollView style={styles.scrollView}>
+            <View>
+                <Text style = {styles.text}>{full_name}</Text>
+                <Text style = {styles.text}>{gender === 'M' ? 'Male' : 'Female'}</Text>
+                {email ? <Text style= {styles.text}>email: {email} </Text> : false}
+                <Text style= {styles.text}>DOB: {dob !== null ? Moment(dob).format("MMMM DD, YYYY") : 'Not found'}</Text>
+                {createCallButton('Mobile', phoneNumbers)}
+                {createCallButton('Work', phoneNumbers)}
+                {createCallButton('Home', phoneNumbers)}
+            </View>
             {
                 is_child && primaryContact ?
                 <View>
-                    <Card title="Primary Contact" >
-                        <Text style={{alignSelf: 'center', fontSize: 18}}>{primaryContact.full_name}</Text> 
-                        {createCallButton('Mobile', primaryContactPhones)}
-                        {createCallButton('Work', primaryContactPhones)}
-                        {createCallButton('Home', primaryContactPhones)}
-                        {primaryContact.email != "" ? <Text style = { styles.staticEmail }>Email : {primaryContact.email}</Text> : false}
-                        <Button
-                            containerViewStyle={{marginTop: 20}}
-                            backgroundColor='#1976D2'
-                            title={`Full details` }
-                            iconRight={{name: 'folder-shared', type: 'Entypo', size: 25}}
-                            onPress={()=>{
-                                props.navigation.navigate('fullDetail', { 
-                                customerId : primaryContact.id,
-                                nav: props.nav 
-                            })}}
-                        />
+                    <Text style={{alignSelf: 'center', fontSize: 18}}>{primaryContact.full_name}</Text> 
+                    {createCallButton('Mobile', primaryContactPhones)}
+                    {createCallButton('Work', primaryContactPhones)}
+                    {createCallButton('Home', primaryContactPhones)}
+                    {primaryContact.email != "" ? <Text style = { styles.staticEmail }>Email : {primaryContact.email}</Text> : false}
+                    <Button
+                        containerViewStyle={{marginTop: 20}}
+                        backgroundColor='#1976D2'
+                        title={`Full details` }
+                        iconRight={{name: 'folder-shared', type: 'Entypo', size: 25}}
+                        onPress={()=>{
+                            props.navigation.navigate('fullDetail', { 
+                            customerId : primaryContact.id,
+                            nav: props.nav 
+                        })}}
+                    />
 
-                    </Card>
-                    <Card title="Emergency Contacts">
-                        {this.showEmergencyContacts(emergencyContacts)}
-                    </Card>
+                    {this.showEmergencyContacts(emergencyContacts)}                    
                 </View>
                 :
                 false
@@ -211,6 +205,9 @@ export const CustomerFullDetails = (props) => {
 };
 
 const styles = StyleSheet.create({
+    scrollView: {
+        backgroundColor: '#fff'
+    },
     infoCard: {
         paddingBottom: 15,
         paddingTop: 15,

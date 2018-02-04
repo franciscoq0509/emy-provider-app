@@ -226,7 +226,7 @@ export const ChildDetailsCard = ({
                     </View>
             }
 
-            {Object.keys(familyDoctors).length > 0 ?
+            {familyDoctors && Object.keys(familyDoctors).length > 0 ?
                 <View style={styles.infoCard}>
                     <Text style={styles.title}>Family Doctors</Text>
                     {Object.keys(familyDoctors).map((d) => (

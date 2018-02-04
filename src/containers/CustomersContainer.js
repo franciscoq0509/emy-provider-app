@@ -46,7 +46,6 @@ class CustomersListContainer extends React.Component {
 
     componentWillMount() {
         ENV = _ENV_();
-        
         this.props.dispatch(requestCustomers());
         this.setState(() => ({showSpinner: this.showLoadingSpinner, showLoadError: false}));
         getProviderGuid()
