@@ -93,12 +93,11 @@ class CustomersListContainer extends React.Component {
         return (
             <CustomersListNavigator 
                 onNavigationStateChange = {(prev, current) => {
-                    const h = backButtonHandler(prev, current);
-                    console.log(h);
                     if(current.index === 0) {
                         clickCount.count = 0;
                         this.props.dispatch(userCancelledDetailsRequest());
                     }
+                    backButtonHandler(prev, current);
                 }}
                 screenProps = { 
                     {   
