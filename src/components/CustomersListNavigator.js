@@ -26,7 +26,7 @@ class CustomersList extends React.Component {
                     adjustFrame={(obj) => {
                         obj.width = '30%';
                         obj.top += 15;
-                        obj.height -= 117;
+                        obj.height -= 117;//this is hardcoded for only one option. need to find a dynamic way to set height...
                         return obj;
                     }}
                     onSelect={(index, value) => {
