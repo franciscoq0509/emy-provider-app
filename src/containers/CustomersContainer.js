@@ -10,6 +10,7 @@ import { signUserOut } from '../utilities/userAuth';
 import { NavigationActions } from 'react-navigation';
 import { _signUserOut } from '../utilities/userAuth';
 import { clickCount } from '../utilities/customerListClickCount';
+import { backButtonHandler } from '../utilities/backButtonHandler';
 
 
 const ENV = null;
@@ -92,6 +93,8 @@ class CustomersListContainer extends React.Component {
         return (
             <CustomersListNavigator 
                 onNavigationStateChange = {(prev, current) => {
+                    const h = backButtonHandler(prev, current);
+                    console.log(h);
                     if(current.index === 0) {
                         clickCount.count = 0;
                         this.props.dispatch(userCancelledDetailsRequest());
