@@ -21,28 +21,20 @@ class CustomersList extends React.Component {
                     options={['logout']} 
                     dropdownTextStyle = {{fontSize: 20}}
                     dropdownStyle = {{backgroundColor: '#D9D9D9', borderColor:  'black'}}
+                    defaultValue = '. . .'
+                    textStyle={{fontSize: 25, color: '#fff', marginRight: 20, }}
                     adjustFrame={(obj) => {
-                        console.log(obj);
                         obj.width = '30%';
-                        obj.top += 25;
+                        obj.top += 15;
                         obj.height -= 117;
-                        console.log(obj); 
                         return obj;
-                        // return {
-                        //     ...obj,
-                        //     right: obj.right + 0.05
-                        // }
                     }}
                     onSelect={(index, value) => {
-                        console.log(index);
-                        index += 1;
-                        switch (index) {
-                            case 1:
-                                console.log('logout');
+                        switch (value) {
+                            case 'logout':
                                 params.logout()
                                 break;
                             default:
-                                console.log('nothing');
                                 return false;
                         }
                     }}
