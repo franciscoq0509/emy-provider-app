@@ -208,9 +208,9 @@ export const ChildDetailsCard = ({
                             <Text style={styles.text}>{parentUnauthorizedPickups}</Text>
                         </View>
                     :
-                        <View style={styles.infoCard}>
-                            <Text style={styles.title}>No parent unauthorized pickups found</Text>
-                        </View>
+                    <Badge containerStyle={{ backgroundColor: '#ff8e00', margin: 15}}>
+                        <Text style={{fontSize: 16, color: '#fff'}}>No parent unauthorized pickups found</Text>
+                    </Badge> 
                     }
         
                     {providerUnauthorizedPickups ?
@@ -219,9 +219,9 @@ export const ChildDetailsCard = ({
                             <Text style={styles.text}>{providerUnauthorizedPickups}</Text>
                         </View>
                     :
-                        <View style={styles.infoCard}>
-                            <Text style={styles.title}>No provider unauthorized pickups found</Text>
-                        </View>
+                        <Badge containerStyle={{ backgroundColor: '#ff8e00', margin: 15}}>
+                            <Text style={{fontSize: 16, color: '#fff'}}>No provider unauthorized pickups found</Text>
+                        </Badge> 
                     }
                     </View>
             }
