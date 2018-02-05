@@ -30,7 +30,7 @@ export const ChildDetailsCard = ({
     }
 
     return (
-        <Card containerStyle={styles.cardWrapper}>
+        <View containerStyle={styles.detailsWrapper}>
             <View style={styles.infoCard}>
                 <Text style={styles.title}>School Information</Text>
                 <Text style= {styles.text}>School: {schoolName ? schoolName : 'N/A'}</Text>
@@ -129,14 +129,14 @@ export const ChildDetailsCard = ({
                     {healthInformation.provider_medication ? <Text style= {styles.text}>Medication From Provider: {healthInformation.provider_medication}</Text> : false}
                 </View>
                 :
-                <View style={styles.infoCard}> 
-                    <Text style= {styles.title}>No Health information was found on {fullName}</Text>
-                </View>
+                <Badge containerStyle={{ backgroundColor: '#ff8e00', margin: 15}}>
+                    <Text style={{fontSize: 16, color: '#fff'}}>No Health information was found</Text>
+                </Badge>
             }
 
             {
                 !parentAuthorizedPickups && ! providerAuthorizedPickups  ?
-                    <Badge containerStyle={{ backgroundColor: '#ff8e00', marginBottom: 15}}>
+                    <Badge containerStyle={{ backgroundColor: '#ff8e00', margin: 15}}>
                         <Text style={{fontSize: 16, color: '#fff'}}>No authorized pickups found</Text>
                     </Badge>
                 :
@@ -197,7 +197,7 @@ export const ChildDetailsCard = ({
             }
             {
                 !parentUnauthorizedPickups && !providerUnauthorizedPickups ?
-                    <Badge containerStyle={{ backgroundColor: '#ff8e00', marginBottom: 15}}>
+                    <Badge containerStyle={{ backgroundColor: '#ff8e00', margin: 15}}>
                         <Text style={{fontSize: 16, color: '#fff'}}>No unauthorized pickups found</Text>
                     </Badge>   
                 :
@@ -251,7 +251,7 @@ export const ChildDetailsCard = ({
             
             <Text style= {styles.text}>Last Modified: {Moment(healthInformation.modified).format("DD of MMMM, YYYY") === 'Invalid date' ? 'Unknown': Moment(healthInformation.modified).format("DD of MMMM, YYYY")}</Text>
             <Text style= {styles.text}>Acount Created: {Moment(customerCreated).format("MMMM D, YYYY, h:mm:ss a")}</Text>
-        </Card>
+        </View>
     );
 };
 
@@ -278,7 +278,7 @@ export const ChildDetailsCard = ({
 // }
 
 const styles = StyleSheet.create({
-    cardWrapper: {
+    detailsWrapper: {
         marginBottom: 50
     },
     infoCard: {

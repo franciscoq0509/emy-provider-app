@@ -102,7 +102,7 @@ export const CustomerFullDetails = (props) => {
     showEmergencyContacts = (obj) => {
         if(obj === 0 || obj === undefined){
             return (
-                <Badge containerStyle={{ backgroundColor: '#ff8e00', marginBottom: 15}}>
+                <Badge containerStyle={{ backgroundColor: '#ff8e00', margin: 15}}>
                     <Text style={{fontSize: 16, color: '#fff'}}>No emergency contacts found</Text>
                 </Badge>
             );
@@ -110,8 +110,8 @@ export const CustomerFullDetails = (props) => {
             return (
                 <View>
                     {Object.keys(obj).map((key, index) => (
-                            <View   style={styles.infoCard} key={key}>
-                                <Text style= {styles.emergencyContactName}>{obj[key].first_name}</Text>
+                            <View key={key}>
+                                <Text style= {styles.text}>{obj[key].first_name}</Text>
                                 <View style={{flex:1, flexDirection: 'column'}}>
                                     <Text style= {styles.subText}>Relationship: { obj[key].relationship }</Text>
                                     <Button
@@ -132,11 +132,11 @@ export const CustomerFullDetails = (props) => {
     
     return (
         <ScrollView style={styles.scrollView}>
-            <View>
-                <Text style = {styles.text}>{full_name}</Text>
-                <Text style = {styles.text}>{gender === 'M' ? 'Male' : 'Female'}</Text>
-                {email ? <Text style= {styles.text}>email: {email} </Text> : false}
-                <Text style= {styles.text}>DOB: {dob !== null ? Moment(dob).format("MMMM DD, YYYY") : 'Not found'}</Text>
+            <View style={{marginTop: 40, marginBottom: 40}}>
+                <Text style = {styles.MainDetails}>{full_name}</Text>
+                <Text style = {styles.MainDetails}>{gender === 'M' ? 'Male' : 'Female'}</Text>
+                {email ? <Text style= {styles.MainDetails}>email: {email} </Text> : false}
+                <Text style= {styles.MainDetails}>DOB: {dob !== null ? Moment(dob).format("MMMM DD, YYYY") : 'Not found'}</Text>
                 {createCallButton('Mobile', phoneNumbers)}
                 {createCallButton('Work', phoneNumbers)}
                 {createCallButton('Home', phoneNumbers)}
@@ -144,24 +144,36 @@ export const CustomerFullDetails = (props) => {
             {
                 is_child && primaryContact ?
                 <View>
-                    <Text style={{alignSelf: 'center', fontSize: 18}}>{primaryContact.full_name}</Text> 
-                    {createCallButton('Mobile', primaryContactPhones)}
-                    {createCallButton('Work', primaryContactPhones)}
-                    {createCallButton('Home', primaryContactPhones)}
-                    {primaryContact.email != "" ? <Text style = { styles.staticEmail }>Email : {primaryContact.email}</Text> : false}
-                    <Button
-                        containerViewStyle={{marginTop: 20}}
-                        backgroundColor='#1976D2'
-                        title={`Full details` }
-                        iconRight={{name: 'folder-shared', type: 'Entypo', size: 25}}
-                        onPress={()=>{
-                            props.navigation.navigate('fullDetail', { 
-                            customerId : primaryContact.id,
-                            nav: props.nav 
-                        })}}
-                    />
-
-                    {this.showEmergencyContacts(emergencyContacts)}                    
+                    <View style={styles.infoCard}>
+                        <Text style={styles.title}>Primary Contact</Text>
+                        <Text style={styles.text}>{primaryContact.full_name}</Text> 
+                        {createCallButton('Mobile', primaryContactPhones)}
+                        {createCallButton('Work', primaryContactPhones)}
+                        {createCallButton('Home', primaryContactPhones)}
+                        {primaryContact.email != "" ? <Text style = { styles.staticEmail }>Email : {primaryContact.email}</Text> : false}
+                        <Button
+                            containerViewStyle={{marginTop: 20}}
+                            backgroundColor='#1976D2'
+                            title={`Full details` }
+                            iconRight={{name: 'folder-shared', type: 'Entypo', size: 25}}
+                            onPress={()=>{
+                                props.navigation.navigate('fullDetail', { 
+                                customerId : primaryContact.id,
+                                nav: props.nav 
+                            })}}
+                        />
+                        
+                    </View>
+                    {
+                        emergencyContacts 
+                        ?
+                        <View style={styles.infoCard}>
+                            <Text style={styles.title}>Emergency Contacts</Text>
+                            {this.showEmergencyContacts(emergencyContacts)}                    
+                        </View>
+                        :
+                        false
+                    }
                 </View>
                 :
                 false
@@ -209,21 +221,32 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff'
     },
     infoCard: {
-        paddingBottom: 15,
-        paddingTop: 15,
+        paddingBottom: 30,
+        paddingTop: 30,
         backgroundColor: '#E3F2FD',
-        marginBottom: 15
+        marginBottom: 60
     },
     title: {
-        paddingLeft: 20,
-        fontSize: 22,
-        marginBottom: 10,
+        alignSelf: 'center',
+        textDecorationLine: 'underline',
+        fontSize: 20,
+        fontWeight: 'bold',
+        marginBottom: 30,
         color: '#2a2a2a'
     },
+    MainDetails: {
+        alignSelf: 'center',
+        fontSize: 20,
+        fontWeight: 'bold',
+        marginBottom: 15,
+        marginTop: 15
+    },
     text: {
-        paddingLeft: 20,
+        alignSelf: 'center',
         fontSize: 18,
-        marginBottom: 15
+        fontWeight: 'bold',
+        marginBottom: 15,
+        marginTop: 15
     },
     staticEmail: {
         marginTop : 20,
