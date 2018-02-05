@@ -8,6 +8,7 @@ import CustomerFullDetailsContainer from '../containers/CustomerFullDetailsConta
 import spinnerStyle from './styles/spinnerStyle';
 import { ErrorMessage } from './ErrorMessage';
 import { userCancelledDetailsRequest } from '../actions/customers';
+import ModalDropDown from 'react-native-modal-dropdown';
 
 
 class CustomersList extends React.Component {
@@ -15,12 +16,36 @@ class CustomersList extends React.Component {
     static navigationOptions = ({ navigation }) => {
         const { params = {} } = navigation.state;
         let headerRight = ( 
-                <Icon  
-                        containerStyle={{paddingRight:15}}
-                        name="exit-to-app" 
-                        type="material-icons" 
-                        color="#fff"
-                        onPress={()=>params.logout ? params.logout() : () => null}
+                
+                <ModalDropDown 
+                    options={['logout']} 
+                    dropdownTextStyle = {{fontSize: 20}}
+                    dropdownStyle = {{backgroundColor: '#D9D9D9', borderColor:  'black'}}
+                    adjustFrame={(obj) => {
+                        console.log(obj);
+                        obj.width = '30%';
+                        obj.top += 25;
+                        obj.height -= 117;
+                        console.log(obj); 
+                        return obj;
+                        // return {
+                        //     ...obj,
+                        //     right: obj.right + 0.05
+                        // }
+                    }}
+                    onSelect={(index, value) => {
+                        console.log(index);
+                        index += 1;
+                        switch (index) {
+                            case 1:
+                                console.log('logout');
+                                params.logout()
+                                break;
+                            default:
+                                console.log('nothing');
+                                return false;
+                        }
+                    }}
                 />
             );
 

@@ -21,6 +21,7 @@
 		"react-native-button": "^2.2.0",
 		"react-native-calendars": "^1.15.0",
 		"react-native-elements": "^0.18.5",
+		"react-native-modal-dropdown": "^0.6.0",
 		"react-native-optimized-flatlist": "^1.0.4",
 		"react-native-phone-call": "^1.0.4",
 		"react-native-vector-icons": "^4.4.3",
